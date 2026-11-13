@@ -68,3 +68,6 @@ G4 real-device QA: animation frame consistency, CPU/memory/battery, permission d
 - Page/field/Flutter mapping: docs/SCREEN_LAYOUT_CONTRACT.md.
 - QA and rights: docs/ASSET_QA.md and docs/ASSET_REGISTER.md.
 - **NO Flutter feature implementation yet under this asset-first gate.** Existing prototype code is not approval of UI. Next gate is visual acceptance and device motion QA.
+
+## 10. Audio design contract
+Use assets/sounds/manifest.json for original optional sound effects; never play sound automatically by default. Alarm and reminder sounds must respect device sound settings and quiet hours where applicable. No audio is required for core offline task functionality.
