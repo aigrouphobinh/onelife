@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "derivedFrom": "design/screens/*.svg",
+  "status": "dark theme design only, not Flutter app screenshots",
+  "screens": [
+    {
+      "screen": "01-splash",
+      "file": "01-splash.png",
+      "sha256": "8fd4dd612955004ba86f6ce5a4d2d39dad2e637c2e5b254654a0760fb8dce8e9",
+      "width": 390,
+      "height": 844,
+      "mode": "dark"
+    },
+    {
+      "screen": "02-onboarding",
+      "file": "02-onboarding.png",
+      "sha256": "f978bdcfe5e115889311ab250e42a40bc339f614edfa40dd9b5c047de7e8e7d1",
+      "width": 390,
+      "height": 844,
+      "mode": "dark"
+    },
+    {
+      "screen": "03-home",
+      "file": "03-home.png",
+      "sha256": "8fc1cc56027b4f1011d5664f588fc5e29822ab25fd3f0eb307af3fdb17f23cea",
+      "width": 390,
+      "height": 844,
+      "mode": "dark"
+    },
+    {
+      "screen": "04-tasks",
+      "file": "04-tasks.png",
+      "sha256": "424952efeaa978b42b53ddc558c5d988e04d735813e65dcf92869d5cbd98eae5",
+      "width": 390,
+      "height": 844,
+      "mode": "dark"
+    },
+    {
+      "screen": "05-schedule",
+      "file": "05-schedule.png",
+      "sha256": "eac03c4efd690e47515ac5584747f71bdf73c9c06af74cd4585380c032bdbc25",
+      "width": 390,
+      "height": 844,
+      "mode": "dark"
+    },
+    {
+      "screen": "06-habits",
+      "file": "06-habits.png",
+      "sha256": "84675b6e43c63a11b0527131bef6dcd9a9bbff1daddabbb75ac5e11f39009092",
+      "width": 390,
+      "height": 844,
+      "mode": "dark"
+    },
+    {
+      "screen": "07-assistant",
+      "file": "07-assistant.png",
+      "sha256": "55227d22538493191f4e88829a225e173336870e839a252d202d3e5d8a9c68b1",
+      "width": 390,
+      "height": 844,
+      "mode": "dark"
+    },
+    {
+      "screen": "08-characters",
+      "file": "08-characters.png",
+      "sha256": "47996becc139d9196bfb5bbca35592b5f3c949fa91737d1517b3779bcdc62c64",
+      "width": 390,
+      "height": 844,
+      "mode": "dark"
+    },
+    {
+      "screen": "09-settings",
+      "file": "09-settings.png",
+      "sha256": "7d09b4b9a2c048dc24e5b6e6b9c7fcd0a4d9a68ff1bf5619975ae1bed0980107",
+      "width": 390,
+      "height": 844,
+      "mode": "dark"
+    },
+    {
+      "screen": "10-overlay-android",
+      "file": "10-overlay-android.png",
+      "sha256": "9c12846ba08e29e89661f040741308356fe6173234b9f3a3bef688322a7b515a",
+      "width": 390,
+      "height": 844,
+      "mode": "dark"
+    }
+  ]
+}
