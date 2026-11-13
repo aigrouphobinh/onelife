@@ -118,9 +118,9 @@ get('nextFrame').addEventListener('click',function(){paused=true;frame=(frame+1)
 get('frameSeek').addEventListener('input',function(){paused=true;frame=Number(this.value);get('pause').textContent='▶ Tiếp tục';render()});
 get('motion').addEventListener('change',function(){if(this.value==='still'){paused=true;frame=0;render()}else{paused=false;get('pause').textContent='⏸ Tạm dừng'}});
 get('size').addEventListener('change',function(){get('hero').style.width=this.value+'px';get('hero').style.height=this.value+'px'});
-get('themeButton').addEventListener('click',function(){var dark=document.body.dataset.theme==='dark';document.body.dataset.theme=dark?'light':'dark';this.textContent=dark?'🌙 Đổi nền tối':'☀️ Đổi nền sáng'});
+get('themeButton').addEventListener('click',function(){var dark=document.body.dataset.theme==='dark';document.body.dataset.theme=dark?'light':'dark';this.textContent=dark?'🌙 Đổi nền tối':'☀️ Đổi nền sáng';setPage(pageIndex)});
 pages.forEach(function(page,i){var b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0')+' · '+page[1];b.addEventListener('click',function(){setPage(i)});get('pages').appendChild(b)});
-function setPage(i){pageIndex=(i+pages.length)%pages.length;var page=pages[pageIndex];get('screen').src='../screens/'+page[0]+'.png';get('screen').alt='Màn hình thiết kế '+page[1];get('pageInfo').textContent=page[1]+' · '+page[2]+' · 390 × 844 (design, chưa có dữ liệu thật).';Array.from(get('pages').children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===pageIndex))})}
+function setPage(i){pageIndex=(i+pages.length)%pages.length;var page=pages[pageIndex];get('screen').src='../screens/'+(document.body.dataset.theme==='dark'?'dark/':'')+page[0]+'.png';get('screen').alt='Màn hình thiết kế '+page[1];get('pageInfo').textContent=page[1]+' · '+page[2]+' · 390 × 844 (design, chưa có dữ liệu thật).';Array.from(get('pages').children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===pageIndex))})}
 get('prevPage').addEventListener('click',function(){setPage(pageIndex-1)});
 get('nextPage').addEventListener('click',function(){setPage(pageIndex+1)});
 load();setPage(pageIndex);requestAnimationFrame(loop);

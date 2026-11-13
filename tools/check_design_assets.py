@@ -73,6 +73,18 @@ def run():
                     if screen.size!=(s["width"],s["height"]):errors.append("Screen size "+s["file"])
     except (OSError,KeyError,ValueError) as e:errors.append("Screen manifest: "+str(e))
     try:
+        darkdir=ROOT/"design/screens/dark"
+        dark=json.loads((darkdir/"manifest.json").read_text())
+        if len(dark["screens"])!=10:errors.append("Expected 10 dark design screens")
+        for s in dark["screens"]:
+            p=darkdir/s["file"]
+            if not p.is_file() or not p.with_suffix(".svg").is_file() or sha(p)!=s["sha256"]:
+                errors.append("Dark screen missing/mismatch "+s["file"])
+            else:
+                with Image.open(p) as im:
+                    if im.size!=(s["width"],s["height"]):errors.append("Dark screen size "+s["file"])
+    except (OSError,KeyError,ValueError) as e:errors.append("Dark manifest: "+str(e))
+    try:
         manifest=json.loads((ROOT/"assets/sounds/manifest.json").read_text())
         for name,s in manifest["sounds"].items():
             p=ROOT/"assets/sounds"/s["file"]

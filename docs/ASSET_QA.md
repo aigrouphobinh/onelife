@@ -36,3 +36,9 @@ Binary sprite PNG/GIF files and original WAV files have been read back from GitH
 - [x] Five character contact sheets generated on GitHub main.
 - [x] Additional static JS syntax / local asset validation added to CI.
 - [ ] Artist and real-device review remains pending. Automated checks do NOT constitute visual acceptance.
+
+## Dark mode output
+- [x] Ten dark SVG/PNG screen compositions and checksum manifest published on main by GitHub Actions.
+- [x] Design gallery toggles between actual light and dark screen images.
+- [x] Dark screen dimensions and hashes added to automated asset QA.
+- [ ] Human review of dark-mode contrast, Android status bar and bottom navigation accessibility.

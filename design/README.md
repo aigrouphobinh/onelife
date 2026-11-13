@@ -27,3 +27,7 @@ Follow `docs/SCREEN_LAYOUT_CONTRACT.md` and `docs/DESIGN_BRAIN.md`. Treat 390×8
 
 ## Gate
 Do not begin building a production UI from these screens until designers confirm appearance, mascot shape/animation, mobile readability and dark mode. Asset runtime QA and iOS fallback paths remain outstanding.
+
+
+## Dark-mode compositions
+Ten independently generated dark SVG/PNG design screens are in `screens/dark/` with SHA256 manifest, created deterministically by `tools/render_dark_screens.py` and GitHub Actions. The review gallery switches both its background **and the actual page mockup** when toggling dark mode. These are not Flutter screenshots; accessibility contrast, typography and device behavior require separate sign-off.
