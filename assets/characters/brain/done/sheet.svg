@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="768" viewBox="0 0 1024 768" role="img" aria-label="OneLife Brain done sprite sheet"><defs><linearGradient id="brainFill" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#FFE0EF"/><stop offset=".5" stop-color="#FFB8D8"/><stop offset="1" stop-color="#F69CC7"/></linearGradient><linearGradient id="headphones" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#C5ADFF"/><stop offset=".5" stop-color="#8F68E7"/><stop offset="1" stop-color="#7147C9"/></linearGradient></defs><g transform="translate(0 0)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 0.00) rotate(0.00 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-24 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(186 92)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(256 0)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 3.50) rotate(0.65 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-12.000000000000002 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(188.5 91.46410161513775)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(512 0)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 6.06) rotate(1.13 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-3.215390309173472 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(190.33012701892218 90)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(768 0)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 7.00) rotate(1.30 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(0 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(191 88)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(0 256)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 6.06) rotate(1.13 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-3.215390309173472 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(190.33012701892218 86)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(256 256)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 3.50) rotate(0.65 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-12.000000000000002 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(188.5 84.53589838486225)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(512 256)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 0.00) rotate(0.00 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-23.999999999999996 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(186 84)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(768 256)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 -3.50) rotate(-0.65 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-36 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(183.5 84.53589838486225)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(0 512)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 -6.06) rotate(-1.13 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-44.78460969082652 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(181.66987298107782 86)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(256 512)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 -7.00) rotate(-1.30 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-48 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(181 88)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(512 512)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 -6.06) rotate(-1.13 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-44.78460969082653 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(181.66987298107782 90)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g><g transform="translate(768 512)"><ellipse cx="128" cy="227" rx="62" ry="9" fill="#443064" opacity=".10"/>
+ <g transform="translate(0 -3.50) rotate(-0.65 128 155)">
+ <path d="M96 201q-10 14 -2 25q14 8 26 -7l6 -15M135 206q3 21 15 19q17 -4 12 -24" fill="#FFADCF" stroke="#9A4A96" stroke-width="4" stroke-linejoin="round"/>
+ <g transform="rotate(-30 80 183)"><path d="M83 181Q66 184 67 198Q73 212 87 196" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g><g transform="rotate(-36.000000000000014 173 181)"><path d="M170 182Q191 179 192 196Q183 211 170 195" fill="#FFB2D8" stroke="#994A94" stroke-width="3.5"/></g>
+ <path d="M72 102Q76 69 104 72Q123 57 142 73Q172 59 187 90Q209 102 202 128Q219 148 202 175Q200 203 177 207Q153 223 130 208Q106 222 87 207Q56 203 55 180Q39 163 48 141Q42 117 72 102Z" fill="url(#brainFill)" stroke="#96478F" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M75 111Q87 92 101 96Q120 73 136 91Q156 81 174 103" fill="none" stroke="#F5A1C9" stroke-width="3" opacity=".75"/>
+ <path d="M63 130Q65 82 111 74Q143 64 177 84Q194 98 198 127" fill="none" stroke="#4D2D88" stroke-width="12" stroke-linecap="round"/>
+ <path d="M64 128Q70 86 112 78Q144 68 176 89Q191 100 197 127" fill="none" stroke="#9B7BF3" stroke-width="6" stroke-linecap="round"/>
+ <rect x="42" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <rect x="185" y="125" width="30" height="62" rx="15" fill="url(#headphones)" stroke="#6039A1" stroke-width="3"/>
+ <ellipse cx="57" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/><ellipse cx="200" cy="156" rx="9" ry="18" fill="#B59BF8" opacity=".75"/>
+ <path d="M80 114q11 -30 30 -30M153 84q17 5 22 17" fill="none" stroke="#FFE7F5" stroke-width="8" stroke-linecap="round" opacity=".92"/><ellipse cx="89" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/><ellipse cx="168" cy="163" rx="14" ry="8" fill="#F47FA9" opacity=".85"/>
+ <path d="M100 127q7 -5 14 0M141 127q7 -5 14 0" stroke="#A4539E" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M101 145q9 9 18 0M138 145q9 9 18 0" fill="none" stroke="#38254D" stroke-width="5.5" stroke-linecap="round"/><path d="M118 163q10 18 23 0Z" fill="#763049" stroke="#763049" stroke-width="2"/><path d="M123 170q7 -5 13 2" fill="none" stroke="#ED789B" stroke-width="3"/>
+ </g><g transform="translate(183.5 91.46410161513775)"><circle r="23" fill="#5DD2A2" stroke="#258F6C" stroke-width="3"/><path d="M-12 -1l8 9 16 -19" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g></svg>
