@@ -34,9 +34,9 @@ jobs:
           import json
           from pathlib import Path
           paths=list(Path("assets/characters/brain").glob("*/metadata.json"))
-          assert len(paths)==10, f"Expected 10 brain states, found {len(paths)}"
-          assert sum(json.loads(p.read_text())["frames"] for p in paths)==100
-          print("PASS: 10 brain animations, 100 frames")
+          assert len(paths)==15, f"Expected 15 brain states, found {len(paths)}"
+          assert sum(json.loads(p.read_text())["frames"] for p in paths)==152
+          print("PASS: 15 brain animations, 152 frames")
           PY
       - name: Commit rendered image assets directly to main
         shell: bash

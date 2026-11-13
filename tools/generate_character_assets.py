@@ -23,6 +23,12 @@ STATES = {
     "done": (12, 95, False),
     "thinking": (8, 140, True),
     "sad": (8, 160, False),
+    # Brain Balance: purely metaphorical visual reflection of opt-in usage goals.
+    "balanced": (8, 140, True),
+    "strained": (10, 160, True),
+    "overloaded": (12, 115, True),
+    "resting": (10, 205, True),
+    "recovering": (12, 110, False),
 }
 
 def generate(path: Path) -> dict:
