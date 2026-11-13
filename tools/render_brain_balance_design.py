@@ -5,6 +5,8 @@ Mock values are always labelled. These are source images, not working Flutter UI
 from __future__ import annotations
 
 import hashlib
+import base64
+import io
 import json
 import re
 from pathlib import Path
@@ -51,17 +53,19 @@ def make(state,theme,defs,master):
       label(195,396,title,20,text,700,"middle"),
       label(195,414,"DỮ LIỆU MẪU · KHÔNG ĐO SỨC KHỎE",8,muted,600,"middle")]
     # Place the actual OneLife Brain master artwork, with a per-state comic effect.
-    root.append('<g transform="translate(93 114) scale(.80)">'+master+'</g>')
-    if state=="overloaded":
-        root.append('<g fill="none" stroke="#9879DE" stroke-width="4" stroke-linecap="round"><path d="M126 209l-9 -13 14 4 -5 -14 16 12"/><path d="M242 186l11 -12 -1 15 13 -2 -10 16"/></g>')
-    elif state=="strained":
-        root.append('<path d="M236 223q15 19 0 27q-10 -12 0 -27" fill="#85CCF5" stroke="#5FA0DB" stroke-width="2"/>')
-    elif state=="resting":
-        root.append('<circle cx="195" cy="246" r="85" stroke="#6ACDBF" stroke-width="3" fill="none" opacity=".4"/>')
-    elif state=="recovering":
-        root.append('<g fill="#74D8B9"><circle cx="114" cy="193" r="6"/><circle cx="264" cy="212" r="5"/><circle cx="233" cy="174" r="4"/></g>')
-    elif state=="balanced":
-        root.append('<path d="M253 175l5 13 13 5 -13 5 -5 13 -5 -13 -13 -5 13 -5Z" fill="#FFE386"/>')
+    # Present actual exported state artwork, not a default smiling still.
+    clip_state = "balanced" if state == "permission" else state
+    atlas_path = ROOT / "assets/characters/brain" / clip_state / "sheet.png"
+    with Image.open(atlas_path) as im:
+        rgba = im.convert("RGBA")
+        key_frame = {"balanced": 2, "strained": 3, "overloaded": 4,
+                     "resting": 4, "recovering": 6, "permission": 2}[state]
+        x, y = key_frame % 4, key_frame // 4
+        frame = rgba.crop((x * 256, y * 256, (x + 1) * 256, (y + 1) * 256))
+    image_buffer = io.BytesIO()
+    frame.save(image_buffer, format="PNG", optimize=True)
+    encoded = base64.b64encode(image_buffer.getvalue()).decode("ascii")
+    root.append(f'<image x="86" y="123" width="218" height="218" href="data:image/png;base64,{encoded}"/>')
     root += [label(24,472,explanation,12,text,600),rect(24,496,342,118,18,card,line)]
     if fraction is not None:
         root += [label(41,525,"Tiến độ tới mục tiêu cá nhân",11,muted,500),label(349,525,"Ví dụ",10,bright,600,"end"),
@@ -74,7 +78,7 @@ def make(state,theme,defs,master):
     root += [rect(24,632,342,54,14,bright),
              label(195,665,"Bắt đầu nghỉ 5 phút" if state!="permission" else "Tìm hiểu quyền truy cập",13,"#FFFFFF",700,"middle"),
              rect(24,700,342,58,14,card,line),
-             label(41,722,"🔒  Lưu trên điện thoại",12,text,600),
+             label(41,722,"Lưu dữ liệu trên điện thoại",12,text,600),
              label(41,743,"Có thể tắt và xóa lịch sử bất cứ lúc nào",10,muted),
              rect(0,781,390,63,16,card,line),
              label(55,822,"Trang chủ",10,muted,600,"middle"),
