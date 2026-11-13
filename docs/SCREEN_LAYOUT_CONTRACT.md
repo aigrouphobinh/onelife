@@ -51,3 +51,11 @@ Version 1.0 • Design-only gate • AI implementation contract
 
 ## Production sequence
 A: Render and inspect 50 mascot clips → B: inspect 10 screen comps → C: adjust tokens/spacing & approve art direction → D: begin Flutter component implementation → E: accessibility, battery, overlay & iOS fallback device tests.
+
+## Brain Balance feature regions (design stage only)
+- `/habits`: `BrainBalanceStage(level: WellbeingVisualState)`, `DailyUsageSummaryCard(source, observedMinutes)`, `PersonalBreakGoalEditor`, `StartBreakButton`, `UsageConsentGate`, `PrivacyExplanation`. Screen-time cards show `unknown` without OS data.
+- `/home`: soft `BrainBalanceBadge(state, reasonCode)` underneath mascot if opted in, no intrusive modal.
+- `/settings`: user-defined break interval, work/study mode exception, nudge frequency, quiet hours, OS usage permission, remove local history.
+- `/characters`: preview tab `Category: Wellbeing` showing 5 additional states each character.
+- `/overlay`: opt-in, dismissible, muted by default; 64px state must remain legible without relying on tiny symbols; Android-only supported OS permission.
+- See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md) for `UsageStatsManager` / iOS entitlement limitations and rules engine acceptance.

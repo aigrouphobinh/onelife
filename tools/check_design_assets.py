@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT=Path(__file__).resolve().parents[1]
 CHARS=("brain","cat","dog","robot","sprout")
-STATES={"idle":8,"happy":10,"remind":12,"alarm":12,"focus":8,"study":12,"sleepy":10,"done":12,"thinking":8,"sad":8}
+STATES={"idle":8,"happy":10,"remind":12,"alarm":12,"focus":8,"study":12,"sleepy":10,"done":12,"thinking":8,"sad":8,"balanced":8,"strained":10,"overloaded":12,"resting":10,"recovering":12}
 OUT=ROOT/"design/review"
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 def run():
@@ -18,7 +18,7 @@ def run():
     for character in CHARS:
         basedir=ROOT/"assets/characters"/character
         if not (basedir/"master.svg").is_file(): errors.append(character+": master missing")
-        canvas=Image.new("RGB",(900,448),(248,247,252))
+        canvas=Image.new("RGB",(900,672),(248,247,252))
         painter=ImageDraw.Draw(canvas)
         for index,(state,count) in enumerate(STATES.items()):
             path=basedir/state; tag=character+"/"+state
@@ -93,7 +93,7 @@ def run():
                 if not .1<=(w.getnframes()/w.getframerate())<=5:errors.append("Sound duration "+name)
     except (OSError,KeyError,ValueError) as e:errors.append("Sound manifest: "+str(e))
     total=sum(x["frames"] for x in records)
-    if len(records)!=50 or total!=500:errors.append("Expected 50 clips/500 frames, got "+str((len(records),total)))
+    if len(records)!=75 or total!=760:errors.append("Expected 75 clips/760 frames, got "+str((len(records),total)))
     report={"schemaVersion":1,"automatedOnly":True,"passed":not errors,"clips":len(records),"frames":total,"errors":errors,"warnings":warnings,"records":records}
     (OUT/"reports/asset-qa.json").write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n")
     lines=["# Automated OneLife Asset QA","","Status: **"+("PASS" if not errors else "FAIL")+"** — automated only, not visual or device sign-off.","",f"Clips: {len(records)}/50 · frames: {total}/500","",

@@ -96,3 +96,11 @@ All personal history and derived habits are stored on the phone by default. Offl
 - Profile on a low-end Android phone: memory, CPU, battery, start/stop latency and overlay UI. Do not invent measurements or percent complete.
 
 **Implementation should not begin because this document exists; begin when the design gate is explicitly approved and documented.**
+
+
+## Brain Balance visual state extension (2026-11-14)
+
+A separate **non-medical, opt-in screen-use visual layer** is specified in [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md). It adds five animation keys per character: `balanced`, `strained`, `overloaded`, `resting`, `recovering` (25 extra clips / 260 frames). `WellbeingVisualState` is separate from `MascotState` so alarms/tasks keep their priority. Each new clip uses the same sprite atlas metadata and existing Flutter painter contract. These SVG/PNG/GIF sources are deliverables; on-device rules, native usage permission checks and renderer remain unimplemented.
+
+### Dispatcher rule
+`showMascotState` selects active high-priority event (`alarm`, `remind`, `done`, `focus`) before optional wellbeing visuals. A user-selected break may show `resting`. A completed break plays `recovering` once before returning to `balanced` / `idle`. If usage data are unavailable/consent denied, show neutral `idle` and `unknown` insight; never pretend to know screen time. Respect cooldowns and quiet hours in the feature design contract.

@@ -54,7 +54,7 @@ a{color:var(--purple)}.foot{margin-top:20px}
         <div class="preview"><canvas class="small" width="144" height="144"></canvas><span class="caption">In-app 144</span></div>
       </div>
       <p class="caption" id="animationInfo" aria-live="polite">Đang mở sprite...</p>
-      <div class="stats"><span class="tag">5 nhân vật</span><span class="tag">10 biểu cảm/nhân vật</span><span class="tag">500 frame</span></div>
+      <div class="stats"><span class="tag">5 nhân vật</span><span class="tag">15 trạng thái/nhân vật</span><span class="tag">760 frame</span></div>
     </section>
     <section class="card" aria-labelledby="uiTitle">
       <h2 id="uiTitle">02 · Giao diện màn hình</h2>
@@ -73,7 +73,7 @@ a{color:var(--purple)}.foot{margin-top:20px}
 (function(){
 'use strict';
 var chars={brain:'🧠 Bộ não',cat:'🐱 Mèo',dog:'🐶 Chó',robot:'🤖 Robot',sprout:'🌱 Mầm xanh'};
-var states={idle:[8,140,'Bình thường'],happy:[10,85,'Vui vẻ'],remind:[12,110,'Nhắc việc'],alarm:[12,80,'Báo thức'],focus:[8,160,'Tập trung'],study:[12,120,'Học tập'],sleepy:[10,180,'Buồn ngủ'],done:[12,95,'Hoàn thành'],thinking:[8,140,'Suy nghĩ'],sad:[8,160,'Buồn']};
+var states={idle:[8,140,'Bình thường'],happy:[10,85,'Vui vẻ'],remind:[12,110,'Nhắc việc'],alarm:[12,80,'Báo thức'],focus:[8,160,'Tập trung'],study:[12,120,'Học tập'],sleepy:[10,180,'Buồn ngủ'],done:[12,95,'Hoàn thành'],thinking:[8,140,'Suy nghĩ'],sad:[8,160,'Buồn'],balanced:[8,140,'Cân bằng'],strained:[10,160,'Bắt đầu mệt'],overloaded:[12,115,'Quá tải minh họa'],resting:[10,205,'Đang nghỉ'],recovering:[12,110,'Tươi tỉnh trở lại']};
 var pages=[
 ['01-splash','Splash','SplashPage'],
 ['02-onboarding','Giới thiệu','OnboardingPage'],

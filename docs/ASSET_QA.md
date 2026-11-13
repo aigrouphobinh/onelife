@@ -42,3 +42,12 @@ Binary sprite PNG/GIF files and original WAV files have been read back from GitH
 - [x] Design gallery toggles between actual light and dark screen images.
 - [x] Dark screen dimensions and hashes added to automated asset QA.
 - [ ] Human review of dark-mode contrast, Android status bar and bottom navigation accessibility.
+
+## Brain Balance extension (2026-11-14)
+- [x] 25 original vector state clips added to the original 50; 75 clips and 760 design frames total.
+- [x] GitHub Actions mascot renderer generated 25 new PNG atlases, GIF previews and metadata on main (run linked in GitHub Actions).
+- [ ] Extended automated asset QA must pass with 75 clips and 760 frames.
+- [ ] Full visual and mobile-device review for all additional 25 clips, 64/96/144px and dark/light.
+- [ ] UI concept for user-defined break goals, permission-denied and break/recovery sequences.
+- [ ] Flutter runtime, local rules engine and OS permissions (NOT implemented).
+See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md). `overloaded` is a fictional stress illustration, not damage diagnosis.

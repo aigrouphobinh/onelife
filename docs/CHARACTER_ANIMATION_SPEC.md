@@ -47,3 +47,6 @@ For each exported file record: source author/tool, creation date, license, modif
 
 ## Deliverables / DoD
 Approved character sheets + expression boards + all 50 motion clips + manifest + contact sheets + in-app preview design; screenshots at 1x/2x/3x. Do not claim complete until verified.
+
+## Additional opt-in Brain Balance clips (non-medical)
+For each character, produce separate transparent sprite sheets: `balanced` (8 frames, 140 ms), `strained` (10 frames, 160 ms), `overloaded` (12 frames, 115 ms), `resting` (10 frames, 205 ms), `recovering` (12 frames, 110 ms). These 25 clips add 260 frames to baseline 50 clips/500 frames, for a 75/760 combined asset inventory. `overloaded` uses abstract comic stress effects, never permanent injury depiction. See `BRAIN_BALANCE_DESIGN.md` and art review.

@@ -47,7 +47,8 @@ def main():
     assert result.returncode == 0, "JavaScript parse failure:\n" + result.stderr
     assert not re.search(r"\bfetch\s*\(|\bXMLHttpRequest\b", script), "Design viewer must remain local/offline"
     char_ids = ("brain", "cat", "dog", "robot", "sprout")
-    states = ("idle", "happy", "remind", "alarm", "focus", "study", "sleepy", "done", "thinking", "sad")
+    states = ("idle", "happy", "remind", "alarm", "focus", "study", "sleepy", "done", "thinking", "sad",
+              "balanced", "strained", "overloaded", "resting", "recovering")
     for char in char_ids:
         assert (ROOT / "assets/characters" / char / "master.svg").is_file()
         for state in states:

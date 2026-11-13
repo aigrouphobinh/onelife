@@ -37,3 +37,6 @@
 - G4 Flutter runtime rendering, background/overlay battery measurement, Android and iOS platform limitations: NOT STARTED.
 
 **Do not move asset acceptance issues to done before G2–G4 are evidenced.** No Flutter application production implementation should be implied by design previews.
+
+## Brain Balance art review addendum
+25 new animations (5 states × 5 mascots) require human evaluation in Design Lab. Check `overloaded` does not portray literal permanent brain damage or use alarming flash effects. Check eye/face behavior, tired/recharge symbolism, transitions and 64px readability. Automated asset validation is not human approval; Issue #27 remains open until feature and real-device tests.

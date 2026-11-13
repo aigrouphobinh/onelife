@@ -71,3 +71,6 @@ G4 real-device QA: animation frame consistency, CPU/memory/battery, permission d
 
 ## 10. Audio design contract
 Use assets/sounds/manifest.json for original optional sound effects; never play sound automatically by default. Alarm and reminder sounds must respect device sound settings and quiet hours where applicable. No audio is required for core offline task functionality.
+
+## 11. Brain Balance – optional screen-usage animation
+See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md) and [ANIMATION_RUNTIME_CONTRACT.md](ANIMATION_RUNTIME_CONTRACT.md). New wellbeing visual states: balanced, strained, overloaded, resting and recovering, available for all five characters as distinct source sprite clips. This is a metaphor and must not be advertised as detected brain damage. User-defined goals, on-device processing, permission-denied fallback, 2 nudges/day maximum and user opt-out are mandatory. UI and native telemetry require separate real-device implementation and design sign-off.
