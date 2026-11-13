@@ -1,0 +1,44 @@
+name: Render original sound cues
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/generate_sounds.py'
+      - '.github/workflows/sound-assets.yml'
+permissions:
+  contents: write
+concurrency:
+  group: sound-assets-main
+  cancel-in-progress: false
+jobs:
+  render:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/generate_sounds.py
+      - name: Verify audio files
+        run: |
+          python - <<'PY'
+          import wave
+          from pathlib import Path
+          paths=list(Path("assets/sounds").glob("*.wav"))
+          assert len(paths)==5, f"expected 5 WAVs, got {len(paths)}"
+          for p in paths:
+              with wave.open(str(p)) as w:
+                  assert w.getnchannels()==1 and w.getframerate()==22050
+          print("PASS: five valid mono PCM WAVs")
+          PY
+      - name: Push generated WAVs to main
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/sounds
+          if ! git diff --cached --quiet; then
+            git commit -m 'assets: render original sound WAV cues [skip ci]'
+            git push origin HEAD:main
+          fi
