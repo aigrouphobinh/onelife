@@ -1,0 +1,46 @@
+{
+  "characterId": "brain",
+  "version": "1.0.0",
+  "states": {
+    "alarm": {
+      "file": "assets/characters/brain/alarm/metadata.json",
+      "frames": 12
+    },
+    "done": {
+      "file": "assets/characters/brain/done/metadata.json",
+      "frames": 12
+    },
+    "focus": {
+      "file": "assets/characters/brain/focus/metadata.json",
+      "frames": 8
+    },
+    "happy": {
+      "file": "assets/characters/brain/happy/metadata.json",
+      "frames": 10
+    },
+    "idle": {
+      "file": "assets/characters/brain/idle/metadata.json",
+      "frames": 8
+    },
+    "remind": {
+      "file": "assets/characters/brain/remind/metadata.json",
+      "frames": 12
+    },
+    "sad": {
+      "file": "assets/characters/brain/sad/metadata.json",
+      "frames": 8
+    },
+    "sleepy": {
+      "file": "assets/characters/brain/sleepy/metadata.json",
+      "frames": 10
+    },
+    "study": {
+      "file": "assets/characters/brain/study/metadata.json",
+      "frames": 12
+    },
+    "thinking": {
+      "file": "assets/characters/brain/thinking/metadata.json",
+      "frames": 8
+    }
+  }
+}
