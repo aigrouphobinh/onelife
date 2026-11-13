@@ -6,7 +6,7 @@
       "source": "light-balanced.svg",
       "state": "balanced",
       "theme": "light",
-      "sha256": "b4b245919b9fb05db644bb044d8e1ed53885c67c4b4fddf95643acefd93703c1",
+      "sha256": "02626a6758e71bb6fd45a4ec8ff97ef157158659fbeb1fd6e52fbe92be641eb0",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -16,7 +16,7 @@
       "source": "light-strained.svg",
       "state": "strained",
       "theme": "light",
-      "sha256": "971b89c6fd47dad11fc85622d8e29e7738acc5a4dfb822e91d17bb8935989df2",
+      "sha256": "5045ca462d2020a531ccba5b9f4de72432d3505c526fee18fb4276c5f3f0d369",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -26,7 +26,7 @@
       "source": "light-overloaded.svg",
       "state": "overloaded",
       "theme": "light",
-      "sha256": "9b849bf84608efc5102cb389784ee53ca66bcc99bc57729b37eebd8ac6d37613",
+      "sha256": "11c4a0f5f1f9fd3c49fca9479002bd83188a394d0164100ab147b480835cc5c4",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -36,7 +36,7 @@
       "source": "light-resting.svg",
       "state": "resting",
       "theme": "light",
-      "sha256": "dcd293130c0910217a20495e86d3afbec4e04c0ab08fb7768b09d141407075b7",
+      "sha256": "fd5a9c7dca66f98469ee91ce519588e219f34999b3ab2f78e3b58b381a6d6473",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -46,7 +46,7 @@
       "source": "light-recovering.svg",
       "state": "recovering",
       "theme": "light",
-      "sha256": "6aa35366eb6859157ef7c27004392213c94873962695fbedf0652c9dc70992ee",
+      "sha256": "77536d538e6674240d8328b3ccd73ec37b72869e373a745b93d15b6bde419063",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -56,7 +56,7 @@
       "source": "light-permission.svg",
       "state": "permission",
       "theme": "light",
-      "sha256": "c7336af10a4e607dbb00703c81d23f6962dbac65c56a9a616caa80c605f533fe",
+      "sha256": "34ba8ea58ec829de321d57f261bf1f430df87fc804e15bcd30304445cfa573d5",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -66,7 +66,7 @@
       "source": "dark-balanced.svg",
       "state": "balanced",
       "theme": "dark",
-      "sha256": "b5cbabbf52568a810da445d028aebf2879c9b1ed59537cb26bbf1d79a71771ab",
+      "sha256": "70b4582b100faceba7cec300d2ec0db005d6df7d1394471e7db4e1218d026ce3",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -76,7 +76,7 @@
       "source": "dark-strained.svg",
       "state": "strained",
       "theme": "dark",
-      "sha256": "4efa80eba25728d27fc9b906d0944480d6fb4c6f94d23942c75a27105b33ed66",
+      "sha256": "c71311c034ec461a40df8a2dd08759d0eb9f3227ccbfa99a3673ee448e7b7846",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -86,7 +86,7 @@
       "source": "dark-overloaded.svg",
       "state": "overloaded",
       "theme": "dark",
-      "sha256": "8cafc032ab673adc21408010f559e0c9a19c4d13ed6c1e54d5b81b23e34c975a",
+      "sha256": "e87037dd6ff63a6cc8fd020e3c11b50e82b41402ab9f598738ba3eb5841e5be2",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -96,7 +96,7 @@
       "source": "dark-resting.svg",
       "state": "resting",
       "theme": "dark",
-      "sha256": "ddcebe9e12415a6d55639aaa4b8fafccc991d97efef1445242186108a2e0ac14",
+      "sha256": "65e24ab92b855bc781cd0479a190ae7383dabdb790ca3ed5f0ad6348aaccdfb7",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -106,7 +106,7 @@
       "source": "dark-recovering.svg",
       "state": "recovering",
       "theme": "dark",
-      "sha256": "b1b236be0634cde657d29cb5816ee530c39d15988415a2df4cc66cf484d30fc1",
+      "sha256": "05f58612b5db7ccbc81e3c279db63c6a48e879a6860b52c9b0d39146a1db60ff",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -116,7 +116,7 @@
       "source": "dark-permission.svg",
       "state": "permission",
       "theme": "dark",
-      "sha256": "8671493a80a5ad1e31b0d72434d0f167e33671512aa244b8dceacd0e5800dc8e",
+      "sha256": "0dcdfe29baa4f3564ff18b7140a92b505ac6608a7da1bdb4cdfd87ce5062ea23",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
