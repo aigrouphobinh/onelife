@@ -16,3 +16,9 @@ Track provenance, rights and verification for **every** asset. Generated assets 
 - Prefer original characters over copyrighted look-alikes.
 - Register any future sounds and fonts individually. Do **not** include unlicensed or copied audio.
 - All unfinished assets must be labelled pending, not done.
+
+## 2026-11-14 production addendum
+- Cat, dog, robot and sprout: 40 additional vector animation sheets, 400 illustrated frames, generated atlas PNGs, GIFs and per-state metadata; original assistant-generated artwork, no external asset collection.
+- Full mascot catalog: 50 clips, 500 designed frames total. Github Actions 43523520219 succeeded; renderer verified binary outputs were present on main.
+- Screen library: 10 SVG compositions and generated PNG screenshots (design only), original markup authored for OneLife, GitHub Actions run 43524137611 passed. Paths design/screens/*.svg and design/screens/*.png.
+- Manual design review and on-device runtime validation remain pending; automated render success is not product readiness.
