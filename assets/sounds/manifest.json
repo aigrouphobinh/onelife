@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "origin": "original synthesised UI alert sounds for OneLife",
+  "sounds": {
+    "remind": {
+      "file": "remind.wav",
+      "sampleRateHz": 22050,
+      "channels": 1,
+      "sampleWidthBits": 16,
+      "durationSeconds": 0.62,
+      "peakAmplitude": 0.191,
+      "sha256": "2789122046d087eaa754fa8be24e6695bf883b688a7293306cc72c199e812de5",
+      "usage": "optional, muted by default"
+    },
+    "alarm": {
+      "file": "alarm.wav",
+      "sampleRateHz": 22050,
+      "channels": 1,
+      "sampleWidthBits": 16,
+      "durationSeconds": 1.35,
+      "peakAmplitude": 0.1767,
+      "sha256": "e1d5ebfc5a91fa428094f4319c3521f084de06a8646e24d633614d63584ee540",
+      "usage": "optional, muted by default"
+    },
+    "done": {
+      "file": "done.wav",
+      "sampleRateHz": 22050,
+      "channels": 1,
+      "sampleWidthBits": 16,
+      "durationSeconds": 0.68,
+      "peakAmplitude": 0.212,
+      "sha256": "ededd90ddc21bcb7cb27e9be4cbb7f58902b506f0c4a99aa279b66acdc210b26",
+      "usage": "optional, muted by default"
+    },
+    "focus": {
+      "file": "focus.wav",
+      "sampleRateHz": 22050,
+      "channels": 1,
+      "sampleWidthBits": 16,
+      "durationSeconds": 0.42,
+      "peakAmplitude": 0.1176,
+      "sha256": "fe947b5e064168e147a42d36774a29bfbe3584b948b8ce70a8183f57c639dbfa",
+      "usage": "optional, muted by default"
+    },
+    "sleepy": {
+      "file": "sleepy.wav",
+      "sampleRateHz": 22050,
+      "channels": 1,
+      "sampleWidthBits": 16,
+      "durationSeconds": 0.84,
+      "peakAmplitude": 0.1328,
+      "sha256": "fd15c75089c9224c8e0346e4e9107e61ac0c6fb69dc5e20d0f22322648ad4af6",
+      "usage": "optional, muted by default"
+    }
+  }
+}
