@@ -27,5 +27,5 @@ The GitHub connector accepts UTF-8 source and Git objects but not local binary p
 
 ## Sound QA
 - [x] Original deterministic source generator tools/generate_sounds.py on main.
-- [ ] Confirm 5 WAV files exist in GitHub after sound-asset workflow completion.
+- [x] GitHub Actions run 43524688175 passed; 5 WAV source artifacts generated, and remind.wav read back from GitHub.
 - [ ] Test peak amplitude, notification permissions, quiet hours, user mute, Android/iOS supported formats and playback routing.
