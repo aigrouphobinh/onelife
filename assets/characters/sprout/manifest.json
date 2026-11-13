@@ -6,6 +6,10 @@
       "file": "assets/characters/sprout/alarm/metadata.json",
       "frames": 12
     },
+    "balanced": {
+      "file": "assets/characters/sprout/balanced/metadata.json",
+      "frames": 8
+    },
     "done": {
       "file": "assets/characters/sprout/done/metadata.json",
       "frames": 12
@@ -22,9 +26,21 @@
       "file": "assets/characters/sprout/idle/metadata.json",
       "frames": 8
     },
+    "overloaded": {
+      "file": "assets/characters/sprout/overloaded/metadata.json",
+      "frames": 12
+    },
+    "recovering": {
+      "file": "assets/characters/sprout/recovering/metadata.json",
+      "frames": 12
+    },
     "remind": {
       "file": "assets/characters/sprout/remind/metadata.json",
       "frames": 12
+    },
+    "resting": {
+      "file": "assets/characters/sprout/resting/metadata.json",
+      "frames": 10
     },
     "sad": {
       "file": "assets/characters/sprout/sad/metadata.json",
@@ -32,6 +48,10 @@
     },
     "sleepy": {
       "file": "assets/characters/sprout/sleepy/metadata.json",
+      "frames": 10
+    },
+    "strained": {
+      "file": "assets/characters/sprout/strained/metadata.json",
       "frames": 10
     },
     "study": {

@@ -1,0 +1,18 @@
+{
+  "characterId": "cat",
+  "state": "balanced",
+  "frames": 8,
+  "columns": 4,
+  "rows": 2,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 140,
+  "loop": true,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "source": "sheet.svg",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "sha256": "aa1d2cba2803322a2e157f170c1a075b0f2669f5868748d0c8b0a9a68b81aada"
+}

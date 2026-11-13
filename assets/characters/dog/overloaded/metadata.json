@@ -1,0 +1,18 @@
+{
+  "characterId": "dog",
+  "state": "overloaded",
+  "frames": 12,
+  "columns": 4,
+  "rows": 3,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 115,
+  "loop": true,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "source": "sheet.svg",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "sha256": "5097b5cb67877d7940ff51f33420bc01e911246390636746bbae7cd4f581af8b"
+}

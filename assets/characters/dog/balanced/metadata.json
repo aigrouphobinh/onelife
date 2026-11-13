@@ -1,0 +1,18 @@
+{
+  "characterId": "dog",
+  "state": "balanced",
+  "frames": 8,
+  "columns": 4,
+  "rows": 2,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 140,
+  "loop": true,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "source": "sheet.svg",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "sha256": "1fefbf352a613b3b140416e0d4011eadec04ccc62902adb83937a45f08243be5"
+}

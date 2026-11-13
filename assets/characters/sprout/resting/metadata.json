@@ -1,0 +1,18 @@
+{
+  "characterId": "sprout",
+  "state": "resting",
+  "frames": 10,
+  "columns": 4,
+  "rows": 3,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 205,
+  "loop": true,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "source": "sheet.svg",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "sha256": "29ad5fea7893b78adba2f8cc6beba30ae007056b03e523b162622031f57ed91e"
+}

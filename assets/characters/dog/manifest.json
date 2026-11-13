@@ -6,6 +6,10 @@
       "file": "assets/characters/dog/alarm/metadata.json",
       "frames": 12
     },
+    "balanced": {
+      "file": "assets/characters/dog/balanced/metadata.json",
+      "frames": 8
+    },
     "done": {
       "file": "assets/characters/dog/done/metadata.json",
       "frames": 12
@@ -22,9 +26,21 @@
       "file": "assets/characters/dog/idle/metadata.json",
       "frames": 8
     },
+    "overloaded": {
+      "file": "assets/characters/dog/overloaded/metadata.json",
+      "frames": 12
+    },
+    "recovering": {
+      "file": "assets/characters/dog/recovering/metadata.json",
+      "frames": 12
+    },
     "remind": {
       "file": "assets/characters/dog/remind/metadata.json",
       "frames": 12
+    },
+    "resting": {
+      "file": "assets/characters/dog/resting/metadata.json",
+      "frames": 10
     },
     "sad": {
       "file": "assets/characters/dog/sad/metadata.json",
@@ -32,6 +48,10 @@
     },
     "sleepy": {
       "file": "assets/characters/dog/sleepy/metadata.json",
+      "frames": 10
+    },
+    "strained": {
+      "file": "assets/characters/dog/strained/metadata.json",
       "frames": 10
     },
     "study": {

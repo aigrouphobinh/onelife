@@ -6,6 +6,10 @@
       "file": "assets/characters/brain/alarm/metadata.json",
       "frames": 12
     },
+    "balanced": {
+      "file": "assets/characters/brain/balanced/metadata.json",
+      "frames": 8
+    },
     "done": {
       "file": "assets/characters/brain/done/metadata.json",
       "frames": 12
@@ -22,9 +26,21 @@
       "file": "assets/characters/brain/idle/metadata.json",
       "frames": 8
     },
+    "overloaded": {
+      "file": "assets/characters/brain/overloaded/metadata.json",
+      "frames": 12
+    },
+    "recovering": {
+      "file": "assets/characters/brain/recovering/metadata.json",
+      "frames": 12
+    },
     "remind": {
       "file": "assets/characters/brain/remind/metadata.json",
       "frames": 12
+    },
+    "resting": {
+      "file": "assets/characters/brain/resting/metadata.json",
+      "frames": 10
     },
     "sad": {
       "file": "assets/characters/brain/sad/metadata.json",
@@ -32,6 +48,10 @@
     },
     "sleepy": {
       "file": "assets/characters/brain/sleepy/metadata.json",
+      "frames": 10
+    },
+    "strained": {
+      "file": "assets/characters/brain/strained/metadata.json",
       "frames": 10
     },
     "study": {

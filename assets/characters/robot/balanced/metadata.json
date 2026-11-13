@@ -1,0 +1,18 @@
+{
+  "characterId": "robot",
+  "state": "balanced",
+  "frames": 8,
+  "columns": 4,
+  "rows": 2,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 140,
+  "loop": true,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "source": "sheet.svg",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "sha256": "89db7325f794f0017dbad20cad708b24ade3a425c7e138b8c10c6819ec8d1fa0"
+}

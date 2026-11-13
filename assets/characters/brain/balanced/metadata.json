@@ -1,0 +1,18 @@
+{
+  "characterId": "brain",
+  "state": "balanced",
+  "frames": 8,
+  "columns": 4,
+  "rows": 2,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 140,
+  "loop": true,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "source": "sheet.svg",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "sha256": "f52c5554967b04a10593f3177074c7ac2b6e127081d2ff2457c4cd498b32b3a5"
+}

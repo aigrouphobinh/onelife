@@ -6,6 +6,10 @@
       "file": "assets/characters/robot/alarm/metadata.json",
       "frames": 12
     },
+    "balanced": {
+      "file": "assets/characters/robot/balanced/metadata.json",
+      "frames": 8
+    },
     "done": {
       "file": "assets/characters/robot/done/metadata.json",
       "frames": 12
@@ -22,9 +26,21 @@
       "file": "assets/characters/robot/idle/metadata.json",
       "frames": 8
     },
+    "overloaded": {
+      "file": "assets/characters/robot/overloaded/metadata.json",
+      "frames": 12
+    },
+    "recovering": {
+      "file": "assets/characters/robot/recovering/metadata.json",
+      "frames": 12
+    },
     "remind": {
       "file": "assets/characters/robot/remind/metadata.json",
       "frames": 12
+    },
+    "resting": {
+      "file": "assets/characters/robot/resting/metadata.json",
+      "frames": 10
     },
     "sad": {
       "file": "assets/characters/robot/sad/metadata.json",
@@ -32,6 +48,10 @@
     },
     "sleepy": {
       "file": "assets/characters/robot/sleepy/metadata.json",
+      "frames": 10
+    },
+    "strained": {
+      "file": "assets/characters/robot/strained/metadata.json",
       "frames": 10
     },
     "study": {
