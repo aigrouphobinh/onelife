@@ -1,0 +1,46 @@
+{
+  "characterId": "robot",
+  "version": "1.0.0",
+  "states": {
+    "alarm": {
+      "file": "assets/characters/robot/alarm/metadata.json",
+      "frames": 12
+    },
+    "done": {
+      "file": "assets/characters/robot/done/metadata.json",
+      "frames": 12
+    },
+    "focus": {
+      "file": "assets/characters/robot/focus/metadata.json",
+      "frames": 8
+    },
+    "happy": {
+      "file": "assets/characters/robot/happy/metadata.json",
+      "frames": 10
+    },
+    "idle": {
+      "file": "assets/characters/robot/idle/metadata.json",
+      "frames": 8
+    },
+    "remind": {
+      "file": "assets/characters/robot/remind/metadata.json",
+      "frames": 12
+    },
+    "sad": {
+      "file": "assets/characters/robot/sad/metadata.json",
+      "frames": 8
+    },
+    "sleepy": {
+      "file": "assets/characters/robot/sleepy/metadata.json",
+      "frames": 10
+    },
+    "study": {
+      "file": "assets/characters/robot/study/metadata.json",
+      "frames": 12
+    },
+    "thinking": {
+      "file": "assets/characters/robot/thinking/metadata.json",
+      "frames": 8
+    }
+  }
+}

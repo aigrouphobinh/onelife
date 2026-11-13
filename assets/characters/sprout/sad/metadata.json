@@ -1,11 +1,6 @@
 {
   "characterId": "sprout",
   "state": "sad",
-  "version": "1.0.0",
-  "source": "sheet.svg",
-  "runtimeAsset": "sheet.png",
-  "preview": "preview.gif",
-  "generatedRasterStatus": "awaiting GitHub Actions validation",
   "frames": 8,
   "columns": 4,
   "rows": 2,
@@ -15,5 +10,9 @@
   "loop": false,
   "anchorX": 0.5,
   "anchorY": 0.92,
-  "licenseRef": "docs/ASSET_REGISTER.md"
+  "source": "sheet.svg",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "sha256": "1f7b165d22b06ad29ba71dc13b751488c157a110ae3d8601fd65f51869e095b5"
 }

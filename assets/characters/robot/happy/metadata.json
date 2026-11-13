@@ -1,11 +1,6 @@
 {
   "characterId": "robot",
   "state": "happy",
-  "version": "1.0.0",
-  "source": "sheet.svg",
-  "runtimeAsset": "sheet.png",
-  "preview": "preview.gif",
-  "generatedRasterStatus": "awaiting GitHub Actions validation",
   "frames": 10,
   "columns": 4,
   "rows": 3,
@@ -15,5 +10,9 @@
   "loop": true,
   "anchorX": 0.5,
   "anchorY": 0.92,
-  "licenseRef": "docs/ASSET_REGISTER.md"
+  "source": "sheet.svg",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "sha256": "50ae4bbb3898e4349958419d8a8a8c59f4e9fc1b79d3506162ec033404f4c4ce"
 }

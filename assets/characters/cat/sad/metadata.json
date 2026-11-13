@@ -1,11 +1,6 @@
 {
   "characterId": "cat",
   "state": "sad",
-  "version": "1.0.0",
-  "source": "sheet.svg",
-  "runtimeAsset": "sheet.png",
-  "preview": "preview.gif",
-  "generatedRasterStatus": "awaiting GitHub Actions validation",
   "frames": 8,
   "columns": 4,
   "rows": 2,
@@ -15,5 +10,9 @@
   "loop": false,
   "anchorX": 0.5,
   "anchorY": 0.92,
-  "licenseRef": "docs/ASSET_REGISTER.md"
+  "source": "sheet.svg",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "sha256": "2cbfe753c874eeb3f566a70be2378ddfe3c038c6f4391fcdd88e5a7c529df443"
 }

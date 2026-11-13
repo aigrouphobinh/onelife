@@ -1,0 +1,46 @@
+{
+  "characterId": "cat",
+  "version": "1.0.0",
+  "states": {
+    "alarm": {
+      "file": "assets/characters/cat/alarm/metadata.json",
+      "frames": 12
+    },
+    "done": {
+      "file": "assets/characters/cat/done/metadata.json",
+      "frames": 12
+    },
+    "focus": {
+      "file": "assets/characters/cat/focus/metadata.json",
+      "frames": 8
+    },
+    "happy": {
+      "file": "assets/characters/cat/happy/metadata.json",
+      "frames": 10
+    },
+    "idle": {
+      "file": "assets/characters/cat/idle/metadata.json",
+      "frames": 8
+    },
+    "remind": {
+      "file": "assets/characters/cat/remind/metadata.json",
+      "frames": 12
+    },
+    "sad": {
+      "file": "assets/characters/cat/sad/metadata.json",
+      "frames": 8
+    },
+    "sleepy": {
+      "file": "assets/characters/cat/sleepy/metadata.json",
+      "frames": 10
+    },
+    "study": {
+      "file": "assets/characters/cat/study/metadata.json",
+      "frames": 12
+    },
+    "thinking": {
+      "file": "assets/characters/cat/thinking/metadata.json",
+      "frames": 8
+    }
+  }
+}

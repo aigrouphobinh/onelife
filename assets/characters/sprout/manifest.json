@@ -1,0 +1,46 @@
+{
+  "characterId": "sprout",
+  "version": "1.0.0",
+  "states": {
+    "alarm": {
+      "file": "assets/characters/sprout/alarm/metadata.json",
+      "frames": 12
+    },
+    "done": {
+      "file": "assets/characters/sprout/done/metadata.json",
+      "frames": 12
+    },
+    "focus": {
+      "file": "assets/characters/sprout/focus/metadata.json",
+      "frames": 8
+    },
+    "happy": {
+      "file": "assets/characters/sprout/happy/metadata.json",
+      "frames": 10
+    },
+    "idle": {
+      "file": "assets/characters/sprout/idle/metadata.json",
+      "frames": 8
+    },
+    "remind": {
+      "file": "assets/characters/sprout/remind/metadata.json",
+      "frames": 12
+    },
+    "sad": {
+      "file": "assets/characters/sprout/sad/metadata.json",
+      "frames": 8
+    },
+    "sleepy": {
+      "file": "assets/characters/sprout/sleepy/metadata.json",
+      "frames": 10
+    },
+    "study": {
+      "file": "assets/characters/sprout/study/metadata.json",
+      "frames": 12
+    },
+    "thinking": {
+      "file": "assets/characters/sprout/thinking/metadata.json",
+      "frames": 8
+    }
+  }
+}

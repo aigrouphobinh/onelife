@@ -1,0 +1,46 @@
+{
+  "characterId": "dog",
+  "version": "1.0.0",
+  "states": {
+    "alarm": {
+      "file": "assets/characters/dog/alarm/metadata.json",
+      "frames": 12
+    },
+    "done": {
+      "file": "assets/characters/dog/done/metadata.json",
+      "frames": 12
+    },
+    "focus": {
+      "file": "assets/characters/dog/focus/metadata.json",
+      "frames": 8
+    },
+    "happy": {
+      "file": "assets/characters/dog/happy/metadata.json",
+      "frames": 10
+    },
+    "idle": {
+      "file": "assets/characters/dog/idle/metadata.json",
+      "frames": 8
+    },
+    "remind": {
+      "file": "assets/characters/dog/remind/metadata.json",
+      "frames": 12
+    },
+    "sad": {
+      "file": "assets/characters/dog/sad/metadata.json",
+      "frames": 8
+    },
+    "sleepy": {
+      "file": "assets/characters/dog/sleepy/metadata.json",
+      "frames": 10
+    },
+    "study": {
+      "file": "assets/characters/dog/study/metadata.json",
+      "frames": 12
+    },
+    "thinking": {
+      "file": "assets/characters/dog/thinking/metadata.json",
+      "frames": 8
+    }
+  }
+}
