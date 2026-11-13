@@ -24,3 +24,8 @@ The GitHub connector accepts UTF-8 source and Git objects but not local binary p
 - At least one generated PNG/GIF file for each of cat, dog, robot, sprout was read back successfully via GitHub API.
 - 10 screen SVG/PNG compositions validated by design-render workflow 43524137611. These are design mockups, not app screenshots.
 - Remaining work: visual approval of every motion; reduced-motion, actual device, battery and accessibility checks.
+
+## Sound QA
+- [x] Original deterministic source generator tools/generate_sounds.py on main.
+- [ ] Confirm 5 WAV files exist in GitHub after sound-asset workflow completion.
+- [ ] Test peak amplitude, notification permissions, quiet hours, user mute, Android/iOS supported formats and playback routing.
