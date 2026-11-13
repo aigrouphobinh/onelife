@@ -1,0 +1,19 @@
+{
+  "characterId": "sprout",
+  "state": "idle",
+  "version": "1.0.0",
+  "source": "sheet.svg",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "generatedRasterStatus": "awaiting GitHub Actions validation",
+  "frames": 8,
+  "columns": 4,
+  "rows": 2,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 140,
+  "loop": true,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "licenseRef": "docs/ASSET_REGISTER.md"
+}
