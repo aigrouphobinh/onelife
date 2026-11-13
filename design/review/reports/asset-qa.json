@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "automatedOnly": true,
   "passed": true,
-  "clips": 50,
-  "frames": 500,
+  "clips": 75,
+  "frames": 760,
   "errors": [],
   "warnings": [],
   "records": [
@@ -78,6 +78,41 @@
       "pngBytes": 119565
     },
     {
+      "character": "brain",
+      "state": "balanced",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 108139
+    },
+    {
+      "character": "brain",
+      "state": "strained",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 158991
+    },
+    {
+      "character": "brain",
+      "state": "overloaded",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 296238
+    },
+    {
+      "character": "brain",
+      "state": "resting",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 194000
+    },
+    {
+      "character": "brain",
+      "state": "recovering",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 194224
+    },
+    {
       "character": "cat",
       "state": "idle",
       "frames": 8,
@@ -146,6 +181,41 @@
       "frames": 8,
       "changingTransitions": 7,
       "pngBytes": 136211
+    },
+    {
+      "character": "cat",
+      "state": "balanced",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 115366
+    },
+    {
+      "character": "cat",
+      "state": "strained",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 163589
+    },
+    {
+      "character": "cat",
+      "state": "overloaded",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 318033
+    },
+    {
+      "character": "cat",
+      "state": "resting",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 202166
+    },
+    {
+      "character": "cat",
+      "state": "recovering",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 203683
     },
     {
       "character": "dog",
@@ -218,6 +288,41 @@
       "pngBytes": 111176
     },
     {
+      "character": "dog",
+      "state": "balanced",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 98008
+    },
+    {
+      "character": "dog",
+      "state": "strained",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 142450
+    },
+    {
+      "character": "dog",
+      "state": "overloaded",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 289000
+    },
+    {
+      "character": "dog",
+      "state": "resting",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 177954
+    },
+    {
+      "character": "dog",
+      "state": "recovering",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 171499
+    },
+    {
       "character": "robot",
       "state": "idle",
       "frames": 8,
@@ -288,6 +393,41 @@
       "pngBytes": 112466
     },
     {
+      "character": "robot",
+      "state": "balanced",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 91327
+    },
+    {
+      "character": "robot",
+      "state": "strained",
+      "frames": 10,
+      "changingTransitions": 8,
+      "pngBytes": 133669
+    },
+    {
+      "character": "robot",
+      "state": "overloaded",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 299581
+    },
+    {
+      "character": "robot",
+      "state": "resting",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 185083
+    },
+    {
+      "character": "robot",
+      "state": "recovering",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 165809
+    },
+    {
       "character": "sprout",
       "state": "idle",
       "frames": 8,
@@ -356,6 +496,41 @@
       "frames": 8,
       "changingTransitions": 7,
       "pngBytes": 115096
+    },
+    {
+      "character": "sprout",
+      "state": "balanced",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 101322
+    },
+    {
+      "character": "sprout",
+      "state": "strained",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 144872
+    },
+    {
+      "character": "sprout",
+      "state": "overloaded",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 317563
+    },
+    {
+      "character": "sprout",
+      "state": "resting",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 203562
+    },
+    {
+      "character": "sprout",
+      "state": "recovering",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 179973
     }
   ]
 }
