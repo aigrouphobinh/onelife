@@ -75,8 +75,16 @@ def make(state,theme,defs,master):
         root += [label(41,526,"Chưa có dữ liệu sử dụng",13,text,600),
                  label(41,554,"Dữ liệu chỉ có khi bạn đồng ý cấp quyền.",10,muted),
                  label(41,582,"Không cấp quyền vẫn dùng được lịch nhắc.",10,muted)]
+    button_copy = {
+        "balanced": "Tùy chỉnh mục tiêu",
+        "strained": "Bắt đầu nghỉ 5 phút",
+        "overloaded": "Bắt đầu nghỉ 5 phút",
+        "resting": "Kết thúc giờ nghỉ",
+        "recovering": "Tiếp tục theo nhịp của bạn",
+        "permission": "Tìm hiểu quyền truy cập",
+    }[state]
     root += [rect(24,632,342,54,14,bright),
-             label(195,665,"Bắt đầu nghỉ 5 phút" if state!="permission" else "Tìm hiểu quyền truy cập",13,"#FFFFFF",700,"middle"),
+             label(195,665,button_copy,13,"#FFFFFF",700,"middle"),
              rect(24,700,342,58,14,card,line),
              label(41,722,"Lưu dữ liệu trên điện thoại",12,text,600),
              label(41,743,"Có thể tắt và xóa lịch sử bất cứ lúc nào",10,muted),
