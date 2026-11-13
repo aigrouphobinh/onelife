@@ -26,21 +26,21 @@
     {
       "screen": "04-tasks",
       "file": "04-tasks.png",
-      "sha256": "ae2a490015fe45be9a163c783d777250b9a31eb9eb07b08f73ee795f500f0985",
+      "sha256": "537e735eed665596e8ee27dcca8efc9748269300955b1d76bb80e796e3ec8777",
       "width": 390,
       "height": 844
     },
     {
       "screen": "05-schedule",
       "file": "05-schedule.png",
-      "sha256": "67471b07468e375e3f0b081aed3d3d7e6f7980906206dd50ef6d0f0a9c2ee5f9",
+      "sha256": "5ec78d2edc59d56f067c6f1b4587f38f04c881efb7cc41b0f33b7f81b267e3a0",
       "width": 390,
       "height": 844
     },
     {
       "screen": "06-habits",
       "file": "06-habits.png",
-      "sha256": "4ef2bde1f9c51848a591a4c9bcb213190b12f1989c13facd0019938939ae9af7",
+      "sha256": "51e4f94e95a5af1efb4d23fa1e44494d91ccbfe23f49a6f78ea1abc705b83b77",
       "width": 390,
       "height": 844
     },
@@ -54,14 +54,14 @@
     {
       "screen": "08-characters",
       "file": "08-characters.png",
-      "sha256": "d3b321b9ea78d1091f524a3487f45d346ac4f6d3a763ffad0d52659b4b06c7f7",
+      "sha256": "0e812cd8cf6b2c55291b0cb3995d5470436bd57da494f52da00ec30ece9972d5",
       "width": 390,
       "height": 844
     },
     {
       "screen": "09-settings",
       "file": "09-settings.png",
-      "sha256": "3a51ad7795f926b00e797a6d11c359b4034b68634b76e323ddde638007f22a07",
+      "sha256": "1f64407177ec2fee07aa5b4267f3fe5f02127dc3bb2be0201e79785e42957f39",
       "width": 390,
       "height": 844
     },
