@@ -1,0 +1,38 @@
+name: Render Brain Balance storyboard
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/render_brain_balance_design.py'
+      - '.github/workflows/brain-balance-design.yml'
+      - 'assets/characters/brain/master.svg'
+permissions:
+  contents: write
+concurrency:
+  group: onelife-brain-balance-design
+  cancel-in-progress: false
+jobs:
+  render:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'CairoSVG==2.7.1' 'Pillow==11.0.0'
+      - run: python tools/render_brain_balance_design.py
+      - name: Commit design SVG PNG and manifest
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add design/wellbeing
+          if git diff --cached --quiet; then
+            echo 'No changes'
+          else
+            git commit -m 'design: render Brain Balance screen concepts [skip ci]'
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
+          fi
