@@ -56,6 +56,9 @@ def main():
     for page in ("01-splash","02-onboarding","03-home","04-tasks","05-schedule",
                  "06-habits","07-assistant","08-characters","09-settings","10-overlay-android"):
         assert (ROOT / "design/screens" / (page + ".png")).is_file(), page
+    for mode in ("light", "dark"):
+        for state in ("balanced","strained","overloaded","resting","recovering","permission"):
+            assert (ROOT / "design/wellbeing" / (mode+"-"+state+".png")).is_file(), mode+"/"+state
     assert (ROOT / "design/review/reports/asset-qa.md").is_file(), "Asset QA report must be committed first"
     print("PASS design preview: JS syntax, 50 local atlas paths, 10 design screens, controls")
 

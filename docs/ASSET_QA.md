@@ -51,3 +51,10 @@ Binary sprite PNG/GIF files and original WAV files have been read back from GitH
 - [ ] UI concept for user-defined break goals, permission-denied and break/recovery sequences.
 - [ ] Flutter runtime, local rules engine and OS permissions (NOT implemented).
 See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md). `overloaded` is a fictional stress illustration, not damage diagnosis.
+
+## 2026-11-14 Brain Balance added review assets
+- [x] New sprite source and rendered binary: 25 wellbeing clips, all five characters (combined 75/760); on main.
+- [x] 12 Brain Balance concept screens (6 states × light/dark) available under `design/wellbeing/`, using real sprite keyframes (mock data only).
+- [x] QA now checks all 75 clips / 760 frames and both original 20 + Brain Balance 12 screen images.
+- [ ] Human approval of emotional continuity, 64px readability and real-device tests.
+- [ ] Flutter native usage tracking and real personalized rules (not implemented).

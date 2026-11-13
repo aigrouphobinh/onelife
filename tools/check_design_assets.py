@@ -85,6 +85,18 @@ def run():
                     if im.size!=(s["width"],s["height"]):errors.append("Dark screen size "+s["file"])
     except (OSError,KeyError,ValueError) as e:errors.append("Dark manifest: "+str(e))
     try:
+        concepts_dir=ROOT/"design/wellbeing"
+        concepts=json.loads((concepts_dir/"manifest.json").read_text())
+        if len(concepts["files"])!=12:errors.append("Expected 12 Brain Balance storyboard images")
+        for s in concepts["files"]:
+            p=concepts_dir/s["file"]
+            if not p.is_file() or not (concepts_dir/s["source"]).is_file() or sha(p)!=s["sha256"]:
+                errors.append("Brain Balance storyboard missing/checksum mismatch: "+s["file"])
+            else:
+                with Image.open(p) as im:
+                    if im.size!=(s["width"],s["height"]):errors.append("Brain Balance dimensions: "+s["file"])
+    except (OSError,KeyError,ValueError) as e:errors.append("Brain Balance storyboard: "+str(e))
+    try:
         manifest=json.loads((ROOT/"assets/sounds/manifest.json").read_text())
         for name,s in manifest["sounds"].items():
             p=ROOT/"assets/sounds"/s["file"]

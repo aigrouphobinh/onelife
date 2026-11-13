@@ -31,3 +31,6 @@ Do not begin building a production UI from these screens until designers confirm
 
 ## Dark-mode compositions
 Ten independently generated dark SVG/PNG design screens are in `screens/dark/` with SHA256 manifest, created deterministically by `tools/render_dark_screens.py` and GitHub Actions. The review gallery switches both its background **and the actual page mockup** when toggling dark mode. These are not Flutter screenshots; accessibility contrast, typography and device behavior require separate sign-off.
+
+## Brain Balance scenario designs
+`design/wellbeing/` holds six distinct Brain Balance scenarios in light and dark versions (12 SVG + 12 PNG; `manifest.json`). The sample numbers are illustrations, not telemetry. Source renderer: `tools/render_brain_balance_design.py`; no external data or fonts. The design viewer offers an extra Brain Balance screen and can preview the selected wellbeing emotion.

@@ -9,6 +9,7 @@ on:
       - 'assets/characters/**/metadata.json'
       - 'assets/sounds/**'
       - 'design/screens/**'
+      - 'design/wellbeing/**'
       - 'design/review/index.html'
       - 'tools/check_design_review.py'
 permissions:

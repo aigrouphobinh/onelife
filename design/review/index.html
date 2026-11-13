@@ -84,7 +84,8 @@ var pages=[
 ['07-assistant','Trợ lý','AssistantPage'],
 ['08-characters','Nhân vật','CharactersPage'],
 ['09-settings','Cài đặt','SettingsPage'],
-['10-overlay-android','Android Overlay','OverlayWidget']];
+['10-overlay-android','Android Overlay','OverlayWidget'],
+['brain-balance','Brain Balance','BrainBalancePage']];
 var get=function(id){return document.getElementById(id)};
 function makeOptions(select,values){Object.keys(values).forEach(function(k){var op=document.createElement('option');op.value=k;op.textContent=Array.isArray(values[k])?values[k][2]:values[k];select.appendChild(op)})}
 makeOptions(get('character'),chars);makeOptions(get('state'),states);get('state').value='remind';
@@ -112,7 +113,7 @@ if(!last)last=t;var step=states[get('state').value][1];if(t-last>=step){var n=Ma
 }else last=t;
 requestAnimationFrame(loop);
 }
-get('character').addEventListener('change',load);get('state').addEventListener('change',load);
+get('character').addEventListener('change',load);get('state').addEventListener('change',function(){load();if(pageIndex===10)setPage(pageIndex)});
 get('pause').addEventListener('click',function(){paused=!paused;get('pause').textContent=paused?'▶ Tiếp tục':'⏸ Tạm dừng';get('pause').setAttribute('aria-pressed',String(!paused))});
 get('nextFrame').addEventListener('click',function(){paused=true;frame=(frame+1)%states[get('state').value][0];get('pause').textContent='▶ Tiếp tục';render()});
 get('frameSeek').addEventListener('input',function(){paused=true;frame=Number(this.value);get('pause').textContent='▶ Tiếp tục';render()});
@@ -120,7 +121,7 @@ get('motion').addEventListener('change',function(){if(this.value==='still'){paus
 get('size').addEventListener('change',function(){get('hero').style.width=this.value+'px';get('hero').style.height=this.value+'px'});
 get('themeButton').addEventListener('click',function(){var dark=document.body.dataset.theme==='dark';document.body.dataset.theme=dark?'light':'dark';this.textContent=dark?'🌙 Đổi nền tối':'☀️ Đổi nền sáng';setPage(pageIndex)});
 pages.forEach(function(page,i){var b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0')+' · '+page[1];b.addEventListener('click',function(){setPage(i)});get('pages').appendChild(b)});
-function setPage(i){pageIndex=(i+pages.length)%pages.length;var page=pages[pageIndex];get('screen').src='../screens/'+(document.body.dataset.theme==='dark'?'dark/':'')+page[0]+'.png';get('screen').alt='Màn hình thiết kế '+page[1];get('pageInfo').textContent=page[1]+' · '+page[2]+' · 390 × 844 (design, chưa có dữ liệu thật).';Array.from(get('pages').children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===pageIndex))})}
+function setPage(i){pageIndex=(i+pages.length)%pages.length;var page=pages[pageIndex];var theme=document.body.dataset.theme==='dark'?'dark':'light';var state=get('state').value;var wellbeing=['balanced','strained','overloaded','resting','recovering'].includes(state)?state:'strained';get('screen').src=page[0]==='brain-balance'?('../wellbeing/'+theme+'-'+wellbeing+'.png'):('../screens/'+(theme==='dark'?'dark/':'')+page[0]+'.png');get('screen').alt='Màn hình thiết kế '+page[1];get('pageInfo').textContent=page[1]+' · '+page[2]+' · 390 × 844 (design, chưa có dữ liệu thật).';Array.from(get('pages').children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===pageIndex))})}
 get('prevPage').addEventListener('click',function(){setPage(pageIndex-1)});
 get('nextPage').addEventListener('click',function(){setPage(pageIndex+1)});
 load();setPage(pageIndex);requestAnimationFrame(loop);
