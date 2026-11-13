@@ -1,0 +1,361 @@
+{
+  "schemaVersion": 1,
+  "automatedOnly": true,
+  "passed": true,
+  "clips": 50,
+  "frames": 500,
+  "errors": [],
+  "warnings": [],
+  "records": [
+    {
+      "character": "brain",
+      "state": "idle",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 116066
+    },
+    {
+      "character": "brain",
+      "state": "happy",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 180686
+    },
+    {
+      "character": "brain",
+      "state": "remind",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 226760
+    },
+    {
+      "character": "brain",
+      "state": "alarm",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 223836
+    },
+    {
+      "character": "brain",
+      "state": "focus",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 103268
+    },
+    {
+      "character": "brain",
+      "state": "study",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 192449
+    },
+    {
+      "character": "brain",
+      "state": "sleepy",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 171370
+    },
+    {
+      "character": "brain",
+      "state": "done",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 218185
+    },
+    {
+      "character": "brain",
+      "state": "thinking",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 122690
+    },
+    {
+      "character": "brain",
+      "state": "sad",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 119565
+    },
+    {
+      "character": "cat",
+      "state": "idle",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 133960
+    },
+    {
+      "character": "cat",
+      "state": "happy",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 179814
+    },
+    {
+      "character": "cat",
+      "state": "remind",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 224229
+    },
+    {
+      "character": "cat",
+      "state": "alarm",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 218898
+    },
+    {
+      "character": "cat",
+      "state": "focus",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 118591
+    },
+    {
+      "character": "cat",
+      "state": "study",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 194418
+    },
+    {
+      "character": "cat",
+      "state": "sleepy",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 175955
+    },
+    {
+      "character": "cat",
+      "state": "done",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 212467
+    },
+    {
+      "character": "cat",
+      "state": "thinking",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 143236
+    },
+    {
+      "character": "cat",
+      "state": "sad",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 136211
+    },
+    {
+      "character": "dog",
+      "state": "idle",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 112126
+    },
+    {
+      "character": "dog",
+      "state": "happy",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 148767
+    },
+    {
+      "character": "dog",
+      "state": "remind",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 190106
+    },
+    {
+      "character": "dog",
+      "state": "alarm",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 187820
+    },
+    {
+      "character": "dog",
+      "state": "focus",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 96146
+    },
+    {
+      "character": "dog",
+      "state": "study",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 158795
+    },
+    {
+      "character": "dog",
+      "state": "sleepy",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 146952
+    },
+    {
+      "character": "dog",
+      "state": "done",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 181807
+    },
+    {
+      "character": "dog",
+      "state": "thinking",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 120355
+    },
+    {
+      "character": "dog",
+      "state": "sad",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 111176
+    },
+    {
+      "character": "robot",
+      "state": "idle",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 108848
+    },
+    {
+      "character": "robot",
+      "state": "happy",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 147663
+    },
+    {
+      "character": "robot",
+      "state": "remind",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 188624
+    },
+    {
+      "character": "robot",
+      "state": "alarm",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 185712
+    },
+    {
+      "character": "robot",
+      "state": "focus",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 96064
+    },
+    {
+      "character": "robot",
+      "state": "study",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 155843
+    },
+    {
+      "character": "robot",
+      "state": "sleepy",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 141864
+    },
+    {
+      "character": "robot",
+      "state": "done",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 178057
+    },
+    {
+      "character": "robot",
+      "state": "thinking",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 119676
+    },
+    {
+      "character": "robot",
+      "state": "sad",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 112466
+    },
+    {
+      "character": "sprout",
+      "state": "idle",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 117747
+    },
+    {
+      "character": "sprout",
+      "state": "happy",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 159690
+    },
+    {
+      "character": "sprout",
+      "state": "remind",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 199081
+    },
+    {
+      "character": "sprout",
+      "state": "alarm",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 203891
+    },
+    {
+      "character": "sprout",
+      "state": "focus",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 101777
+    },
+    {
+      "character": "sprout",
+      "state": "study",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 166782
+    },
+    {
+      "character": "sprout",
+      "state": "sleepy",
+      "frames": 10,
+      "changingTransitions": 9,
+      "pngBytes": 156070
+    },
+    {
+      "character": "sprout",
+      "state": "done",
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 196567
+    },
+    {
+      "character": "sprout",
+      "state": "thinking",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 125195
+    },
+    {
+      "character": "sprout",
+      "state": "sad",
+      "frames": 8,
+      "changingTransitions": 7,
+      "pngBytes": 115096
+    }
+  ]
+}
