@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "status": "design mockups, not real app screenshots",
+  "screens": [
+    {
+      "screen": "01-splash",
+      "file": "01-splash.png",
+      "sha256": "be85c90794f59fa7567439ae18c2012a38c72c17539f47ee4b288e6d8b772890",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "screen": "02-onboarding",
+      "file": "02-onboarding.png",
+      "sha256": "1229e051641f71cfcd523cdc1e5242bdc8d55c60a34bfbf42c9686d18a245a47",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "screen": "03-home",
+      "file": "03-home.png",
+      "sha256": "e4f73272db567fd5b3059f4ed3889d058cf0f842967cfb4ac54e968e7b4099cc",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "screen": "04-tasks",
+      "file": "04-tasks.png",
+      "sha256": "ae2a490015fe45be9a163c783d777250b9a31eb9eb07b08f73ee795f500f0985",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "screen": "05-schedule",
+      "file": "05-schedule.png",
+      "sha256": "67471b07468e375e3f0b081aed3d3d7e6f7980906206dd50ef6d0f0a9c2ee5f9",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "screen": "06-habits",
+      "file": "06-habits.png",
+      "sha256": "4ef2bde1f9c51848a591a4c9bcb213190b12f1989c13facd0019938939ae9af7",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "screen": "07-assistant",
+      "file": "07-assistant.png",
+      "sha256": "94e36fdebd2b49aefb51110a5e0fa2711e6f4c3ed02600d17b5f5f45ac2efdf2",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "screen": "08-characters",
+      "file": "08-characters.png",
+      "sha256": "d3b321b9ea78d1091f524a3487f45d346ac4f6d3a763ffad0d52659b4b06c7f7",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "screen": "09-settings",
+      "file": "09-settings.png",
+      "sha256": "3a51ad7795f926b00e797a6d11c359b4034b68634b76e323ddde638007f22a07",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "screen": "10-overlay-android",
+      "file": "10-overlay-android.png",
+      "sha256": "d2e63e3f920cfc52ccd4eb2fb0b033a0f6c08eb434b1c43de72aee601a013124",
+      "width": 390,
+      "height": 844
+    }
+  ]
+}
