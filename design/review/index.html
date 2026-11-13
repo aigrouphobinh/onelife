@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OneLife | Animation & Design Review</title>
+<style>
+:root{--bg:#F7F5FC;--card:#fff;--ink:#302744;--muted:#746985;--stroke:#E3DCEC;--purple:#7B61FF;--soft:#F0EBFF}
+[data-theme=dark]{--bg:#151426;--card:#242038;--ink:#F8F5FF;--muted:#BEB6D2;--stroke:#51486B;--soft:#403658}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:1360px;margin:auto;padding:22px}.header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.logo{display:flex;align-items:center;gap:14px}.logo img{width:64px;height:64px}
+h1{margin:0;font-size:1.65rem}h2{margin:0 0 15px;font-size:1.1rem}.caption{font-size:.86rem;line-height:1.55;color:var(--muted)}.tag{padding:5px 10px;border-radius:999px;background:var(--soft);font-size:12px;font-weight:700}
+.layout{display:grid;grid-template-columns:1fr 1.1fr;gap:18px;align-items:start}.card{background:var(--card);border:1px solid var(--stroke);border-radius:23px;padding:22px;box-shadow:0 16px 46px #3326500F}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}.controls label{display:block;color:var(--muted);font-size:.76rem;margin-bottom:5px}
+select,button,input{font:inherit}select{width:100%;background:var(--card);color:var(--ink);padding:10px;border:1px solid var(--stroke);border-radius:12px;min-height:44px}
+button{background:var(--soft);color:var(--ink);border:1px solid var(--stroke);border-radius:11px;padding:9px 11px;min-height:43px;cursor:pointer}
+button[aria-pressed=true],.primary{background:var(--purple);color:white;border-color:var(--purple)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #c7b5ff;outline-offset:3px}
+.stage{min-height:294px;background:linear-gradient(145deg,#EEE7FE,#FFE9F4);border-radius:22px;margin:14px 0;display:flex;justify-content:center;align-items:center;position:relative}
+[data-theme=dark] .stage{background:linear-gradient(145deg,#30274D,#4B344D)}
+.stage canvas{max-width:100%;image-rendering:auto}.hint{position:absolute;top:14px;left:14px;background:#fffE;color:#594082;border-radius:999px;font-size:11px;padding:5px 10px}
+.playbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.playbar input{flex:1;accent-color:var(--purple);min-width:100px}
+.previews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.preview{background:var(--soft);padding:10px 4px;border-radius:15px;text-align:center}.preview canvas{max-width:100%;display:block;margin:auto}
+.mobile-layout{display:flex;gap:16px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+.phone{padding:8px;background:#141124;border-radius:35px;width:min(100%,270px);box-shadow:0 16px 36px #1e16462f}
+.phone img{display:block;width:100%;height:auto;border-radius:28px}
+.pages{display:flex;flex-direction:column;gap:7px;flex:1;min-width:164px}.pages button{text-align:left;font-size:.81rem}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}.stats .tag{font-size:12px}
+a{color:var(--purple)}.foot{margin-top:20px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.card{padding:16px}}
+@media(max-width:450px){.wrap{padding:12px}.controls{grid-template-columns:1fr}.pages{flex-direction:row;flex-wrap:wrap}.pages button{font-size:.72rem}.phone{width:250px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body data-theme="light">
+<div class="wrap">
+  <div class="header"><div class="logo"><img src="../../assets/characters/brain/master.svg" alt="Nhân vật bộ não nhỏ"><div><h1>OneLife <span class="tag">Design Lab</span></h1><div class="caption">Duyệt thiết kế trước khi nối Flutter · Local assets, không API ngoài</div></div></div><button id="themeButton">🌙 Đổi nền tối</button></div>
+  <p class="caption">Đây là trang kiểm duyệt nguyên liệu, <strong>không phải ứng dụng đã lập trình</strong>. Chuyển đổi trực tiếp 50 clip sprite PNG thật trên nền sáng/tối, kiểm tra từng khung hình và đối chiếu với 10 màn hình UI.</p>
+  <div class="layout">
+    <section class="card" aria-labelledby="animTitle">
+      <h2 id="animTitle">01 · Hoạt ảnh nhân vật</h2>
+      <div class="controls">
+        <div><label for="character">Chọn nhân vật</label><select id="character"></select></div>
+        <div><label for="state">Biểu cảm</label><select id="state"></select></div>
+        <div><label for="size">Kích thước hiển thị</label><select id="size"><option value="192">192 px · Home</option><option value="128">128 px · Widget</option><option value="72">72 px · Overlay</option><option value="256">256 px · Gốc</option></select></div>
+        <div><label for="motion">Chuyển động</label><select id="motion"><option value="animate">Animation</option><option value="still">Giảm chuyển động</option></select></div>
+      </div>
+      <div class="stage"><span class="hint">PNG RGBA sprite frames</span><canvas id="hero" width="256" height="256" role="img" aria-label="Xem hoạt ảnh nhân vật"></canvas></div>
+      <div class="playbar"><button id="pause" aria-pressed="true">⏸ Tạm dừng</button><button id="nextFrame">Frame ›</button><span id="frameLabel" class="caption">1/12</span><input id="frameSeek" type="range" min="0" max="11" value="0" aria-label="Chọn frame"></div>
+      <div class="previews">
+        <div class="preview"><canvas class="small" width="64" height="64"></canvas><span class="caption">Overlay 64</span></div>
+        <div class="preview"><canvas class="small" width="96" height="96"></canvas><span class="caption">Widget 96</span></div>
+        <div class="preview"><canvas class="small" width="144" height="144"></canvas><span class="caption">In-app 144</span></div>
+      </div>
+      <p class="caption" id="animationInfo" aria-live="polite">Đang mở sprite...</p>
+      <div class="stats"><span class="tag">5 nhân vật</span><span class="tag">10 biểu cảm/nhân vật</span><span class="tag">500 frame</span></div>
+    </section>
+    <section class="card" aria-labelledby="uiTitle">
+      <h2 id="uiTitle">02 · Giao diện màn hình</h2>
+      <div class="mobile-layout">
+        <div class="phone"><img id="screen" src="../screens/03-home.png" alt="Thiết kế trang chủ OneLife"></div>
+        <div class="pages" id="pages"></div>
+      </div>
+      <p id="pageInfo" class="caption">Màn hình Home, chỉ là concept 390 × 844.</p>
+      <div class="playbar"><button id="prevPage">‹ Trang trước</button><button id="nextPage" class="primary">Trang sau ›</button></div>
+      <p class="caption">Đặc tả cho AI: <a href="../../docs/DESIGN_BRAIN.md">Design Brain</a> · <a href="../../docs/SCREEN_LAYOUT_CONTRACT.md">UI → Flutter</a> · <a href="reports/asset-qa.md">Báo cáo QA</a> · <a href="../../docs/ASSET_QA.md">Điều kiện nghiệm thu</a>.</p>
+    </section>
+  </div>
+  <p class="caption foot">Trên Android, Overlay cần quyền hệ điều hành; iOS không cho phép nhân vật nổi tùy ý trên mọi ứng dụng. Mọi số liệu trong thiết kế là minh họa, không phải dữ liệu người dùng thật. Kiểm tra pin, hiệu năng và giảm chuyển động trên máy thật vẫn chưa hoàn thành.</p>
+</div>
+<script>
+(function(){
+'use strict';
+var chars={brain:'🧠 Bộ não',cat:'🐱 Mèo',dog:'🐶 Chó',robot:'🤖 Robot',sprout:'🌱 Mầm xanh'};
+var states={idle:[8,140,'Bình thường'],happy:[10,85,'Vui vẻ'],remind:[12,110,'Nhắc việc'],alarm:[12,80,'Báo thức'],focus:[8,160,'Tập trung'],study:[12,120,'Học tập'],sleepy:[10,180,'Buồn ngủ'],done:[12,95,'Hoàn thành'],thinking:[8,140,'Suy nghĩ'],sad:[8,160,'Buồn']};
+var pages=[
+['01-splash','Splash','SplashPage'],
+['02-onboarding','Giới thiệu','OnboardingPage'],
+['03-home','Trang chủ','HomePage'],
+['04-tasks','Công việc','TaskPage'],
+['05-schedule','Lịch & báo thức','SchedulePage'],
+['06-habits','Thói quen','HabitPage'],
+['07-assistant','Trợ lý','AssistantPage'],
+['08-characters','Nhân vật','CharactersPage'],
+['09-settings','Cài đặt','SettingsPage'],
+['10-overlay-android','Android Overlay','OverlayWidget']];
+var get=function(id){return document.getElementById(id)};
+function makeOptions(select,values){Object.keys(values).forEach(function(k){var op=document.createElement('option');op.value=k;op.textContent=Array.isArray(values[k])?values[k][2]:values[k];select.appendChild(op)})}
+makeOptions(get('character'),chars);makeOptions(get('state'),states);get('state').value='remind';
+var prefersReduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(prefersReduced)get('motion').value='still';
+var bitmap=new Image(),frame=0,last=0,paused=!!prefersReduced,changing=false,pageIndex=2;
+function render(){
+if(!bitmap.complete||!bitmap.naturalWidth)return;
+var cols=4,sourceX=(frame%cols)*256,sourceY=Math.floor(frame/cols)*256;
+var canvases=[get('hero')].concat(Array.from(document.querySelectorAll('canvas.small')));
+canvases.forEach(function(c){var ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);ctx.imageSmoothingEnabled=true;ctx.drawImage(bitmap,sourceX,sourceY,256,256,0,0,c.width,c.height)});
+get('frameLabel').textContent=(frame+1)+' / '+states[get('state').value][0];get('frameSeek').value=frame;
+}
+function load(){
+var char=get('character').value,state=get('state').value,props=states[state];frame=0;last=0;changing=true;get('frameSeek').max=props[0]-1;
+get('animationInfo').textContent=chars[char]+' · '+props[2]+' · '+props[0]+' khung hình · '+props[1]+' ms/khung.';
+bitmap=new Image();
+bitmap.onload=function(){changing=false;render()};
+bitmap.onerror=function(){changing=false;get('animationInfo').textContent='Chưa tải được sprite PNG. Hãy mở cả thư mục repository.'};
+bitmap.src='../../assets/characters/'+char+'/'+state+'/sheet.png';
+}
+function loop(t){
+if(!changing&&!paused&&get('motion').value==='animate'&&!document.hidden&&bitmap.complete&&bitmap.naturalWidth){
+if(!last)last=t;var step=states[get('state').value][1];if(t-last>=step){var n=Math.floor((t-last)/step);frame=(frame+n)%states[get('state').value][0];last+=n*step;render()}
+}else last=t;
+requestAnimationFrame(loop);
+}
+get('character').addEventListener('change',load);get('state').addEventListener('change',load);
+get('pause').addEventListener('click',function(){paused=!paused;get('pause').textContent=paused?'▶ Tiếp tục':'⏸ Tạm dừng';get('pause').setAttribute('aria-pressed',String(!paused))});
+get('nextFrame').addEventListener('click',function(){paused=true;frame=(frame+1)%states[get('state').value][0];get('pause').textContent='▶ Tiếp tục';render()});
+get('frameSeek').addEventListener('input',function(){paused=true;frame=Number(this.value);get('pause').textContent='▶ Tiếp tục';render()});
+get('motion').addEventListener('change',function(){if(this.value==='still'){paused=true;frame=0;render()}else{paused=false;get('pause').textContent='⏸ Tạm dừng'}});
+get('size').addEventListener('change',function(){get('hero').style.width=this.value+'px';get('hero').style.height=this.value+'px'});
+get('themeButton').addEventListener('click',function(){var dark=document.body.dataset.theme==='dark';document.body.dataset.theme=dark?'light':'dark';this.textContent=dark?'🌙 Đổi nền tối':'☀️ Đổi nền sáng'});
+pages.forEach(function(page,i){var b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0')+' · '+page[1];b.addEventListener('click',function(){setPage(i)});get('pages').appendChild(b)});
+function setPage(i){pageIndex=(i+pages.length)%pages.length;var page=pages[pageIndex];get('screen').src='../screens/'+page[0]+'.png';get('screen').alt='Màn hình thiết kế '+page[1];get('pageInfo').textContent=page[1]+' · '+page[2]+' · 390 × 844 (design, chưa có dữ liệu thật).';Array.from(get('pages').children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===pageIndex))})}
+get('prevPage').addEventListener('click',function(){setPage(pageIndex-1)});
+get('nextPage').addEventListener('click',function(){setPage(pageIndex+1)});
+load();setPage(pageIndex);requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
