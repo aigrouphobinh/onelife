@@ -17,7 +17,7 @@
 Brain sprite atlas is 4 columns × 2–3 rows, 256×256 cell, state-defined frame count. Distinct vector frames include changing facial expression/eyelids, accessory props and animation offsets; review in PNG/GIF for visible movement. GIF previews are review tools, not production rendering format.
 
 ## Current blockers
-The GitHub connector accepts UTF-8 source and Git objects but not local binary paths. A workflow was added to render and commit PNG/GIF on main; until its output files can be fetched from the repository, the binary assets must not be marked delivered on GitHub. The locally generated reminder raster sample is available as a download in the originating ChatGPT conversation.
+Binary sprite PNG/GIF files and original WAV files have been read back from GitHub and verified on main. Outstanding blockers are human review of all 50 motion clips, real-device overlay visibility, reduced-motion behavior, battery/CPU profiling and platform permission tests. See docs/ART_DIRECTION_REVIEW.md.
 
 ## Verified production evidence
 - GitHub Actions run 43523520219 completed successfully for 50 animation clips.
@@ -29,3 +29,10 @@ The GitHub connector accepts UTF-8 source and Git objects but not local binary p
 - [x] Original deterministic source generator tools/generate_sounds.py on main.
 - [x] GitHub Actions run 43524688175 passed; 5 WAV source artifacts generated, and remind.wav read back from GitHub.
 - [ ] Test peak amplitude, notification permissions, quiet hours, user mute, Android/iOS supported formats and playback routing.
+
+## Design Review Lab / Asset QA pipeline (2026-11-14)
+- [x] Interactive design viewer created: design/review/index.html (local PNG atlas playback, seek, theme toggle, 10-page screen gallery).
+- [x] Automated QA report: design/review/reports/asset-qa.md — 50 clips / 500 frames, zero automated errors and warnings.
+- [x] Five character contact sheets generated on GitHub main.
+- [x] Additional static JS syntax / local asset validation added to CI.
+- [ ] Artist and real-device review remains pending. Automated checks do NOT constitute visual acceptance.
