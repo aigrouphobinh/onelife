@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "file": "light-balanced.png",
+      "source": "light-balanced.svg",
+      "state": "balanced",
+      "theme": "light",
+      "sha256": "b4b245919b9fb05db644bb044d8e1ed53885c67c4b4fddf95643acefd93703c1",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "light-strained.png",
+      "source": "light-strained.svg",
+      "state": "strained",
+      "theme": "light",
+      "sha256": "971b89c6fd47dad11fc85622d8e29e7738acc5a4dfb822e91d17bb8935989df2",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "light-overloaded.png",
+      "source": "light-overloaded.svg",
+      "state": "overloaded",
+      "theme": "light",
+      "sha256": "9b849bf84608efc5102cb389784ee53ca66bcc99bc57729b37eebd8ac6d37613",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "light-resting.png",
+      "source": "light-resting.svg",
+      "state": "resting",
+      "theme": "light",
+      "sha256": "dcd293130c0910217a20495e86d3afbec4e04c0ab08fb7768b09d141407075b7",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "light-recovering.png",
+      "source": "light-recovering.svg",
+      "state": "recovering",
+      "theme": "light",
+      "sha256": "6aa35366eb6859157ef7c27004392213c94873962695fbedf0652c9dc70992ee",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "light-permission.png",
+      "source": "light-permission.svg",
+      "state": "permission",
+      "theme": "light",
+      "sha256": "c7336af10a4e607dbb00703c81d23f6962dbac65c56a9a616caa80c605f533fe",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "dark-balanced.png",
+      "source": "dark-balanced.svg",
+      "state": "balanced",
+      "theme": "dark",
+      "sha256": "b5cbabbf52568a810da445d028aebf2879c9b1ed59537cb26bbf1d79a71771ab",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "dark-strained.png",
+      "source": "dark-strained.svg",
+      "state": "strained",
+      "theme": "dark",
+      "sha256": "4efa80eba25728d27fc9b906d0944480d6fb4c6f94d23942c75a27105b33ed66",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "dark-overloaded.png",
+      "source": "dark-overloaded.svg",
+      "state": "overloaded",
+      "theme": "dark",
+      "sha256": "8cafc032ab673adc21408010f559e0c9a19c4d13ed6c1e54d5b81b23e34c975a",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "dark-resting.png",
+      "source": "dark-resting.svg",
+      "state": "resting",
+      "theme": "dark",
+      "sha256": "ddcebe9e12415a6d55639aaa4b8fafccc991d97efef1445242186108a2e0ac14",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "dark-recovering.png",
+      "source": "dark-recovering.svg",
+      "state": "recovering",
+      "theme": "dark",
+      "sha256": "b1b236be0634cde657d29cb5816ee530c39d15988415a2df4cc66cf484d30fc1",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    },
+    {
+      "file": "dark-permission.png",
+      "source": "dark-permission.svg",
+      "state": "permission",
+      "theme": "dark",
+      "sha256": "8671493a80a5ad1e31b0d72434d0f167e33671512aa244b8dceacd0e5800dc8e",
+      "width": 390,
+      "height": 844,
+      "status": "design mockup only"
+    }
+  ]
+}
