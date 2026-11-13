@@ -6,7 +6,7 @@
       "source": "light-balanced.svg",
       "state": "balanced",
       "theme": "light",
-      "sha256": "02626a6758e71bb6fd45a4ec8ff97ef157158659fbeb1fd6e52fbe92be641eb0",
+      "sha256": "be3fad502433c3d4aa5b9048be028be3241930754081a3482a0aff9e653d1ccc",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -36,7 +36,7 @@
       "source": "light-resting.svg",
       "state": "resting",
       "theme": "light",
-      "sha256": "fd5a9c7dca66f98469ee91ce519588e219f34999b3ab2f78e3b58b381a6d6473",
+      "sha256": "9a165a10de71d51cdb8a5ff7fd5b66cb8f629696615d5bbbbfe2e890840910fb",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -46,7 +46,7 @@
       "source": "light-recovering.svg",
       "state": "recovering",
       "theme": "light",
-      "sha256": "77536d538e6674240d8328b3ccd73ec37b72869e373a745b93d15b6bde419063",
+      "sha256": "e320b596cc818c5202f55c4654651c30d2e39099b6a5597d2b5cd501882f8b7c",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -66,7 +66,7 @@
       "source": "dark-balanced.svg",
       "state": "balanced",
       "theme": "dark",
-      "sha256": "70b4582b100faceba7cec300d2ec0db005d6df7d1394471e7db4e1218d026ce3",
+      "sha256": "c0591d168eb4442afa3691f10f82b32c29d6b56c798606ef13b2f3813bb30198",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -96,7 +96,7 @@
       "source": "dark-resting.svg",
       "state": "resting",
       "theme": "dark",
-      "sha256": "65e24ab92b855bc781cd0479a190ae7383dabdb790ca3ed5f0ad6348aaccdfb7",
+      "sha256": "2d729d8e07251da4191f3dd72b8038e241626050ac1403d625d5a8d9a24401f7",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
@@ -106,7 +106,7 @@
       "source": "dark-recovering.svg",
       "state": "recovering",
       "theme": "dark",
-      "sha256": "05f58612b5db7ccbc81e3c279db63c6a48e879a6860b52c9b0d39146a1db60ff",
+      "sha256": "dc92643afb1af5b8579aecdcaa54f9fdef64c271b59c2eefe9564dbe19916ee6",
       "width": 390,
       "height": 844,
       "status": "design mockup only"
