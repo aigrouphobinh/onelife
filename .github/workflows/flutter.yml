@@ -1,7 +1,23 @@
 name: Flutter checks
 on:
+  workflow_dispatch:
   push:
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'android/**'
+      - 'ios/**'
+      - '.github/workflows/flutter.yml'
   pull_request:
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'android/**'
+      - 'ios/**'
 jobs:
   checks:
     runs-on: ubuntu-latest
