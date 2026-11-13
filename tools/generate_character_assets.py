@@ -56,9 +56,16 @@ def generate(path: Path) -> dict:
     png_path = path.with_name("sheet.png")
     rgba.save(png_path, optimize=True)
     # GIF is only a review preview, the PNG atlas remains the intended runtime asset.
-    resized = [x.resize((192, 192), Image.Resampling.LANCZOS) for x in slices]
+    # Composite each RGBA frame against the app's light surface. GIF has no
+    # true RGBA: explicitly converting to RGB avoids Pillow invalid-palette errors.
+    resized = []
+    for frame in slices:
+        small = frame.resize((192, 192), Image.Resampling.LANCZOS)
+        background = Image.new("RGB", small.size, (248, 247, 252))
+        background.paste(small, mask=small.getchannel("A"))
+        resized.append(background)
     resized[0].save(path.with_name("preview.gif"), save_all=True, append_images=resized[1:],
-                    duration=duration, loop=0 if loop else 1, disposal=2, optimize=True)
+                    duration=duration, loop=0 if loop else 1, disposal=2, optimize=False)
     meta = {
         "characterId": char_id, "state": state, "frames": frames, "columns": columns,
         "rows": rows, "frameWidth": CELL, "frameHeight": CELL,
