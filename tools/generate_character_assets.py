@@ -51,8 +51,11 @@ def generate(path: Path) -> dict:
         slices.append(frame)
     # Reject fully identical frame sequences, including seamless loops with an idle hold.
     unique = sum(ImageChops.difference(a, b).getbbox() is not None for a, b in zip(slices, slices[1:]))
-    if unique < frames - 2:
-        raise AssertionError(f"Insufficient distinct poses ({unique}) in {path}")
+    # Intentional animation holds (e.g. sleepy eyelid pause) are allowed,
+    # provided at least ~75% of adjacent transitions visibly change.
+    minimum_transitions = max(5, round((frames - 1) * 0.75))
+    if unique < minimum_transitions:
+        raise AssertionError(f"Insufficient distinct poses ({unique}/{frames-1}) in {path}")
     png_path = path.with_name("sheet.png")
     rgba.save(png_path, optimize=True)
     # GIF is only a review preview, the PNG atlas remains the intended runtime asset.
