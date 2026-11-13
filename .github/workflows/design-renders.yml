@@ -1,0 +1,38 @@
+name: Render design mockups
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'design/screens/*.svg'
+      - 'tools/render_design_screens.py'
+      - '.github/workflows/design-renders.yml'
+permissions:
+  contents: write
+concurrency:
+  group: design-renders-main
+  cancel-in-progress: false
+jobs:
+  render:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check 'CairoSVG==2.7.1' 'Pillow==11.0.0'
+      - run: python tools/render_design_screens.py
+      - name: Commit PNG review sheets directly to main
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add design/screens
+          if git diff --cached --quiet; then
+            echo 'No design renders changed'
+          else
+            git commit -m 'design: render 10 page PNG mockups [skip ci]'
+            git push origin HEAD:main
+          fi
