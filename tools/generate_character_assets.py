@@ -36,6 +36,19 @@ def generate(path: Path) -> dict:
     state = path.parent.name
     if state not in STATES:
         raise ValueError(f"Unexpected animation state: {path}")
+    # Approved glossy V2 raster takes precedence over the older flat SVG source.
+    # Never overwrite the actual user-selected artwork when regenerating SVG assets.
+    if char_id == "brain" and state == "remind":
+        metadata_path = path.with_name("metadata.json")
+        if metadata_path.exists():
+            current = json.loads(metadata_path.read_text(encoding="utf-8"))
+            if current.get("artStyle") == "glossy-kawaii-v2":
+                png_path = path.with_name("sheet.png")
+                actual = hashlib.sha256(png_path.read_bytes()).hexdigest()
+                if actual != current["sha256"]:
+                    raise AssertionError("Glossy Brain V2 atlas checksum mismatch")
+                print("PASS verified glossy Brain remind atlas (not regenerated from V1 SVG)")
+                return current
     frames, duration, loop = STATES[state]
     columns = 4
     rows = (frames + columns - 1) // columns

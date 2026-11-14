@@ -1,6 +1,6 @@
 {
   "characterId": "brain",
-  "version": "1.0.0",
+  "version": "1.1.0-v2-partial",
   "states": {
     "alarm": {
       "file": "assets/characters/brain/alarm/metadata.json",
@@ -62,5 +62,9 @@
       "file": "assets/characters/brain/thinking/metadata.json",
       "frames": 8
     }
+  },
+  "defaultPreviewAsset": "assets/characters/brain/master.png",
+  "visualStateVersions": {
+    "remind": "glossy-kawaii-v2"
   }
 }

@@ -70,3 +70,12 @@ See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md). `overloaded` is a fictio
 **Do not confuse automated PASS on V1 sprites with art approval.**
 
 - [x] Small 96×96 glossy reference thumbnail committed and Git blob hash verified. This is *not* a production master or complete user-selected board: `design/references/brain_glossy_thumbnail.webp`.
+
+## 2026-11-14 Glossy V2 replacement status
+- [x] Real high-detail 640×640 Brain master PNG pushed and mirrored to primary Brain master location.
+- [x] New genuine glossy reminder sequence: 12 RGBA frames, 256px cells (4×3 atlas) pushed to main and mirrored to primary runtime path.
+- [x] 12-frame GIF and WebP preview assets included, and metadata SHA256 matches newly generated atlas.
+- [x] Generator safeguards glossy `brain/remind/sheet.png` from replacement by older flat SVG conversion.
+- [ ] Full 15 Brain states are **not** glossy yet (only `remind` converted).
+- [ ] Cat, Dog, Robot, Sprout have **not** been upgraded to V2.
+- [ ] Frame-level visual / real Android device acceptance is pending.

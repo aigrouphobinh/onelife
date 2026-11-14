@@ -7,3 +7,6 @@ The 96×96 transparent WebP above is a **small verification thumbnail**, cropped
 The user's most recent chosen picture remains the canonical art direction. Read [STYLE_LOCK_V2.md](../STYLE_LOCK_V2.md). **Do not train or regenerate assets from the flat SVG v1 masters.** High-resolution source image, complete art variants, and visually approved sprites are still pending.
 
 SHA (Git blob): `1f0ed867825dcbfdd1501736390af98b0aa794b9`. Source extraction date: 2026-11-14.
+
+## High-resolution actual Brain V2 now in repository
+The generated glossy candidate master is at [assets/characters-v2/brain/master.png](../../assets/characters-v2/brain/master.png). The real 12-frame glossy reminder atlas is at [assets/characters-v2/brain/remind/sheet.png](../../assets/characters-v2/brain/remind/sheet.png). These supersede the low-resolution thumbnail as *working art candidates*, without claiming they exactly reproduce every pixel of the user's uploaded example.

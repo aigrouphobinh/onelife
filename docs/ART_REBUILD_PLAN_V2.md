@@ -46,3 +46,8 @@ Avoid stylizing each frame independently without identity consistency. No third-
 ## Current milestone
 
 **Style direction fixed; redesigned Brain v2 art production and user acceptance are pending.** Flutter feature development remains outside this sprint.
+
+## 2026-11-14 progress
+- Brain master raster v2: exported to GitHub and mirrored to active preview path (art direction approved; further edge clean-up may be needed).
+- Brain remind v2: 12 distinct action frames, real PNG/GIF/WebP binary assets, metadata; manual motion QA still pending.
+- Remaining animation states (including health/wellbeing), other four character variants and UI pages must be redrawn with the new style. **Do not advance feature code yet.**

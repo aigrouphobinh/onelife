@@ -66,3 +66,6 @@ design/references/  (visual references and provenance)
 The canonical user-selected full-size illustration is in the ChatGPT conversation. A **small 96×96 visual sample** cropped from an earlier glossy reminder illustration is verified on GitHub at [references/brain_glossy_thumbnail.webp](references/brain_glossy_thumbnail.webp). It shows the approved general aesthetic, but is not the full-resolution art master, not the full user-uploaded image, and the extracted matting may require edge cleanup. Full-resolution production asset and art approval remain pending.
 
 **Decision:** Freeze the existing V1 flat mascot rendering for production. Prioritize visual consistency and original glossy asset production before further Flutter feature implementation.
+
+## Production asset update (2026-11-14)
+The 640×640 glossy Brain master and 12-frame `remind` PNG atlas are committed at `assets/characters-v2/brain/` and mirrored to legacy Brain asset paths. These are actual raster-generated original artwork, not a flat SVG reconstruction. The user's preferred reference remains the ultimate style target; character identity consistency and screen-sized motion require human checks. Other states/characters remain at V1. See `docs/ASSET_QA.md`.
