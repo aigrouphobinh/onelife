@@ -151,3 +151,9 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Source/identity reference: existing `assets/characters-v2/cat/master.png`; generated expressly for this OneLife project without imported third-party character assets.
 - Rights: generated output subject to applicable OpenAI output terms and final product/trademark review; not automatically public domain or CC0.
 - Status: source QA passed locally for 12 cells, 11 changing adjacent pairs and true transparent padding; GitHub Actions PNG/GIF production, user art review and device performance QA must be verified separately.
+
+## Cat Thinking Glossy V2 illustrated candidate (2026-11-14)
+- User-requested original, glossy Kawaii Cat with violet headphones/earcups, white forelock, curled tail, rounded paws and lavender highlights. 12 independently illustrated poses expressing curiosity → pondering → ideas → relaxed smile.
+- Compressed RGBA source: `assets/characters-v2/cat/thinking/sheet_illustrated.webp` (4×3, 256 px cells; 1024×768), SHA-256 `c6784d22720e0d91ea6dcf0fde30f0df11efada90ae48dd0d2deaddc154aaf73`.
+- Source art generated specifically for OneLife; the original white matte was removed algorithmically, with manual edge review still required; no external copyrighted character image imported.
+- Playback: 150 ms/frame, loop true. Local structural QA passed 12 nonempty alpha frames and 11 meaningful transitions; mobile art/energy/accessibility review is PENDING. SHA and output assets must be reverified by GitHub Actions.
