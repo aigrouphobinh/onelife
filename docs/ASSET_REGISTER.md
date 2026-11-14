@@ -157,3 +157,8 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Compressed RGBA source: `assets/characters-v2/cat/thinking/sheet_illustrated.webp` (4×3, 256 px cells; 1024×768), SHA-256 `c6784d22720e0d91ea6dcf0fde30f0df11efada90ae48dd0d2deaddc154aaf73`.
 - Source art generated specifically for OneLife; the original white matte was removed algorithmically, with manual edge review still required; no external copyrighted character image imported.
 - Playback: 150 ms/frame, loop true. Local structural QA passed 12 nonempty alpha frames and 11 meaningful transitions; mobile art/energy/accessibility review is PENDING. SHA and output assets must be reverified by GitHub Actions.
+
+## Cat Sad — Glossy V2 source (2026-11-14)
+- Original AI-generated 12-pose lavender Cat illustration sheet for OneLife (no downloaded third-party character art); commercial use subject to applicable image-generation terms, not declared CC0.
+- Source `assets/characters-v2/cat/sad/sheet_illustrated.webp`; SHA-256 `fc69b9241ee15a80bb73a754c2c36b6f8c31cef63a19a10f0fdf7a5147f4ebf2`.
+- Generated PNG/GIF/metadata through project renderer, provenance and automatic checks; art approval and real-device accessibility pending.

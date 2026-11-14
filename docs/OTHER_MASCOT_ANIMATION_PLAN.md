@@ -55,3 +55,9 @@ Two independently illustrated resting/sleepy key poses were extracted and alpha-
 
 ## Cat Strained / Overloaded concept poses (NOT ANIMATION)
 `design/references/cat_strained_overloaded_keyposes.webp` contains two non-transparent illustrated concept crops for stress expressions (mild strain and over-goal cartoon overload). They are useful for facial/body direction but are **not** independent frame-by-frame clips and do not count separately. The actual Overloaded animation was subsequently imported from its own illustrated 12-pose source; catalog coverage is **6/60**. Recreate final poses without baked-on text or background, then review non-shaming, non-clinical wording and small overlay legibility.
+
+## Cat Sad V2 - illustrated source import (2026-11-14)
+- 12 generated, separately posed glossy purple cat frames; emotional arc from concerned → sad and lowered ears → gentle reassurance → friendly return, **not a psychological diagnosis**.
+- Source: `assets/characters-v2/cat/sad/sheet_illustrated.webp` (RGBA WebP atlas 1024×768), SHA-256 `fc69b9241ee15a80bb73a754c2c36b6f8c31cef63a19a10f0fdf7a5147f4ebf2`.
+- Source has been prepared/inspected by automated local alpha and frame tests; runtime PNG/GIF and manifest/coverage are produced by the existing GitHub Action after import.
+- Mobile visual QA, smooth movement and emotional appropriateness still require human sign-off. Never convert structural QA to release approval.
