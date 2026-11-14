@@ -18,21 +18,21 @@ input[type=range]{min-width:110px;flex:1;accent-color:var(--accent)}
 .note{font-size:13px;color:var(--muted)}a{color:inherit}
 </style></head><body data-theme="light"><main>
 <h1>🐱 Mèo Tím · Glossy V2</h1>
-<p class="muted">Xem các frame minh họa PNG thật: Idle (8 frame), Remind (12 frame), Alarm (12 frame) và Resting (12 frame). Chưa có ứng dụng Flutter hoạt động hoặc 15 trạng thái của Mèo.</p>
+<p class="muted">Xem các frame minh họa PNG thật: Idle (8 frame), Remind (12 frame), Alarm (12 frame), Resting (12 frame) và Overloaded (12 frame). Chưa có ứng dụng Flutter hoạt động hoặc 15 trạng thái của Mèo.</p>
 <div class="card"><span class="tag" id="tag">Idle · ứng viên mỹ thuật</span>
-<div class="controls"><label for="state">Biểu cảm</label><select id="state"><option value="idle">Idle · Bình thường</option><option value="remind">Remind · Nhắc việc</option><option value="alarm">Alarm · Báo thức</option><option value="resting">Resting · Nghỉ ngơi</option></select>
+<div class="controls"><label for="state">Biểu cảm</label><select id="state"><option value="idle">Idle · Bình thường</option><option value="remind">Remind · Nhắc việc</option><option value="alarm">Alarm · Báo thức</option><option value="resting">Resting · Nghỉ ngơi</option><option value="overloaded">Overloaded · Quá tải</option></select>
 <label for="size">Kích thước</label><select id="size"><option value="256">256px</option><option value="144">144px</option><option value="96">96px</option><option value="64">64px</option></select></div>
 <div class="stage"><canvas id="stage" width="256" height="256" role="img" aria-label="Hoạt ảnh Mèo Glossy V2"></canvas></div>
 <div class="controls"><button id="toggle">⏸ Tạm dừng</button><button id="next">Frame kế ›</button><button id="theme">Sáng / Tối</button></div>
 <div class="controls"><label for="seek">Frame <output id="counter">1/8</output></label><input id="seek" type="range" min="0" max="7" value="0"></div>
 <p class="note" id="status">Đang tải ảnh...</p>
-<p class="note">Từng frame lấy từ atlas PNG, không dùng CSS xoay/đổi miệng để giả động tác. Remind và Alarm là hoạt ảnh một lượt; Resting là hoạt ảnh lặp chậm; việc phát báo thức hệ điều hành thực tế chưa được lập trình.</p>
+<p class="note">Từng frame lấy từ atlas PNG, không dùng CSS xoay/đổi miệng để giả động tác. Remind và Alarm là hoạt ảnh một lượt; Resting là hoạt ảnh lặp chậm; Overloaded là một chuỗi gợi ý nghỉ nhẹ nhàng, không đại diện cho tổn thương não; việc phát báo thức hệ điều hành thực tế chưa được lập trình.</p>
 </div>
 <p class="note">Đánh giá tự động không thay thế kiểm duyệt ở 64px, xem viền nền trong suốt, khả năng hiển thị chuông và thử trên Android/iOS. <a href="../../docs/OTHER_MASCOT_COVERAGE.md">Báo cáo tiến độ 60 clip</a>.</p>
 </main><script>
 (function(){'use strict';
 const $=id=>document.getElementById(id), c=$('stage'),ctx=c.getContext('2d');
-const config={idle:{frames:8,duration:150,loop:true},remind:{frames:12,duration:125,loop:false},alarm:{frames:12,duration:100,loop:false},resting:{frames:12,duration:190,loop:true}};
+const config={idle:{frames:8,duration:150,loop:true},remind:{frames:12,duration:125,loop:false},alarm:{frames:12,duration:100,loop:false},resting:{frames:12,duration:190,loop:true},overloaded:{frames:12,duration:125,loop:false}};
 let image=new Image(),frame=0,ready=false,last=0;
 let playing=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 function state(){return config[$('state').value]}
