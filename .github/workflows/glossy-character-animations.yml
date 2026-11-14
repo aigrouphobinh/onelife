@@ -12,6 +12,7 @@ on:
       - 'design/review/glossy-cat-idle.html'
       - 'design/review/glossy-dog-idle.html'
       - 'tools/check_dog_glossy_review.py'
+      - 'tools/check_dog_sleepy_v2.py'
       - 'tools/check_cat_glossy_review.py'
       - 'tools/render_cat_glossy_contact.py'
       - '.github/workflows/glossy-character-animations.yml'
@@ -41,6 +42,8 @@ jobs:
         run: python tools/render_glossy_character_animation.py
       - name: Verify Dog Idle original sprite and review
         run: python tools/check_dog_glossy_review.py
+      - name: Verify illustrated Dog Sleepy source and one-shot playback
+        run: python tools/check_dog_sleepy_v2.py
       - name: Update coverage from newly rendered assets (avoid stale reports)
         run: |
           # Sync Cat viewer options/playback and NEXT_AUTO_TASK before strict QA.

@@ -206,3 +206,5 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Source SHA-256: `da01cc23446339057f8cb9e09025ca4d8ee32cc0283b900c3199fce290e5c50c`; source WebP 1024×768 with 12 genuine, individually acted poses.
 - Image was matted from a white-background illustration into RGBA and optimized for the project; applicable generation terms require review, no CC0 claim.
 - QA: 12 nonempty frames, visible adjacent changes and margins locally checked; frame 11→Idle, art consistency, low-end Android performance and reduced-motion review pending.
+
+| Dog Sleepy illustrated 12-pose source | `assets/characters-v2/dog/sleepy/sheet_illustrated.webp` | First-party AI-generated asset specifically for OneLife, 2026-11-15; white matte removed and cutouts reviewed at 64px | Subject to generating service terms; no CC0 declaration; SHA-256 `3aa07462a3d4819981c532fb2b09761cbf536f5358105589d87891924eedb347` | Automated raster QA passed locally; GitHub CI, visual polish and low-end device approval pending |

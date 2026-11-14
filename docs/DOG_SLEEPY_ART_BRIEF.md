@@ -37,10 +37,10 @@ Use `assets/characters-v2/dog/master.webp` and the verified `dog/idle` atlas as 
 
 ## Acceptance checklist
 
-- [ ] 12 Sleepy-specific original poses generated (NOT Happy/reused)
+- [x] 12 Sleepy-specific original poses generated (NOT Happy/reused)
 - [ ] Same Dog master geometry, eye color, muzzle, ears and tail
-- [ ] Actual RGBA source has been visually reviewed and uploaded to main
-- [ ] Correct source SHA-256 registered
+- [x] RGBA source created and uploaded to `main` (technical review only; human art signoff pending)
+- [x] Correct source SHA-256 registered
 - [ ] CI-generated PNG, GIF, metadata and coverage PASS and read back from GitHub
 - [ ] Seam/one-shot pacing, reduced-motion and real-device QA performed
 - [ ] Human approval for use in production
@@ -48,3 +48,9 @@ Use `assets/characters-v2/dog/master.webp` and the verified `dog/idle` atlas as 
 ## Attempt record
 
 2026-11-15: An attempted image generation after Dog Happy reproduced a **Happy celebration sheet** with hearts/confetti/music/flowers, not sleepy poses. It is rejected as a Dog Sleepy source and must not be added to the asset registry or coverage. Generate a new sheet according to the storyboard above.
+
+## Source import – 2026-11-15
+- Source: `assets/characters-v2/dog/sleepy/sheet_illustrated.webp` (12 individual illustrated poses, no sleep props; 4×3, 256px cells, RGBA WebP).
+- Source SHA-256: `3aa07462a3d4819981c532fb2b09761cbf536f5358105589d87891924eedb347`.
+- Local QA passed: nonempty alpha per cell, 11 adjacent visible differences, 1024×768 atlas, no clipping, one-shot GIF. CI and GitHub readback must be checked separately.
+- **No human approval, phone playback, reduced-motion or release signoff** is claimed. This is not an implementation of OS scheduling or device sleep tracking.
