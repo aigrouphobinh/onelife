@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "artApproval": false,
+  "frames": 156,
+  "clips": [
+    {
+      "state": "idle",
+      "frames": 8,
+      "sourceClass": "illustrated-source",
+      "sha256": "e7557f5f754549d99cd7ac1948bef9b12e2a55f38ddc293a7951ceaf9b83e745"
+    },
+    {
+      "state": "remind",
+      "frames": 12,
+      "sourceClass": "illustrated-source",
+      "sha256": "c4ff3f6f0689bee11e39df7f85220f76868b987efbb7f65e4d90beff1e51aa3a"
+    },
+    {
+      "state": "happy",
+      "frames": 12,
+      "sourceClass": "illustrated-source",
+      "sha256": "7979f1415ba91e553707e3b8e3c5d6189f73112c248da334234e2c2340db2f0e"
+    },
+    {
+      "state": "overloaded",
+      "frames": 12,
+      "sourceClass": "illustrated-source",
+      "sha256": "249f27886aabd7cc6716412ec05ea3062357cbe6417fd20e1b00f6d7a88a419c"
+    },
+    {
+      "state": "resting",
+      "frames": 10,
+      "sourceClass": "derived-pose-composite",
+      "sha256": "08f10fd53c973714e50befe1c9eb9789d442352528a468bf1175ae7fe8badfc7"
+    },
+    {
+      "state": "alarm",
+      "frames": 12,
+      "sourceClass": "illustrated-source",
+      "sha256": "b91b9852087d5fcdd15235ea030d7e6b7f030f7ccc8b3e1c98414e45a6efbca2"
+    },
+    {
+      "state": "sleepy",
+      "frames": 12,
+      "sourceClass": "illustrated-source",
+      "sha256": "3328d9bb3d67161b0279fb2016a2fbaca1088517f74a3aaeca76d7bb2f0f1117"
+    },
+    {
+      "state": "recovering",
+      "frames": 12,
+      "sourceClass": "illustrated-source",
+      "sha256": "6aff73f2f49497e90a7ca199a29235f9caa0a5a942fc4b35b9a7ec6a9e82352a"
+    },
+    {
+      "state": "focus",
+      "frames": 8,
+      "sourceClass": "derived-pose-composite",
+      "sha256": "4f3faf02801c0e96acf5b07638349b1a3cc343c3ca396b98efb4c0f3206b5684"
+    },
+    {
+      "state": "study",
+      "frames": 12,
+      "sourceClass": "derived-pose-composite",
+      "sha256": "789c96486b551b5457e7e3f81114e8f6f7b87206f66b2fb9a6d4af5a3482366b"
+    },
+    {
+      "state": "done",
+      "frames": 12,
+      "sourceClass": "derived-pose-composite",
+      "sha256": "1feb62bfe1210cf10956fe3dd616fdef468d3b6b5f44f27a57989c453c7eb188"
+    },
+    {
+      "state": "thinking",
+      "frames": 8,
+      "sourceClass": "derived-pose-composite",
+      "sha256": "feddf4f8966006e575fc0cb58e5392ea7fe3ac0cc7112d1146e9838e15bc5575"
+    },
+    {
+      "state": "sad",
+      "frames": 8,
+      "sourceClass": "derived-pose-composite",
+      "sha256": "133da3f3e07cdaf297fbcbb4927e0b9cd0d9ca65e5227b496c0e95cf67550f9d"
+    },
+    {
+      "state": "balanced",
+      "frames": 8,
+      "sourceClass": "derived-pose-composite",
+      "sha256": "e7cf34153d6ebf39370e37bbaf6eb5dfc6843080e49fac75c731df5670c0abbc"
+    },
+    {
+      "state": "strained",
+      "frames": 10,
+      "sourceClass": "derived-pose-composite",
+      "sha256": "3d9953525ccb62514125529c102addf6def9303a83d4d7f071e8b921cf89b0f2"
+    }
+  ]
+}
