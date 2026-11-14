@@ -124,7 +124,9 @@ class _GlossySpriteState extends State<GlossySprite>
     ui.Image? decoded;
     try {
       final bytes = await rootBundle.load(widget.spec.assetPath);
-      final codec = await ui.instantiateImageCodec(bytes.buffer.asUint8List());
+      final codec = await ui.instantiateImageCodec(
+        bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes),
+      );
       try {
         final frame = await codec.getNextFrame();
         decoded = frame.image;
