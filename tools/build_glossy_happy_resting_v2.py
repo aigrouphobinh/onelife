@@ -83,6 +83,7 @@ def main():
         obj=json.loads(manifest.read_text()) if manifest.exists() else {"characterId":"brain","states":{}}
         for state,config in STATES.items():
             obj.setdefault("states",{})[state]={"file":str((base/state/"metadata.json").relative_to(ROOT)),"frames":len(config["source"])}
+        obj["note"]="Glossy V2 present for idle, remind, overloaded, happy, resting; 10 states remain V1; Happy/Resting are montage candidates."
         obj["productionReady"]=False
         obj["artReview"]="Happy and Resting use painted key-pose montages; bespoke frame-by-frame artwork pending"
         manifest.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+"\n")

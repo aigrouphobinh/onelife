@@ -52,8 +52,8 @@ def validate_clip(folder:Path, state:str):
 def main():
     manifest=json.loads((STAGING/"manifest.json").read_text(encoding="utf-8"))
     states=manifest["states"]
-    assert {"idle","remind","overloaded"}<=set(states),states
-    assert len(states)==3,f"Unexpected glossy state count {len(states)}"
+    assert {"idle","remind","overloaded","happy","resting"}<=set(states),states
+    assert len(states)==5,f"Unexpected glossy state count {len(states)}"
     for folder in (STAGING,LIVE):
         with Image.open(folder/"master.png") as image:
             assert image.mode=="RGBA" and image.width==image.height>=256
@@ -62,6 +62,6 @@ def main():
             versioned=json.loads((STAGING/state/"metadata.json").read_text())
             assert staged["sha256"]==versioned["sha256"],(folder,state)
             assert sha(folder/state/"sheet.png")==sha(STAGING/state/"sheet.png")
-    print("PASS: 3/15 genuine glossy V2 Brain states, 32 frames, 12 states remain V1")
+    print("PASS: 5/15 glossy V2 Brain states, 54 frames; Happy/Resting montage candidates, 10 states remain V1")
 if __name__=="__main__":
     main()
