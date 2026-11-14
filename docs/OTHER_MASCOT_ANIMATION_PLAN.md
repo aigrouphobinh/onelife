@@ -69,3 +69,5 @@ Two independently illustrated resting/sleepy key poses were extracted and alpha-
 - Full state count remains **60** across four non-Brain mascots; 13 original candidates, 47 missing; mobile art approval still pending for all.
 
 - **Cat/balanced:** 12 independent illustrated glossy poses of calm breathing, smiling and resetting; source checked into `assets/characters-v2/cat/balanced/sheet_illustrated.webp`, SHA-256 `bb08dda98c2c244e21d1908f6b130d1e52ea02afa7d1ef518629845802d1d6a6`, 180ms loop. Structural source QA only; eye/glow continuity and low-end phone tests pending. Cat Strained remains missing until it has separate illustrated source art.
+
+- **Cat/strained:** dedicated 12-frame glossy illustration source committed (SHA-256 `8b67a102fb63f414a7ccb2ed7a8eaab5ae01259e2b91def43b78538281a772d7`); 170 ms/frame, one-shot; gentle fatigue cue only, no medical claims. PNG/GIF pipeline and device approval tracked separately. Completes the *source-candidate* inventory for Cat's 15 states once CI reports successful output.
