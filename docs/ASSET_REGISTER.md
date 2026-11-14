@@ -105,3 +105,8 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 ## Cat strained / overloaded visual references, NOT completed animations
 - `design/references/cat_strained_overloaded_keyposes.webp`: two original OneLife ChatGPT image-generated poses with purple pastel background from a larger concept board; SHA-256 `319640667c97a017804f6abef8c719bffcd456d26a05e461b122d95a3e589a10`.
 - Background is not transparent and this is not a sprite sheet. No medical inference or neurological damage claims. Do not import as runtime asset or count in coverage.
+
+## Cat Resting Glossy V2 original illustrated source (2026-11-14)
+- 12 independently illustrated chibi Cat poses generated for OneLife; purple cushion, gradually relaxed eyes, sleep marks and cheerful wake-up, no alarm prop. Original generated imagery, not third-party artwork.
+- Imported compressed RGBA source: `assets/characters-v2/cat/resting/sheet_illustrated.webp`, SHA-256 `8b7bb34b2429d8d97145dfb2537d47ff235ecdac43875a9d47e856f7b9642860`; source captured as a 4×3 grid of 256px cells.
+- Raster importer outputs PNG atlas/GIF/metadata after SHA/geometry/pose checks. Mask reconstruction from original RGB illustration can leave edge-matting artifacts; device and human artistic review pending. **Not production approved**.
