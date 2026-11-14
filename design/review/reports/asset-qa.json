@@ -3,7 +3,7 @@
   "automatedOnly": true,
   "passed": true,
   "clips": 75,
-  "frames": 760,
+  "frames": 762,
   "errors": [],
   "warnings": [],
   "records": [
@@ -17,9 +17,9 @@
     {
       "character": "brain",
       "state": "happy",
-      "frames": 10,
-      "changingTransitions": 9,
-      "pngBytes": 180686
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 592823
     },
     {
       "character": "brain",
@@ -102,8 +102,8 @@
       "character": "brain",
       "state": "resting",
       "frames": 10,
-      "changingTransitions": 9,
-      "pngBytes": 194000
+      "changingTransitions": 8,
+      "pngBytes": 448914
     },
     {
       "character": "brain",
