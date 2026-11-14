@@ -1,4 +1,4 @@
-name: Glossy V2 Happy and Resting candidate assets
+name: Glossy V2 Resting montage maintenance
 on:
   workflow_dispatch:
   push:
@@ -28,7 +28,7 @@ jobs:
           python - <<'PY'
           import hashlib,json
           from pathlib import Path
-          for state,expected in [('happy',12),('resting',10)]:
+          for state,expected in [('resting',10)]:
               a=Path('assets/characters-v2/brain')/state
               b=Path('assets/characters/brain')/state
               m=json.loads((a/'metadata.json').read_text())
@@ -42,11 +42,11 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/characters-v2/brain/{happy,resting,manifest.json} assets/characters/brain/{happy,resting,manifest.json}
+          git add assets/characters-v2/brain/{resting,manifest.json} assets/characters/brain/{resting,manifest.json}
           if git diff --cached --quiet; then
             echo 'No asset changes'
           else
-            git commit -m 'assets: render glossy Happy and Resting candidates [skip ci]'
+            git commit -m 'assets: update glossy Resting candidate without overwriting illustrated Happy [skip ci]'
             git fetch origin main
             git rebase origin/main
             git push origin HEAD:main

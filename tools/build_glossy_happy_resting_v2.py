@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Create glossy Happy and Resting *candidate* sprite clips from painted V2 poses.
+"""Create Resting montage candidate from glossy keyframes, not production art.
 
-Both clips use multiple existing painted Brain frames, not flat SVGs. They are
-pose montages with drawn accent effects, not a substitute for future bespoke
-hand-painted in-between frames or Android device acceptance.
+Do NOT regenerate Happy here: its separately illustrated V2 source is preserved
+and rendered by tools/render_illustrated_happy_v2.py. This script only updates
+Resting. Human art and device acceptance remain pending.
 """
 from __future__ import annotations
 from pathlib import Path
@@ -14,7 +14,6 @@ ROOT=Path(__file__).resolve().parents[1]
 BRAIN=ROOT/"assets/characters-v2/brain"
 CELL=256
 STATES={
- "happy":{"source":[("idle",0),("idle",1),("idle",6),("idle",4),("idle",5),("idle",6),("overloaded",11),("idle",4),("idle",6),("idle",7),("idle",2),("idle",0)],"ms":105},
  "resting":{"source":[("idle",3),("overloaded",8),("overloaded",9),("overloaded",9),("overloaded",9),("overloaded",9),("overloaded",9),("overloaded",9),("overloaded",8),("idle",3)],"ms":185},
 }
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -77,14 +76,15 @@ def render(state,config):
     print("PASS",state,count,"frames",distinct,"transitions",metadata["sha256"])
 
 def main():
+    assert "happy" not in STATES, "Never overwrite the original illustrated Happy V2 clip"
     for state,config in STATES.items():render(state,config)
     for base in (BRAIN,ROOT/"assets/characters/brain"):
         manifest=base/"manifest.json"
         obj=json.loads(manifest.read_text()) if manifest.exists() else {"characterId":"brain","states":{}}
         for state,config in STATES.items():
             obj.setdefault("states",{})[state]={"file":str((base/state/"metadata.json").relative_to(ROOT)),"frames":len(config["source"])}
-        obj["note"]="Glossy V2 present for idle, remind, overloaded, happy, resting; 10 states remain V1; Happy/Resting are montage candidates."
+        obj["note"]="Glossy V2 present for idle, remind, overloaded, happy, resting; Happy is original illustrated, Resting still uses montage; 10 states remain V1."
         obj["productionReady"]=False
-        obj["artReview"]="Happy and Resting use painted key-pose montages; bespoke frame-by-frame artwork pending"
+        obj["artReview"]="Happy is original illustrated; Resting is a painted key-pose montage pending original in-betweens"
         manifest.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+"\n")
 if __name__=="__main__":main()
