@@ -38,7 +38,7 @@ void main() {
     semantics.dispose();
   });
 
-  testWidgets('All five imported Dog preview atlases keep true alpha',
+  testWidgets('All 15 Dog atlases preserve true RGBA transparency',
       (tester) async {
     for (final spec in [
       GlossySpriteSpec.dogRecovering,
@@ -46,6 +46,16 @@ void main() {
       GlossySpriteSpec.dogStudy,
       GlossySpriteSpec.dogDone,
       GlossySpriteSpec.dogThinking,
+      GlossySpriteSpec.dogIdle,
+      GlossySpriteSpec.dogRemind,
+      GlossySpriteSpec.dogAlarm,
+      GlossySpriteSpec.dogResting,
+      GlossySpriteSpec.dogOverloaded,
+      GlossySpriteSpec.dogHappy,
+      GlossySpriteSpec.dogSleepy,
+      GlossySpriteSpec.dogSad,
+      GlossySpriteSpec.dogBalanced,
+      GlossySpriteSpec.dogStrained,
     ]) {
       final bytes = await rootBundle.load(spec.assetPath);
       final codec = await ui.instantiateImageCodec(
@@ -53,7 +63,7 @@ void main() {
       );
       final image = (await codec.getNextFrame()).image;
       expect(image.width, 1024);
-      expect(image.height, 768);
+      expect(image.height, ((spec.frames + 3) ~/ 4) * 256);
       final rgba = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
       expect(rgba, isNotNull);
       // Four bytes per pixel: first atlas pixel is fully transparent.
