@@ -5,9 +5,10 @@
 ## Actual state
 - **Cat/idle:** eight original illustrated frames (source WebP), generated PNG/GIF via deterministic local workflow; automated QA before aesthetic/device sign-off.
 - **Cat/remind:** twelve illustrated poses with a gold notification bell, imported as a candidate; independent art and real-device sign-off pending.
-- **Cat remaining:** alarm, happy, overloaded, resting, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained: not yet produced as independent illustrated clips.
+- **Cat/alarm:** twelve new illustrated glossy poses with a gold bedside alarm clock; source, atlas, GIF and metadata on main, technical QA PASS; visual/device review still pending.
+- **Cat remaining:** happy, overloaded, resting, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained: no individually illustrated clip committed yet.
 - **Dog/Robot/Sprout:** all 15 character-specific state clips still missing.
-- Total required: 60 illustrated state clips. After Cat Idle exists, 2/60 candidate assets (after CI verification) and 58 remain. The existing V1 SVG art is NOT counted as Glossy V2.
+- Total required: 60 illustrated state clips. After Cat Idle exists, 3/60 technically verified candidate assets and 57 remain. The existing V1 SVG art is NOT counted as Glossy V2.
 
 ## Per-state direction (distinct body acting, not one image with rotation)
 | State | Cat | Dog | Robot | Sprout |
