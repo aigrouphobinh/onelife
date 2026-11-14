@@ -1,0 +1,60 @@
+name: Build remaining Brain Glossy V2 review clips
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/build_brain_v2_remaining.py'
+      - '.github/workflows/build-brain-glossy-v2.yml'
+permissions:
+  contents: write
+concurrency:
+  group: onelife-brain-glossy-v2-remaining
+  cancel-in-progress: false
+jobs:
+  render:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check 'Pillow==11.0.0'
+      - run: python tools/build_brain_v2_remaining.py
+      - name: Verify all 15 state metadata and generated sheets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import json
+          root=Path("assets/characters-v2/brain")
+          m=json.loads((root/"manifest.json").read_text())
+          assert len(m["states"])==15
+          assert sum(v["frames"] for v in m["states"].values())==156
+          for state in m["states"]:
+              d=root/state
+              meta=json.loads((d/"metadata.json").read_text())
+              with Image.open(d/"sheet.png") as im:
+                  assert im.mode=="RGBA"
+                  assert im.size==(1024,((meta["frames"]+3)//4)*256)
+          assert m["productionReady"] is False
+          print("PASS 15 states 156 frames — visual review still pending")
+          PY
+      - name: Commit generated PNG WebP GIF and metadata to main
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/characters-v2/brain assets/characters/brain
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+          else
+            git commit -m 'assets: publish 15-state glossy Brain visual review candidate [skip ci]'
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then break; fi
+              if [ "$attempt" -eq 3 ]; then exit 1; fi
+              sleep 4
+            done
+          fi
