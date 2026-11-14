@@ -58,6 +58,16 @@ class GlossySpriteSpec {
     frameDurationMs: 140,
     loop: false,
   );
+
+  static const dogDone = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/done/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 125,
+    loop: false,
+  );
 }
 
 /// Pure frame indexing: one-shot progress 1.0 holds the final pose.
