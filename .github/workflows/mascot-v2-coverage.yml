@@ -4,10 +4,9 @@ on:
   push:
     paths:
       - 'assets/characters-v2/animation_sources.json'
-      - 'assets/characters-v2/cat/idle/metadata.json'
-      - 'assets/characters-v2/dog/**/metadata.json'
-      - 'assets/characters-v2/robot/**/metadata.json'
-      - 'assets/characters-v2/sprout/**/metadata.json'
+      - 'assets/characters-v2/**/metadata.json'
+      - 'assets/characters-v2/**/sheet.png'
+      - 'assets/characters-v2/**/preview.gif'
       - 'tools/check_mascot_coverage.py'
       - '.github/workflows/mascot-v2-coverage.yml'
 permissions:
