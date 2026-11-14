@@ -245,3 +245,15 @@ Rights: generated material is subject to applicable OpenAI terms. Check original
 - Checkpoint: 12 × 256px cells, 125ms/frame, one-shot, zero candidate QA warnings; human/style review and real-device tests **not approved**, `productionReady=false`.
 - Rights: original AI-generated candidate governed by applicable generation provider terms. No open-source/CC0/third-party commercial license is claimed.
 - Specification: `docs/DOG_DONE_ART_BRIEF.md`.
+
+## Final Dog Glossy Kawaii sources (2026-11-15)
+
+The following are original OneLife ChatGPT-generated art candidates imported and SHA-locked in GitHub commit `ce06a1ec4215`. They have **true alpha RGBA**, not a painted checkerboard. Derived runtime PNGs and matte-backed GIF previews are adjacent to the WebP source in each folder.
+
+| State | Source file | Source SHA-256 | Originality | Approval |
+|---|---|---|---|---|
+| Dog Sad | `assets/characters-v2/dog/sad/sheet_illustrated.webp` | `dfb69500df076d71a15a0d7078c85f9368d9145e33167e429d55e7f62fffe42e` | New generated 12-pose sheet | Technical QA only; device/human review pending |
+| Dog Balanced | `assets/characters-v2/dog/balanced/sheet_illustrated.webp` | `39d920af19746138e65eb6b2d8e356ad3274bf1053cc8a4a11b0066fd9363734` | New generated 12-pose sheet | Technical QA only; device/human review pending |
+| Dog Strained | `assets/characters-v2/dog/strained/sheet_illustrated.webp` | `4c21977047eb194e18ae63dfcff07dbee432e2c65a47b3e75066ec63fc3846ce` | **Retargeted** illustrated 12-pose Sad candidate with drawn stress accents; **not independently authored Strained body acting** | Replace original art before final signoff |
+
+**Source rights:** AI-generated project materials, not copied from a third-party asset store. Use remains subject to applicable image-generation platform terms; no CC0 or MIT grant implied. Full QA and approval caveats: [Dog last three art record](DOG_LAST3_ART_QA.md).
