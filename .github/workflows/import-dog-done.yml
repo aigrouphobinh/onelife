@@ -1,0 +1,112 @@
+name: Import verified Dog Done transparent source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-dog-done.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-dog-done-main
+  cancel-in-progress: false
+
+jobs:
+  import-verified-blob:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow
+        run: python -m pip install 'Pillow>=10,<13'
+      - name: Recover exact verified WebP from Git blob
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -fsSL --retry 3 \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/git/blobs/ce93d700fcf8977748e60cc38a8c5d7b6dd3fd60" \
+            -o "$RUNNER_TEMP/dog-done-blob.json"
+          python - <<'PY'
+          import base64, hashlib, json, os
+          from pathlib import Path
+          from PIL import Image
+          encoded = json.loads((Path(os.environ['RUNNER_TEMP']) / 'dog-done-blob.json').read_text())
+          if encoded.get('encoding') != 'base64':
+              raise SystemExit('GitHub blob was not base64; refusing import')
+          raw = base64.b64decode(encoded['content'])
+          expected = 'f5a8460b467c6fa9e16ea0668f1c8a2135ca578aa9aa7396f82d4cb8cab84767'
+          if len(raw) != 663974 or hashlib.sha256(raw).hexdigest() != expected:
+              raise SystemExit('Dog Done WebP failed length / SHA-256 verification')
+          target = Path('assets/characters-v2/dog/done/sheet_illustrated.webp')
+          target.parent.mkdir(parents=True, exist_ok=True)
+          if target.exists() and target.read_bytes() != raw:
+              raise SystemExit('Different Dog Done source exists; refusing overwrite')
+          target.write_bytes(raw)
+          with Image.open(target) as img:
+              if img.mode != 'RGBA' or img.size != (1024, 768) or img.getpixel((0,0))[3] != 0:
+                  raise SystemExit('Sprite has unexpected geometry / opaque background')
+          print('PASS exact WebP source', expected)
+          PY
+      - name: Verify 12 distinct transparent frames
+        run: |
+          python tools/check_sprite_candidate.py \
+            assets/characters-v2/dog/done/sheet_illustrated.webp \
+            --frames 12 --columns 4 --cell 256 \
+            --json assets/characters-v2/dog/done/candidate_qa.json
+      - name: Register source and export PNG, GIF and metadata
+        run: |
+          python - <<'PY'
+          import importlib.util, json
+          from pathlib import Path
+          catalog = Path('assets/characters-v2/animation_sources.json')
+          data = json.loads(catalog.read_text(encoding='utf-8'))
+          spec = {
+              'characterId': 'dog', 'state': 'done',
+              'version': '2.29.0-illustrated-candidate',
+              'sourceFile': 'sheet_illustrated.webp',
+              'sourceSha256': 'f5a8460b467c6fa9e16ea0668f1c8a2135ca578aa9aa7396f82d4cb8cab84767',
+              'frames': 12, 'columns': 4,
+              'frameWidth': 256, 'frameHeight': 256,
+              'frameDurationMs': 125, 'loop': False,
+              'generationClass': 'independently-illustrated-pose-sheet',
+          }
+          existing = [
+              item for item in data['animationSources']
+              if item['characterId'] == 'dog' and item['state'] == 'done'
+          ]
+          if existing and existing != [spec]:
+              raise SystemExit('Conflicting Dog Done catalog entry; refusing overwrite')
+          if not existing:
+              data['animationSources'].append(spec)
+              catalog.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n',
+                                 encoding='utf-8')
+          module_spec = importlib.util.spec_from_file_location(
+              'glossy_renderer', 'tools/render_glossy_character_animation.py'
+          )
+          module = importlib.util.module_from_spec(module_spec)
+          module_spec.loader.exec_module(module)
+          module.build('dog', 'done', spec)
+          PY
+      - name: Commit exact source and derived sprites to main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/characters-v2/animation_sources.json \
+            assets/characters-v2/dog/done/ \
+            assets/characters-v2/dog/manifest.json
+          if git diff --cached --quiet; then
+            echo 'No new files to commit'
+            exit 0
+          fi
+          git commit -m 'assets: import transparent Glossy Dog Done twelve-frame source'
+          git push origin HEAD:main
