@@ -1,18 +1,14 @@
 # OneLife
 
-## Current Glossy Kawaii asset + Flutter checkpoint (2026-11-15)
+## Current Glossy Kawaii Dog checkpoint (2026-11-15)
 
-**Original source coverage: 26/60 illustrated clips (34 missing)**, counted from `assets/characters-v2/animation_sources.json` on `main`. **This is not an approval or production-readiness percentage.**
+**Source record coverage: 30/60 (50%)** — Cat 15/15, **Dog 15/15**, Robot 0/15 and Sprout 0/15. This is not visual approval, independent artwork coverage or a Flutter release status. The Brain pack is tracked separately.
 
-- Cat **15/15**, Dog **11/15** (now including **Recovering, Focus, Study and Done**), Robot **0/15**, Sprout **0/15**. The Brain V2 package is tracked separately.
-- Verified original 12-frame **Dog Done** WebP has real RGBA transparency, checksum-locked import, PNG atlas, GIF preview, metadata and clean technical QA. [Dog Done asset/acceptance record](docs/DOG_DONE_ART_BRIEF.md).
-- **Flutter working slice:** Home supports four manual mascot preview states (**Hồi phục / Tập trung / Học tập / Hoàn thành**) using `GlossySprite` and true-alpha PNG atlases; replay, semantic labels and reduced-motion fallback are present. These are **preview selectors, not an automatic task-completion event engine**.
-- [Dog Recovering](docs/DOG_RECOVERING_CANDIDATE_REVIEW.md) · [Dog Focus](docs/DOG_FOCUS_ART_BRIEF.md) · [Dog Study](docs/DOG_STUDY_ART_BRIEF.md) · [Dog Done](docs/DOG_DONE_ART_BRIEF.md). All four require human art and real-device review; Dog `productionReady=false`.
-- **Dog Thinking candidate drawn locally**: new original 12-pose Glossy Kawaii image with true RGBA alpha, source SHA-256 `9dd79993b84c27cf42e1ae13c465b9ec86cc36807be5e41d4d4164f973e167c4`, checks at 64/96/144px on light/dark; **source binary is not yet on GitHub and must NOT increase 26/60 coverage**. [Art QA and import gate](docs/DOG_THINKING_ART_BRIEF.md).
-- **Reusable import pipeline**: `tools/import_glossy_candidate.py` validates source SHA/alpha/geometry, rejects overwrite, registers the catalog and invokes the raster renderer. `.github/workflows/import-dog-thinking.yml` automatically runs after the verified Thinking WebP source is actually committed; CI outcome is not yet confirmed.
-- **Next asset gate:** commit the exact Dog Thinking binary and verify generated runtime assets, then proceed to Sad, Balanced and Strained, followed by Robot/Sprout. Do not claim a state is sourced until actual alpha WebP and SHA exist on `main`.
-- Flutter CI has been configured to run analyzer and widget smoke tests; **its passing status has not been independently confirmed**. The full 10-page Flutter app, real OS usage/notifications/overlay, battery and accessibility testing remain outstanding.
-- `docs/NEXT_AUTO_TASK.md` tracks the next original-art task and may be rewritten by the deterministic worker.
+- **Dog 15/15 source records:** final three `sad`, `balanced`, `strained` imported to `main` at commit `ce06a1e`. Each has a 12-frame 4×3 true-RGBA WebP, PNG atlas, GIF preview, metadata, SHA and renderer QA. [Source/art classification and acceptance gates](docs/DOG_LAST3_ART_QA.md).
+- **14/15 independent Dog pose sources:** `strained` is currently a **retargeted** original illustration candidate, not 12 newly illustrated Strained acting frames. Keep its QA flag pending and replace with independently illustrated source before art signoff.
+- **Flutter:** Home retains the note workflow and manual mascot previews; a dedicated [15-state Dog gallery](lib/src/dog_animation_gallery.dart) loads the 15 actual transparent PNG atlases (no SVG placeholders), supports replay and OS reduced-motion preferences. Related [widget tests](test/widget_test.dart), [pixel-alpha tests](test/glossy_sprite_test.dart) and [CI workflow](.github/workflows/flutter-glossy-sprite.yml) are committed.
+- **Technical vs release:** source SHA and alpha/geometry/frame change checks have passed on GitHub; manual art acceptance, Flutter CI analyzer/test results, actual Android/iOS device compatibility and performance are not yet independently confirmed. Dog manifest keeps `productionReady=false`.
+- **Next priority:** Robot 15 original Glossy Kawaii source states and Sprout 15 states; separately replace retargeted Strained poses and verify Flutter on hardware. [Next task](docs/NEXT_AUTO_TASK.md).
 
 ## Design V2 – Trợ lý bộ não nhỏ (2026-11-14)
 
@@ -24,7 +20,7 @@
 - [Style Lock V2](design/STYLE_LOCK_V2.md) · [Brain Balance rules](docs/BRAIN_BALANCE_DESIGN.md)
 - [Visual and device QA gates](docs/ART_DIRECTION_REVIEW.md)
 
-**Nghiệm thu:** GitHub Actions kiểm thử cấu trúc và ảnh đã PASS. Trong 15 clip Brain, có 8 clip được xây dựng từ các tư thế Glossy đã có (composite) và cần vẽ các frame độc lập trước khi duyệt mỹ thuật cuối. **Tiến độ hiện tại: Mèo 15/15, Chó 11/15, Robot 0/15 và Mầm xanh 0/15 nguồn clip (chưa nghiệm thu thiết bị)**, theo Issues [#31](https://github.com/aigrouphobinh/onelife/issues/31), [#32](https://github.com/aigrouphobinh/onelife/issues/32), [#33](https://github.com/aigrouphobinh/onelife/issues/33), [#34](https://github.com/aigrouphobinh/onelife/issues/34).
+**Nghiệm thu:** GitHub Actions kiểm thử cấu trúc và ảnh đã PASS. Trong 15 clip Brain, có 8 clip được xây dựng từ các tư thế Glossy đã có (composite) và cần vẽ các frame độc lập trước khi duyệt mỹ thuật cuối. **Tiến độ hiện tại: Mèo 15/15, Chó 15/15 (14 độc lập + 1 dựng lại), Robot 0/15 và Mầm xanh 0/15 nguồn clip (chưa nghiệm thu thiết bị)**, theo Issues [#31](https://github.com/aigrouphobinh/onelife/issues/31), [#32](https://github.com/aigrouphobinh/onelife/issues/32), [#33](https://github.com/aigrouphobinh/onelife/issues/33), [#34](https://github.com/aigrouphobinh/onelife/issues/34).
 
 **Chưa hoàn thành:** phần lớn Flutter runtime (mới tích hợp widget sprite cho Home), Android UsageStats/overlay/báo thức, iOS Screen Time (giới hạn quyền), AI offline, Gemini tùy chọn, kiểm thử pin và phát hành store.
 
