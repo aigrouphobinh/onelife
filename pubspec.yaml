@@ -18,3 +18,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+
+# Real PNG atlas with RGBA transparency; no poster art or placeholder sprites.
+flutter:
+  assets:
+    - assets/characters-v2/dog/recovering/sheet.png
