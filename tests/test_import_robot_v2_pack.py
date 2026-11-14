@@ -30,7 +30,9 @@ def fixture():
     metadata = dict(
         characterId='robot', state='idle', sourceSha256=sha,
         columns=4, frameWidth=256, frameHeight=256,
-        frames=8, frameDurationMs=140, loop=True,
+        frames=8, rows=2, anchorX=0.5, anchorY=0.92, frameDurationMs=140, loop=True,
+        sourceFile='sheet_illustrated.webp',
+        generationClass='independently-illustrated-pose-sheet',
         artReview='pending', deviceReview='pending', productionReady=False,
     )
     manifest = {'qa': [{'state': 'idle', 'frames': 8, 'sourceSha256': sha}]}
