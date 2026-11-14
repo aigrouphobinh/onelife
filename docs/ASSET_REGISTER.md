@@ -173,3 +173,9 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Source: `assets/characters-v2/cat/strained/sheet_illustrated.webp`; SHA-256 `8b67a102fb63f414a7ccb2ed7a8eaab5ae01259e2b91def43b78538281a772d7`; compressed RGBA WebP, 1024×768, 4×3 cells.
 - Regenerate PNG/GIF/JSON with `tools/render_glossy_character_animation.py` and the pinned entry in `assets/characters-v2/animation_sources.json`.
 - Generated-art use subject to applicable terms; no CC0 claim. Art continuity, reduced-motion support and physical device performance have not been accepted.
+
+
+## Dog Idle V2 (2026-11-15)
+- First-party generated original 8-pose glossy golden-apricot puppy character animation, derived from the *design identity* of `assets/characters-v2/dog/master.webp`, not a third-party stock asset. AI generation and background alpha extraction performed in current OneLife project; generated-art use governed by applicable terms, **not CC0**.
+- Compressed source `assets/characters-v2/dog/idle/sheet_illustrated.webp`, SHA-256 `077c0d07e77d07bb618926478bd66f40d8d11f1236851b799d19bff7b525c4de`, 1024×512 RGBA; 4 columns, 2 rows of 256px cells, 150 ms, looping.
+- Physical-device art quality, matte fringe and loop seam sign-off pending. Runtime PNG/GIF generated from catalog via `tools/render_glossy_character_animation.py`.

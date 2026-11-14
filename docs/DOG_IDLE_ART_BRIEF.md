@@ -1,6 +1,6 @@
 # OneLife — Dog Idle (Glossy Kawaii V2) · production art contract
 
-**Status:** SOURCE ART MISSING. This is a task specification, **not** a finished animation or an approval.
+**Status:** Eight illustrated source poses produced and imported as a **technical candidate**. CI PNG/GIF export, human approval, loop seam smoothing and phone verification are separate checks.
 
 ## Canonical identity
 
@@ -33,3 +33,12 @@ Source of truth: `assets/characters-v2/dog/master.webp` (original 512×512 trans
 ## Current next objective
 
 The user's requested pipeline is **art first**, then real Flutter runtime. Cat now has 15 original source-candidate clips; Dog has only the static master and **0 illustrated action clips**. Build Dog Idle first, then Dog Remind/Alarm/Resting/Overloaded, before moving through its other ten states.
+
+
+## Source import evidence (2026-11-15)
+- Illustration source: `assets/characters-v2/dog/idle/sheet_illustrated.webp`, 1024×512 RGBA, 8 distinct illustrated poses, 4×2 grid, 150ms/pose.
+- SHA-256 of compressed source: `077c0d07e77d07bb618926478bd66f40d8d11f1236851b799d19bff7b525c4de`; Git blob `38a0d0df4b35a119229df06d9eb7a051bcef6a25`.
+- Poses: bright neutral, attentive tail wag, long blink, calm closed-eye smile, glance, tail wag, raised-paw gesture, neutral settle. Dark plum outlines, floppy ears, golden-apricot glossy fur retained; AI-generated independently illustrated cells, **not a transformed still**.
+- Source image began on near-white, matte was segmented into alpha; inspect fringes manually, especially cream fur and ears.
+- Local preview: 8 frames, 7/7 changing adjacent poses, min visual RMS 36.7, 7→0 loop seam RMS 27.3; seam needs human pacing review, not yet visually signed off.
+- CI must render true PNG/GIF, QA and coverage on `main`; do not mark finished before binary GitHub readback and mobile review.
