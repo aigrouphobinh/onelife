@@ -85,3 +85,9 @@ See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md). `overloaded` is a fictio
 - [x] Actions emitted master.png, remind/sheet.png, remind/preview.gif and metadata, verified via GitHub reads.
 - [x] Design review selects genuine V2 art for Brain/remind and Brain logo.
 - [ ] All other Brain states and other mascots still require V2 redraw and art approval.
+
+## Brain idle V2 (2026-11-14)
+- [x] 8 distinct idle poses (breathing, blinking, smiling, small sway), transparent 4×2 atlas and GIF/WebP previews on main.
+- [x] Exact atlas mirrored to the active `assets/characters/brain/idle/` location; metadata and protected generator updated.
+- [x] Automated QA for both `idle` and `remind` V2 assets added.
+- [ ] 13 other Brain states still use V1 flat artwork; manual motion/edge/device QA pending.

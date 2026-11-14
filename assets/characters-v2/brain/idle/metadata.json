@@ -1,0 +1,23 @@
+{
+  "characterId": "brain",
+  "state": "idle",
+  "version": "2.0.0",
+  "artStyle": "glossy-kawaii-v2",
+  "source": "a_clean_png_sprite_sheet_on_a_transparent_backgrou.png",
+  "runtimeAsset": "sheet.png",
+  "webPreviewAsset": "sheet.webp",
+  "preview": "preview.gif",
+  "frames": 8,
+  "columns": 4,
+  "rows": 2,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 140,
+  "loop": true,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "sha256": "e7557f5f754549d99cd7ac1948bef9b12e2a55f38ddc293a7951ceaf9b83e745",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "reviewStatus": "pending-human-motion-and-art-review",
+  "matting": "RGB background removal; inspect alpha/edges at scale"
+}

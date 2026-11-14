@@ -38,7 +38,7 @@ def generate(path: Path) -> dict:
         raise ValueError(f"Unexpected animation state: {path}")
     # Approved glossy V2 raster takes precedence over the older flat SVG source.
     # Never overwrite the actual user-selected artwork when regenerating SVG assets.
-    if char_id == "brain" and state == "remind":
+    if char_id == "brain" and state in ("idle", "remind"):
         metadata_path = path.with_name("metadata.json")
         if metadata_path.exists():
             current = json.loads(metadata_path.read_text(encoding="utf-8"))

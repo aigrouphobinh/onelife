@@ -13,3 +13,6 @@ Artwork is sourced from the newly generated OneLife glossy assets in this conver
 Do not export the old flat `brain/remind/sheet.svg` over the V2 PNG; `tools/generate_character_assets.py` has a protected V2 override for this state.
 
 **Current:** Brain master + remind V2 only. 14 other Brain states and all four non-Brain mascots still use V1 vector artwork.
+
+## Idle glossy upgrade
+`idle/sheet.png` is a distinct 8-frame transparent 4×2 PNG atlas; `idle/sheet.webp` and `idle/preview.gif` are design previews. Mirrored on the legacy Brain idle path for current asset loading. Alpha matting from RGB generated art requires inspection.

@@ -65,6 +65,7 @@
   },
   "defaultPreviewAsset": "assets/characters/brain/master.png",
   "visualStateVersions": {
-    "remind": "glossy-kawaii-v2"
+    "remind": "glossy-kawaii-v2",
+    "idle": "glossy-kawaii-v2"
   }
 }

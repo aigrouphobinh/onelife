@@ -55,3 +55,7 @@ Avoid stylizing each frame independently without identity consistency. No third-
 ## Verified Sprint A progress
 ART-V2-01: Brain 512px real glossy master on main; 1254px original remains in downloadable V2 ZIP.
 ART-V2-03: genuine reminder 12-pose sequence on main; idle, overloaded and resting pilots still pending. Brain V2 visual review and Flutter runtime tests are pending.
+
+## Brain idle progression
+- [x] Idle 8-frame glossy animation and metadata replaced at the active Brain path, after Reminder 12-frame V2.
+- [ ] 13 remaining Brain states, including wellness visuals, require original glossy asset generation and review.
