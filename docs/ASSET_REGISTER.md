@@ -145,3 +145,9 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Source: `assets/characters-v2/cat/study/sheet_illustrated.webp` SHA-256 `b922acdf5f3c8d5c8d905e02b0f765b1413ec007a1d6859867e51c91456d4438`; generated specifically for this project. White image matte was extracted using a segmentation/matting script prior to WebP import.
 - 140 ms per frame, one-shot. Atlas checks locally verified 12 nonempty frames, 11 meaningful adjacent transitions, transparent corners and no clipping. Loop transition, white fringes, optical alignment at 64px, human art approval and device power profiling remain PENDING.
 - GitHub Actions must independently produce `sheet.png`, `preview.gif` and checksummed `metadata.json` before the catalog can count this clip.
+
+## Cat Done Glossy V2 illustrated asset (2026-11-14)
+- Source art: original AI-generated independently illustrated Glossy Kawaii Cat with green completion checkbox, 12 poses; `assets/characters-v2/cat/done/sheet_illustrated.webp`; 1024×768 WebP RGBA atlas, SHA-256 `2bae09b88361524c410b8837a6aed04befae196fb626a06be72c671ae9d97133`.
+- Source/identity reference: existing `assets/characters-v2/cat/master.png`; generated expressly for this OneLife project without imported third-party character assets.
+- Rights: generated output subject to applicable OpenAI output terms and final product/trademark review; not automatically public domain or CC0.
+- Status: source QA passed locally for 12 cells, 11 changing adjacent pairs and true transparent padding; GitHub Actions PNG/GIF production, user art review and device performance QA must be verified separately.
