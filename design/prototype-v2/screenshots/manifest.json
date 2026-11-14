@@ -7,14 +7,14 @@
       "viewport": "390×844",
       "capture": "viewport",
       "file": "home-mobile.png",
-      "bytes": 122400
+      "bytes": 121404
     },
     {
       "page": "home",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "home-mobile-full.png",
-      "bytes": 152521
+      "bytes": 152568
     },
     {
       "page": "tasks",
@@ -35,14 +35,14 @@
       "viewport": "390×844",
       "capture": "viewport",
       "file": "schedule-mobile.png",
-      "bytes": 89935
+      "bytes": 90124
     },
     {
       "page": "schedule",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "schedule-mobile-full.png",
-      "bytes": 107617
+      "bytes": 108057
     },
     {
       "page": "habits",
@@ -56,35 +56,35 @@
       "viewport": "390×844",
       "capture": "scroll",
       "file": "habits-mobile-full.png",
-      "bytes": 112790
+      "bytes": 114477
     },
     {
       "page": "assistant",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "assistant-mobile.png",
-      "bytes": 90320
+      "bytes": 89992
     },
     {
       "page": "assistant",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "assistant-mobile-full.png",
-      "bytes": 117372
+      "bytes": 115166
     },
     {
       "page": "characters",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "characters-mobile.png",
-      "bytes": 62696
+      "bytes": 101103
     },
     {
       "page": "characters",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "characters-mobile-full.png",
-      "bytes": 120407
+      "bytes": 171817
     },
     {
       "page": "settings",
@@ -105,66 +105,66 @@
       "viewport": "390×844",
       "capture": "viewport",
       "file": "onboarding-mobile.png",
-      "bytes": 92274
+      "bytes": 92295
     },
     {
       "page": "onboarding",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "onboarding-mobile-full.png",
-      "bytes": 108979
+      "bytes": 109746
     },
     {
       "page": "overlay",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "overlay-mobile.png",
-      "bytes": 103081
+      "bytes": 103133
     },
     {
       "page": "overlay",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "overlay-mobile-full.png",
-      "bytes": 124536
+      "bytes": 124587
     },
     {
       "page": "splash",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "splash-mobile.png",
-      "bytes": 86236
+      "bytes": 84198
     },
     {
       "page": "splash",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "splash-mobile-full.png",
-      "bytes": 86236
+      "bytes": 84198
     },
     {
       "page": "home",
       "viewport": "1280×900",
       "file": "home-desktop.png",
-      "bytes": 220091
+      "bytes": 219344
     },
     {
       "page": "habits",
       "viewport": "1280×900",
       "file": "habits-desktop.png",
-      "bytes": 168143
+      "bytes": 168375
     },
     {
       "page": "characters",
       "viewport": "1280×900",
       "file": "characters-desktop.png",
-      "bytes": 168396
+      "bytes": 219199
     },
     {
       "page": "settings",
       "viewport": "1280×900",
       "file": "settings-desktop.png",
-      "bytes": 133806
+      "bytes": 133805
     }
   ]
 }
