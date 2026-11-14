@@ -1,6 +1,7 @@
 {
   "characterId": "brain",
   "assetVersion": "2.0.0",
+  "sourceOfTruth": "assets/characters/brain",
   "artMaster": "assets/characters-v2/brain/master.png",
   "states": {
     "remind": {

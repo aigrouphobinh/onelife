@@ -63,7 +63,7 @@ def main():
     from PIL import Image
     from hashlib import sha256
     v2 = ROOT / "assets/characters-v2/brain"
-    for name, expected in (("master.png", (512, 512)), ("remind/sheet.png", (1024, 768))):
+    for name, expected in (("master.png", (640, 640)), ("remind/sheet.png", (1024, 768))):
         p = v2 / name
         assert p.is_file(), f"Missing glossy V2 art: {p}"
         with Image.open(p) as im:

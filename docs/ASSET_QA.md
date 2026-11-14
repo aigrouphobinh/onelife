@@ -91,3 +91,6 @@ See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md). `overloaded` is a fictio
 - [x] Exact atlas mirrored to the active `assets/characters/brain/idle/` location; metadata and protected generator updated.
 - [x] Automated QA for both `idle` and `remind` V2 assets added.
 - [ ] 13 other Brain states still use V1 flat artwork; manual motion/edge/device QA pending.
+
+## Canonical V2 precedence
+Production visual candidate uses assets/characters/brain/master.png (640×640) and assets/characters/brain/remind/sheet.png. The versioned V2 assets mirror these same SHA-256-verified binaries. Previous 512px and 1024px compressed sources remain archival alternatives and never overwrite current canonical output. Device motion review still required.

@@ -59,3 +59,6 @@ ART-V2-03: genuine reminder 12-pose sequence on main; idle, overloaded and resti
 ## Brain idle progression
 - [x] Idle 8-frame glossy animation and metadata replaced at the active Brain path, after Reminder 12-frame V2.
 - [ ] 13 remaining Brain states, including wellness visuals, require original glossy asset generation and review.
+
+## Art source reconciliation
+The 640px live Brain master takes precedence over the earlier 512px compact candidate, and the versioned V2 binary files must share the same hashes as live assets. Do not regenerate from flat SVG or overwrite high-fidelity live art with a lower-resolution compact seed.

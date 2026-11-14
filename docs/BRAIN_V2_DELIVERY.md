@@ -17,3 +17,6 @@ Automated clipping/alpha/frame tests are separate from manual art review and bat
 2. Produce glossy idle, overloaded and resting as 3 distinct hand-posed clips.
 3. Complete remaining states and polish UI dark/light compositions.
 4. Integrate with Flutter after art gate.
+
+## Canonical 640px live Brain (reconciliation)
+The directly deployed Brain master under assets/characters/brain/master.png is the higher-resolution 640px version and its remind sheet at assets/characters/brain/remind/sheet.png has independently verified 12 real frames. The versioned V2 master/sheet/GIF/metadata mirror these exact Git blobs, avoiding mixed 512/640 standards. The 512px WebP and 1024px source WebP are retained as alternate optimized source references; do not treat them as the current canonical output.
