@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onelife/src/home_page.dart';
 import 'package:onelife/src/glossy_sprite.dart';
+import 'package:onelife/src/dog_animation_gallery.dart';
 import 'package:onelife/src/note_repository.dart';
 
 // Smoke test avoids opening a real SQLite database in the widget test process.
@@ -65,5 +66,39 @@ void main() {
     expect(find.text('Chưa có ghi chú. Nhấn + để bắt đầu.'),
         findsOneWidget);
     expect(find.byTooltip('Thêm ghi chú'), findsOneWidget);
+  });
+
+  testWidgets('gallery exposes all 15 Dog states and imports the last three',
+      (tester) async {
+    expect(dogAnimationEntries.length, 15);
+    expect(dogAnimationEntries.map((entry) => entry.id).toSet().length, 15);
+    await tester.pumpWidget(
+      MaterialApp(home: HomePage(repository: FakeRepository())),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Xem đủ 15 hoạt ảnh'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(DogAnimationGalleryPage), findsOneWidget);
+    expect(find.byType(ChoiceChip), findsNWidgets(15));
+    for (final pair in [
+      ('Buồn', 'sad'),
+      ('Cân bằng', 'balanced'),
+      ('Căng nhẹ', 'strained'),
+    ]) {
+      final choice = find.text(pair.$1);
+      await tester.ensureVisible(choice);
+      await tester.pumpAndSettle();
+      await tester.tap(choice);
+      await tester.pumpAndSettle();
+      final spriteFinder = find.descendant(
+        of: find.byType(DogAnimationGalleryPage),
+        matching: find.byType(GlossySprite),
+      );
+      final sprite = tester.widget<GlossySprite>(spriteFinder);
+      expect(sprite.spec.assetPath,
+          'assets/characters-v2/dog/${pair.$2}/sheet.png');
+      expect(sprite.spec.frames, 12);
+    }
   });
 }
