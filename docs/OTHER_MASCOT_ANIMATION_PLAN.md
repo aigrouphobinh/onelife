@@ -67,3 +67,5 @@ Two independently illustrated resting/sleepy key poses were extracted and alpha-
 - Done and Thinking were already committed by the automation; Sad source imported in commit `0e6681c2a636920ccc0fb38d60a05298cf19a663` and exported by Actions (run `43617053572`, success).
 - Cat missing: **Balanced** (even calm breathing) and **Strained** (subtle fatigue), both must use distinct character-specific illustrated poses. Briefs: `docs/CAT_BALANCED_ART_BRIEF.md`, `docs/CAT_STRAINED_ART_BRIEF.md`.
 - Full state count remains **60** across four non-Brain mascots; 13 original candidates, 47 missing; mobile art approval still pending for all.
+
+- **Cat/balanced:** 12 independent illustrated glossy poses of calm breathing, smiling and resetting; source checked into `assets/characters-v2/cat/balanced/sheet_illustrated.webp`, SHA-256 `bb08dda98c2c244e21d1908f6b130d1e52ea02afa7d1ef518629845802d1d6a6`, 180ms loop. Structural source QA only; eye/glow continuity and low-end phone tests pending. Cat Strained remains missing until it has separate illustrated source art.

@@ -162,3 +162,8 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Original AI-generated 12-pose lavender Cat illustration sheet for OneLife (no downloaded third-party character art); commercial use subject to applicable image-generation terms, not declared CC0.
 - Source `assets/characters-v2/cat/sad/sheet_illustrated.webp`; SHA-256 `fc69b9241ee15a80bb73a754c2c36b6f8c31cef63a19a10f0fdf7a5147f4ebf2`.
 - Generated PNG/GIF/metadata through project renderer, provenance and automatic checks; art approval and real-device accessibility pending.
+
+## Cat Balanced glossy animation source (2026-11-14)
+- Original AI-generated 12-pose lavender Cat Balanced expression sheet for OneLife. Source: `assets/characters-v2/cat/balanced/sheet_illustrated.webp`.
+- Source SHA-256: `bb08dda98c2c244e21d1908f6b130d1e52ea02afa7d1ef518629845802d1d6a6`.
+- Art direction: `design/STYLE_LOCK_V2.md`; no third-party source; generated-art usage subject to applicable terms. Automated structural QA and human art/device acceptance are independent; latter pending.
