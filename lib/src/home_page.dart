@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   bool _loading = true;
   String? _error;
   int _mascotReplay = 0;
+  bool _focusSelected = false;
 
   @override
   void initState() {
@@ -88,37 +89,78 @@ class _HomePageState extends State<HomePage> {
       Text('Một nơi để nhớ, tìm và hoàn thành việc', style: Theme.of(context).textTheme.titleMedium),
       const SizedBox(height: 12),
       Card(
-        color: const Color(0xFFF8F6FD),
-        surfaceTintColor: Colors.transparent,
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         child: Padding(
           padding: const EdgeInsets.all(12),
-          child: Row(children: [
-            GlossySprite(
-              key: ValueKey(_mascotReplay),
-              spec: GlossySpriteSpec.dogRecovering,
-              size: 104,
-              semanticLabel: 'Chú chó màu cam đang thức dậy và vươn vai',
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(children: [
+                GlossySprite(
+                  key: ValueKey('dog-${_focusSelected ? 'focus' : 'recovering'}-$_mascotReplay'),
+                  spec: _focusSelected
+                      ? GlossySpriteSpec.dogFocus
+                      : GlossySpriteSpec.dogRecovering,
+                  size: 104,
+                  semanticLabel: _focusSelected
+                      ? 'Chú chó màu cam đang tập trung'
+                      : 'Chú chó màu cam đang thức dậy và vươn vai',
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(_focusSelected ? 'Giữ nhịp tập trung' : 'Một nhịp nghỉ dịu dàng',
+                          style: Theme.of(context).textTheme.titleSmall),
+                      const SizedBox(height: 4),
+                      Text(_focusSelected
+                          ? 'Chọn một việc nhỏ và bắt đầu.'
+                          : 'Nghỉ ngơi rồi trở lại nhẹ nhàng.',
+                          maxLines: 3, overflow: TextOverflow.ellipsis),
+                      TextButton.icon(
+                        onPressed: () => setState(() => _mascotReplay++),
+                        icon: const Icon(Icons.replay, size: 18),
+                        label: const Text('Xem lại'),
+                      ),
+                    ],
+                  ),
+                ),
+              ]),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 4,
                 children: [
-                  Text('Một nhịp nghỉ dịu dàng',
-                      style: Theme.of(context).textTheme.titleSmall),
-                  const SizedBox(height: 4),
-                  const Text('Hoạt ảnh Glossy Kawaii, nền trong suốt thật.',
-                      maxLines: 3, overflow: TextOverflow.ellipsis),
-                  TextButton.icon(
-                    onPressed: () => setState(() => _mascotReplay++),
-                    icon: const Icon(Icons.replay, size: 18),
-                    label: const Text('Xem lại'),
+                  ChoiceChip(
+                    label: const Text('Hồi phục'),
+                    selected: !_focusSelected,
+                    onSelected: (selected) {
+                      if (selected && _focusSelected) {
+                        setState(() {
+                          _focusSelected = false;
+                          _mascotReplay++;
+                        });
+                      }
+                    },
+                  ),
+                  ChoiceChip(
+                    label: const Text('Tập trung'),
+                    selected: _focusSelected,
+                    onSelected: (selected) {
+                      if (selected && !_focusSelected) {
+                        setState(() {
+                          _focusSelected = true;
+                          _mascotReplay++;
+                        });
+                      }
+                    },
                   ),
                 ],
               ),
-            ),
-          ]),
+            ],
+          ),
         ),
       ),
       const SizedBox(height: 12),
