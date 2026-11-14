@@ -1,6 +1,6 @@
 {
   "characterId": "brain",
-  "assetVersion": "2.0.0-partial",
+  "assetVersion": "2.4.0-candidates",
   "sourceOfTruth": "assets/characters/brain",
   "artMaster": "assets/characters-v2/brain/master.png",
   "states": {
@@ -35,10 +35,38 @@
     "recovering": {
       "file": "assets/characters-v2/brain/recovering/metadata.json",
       "frames": 12
+    },
+    "focus": {
+      "file": "assets/characters-v2/brain/focus/metadata.json",
+      "frames": 8
+    },
+    "study": {
+      "file": "assets/characters-v2/brain/study/metadata.json",
+      "frames": 12
+    },
+    "done": {
+      "file": "assets/characters-v2/brain/done/metadata.json",
+      "frames": 12
+    },
+    "thinking": {
+      "file": "assets/characters-v2/brain/thinking/metadata.json",
+      "frames": 8
+    },
+    "sad": {
+      "file": "assets/characters-v2/brain/sad/metadata.json",
+      "frames": 8
+    },
+    "balanced": {
+      "file": "assets/characters-v2/brain/balanced/metadata.json",
+      "frames": 8
+    },
+    "strained": {
+      "file": "assets/characters-v2/brain/strained/metadata.json",
+      "frames": 10
     }
   },
   "v1FallbackAllowed": true,
   "productionReady": false,
   "note": "Glossy V2 present for idle, remind, overloaded, happy, resting; Happy is original illustrated, Resting still uses montage; 10 states remain V1.",
-  "artReview": "Recovering original illustrated poses pending human and mobile QA. Resting currently montage. No clinical recovery claim."
+  "artReview": "Remaining state clips (and Resting rework) are composited from original painted poses: visual review required, no claims of newly illustrated full motion."
 }

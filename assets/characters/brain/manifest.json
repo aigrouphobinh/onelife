@@ -67,5 +67,8 @@
   "visualStateVersions": {
     "remind": "glossy-kawaii-v2",
     "idle": "glossy-kawaii-v2"
-  }
+  },
+  "assetVersion": "2.4.0-candidates",
+  "productionReady": false,
+  "artReview": "Remaining state clips (and Resting rework) are composited from original painted poses: visual review required, no claims of newly illustrated full motion."
 }

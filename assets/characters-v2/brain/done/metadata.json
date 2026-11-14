@@ -1,0 +1,23 @@
+{
+  "characterId": "brain",
+  "state": "done",
+  "artStyle": "glossy-kawaii-v2",
+  "version": "2.4.0-composited-review",
+  "frames": 12,
+  "columns": 4,
+  "rows": 3,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 95,
+  "loop": false,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "runtimeAsset": "sheet.png",
+  "webPreviewAsset": "sheet.webp",
+  "preview": "preview.gif",
+  "sha256": "1feb62bfe1210cf10956fe3dd616fdef468d3b6b5f44f27a57989c453c7eb188",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "source": "Existing painted Glossy V2 poses: Happy, Sleepy, Recovering; added state-specific animated props",
+  "generationClass": "derived-pose-composite",
+  "reviewStatus": "CANDIDATE ONLY: NOT fully individually illustrated, human/device approval pending"
+}
