@@ -78,12 +78,20 @@ def build(character: str, state: str, spec: dict) -> None:
         bg = Image.new('RGB', frame.size, (247, 243, 252))
         bg.paste(frame, mask=frame.getchannel('A'))
         rendered.append(bg)
-    rendered[0].save(folder / 'preview.gif', save_all=True,
-        append_images=rendered[1:], duration=duration, loop=0,
-        disposal=2, optimize=False)
+    # Correct preview playback semantics: loop=0 means infinite in GIF.
+    # One-shot clips MUST omit the Netscape loop extension entirely.
+    gif_kwargs = dict(save_all=True, append_images=rendered[1:],
+                      duration=duration, disposal=2, optimize=False)
+    if bool(spec['loop']):
+        gif_kwargs['loop'] = 0
+    rendered[0].save(folder / 'preview.gif', **gif_kwargs)
     with Image.open(folder / 'preview.gif') as check:
         if getattr(check, 'n_frames', 1) != frames:
             raise AssertionError('GIF encoder omitted/combined frames')
+        observed_loop = check.info.get('loop', None)
+        expected_loop = 0 if bool(spec['loop']) else None
+        if observed_loop != expected_loop:
+            raise AssertionError(f'Preview loop mismatch {character}/{state}: {observed_loop} != {expected_loop}')
 
     metadata = {
         'characterId': character, 'state': state, 'version': spec['version'],
@@ -104,6 +112,7 @@ def build(character: str, state: str, spec: dict) -> None:
         'minimumAdjacentRgbRms': round(min_motion, 2),
         'runtimeSha256': metadata['sha256'], 'sourceSha256': metadata['sourceSha256'],
         'visualReview': 'pending', 'realDeviceTest': 'pending',
+        'previewLoop': 'infinite' if spec['loop'] else 'once',
     }
     (folder / 'qa_report.json').write_text(json.dumps(qa, indent=2)+'\n')
     manifest_path = SRC_ROOT / character / 'manifest.json'
