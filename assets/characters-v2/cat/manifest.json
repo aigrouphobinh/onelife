@@ -38,6 +38,11 @@
       "file": "assets/characters-v2/cat/sleepy/metadata.json",
       "frames": 12,
       "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "recovering": {
+      "file": "assets/characters-v2/cat/recovering/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
     }
   },
   "note": "Visual/phone sign-off required; no inferred or synthesized state completion."
