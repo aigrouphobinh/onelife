@@ -23,6 +23,21 @@ def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def visible_frame(frame: Image.Image) -> Image.Image:
+    """Composite alpha onto a fixed matte before comparing visible motion.
+
+    Raw RGB in fully transparent pixels is not visible to users and must not
+    count as an illustrated pose change.
+    """
+    matte = Image.new('RGBA', frame.size, (247, 243, 252, 255))
+    return Image.alpha_composite(matte, frame.convert('RGBA')).convert('RGB')
+
+
+def visible_motion_rms(previous: Image.Image, current: Image.Image) -> float:
+    difference = ImageChops.difference(visible_frame(previous), visible_frame(current))
+    return sum(ImageStat.Stat(difference).rms) / 3
+
+
 def build(character: str, state: str, spec: dict) -> None:
     folder = SRC_ROOT / character / state
     source = folder / spec['sourceFile']
@@ -64,7 +79,7 @@ def build(character: str, state: str, spec: dict) -> None:
         if frame.getpixel((0, 0))[3] > 20:
             raise AssertionError(f'{character}/{state} frame {i} alpha background not transparent')
         if prev is not None:
-            rms = sum(ImageStat.Stat(ImageChops.difference(prev, frame)).rms[:3]) / 3
+            rms = visible_motion_rms(prev, frame)
             if rms < 2.0:
                 raise AssertionError(f'{character}/{state} frame {i} is near duplicate of {i-1}: {rms:.2f}')
             min_motion = min(min_motion, rms)
