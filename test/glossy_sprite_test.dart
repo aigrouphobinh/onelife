@@ -38,13 +38,14 @@ void main() {
     semantics.dispose();
   });
 
-  testWidgets('Dog Recovering, Focus, Study and Done atlases keep true alpha',
+  testWidgets('All five imported Dog preview atlases keep true alpha',
       (tester) async {
     for (final spec in [
       GlossySpriteSpec.dogRecovering,
       GlossySpriteSpec.dogFocus,
       GlossySpriteSpec.dogStudy,
       GlossySpriteSpec.dogDone,
+      GlossySpriteSpec.dogThinking,
     ]) {
       final bytes = await rootBundle.load(spec.assetPath);
       final codec = await ui.instantiateImageCodec(
