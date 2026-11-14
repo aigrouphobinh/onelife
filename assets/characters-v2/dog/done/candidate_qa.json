@@ -1,0 +1,31 @@
+{
+  "source": "assets/characters-v2/dog/done/sheet_illustrated.webp",
+  "sha256": "f5a8460b467c6fa9e16ea0668f1c8a2135ca578aa9aa7396f82d4cb8cab84767",
+  "geometry": {
+    "frames": 12,
+    "columns": 4,
+    "rows": 3,
+    "cellPx": 256,
+    "atlasPx": [
+      1024,
+      768
+    ]
+  },
+  "adjacentVisibleRms": [
+    55.69,
+    43.57,
+    65.26,
+    79.2,
+    72.13,
+    70.53,
+    85.49,
+    73.01,
+    59.49,
+    55.78,
+    55.15
+  ],
+  "warnings": [],
+  "technicalPreflightPassed": true,
+  "humanVisualApproval": "pending",
+  "realDeviceApproval": "pending"
+}
