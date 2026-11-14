@@ -67,5 +67,7 @@
   "visualStateVersions": {
     "remind": "glossy-kawaii-v2",
     "idle": "glossy-kawaii-v2"
-  }
+  },
+  "productionReady": false,
+  "artReview": "Recovering original illustrated poses pending human and mobile QA. Resting currently montage. No clinical recovery claim."
 }

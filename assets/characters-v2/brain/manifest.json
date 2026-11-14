@@ -31,10 +31,14 @@
     "sleepy": {
       "file": "assets/characters-v2/brain/sleepy/metadata.json",
       "frames": 12
+    },
+    "recovering": {
+      "file": "assets/characters-v2/brain/recovering/metadata.json",
+      "frames": 12
     }
   },
   "v1FallbackAllowed": true,
   "productionReady": false,
   "note": "Glossy V2 present for idle, remind, overloaded, happy, resting; Happy is original illustrated, Resting still uses montage; 10 states remain V1.",
-  "artReview": "Sleepy original 12 illustrated poses require human and device review; Resting still montage; Sleepy illustration must be reviewed on devices"
+  "artReview": "Recovering original illustrated poses pending human and mobile QA. Resting currently montage. No clinical recovery claim."
 }
