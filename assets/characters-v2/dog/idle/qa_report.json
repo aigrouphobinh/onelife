@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "frames": 8,
+  "adjacentChanges": 7,
+  "minimumAdjacentRgbRms": 36.81,
+  "runtimeSha256": "4fa1d00cad0e52d5a45b23590c050fc8bc703ccb31b72907e9a070b4bba9f88a",
+  "sourceSha256": "077c0d07e77d07bb618926478bd66f40d8d11f1236851b799d19bff7b525c4de",
+  "visualReview": "pending",
+  "realDeviceTest": "pending",
+  "previewLoop": "infinite"
+}
