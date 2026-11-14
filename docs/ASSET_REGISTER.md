@@ -139,3 +139,9 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - SHA-256: `88c7ed1504a1a00e7b7ba0e509aa384df2f171136afff39175932cdd9a5dcde0`. Original generated for OneLife, no external media. Check applicable OpenAI terms before distribution.
 - Asset pipeline generates PNG/GIF, meta and report from the pinned WebP source. Local structural QA passed 12 frames, 11 changed transitions, no clipping; Github CI and manual/device art sign-off are separate.
 - Loop intentionally disabled: desk appears during the introductory sequence, so the 12th-to-1st cut would pop. A separately drawn seamless working loop is still an art backlog item.
+
+## Cat Study Glossy V2 illustrated candidate (2026-11-14)
+- Original OneLife lavender Cat illustration: 12 distinct learning poses, book handling, page turning, writing and thinking, 4×3 cells (256×256 each), 1024×768 RGBA atlas.
+- Source: `assets/characters-v2/cat/study/sheet_illustrated.webp` SHA-256 `b922acdf5f3c8d5c8d905e02b0f765b1413ec007a1d6859867e51c91456d4438`; generated specifically for this project. White image matte was extracted using a segmentation/matting script prior to WebP import.
+- 140 ms per frame, one-shot. Atlas checks locally verified 12 nonempty frames, 11 meaningful adjacent transitions, transparent corners and no clipping. Loop transition, white fringes, optical alignment at 64px, human art approval and device power profiling remain PENDING.
+- GitHub Actions must independently produce `sheet.png`, `preview.gif` and checksummed `metadata.json` before the catalog can count this clip.

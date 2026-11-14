@@ -30,4 +30,4 @@ A composite poster often has text/labels and many tiny characters. Cropping rows
 
 ## Next original-art backlog
 
-Cat: Study, Done, Thinking, Sad, Balanced, Strained (six remaining after Focus). Dog/Robot/Sprout: 15 each. Each must get its **own character-specific artwork**, not a recolored Brain. Never manufacture completion percentages by counting poster cells. Flutter, on-device brain-balance rules and live animation QA are separate implementation gates.
+Cat after Study import: Done, Thinking, Sad, Balanced, Strained (five remaining); Stage status requires renderer and coverage verification. Dog/Robot/Sprout: 15 each. Each must get its **own character-specific artwork**, not a recolored Brain. Never manufacture completion percentages by counting poster cells. Flutter, on-device brain-balance rules and live animation QA are separate implementation gates.
