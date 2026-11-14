@@ -1,18 +1,23 @@
 {
   "characterId": "brain",
   "state": "alarm",
+  "version": "2.2.0-illustrated-candidate",
+  "artStyle": "glossy-kawaii-v2",
   "frames": 12,
   "columns": 4,
   "rows": 3,
   "frameWidth": 256,
   "frameHeight": 256,
-  "frameDurationMs": 80,
-  "loop": true,
+  "frameDurationMs": 95,
+  "loop": false,
   "anchorX": 0.5,
   "anchorY": 0.92,
-  "source": "sheet.svg",
+  "source": "sheet_illustrated.webp",
   "runtimeAsset": "sheet.png",
+  "webPreviewAsset": "sheet.webp",
   "preview": "preview.gif",
+  "sha256": "b91b9852087d5fcdd15235ea030d7e6b7f030f7ccc8b3e1c98414e45a6efbca2",
+  "sourceSha256": "b87db9c6277b6b61580356d5e3107f3b0969e84183438fcf55591ebe591fa5b3",
   "licenseRef": "docs/ASSET_REGISTER.md",
-  "sha256": "c20ddb716f17196c84377f0f851ea315c5abefc5b36210f0df25693b26a6ec78"
+  "reviewStatus": "original illustrated poses; manual continuity and phone QA pending"
 }
