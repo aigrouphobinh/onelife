@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "characterId": "cat",
+  "artStyle": "glossy-kawaii-v2",
+  "assetKind": "single-master-artwork",
+  "originalSource": "master.webp",
+  "masterAsset": "master.png",
+  "thumbnailAsset": "thumbnail.png",
+  "sourceSha256": "6b47d6054c7ed09da4974546fcefd027258787cd4cc0dd2c75f6b1fbd0f09582",
+  "masterSha256": "a0820c3a38de4a2b1bf6c277d73ba138241475f3b46ddefd0aee6d708e5ee098",
+  "sourceDimensions": [
+    512,
+    512
+  ],
+  "masterDimensions": [
+    512,
+    512
+  ],
+  "transparentBackground": true,
+  "states": {},
+  "animationReady": false,
+  "productionReady": false,
+  "humanArtReview": "pending",
+  "devicePerformanceReview": "pending",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "provenance": "Original AI-generated OneLife four-mascot concept; transparent masking with local segmentation. No third-party character source."
+}

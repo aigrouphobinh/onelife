@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "characterId": "dog",
+  "artStyle": "glossy-kawaii-v2",
+  "assetKind": "single-master-artwork",
+  "originalSource": "master.webp",
+  "masterAsset": "master.png",
+  "thumbnailAsset": "thumbnail.png",
+  "sourceSha256": "43d5f2f2e6026bd0af2255677a04f90bb1b41b88b3704d7c58439bd0af94b045",
+  "masterSha256": "934ab458c25cd25d0edb06bfb49d4ad157e7f0783de192497b7841f3f87acf86",
+  "sourceDimensions": [
+    512,
+    512
+  ],
+  "masterDimensions": [
+    512,
+    512
+  ],
+  "transparentBackground": true,
+  "states": {},
+  "animationReady": false,
+  "productionReady": false,
+  "humanArtReview": "pending",
+  "devicePerformanceReview": "pending",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "provenance": "Original AI-generated OneLife four-mascot concept; transparent masking with local segmentation. No third-party character source."
+}
