@@ -83,6 +83,24 @@ class SpriteCandidateTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Invalid frame geometry"):
                 mod.inspect(p, frames=0)
 
+    def test_printed_opaque_panel_is_not_transparency(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "fake_alpha.png"
+            image = Image.new("RGBA", (1024, 256), (0, 0, 0, 0))
+            d = ImageDraw.Draw(image)
+            for i in range(4):
+                d.rectangle((i * 256 + 4, 4, i * 256 + 251, 251),
+                            fill=(255, 255, 255, 255))
+                d.ellipse((i * 256 + 90 + i * 4, 60,
+                           i * 256 + 140 + i * 4, 115),
+                          fill=(250, 156, 55, 255))
+            image.save(p)
+            result = mod.inspect(p, frames=4)
+            self.assertFalse(result["technicalPreflightPassed"])
+            self.assertTrue(any("painted background suspected" in w
+                                for w in result["warnings"]))
+
+
 
 if __name__ == "__main__":
     unittest.main()
