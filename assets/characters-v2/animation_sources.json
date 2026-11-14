@@ -434,6 +434,48 @@
       "frameDurationMs": 140,
       "loop": true,
       "generationClass": "independently-illustrated-pose-sheet"
+    },
+    {
+      "characterId": "robot",
+      "state": "remind",
+      "version": "2.40.0-illustrated-candidate",
+      "sourceFile": "sheet_illustrated.webp",
+      "sourceSha256": "f1c9f2dd331125b4e8b3ee8bdd6cd3af2b5a13b9ed41cdd35d807d025b3711ea",
+      "frames": 12,
+      "columns": 4,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "frameDurationMs": 110,
+      "loop": false,
+      "generationClass": "independently-illustrated-pose-sheet"
+    },
+    {
+      "characterId": "robot",
+      "state": "happy",
+      "version": "2.40.0-illustrated-candidate",
+      "sourceFile": "sheet_illustrated.webp",
+      "sourceSha256": "e292bc8588f96239a417701009c8fe9e1725148064976f1a7cb71a9f4bb4e87d",
+      "frames": 12,
+      "columns": 4,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "frameDurationMs": 90,
+      "loop": true,
+      "generationClass": "independently-illustrated-pose-sheet"
+    },
+    {
+      "characterId": "robot",
+      "state": "overloaded",
+      "version": "2.40.0-illustrated-candidate",
+      "sourceFile": "sheet_illustrated.webp",
+      "sourceSha256": "0cb5a9b1e9afd5e2a6a1df69742be04fed4d0c8c0efaee006286775d8a8d58bd",
+      "frames": 12,
+      "columns": 4,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "frameDurationMs": 115,
+      "loop": false,
+      "generationClass": "independently-illustrated-pose-sheet"
     }
   ]
 }
