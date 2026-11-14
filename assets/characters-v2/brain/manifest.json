@@ -1,14 +1,19 @@
 {
   "characterId": "brain",
-  "assetVersion": "2.0.0",
+  "assetVersion": "2.0.0-partial",
   "sourceOfTruth": "assets/characters/brain",
   "artMaster": "assets/characters-v2/brain/master.png",
   "states": {
+    "idle": {
+      "file": "assets/characters-v2/brain/idle/metadata.json",
+      "frames": 8
+    },
     "remind": {
       "file": "assets/characters-v2/brain/remind/metadata.json",
       "frames": 12
     }
   },
-  "v1FallbackAllowed": false,
-  "productionReady": false
+  "v1FallbackAllowed": true,
+  "productionReady": false,
+  "note": "Only idle and remind are glossy; 13 other Brain states remain V1"
 }
