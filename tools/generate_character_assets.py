@@ -113,8 +113,13 @@ def main():
         }
     for char, states in manifests.items():
         manifest_path = ROOT / "assets/characters" / char / "manifest.json"
-        manifest_path.write_text(json.dumps({"characterId":char, "version":"1.0.0",
-            "states": states}, indent=2) + "\n")
+        # Preserve V2 visual overrides and default preview when updating state indices.
+        old_manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+        next_manifest = {"characterId": char, "version": old_manifest.get("version", "1.0.0"), "states": states}
+        for preserved in ("defaultPreviewAsset", "visualStateVersions"):
+            if preserved in old_manifest:
+                next_manifest[preserved] = old_manifest[preserved]
+        manifest_path.write_text(json.dumps(next_manifest, indent=2) + "\n")
     print(f"Rendered {len(paths)} animations across {len(manifests)} characters.")
 
 if __name__ == "__main__":
