@@ -31,7 +31,7 @@ def main():
         page.wait_for_timeout(350)
         assert page.locator("#page-select").count()==1
         for name in PAGES:
-            page.locator("#page-select").select_option(name)
+            page.evaluate("(name) => { const select=document.getElementById('page-select'); select.value=name; select.dispatchEvent(new Event('change',{bubbles:true})); }", name)
             page.wait_for_timeout(130)
             assert page.locator("#current-route").inner_text()==name.upper(),name
             file=OUT/(name+"-mobile.png")
@@ -41,7 +41,7 @@ def main():
             print("CAPTURE",name,"mobile")
         page.set_viewport_size({"width":1280,"height":900})
         for name in ("home","habits","characters","settings"):
-            page.locator("#page-select").select_option(name)
+            page.evaluate("(name) => { const select=document.getElementById('page-select'); select.value=name; select.dispatchEvent(new Event('change',{bubbles:true})); }", name)
             page.wait_for_timeout(130)
             file=OUT/(name+"-desktop.png")
             page.screenshot(path=str(file),full_page=True,animations="disabled")
