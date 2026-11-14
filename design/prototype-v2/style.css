@@ -12,3 +12,7 @@
 @media(max-width:760px){.sidebar{display:none}.main-area{padding:21px 15px 88px}.topbar{margin-bottom:17px}.topbar h1{font-size:24px}.top-actions .avatar{display:none}.dash-grid,.grid-2{grid-template-columns:1fr}.stats-row{gap:7px}.mini-stat{padding:13px}.mini-stat b{font-size:22px}.hero{min-height:340px}.char-grid{grid-template-columns:repeat(3,1fr)}#mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;background:var(--card);border-top:1px solid var(--line);padding:6px 3px max(env(safe-area-inset-bottom),7px);justify-content:space-around;box-shadow:0 -10px 25px #392d4f12}#mobile-nav button{background:none;color:var(--muted);padding:7px 4px;border-radius:12px;font-size:11px;min-width:51px}#mobile-nav button.active{background:var(--primary-soft);color:var(--primary)}#mobile-nav span{display:block;font-size:21px}.app-footer{margin-bottom:22px}}
 @media(max-width:390px){.hero .bubble{right:10px;top:142px}.char-grid{grid-template-columns:repeat(2,1fr)}.stats-row{grid-template-columns:repeat(3,minmax(0,1fr))}.mini-stat{padding:10px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* Programmatic navigation focus should not draw a black frame around the page. */
+#page-content:focus{outline:none}
+#page-content:focus-visible{outline:3px solid var(--primary);outline-offset:4px}

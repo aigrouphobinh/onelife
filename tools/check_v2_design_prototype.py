@@ -35,9 +35,13 @@ def main():
             page.wait_for_timeout(130)
             assert page.locator("#current-route").inner_text()==name.upper(),name
             file=OUT/(name+"-mobile.png")
-            page.screenshot(path=str(file),full_page=True,animations="disabled")
-            manifest["screens"].append({"page":name,"viewport":"390×844",
+            page.screenshot(path=str(file),full_page=False,animations="disabled")
+            manifest["screens"].append({"page":name,"viewport":"390×844","capture":"viewport",
                                         "file":file.name,"bytes":file.stat().st_size})
+            fullfile=OUT/(name+"-mobile-full.png")
+            page.screenshot(path=str(fullfile),full_page=True,animations="disabled")
+            manifest["screens"].append({"page":name,"viewport":"390×844","capture":"scroll",
+                                        "file":fullfile.name,"bytes":fullfile.stat().st_size})
             print("CAPTURE",name,"mobile")
         page.set_viewport_size({"width":1280,"height":900})
         for name in ("home","habits","characters","settings"):
@@ -49,7 +53,7 @@ def main():
                                         "file":file.name,"bytes":file.stat().st_size})
         browser.close()
     assert not errors, "Browser runtime errors: "+repr(errors)
-    assert len(manifest["screens"])==14
+    assert len(manifest["screens"])==24
     (OUT/"manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n")
     print("PASS OneLife V2 prototype: 10 mobile pages, 4 desktop pages, no JS runtime exceptions")
 
