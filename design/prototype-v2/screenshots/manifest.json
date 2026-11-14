@@ -5,86 +5,166 @@
     {
       "page": "home",
       "viewport": "390×844",
+      "capture": "viewport",
       "file": "home-mobile.png",
-      "bytes": 154271
+      "bytes": 123860
+    },
+    {
+      "page": "home",
+      "viewport": "390×844",
+      "capture": "scroll",
+      "file": "home-mobile-full.png",
+      "bytes": 154619
     },
     {
       "page": "tasks",
       "viewport": "390×844",
+      "capture": "viewport",
       "file": "tasks-mobile.png",
-      "bytes": 56974
+      "bytes": 56749
+    },
+    {
+      "page": "tasks",
+      "viewport": "390×844",
+      "capture": "scroll",
+      "file": "tasks-mobile-full.png",
+      "bytes": 57433
     },
     {
       "page": "schedule",
       "viewport": "390×844",
+      "capture": "viewport",
       "file": "schedule-mobile.png",
-      "bytes": 106061
+      "bytes": 90745
+    },
+    {
+      "page": "schedule",
+      "viewport": "390×844",
+      "capture": "scroll",
+      "file": "schedule-mobile-full.png",
+      "bytes": 106993
     },
     {
       "page": "habits",
       "viewport": "390×844",
+      "capture": "viewport",
       "file": "habits-mobile.png",
-      "bytes": 109297
+      "bytes": 64334
+    },
+    {
+      "page": "habits",
+      "viewport": "390×844",
+      "capture": "scroll",
+      "file": "habits-mobile-full.png",
+      "bytes": 109076
     },
     {
       "page": "assistant",
       "viewport": "390×844",
+      "capture": "viewport",
       "file": "assistant-mobile.png",
-      "bytes": 113916
+      "bytes": 88804
+    },
+    {
+      "page": "assistant",
+      "viewport": "390×844",
+      "capture": "scroll",
+      "file": "assistant-mobile-full.png",
+      "bytes": 112089
     },
     {
       "page": "characters",
       "viewport": "390×844",
+      "capture": "viewport",
       "file": "characters-mobile.png",
-      "bytes": 120033
+      "bytes": 62896
+    },
+    {
+      "page": "characters",
+      "viewport": "390×844",
+      "capture": "scroll",
+      "file": "characters-mobile-full.png",
+      "bytes": 120001
     },
     {
       "page": "settings",
       "viewport": "390×844",
+      "capture": "viewport",
       "file": "settings-mobile.png",
-      "bytes": 95762
+      "bytes": 63533
+    },
+    {
+      "page": "settings",
+      "viewport": "390×844",
+      "capture": "scroll",
+      "file": "settings-mobile-full.png",
+      "bytes": 96304
     },
     {
       "page": "onboarding",
       "viewport": "390×844",
+      "capture": "viewport",
       "file": "onboarding-mobile.png",
-      "bytes": 105751
+      "bytes": 90663
+    },
+    {
+      "page": "onboarding",
+      "viewport": "390×844",
+      "capture": "scroll",
+      "file": "onboarding-mobile-full.png",
+      "bytes": 106485
     },
     {
       "page": "overlay",
       "viewport": "390×844",
+      "capture": "viewport",
       "file": "overlay-mobile.png",
-      "bytes": 124034
+      "bytes": 102970
+    },
+    {
+      "page": "overlay",
+      "viewport": "390×844",
+      "capture": "scroll",
+      "file": "overlay-mobile-full.png",
+      "bytes": 124353
     },
     {
       "page": "splash",
       "viewport": "390×844",
+      "capture": "viewport",
       "file": "splash-mobile.png",
-      "bytes": 84612
+      "bytes": 82175
+    },
+    {
+      "page": "splash",
+      "viewport": "390×844",
+      "capture": "scroll",
+      "file": "splash-mobile-full.png",
+      "bytes": 82175
     },
     {
       "page": "home",
       "viewport": "1280×900",
       "file": "home-desktop.png",
-      "bytes": 220579
+      "bytes": 220361
     },
     {
       "page": "habits",
       "viewport": "1280×900",
       "file": "habits-desktop.png",
-      "bytes": 167491
+      "bytes": 168979
     },
     {
       "page": "characters",
       "viewport": "1280×900",
       "file": "characters-desktop.png",
-      "bytes": 168452
+      "bytes": 169599
     },
     {
       "page": "settings",
       "viewport": "1280×900",
       "file": "settings-desktop.png",
-      "bytes": 133549
+      "bytes": 133565
     }
   ]
 }
