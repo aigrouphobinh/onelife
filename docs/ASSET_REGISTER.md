@@ -235,3 +235,13 @@ Rights: generated material is subject to applicable OpenAI terms. Check original
 - **Derived:** `sheet.png` runtime true alpha, `preview.gif` matte-based one-shot playback, `metadata.json`, `qa_report.json`, `candidate_qa.json`.
 - **Technical QA:** 12 × 256px frames, 140ms/frame, 4 columns, 11 detectable transitions, no clipping or opaque backdrop reported. This verifies only structural quality, **not** human motion/identity approval.
 - **Status:** candidate, `productionReady=false`; real-device, smaller-size render, accessibility and final rights review pending. See `docs/DOG_STUDY_ART_BRIEF.md`.
+
+## Glossy Kawaii Dog Done — 2026-11-15
+
+- Asset: `assets/characters-v2/dog/done/sheet_illustrated.webp`; original 12-pose (4×3) orange-and-cream celebratory puppy sequence generated for OneLife in this chat, no third-party download.
+- **Origin/transparency disclosure:** generated first as an RGB illustration with a *painted checkerboard*. Original checker pattern was segmented out into a real RGBA WebP with empty pixels; local validation on dark and light backgrounds, geometry/alpha/frame tests passed. Anti-aliasing and device-size edge review still pending.
+- Source SHA-256: `f5a8460b467c6fa9e16ea0668f1c8a2135ca578aa9aa7396f82d4cb8cab84767`, 663,974 bytes, imported by GitHub Actions commit `865317c51d46`.
+- Generated runtime: `sheet.png` (true alpha), `preview.gif` (opaque-matte preview), `metadata.json`, `candidate_qa.json`, `qa_report.json`.
+- Checkpoint: 12 × 256px cells, 125ms/frame, one-shot, zero candidate QA warnings; human/style review and real-device tests **not approved**, `productionReady=false`.
+- Rights: original AI-generated candidate governed by applicable generation provider terms. No open-source/CC0/third-party commercial license is claimed.
+- Specification: `docs/DOG_DONE_ART_BRIEF.md`.
