@@ -6,5 +6,6 @@
   "runtimeSha256": "ee6d197ec97326f94a9db28e3346709e7fc2334d43491d2bc7a1b3874578cf3f",
   "sourceSha256": "88c7ed1504a1a00e7b7ba0e509aa384df2f171136afff39175932cdd9a5dcde0",
   "visualReview": "pending",
-  "realDeviceTest": "pending"
+  "realDeviceTest": "pending",
+  "previewLoop": "once"
 }
