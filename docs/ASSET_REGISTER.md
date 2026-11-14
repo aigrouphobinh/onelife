@@ -226,3 +226,12 @@ Rights: generated material is subject to applicable OpenAI terms. Check original
 - **Derived:** `sheet.png` (true alpha), `preview.gif` (visual preview), `metadata.json`, `candidate_qa.json`, `qa_report.json`.
 - **Verification:** 12 × 256px cells, 4 columns, 135ms/frame, one-shot; alpha/clip/visible frame differences passed automated checks. Asset remains **candidate / pending art and device signoff**. Do not interpret as clinical focus measurement.
 - **Rights:** original AI-generated output; review applicable generation terms and product/logo policy before commercial release; no CC0 or MIT grant claimed.
+
+## Dog Study — original transparent Glossy Kawaii atlas (2026-11-15)
+
+- **Origin:** generated in the OneLife ChatGPT conversation specifically for the approved orange puppy art direction, then normalized into separately identifiable 256px cells with true alpha using Pillow/SciPy; no external third-party image downloaded. AI artwork is not automatically CC0/MIT.
+- **Commit:** `5ed2ac0021dd2d560f50dd7f89bc49aa6e16f4e6`.
+- **Source:** `assets/characters-v2/dog/study/sheet_illustrated.webp`, lossless 1024×768 RGBA WebP (12 poses); SHA-256 `22527ed1447616233b9672df9410baed71cde1641f538f7d64208148f7b12e4c`.
+- **Derived:** `sheet.png` runtime true alpha, `preview.gif` matte-based one-shot playback, `metadata.json`, `qa_report.json`, `candidate_qa.json`.
+- **Technical QA:** 12 × 256px frames, 140ms/frame, 4 columns, 11 detectable transitions, no clipping or opaque backdrop reported. This verifies only structural quality, **not** human motion/identity approval.
+- **Status:** candidate, `productionReady=false`; real-device, smaller-size render, accessibility and final rights review pending. See `docs/DOG_STUDY_ART_BRIEF.md`.
