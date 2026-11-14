@@ -63,6 +63,6 @@ design/references/  (visual references and provenance)
 
 ## 6. Reference availability
 
-The source art is in the user's ChatGPT conversation. A processed candidate extracted from the previously generated glossy 12-pose Brain image exists as a conversation artifact; it is **not** automatically part of this GitHub repository. Its transparency mask is provisional and requires edge cleanup. Import it as a v2 reference, never claim it was uploaded or approved unless verified by GitHub readback.
+The canonical user-selected full-size illustration is in the ChatGPT conversation. A **small 96×96 visual sample** cropped from an earlier glossy reminder illustration is verified on GitHub at [references/brain_glossy_thumbnail.webp](references/brain_glossy_thumbnail.webp). It shows the approved general aesthetic, but is not the full-resolution art master, not the full user-uploaded image, and the extracted matting may require edge cleanup. Full-resolution production asset and art approval remain pending.
 
 **Decision:** Freeze the existing V1 flat mascot rendering for production. Prioritize visual consistency and original glossy asset production before further Flutter feature implementation.

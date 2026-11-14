@@ -68,3 +68,5 @@ See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md). `overloaded` is a fictio
 - [ ] Visual QA across all states, UI screens and device sizes.
 
 **Do not confuse automated PASS on V1 sprites with art approval.**
+
+- [x] Small 96×96 glossy reference thumbnail committed and Git blob hash verified. This is *not* a production master or complete user-selected board: `design/references/brain_glossy_thumbnail.webp`.
