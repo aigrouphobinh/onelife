@@ -20,7 +20,7 @@ Art baseline: design/STYLE_LOCK_V2.md. The approved look has a glossy, soft pink
 | strained | 10 | Slight slouch, slower blink, one sweat drop, gentle tired breathing | Needs V2 illustration |
 | overloaded | 12 | Comedic surprise, tiny purple static accents, wobble, steadies itself; avoid fear-based brain injury depiction | V2 original illustrated 12-frame candidate; QA and device review pending |
 | resting | 10 | Sits down, closes eyes, shoulders settle, calm inhale/exhale, slow peaceful particles | Painted-pose montage candidate; dedicated resting body acting still needed |
-| recovering | 12 | Opens eyes after rest, perks up, stretches, fresh expression, light sparkles, back to balance | Needs V2 illustration |
+| recovering | 12 | Opens eyes after rest, perks up, stretches, fresh expression, light sparkles, back to balance | Illustrated 12-pose source imported; QA and device review pending |
 
 ## Keyframe requirements
 
@@ -58,3 +58,9 @@ Existing 75 V1 structure-valid clips remain *old flat art* unless explicitly pro
 - `tools/generate_character_assets.py` now preserves all 7 live Glossy V2 states, so the older SVG renderer cannot replace them.
 - Recovering is still **NOT** implemented in Glossy V2. Image-generator infographics and posters showing 15/15 completion are concept images only and are **not** valid spritesheets, source files or evidence of GitHub delivery.
 - Human review of consistency, 64px legibility, smooth action timing and hardware tests remain pending.
+
+## Recovering v2 illustrated candidate (2026-11-14)
+- Source: `assets/characters-v2/brain/recovering/sheet_illustrated.webp` with 12 painted facial/body poses, 4 × 3, 256px cells, generated for OneLife. SHA-256 `1dd19bf59a36c511b28045b9e1f625d968c395bd387710f5c076d43fee51eff4`.
+- Art depicts regaining a cheerful mood after a chosen break; not medical repair of neurons or brain damage.
+- `tools/render_illustrated_recovering_v2.py` converts and mirrors PNG/GIF/metadata when triggered by `glossy-illustrated-recovering.yml`.
+- Human checking of facial consistency, smooth loop transitions and actual 64px phone use remains open.
