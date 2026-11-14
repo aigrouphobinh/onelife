@@ -3,6 +3,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import re
+import json
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -59,6 +60,17 @@ def main():
     for mode in ("light", "dark"):
         for state in ("balanced","strained","overloaded","resting","recovering","permission"):
             assert (ROOT / "design/wellbeing" / (mode+"-"+state+".png")).is_file(), mode+"/"+state
+    from PIL import Image
+    from hashlib import sha256
+    v2 = ROOT / "assets/characters-v2/brain"
+    for name, expected in (("master.png", (512, 512)), ("remind/sheet.png", (1024, 768))):
+        p = v2 / name
+        assert p.is_file(), f"Missing glossy V2 art: {p}"
+        with Image.open(p) as im:
+            assert im.size == expected, f"Unexpected V2 size: {p}"
+    info = json.loads((v2 / "remind/metadata.json").read_text())
+    assert info["frames"] == 12 and info["frameWidth"] == 256
+    assert sha256((v2 / "remind/sheet.png").read_bytes()).hexdigest() == info["sha256"]
     assert (ROOT / "design/review/reports/asset-qa.md").is_file(), "Asset QA report must be committed first"
     print("PASS design preview: JS syntax, 50 local atlas paths, 10 design screens, controls")
 

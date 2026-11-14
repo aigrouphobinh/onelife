@@ -51,3 +51,7 @@ Avoid stylizing each frame independently without identity consistency. No third-
 - Brain master raster v2: exported to GitHub and mirrored to active preview path (art direction approved; further edge clean-up may be needed).
 - Brain remind v2: 12 distinct action frames, real PNG/GIF/WebP binary assets, metadata; manual motion QA still pending.
 - Remaining animation states (including health/wellbeing), other four character variants and UI pages must be redrawn with the new style. **Do not advance feature code yet.**
+
+## Verified Sprint A progress
+ART-V2-01: Brain 512px real glossy master on main; 1254px original remains in downloadable V2 ZIP.
+ART-V2-03: genuine reminder 12-pose sequence on main; idle, overloaded and resting pilots still pending. Brain V2 visual review and Flutter runtime tests are pending.

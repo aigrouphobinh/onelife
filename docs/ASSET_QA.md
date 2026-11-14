@@ -79,3 +79,9 @@ See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md). `overloaded` is a fictio
 - [ ] Full 15 Brain states are **not** glossy yet (only `remind` converted).
 - [ ] Cat, Dog, Robot, Sprout have **not** been upgraded to V2.
 - [ ] Frame-level visual / real Android device acceptance is pending.
+
+## Glossy V2 genuine raster pilot
+- [x] Optimized 512px glossy master and 12-frame 1024x768 WebP source are committed as real binary Git blobs.
+- [x] Actions emitted master.png, remind/sheet.png, remind/preview.gif and metadata, verified via GitHub reads.
+- [x] Design review selects genuine V2 art for Brain/remind and Brain logo.
+- [ ] All other Brain states and other mascots still require V2 redraw and art approval.
