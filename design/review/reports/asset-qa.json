@@ -3,7 +3,7 @@
   "automatedOnly": true,
   "passed": true,
   "clips": 75,
-  "frames": 762,
+  "frames": 764,
   "errors": [],
   "warnings": [],
   "records": [
@@ -52,9 +52,9 @@
     {
       "character": "brain",
       "state": "sleepy",
-      "frames": 10,
-      "changingTransitions": 9,
-      "pngBytes": 171370
+      "frames": 12,
+      "changingTransitions": 11,
+      "pngBytes": 776230
     },
     {
       "character": "brain",

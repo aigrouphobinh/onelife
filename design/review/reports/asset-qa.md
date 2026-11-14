@@ -2,7 +2,7 @@
 
 Status: **PASS** — automated only, not visual or device sign-off.
 
-Clips: 75/75 · active frames: 762/762
+Clips: 75/75 · active frames: 764/764
 
 ## Errors
 - None
