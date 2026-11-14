@@ -2,13 +2,13 @@
 
 ## Current asset-first production checkpoint (2026-11-15)
 
-**Source-illustration coverage: 22/60 clips (38 missing)**, as reported by the deterministic asset check in [docs/NEXT_AUTO_TASK.md](docs/NEXT_AUTO_TASK.md). This count is for sourced illustrations, **not** app-ready/approved animations.
+**Source-illustration coverage: 23/60 clips (37 missing)**, verified from `assets/characters-v2/animation_sources.json` on `main`. This measures original illustration sources, **not** approved or production-ready animations. `docs/NEXT_AUTO_TASK.md` is auto-generated and may lag until its next scheduled update.
 
-- Cat: 15/15 source clips; Dog: 7/15 including Sleepy; Robot and Sprout: 0/15 each. The existing Brain pack is tracked separately from this 60-clip migration.
-- **Next production blocker:** [Dog Recovering 12-frame brief](docs/DOG_RECOVERING_ART_BRIEF.md). An original transparent 4×3 illustrated sprite sheet is required at `assets/characters-v2/dog/recovering/sheet_illustrated.webp`; documentation alone is not an asset.
+- Cat: 15/15 source clips; Dog: 8/15 including Recovering; Robot and Sprout: 0/15 each. The existing Brain pack is tracked separately from this 60-clip migration.
+- **Dog Recovering imported on `main`:** original Glossy Kawaii 12-frame WebP with **real alpha**, 1024×768, verified SHA-256, generated PNG/GIF/metadata and QA. Its `productionReady` remains false pending visual and device review. [Review details](docs/DOG_RECOVERING_CANDIDATE_REVIEW.md).
 - Keep the **Glossy Kawaii V2** master identity and real frame-by-frame movement. Do not fill missing frames with transformed stills, placeholders, or an unlabeled poster.
 - Run source provenance, SHA-256 registration, sprite render and visual QA gates before promoting coverage. No device art approval, Flutter runtime, or production release is implied by passing GitHub Actions.
-- The intended next sequence is **Dog Recovering → Dog Focus → remaining Dog states → Robot/Sprout**, with mobile integration and actual-device verification gated on reviewed artwork.
+- The next asset task is **Dog Focus → remaining Dog states → Robot/Sprout**, alongside real-device validation and final Recovering→Idle motion review.
 
 
 ## Design V2 – Trợ lý bộ não nhỏ (2026-11-14)
