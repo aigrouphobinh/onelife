@@ -8,6 +8,7 @@ on:
   push:
     paths:
       - 'tools/onelife_autopilot.py'
+      - 'tools/audit_glossy_sprite_integrity.py'
       - '.github/workflows/onelife-autopilot-15m.yml'
 permissions:
   contents: write
@@ -30,6 +31,8 @@ jobs:
       - run: python -m pip install --disable-pip-version-check 'Pillow==11.0.0'
       - name: Validate worker itself
         run: python tools/onelife_autopilot.py --self-test
+      - name: Independently audit registered sprites and GIF playback
+        run: python tools/audit_glossy_sprite_integrity.py
       - name: Pick and execute next safe source-backed task
         run: python tools/onelife_autopilot.py
       - name: Commit verified updates directly to main (no empty commits)
