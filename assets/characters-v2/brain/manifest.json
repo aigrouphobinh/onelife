@@ -1,0 +1,13 @@
+{
+  "characterId": "brain",
+  "assetVersion": "2.0.0",
+  "artMaster": "assets/characters-v2/brain/master.png",
+  "states": {
+    "remind": {
+      "file": "assets/characters-v2/brain/remind/metadata.json",
+      "frames": 12
+    }
+  },
+  "v1FallbackAllowed": false,
+  "productionReady": false
+}
