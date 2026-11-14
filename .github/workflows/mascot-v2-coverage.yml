@@ -1,16 +1,17 @@
 name: Glossy character coverage audit
 on:
   workflow_dispatch:
+  # Run after generated metadata/sprites change, not when source catalog/gallery
+  # changes before the raster builder has produced files. The builder itself
+  # runs both the coverage and viewer checks on the new raster assets.
   push:
     paths:
-      - 'assets/characters-v2/animation_sources.json'
       - 'assets/characters-v2/**/metadata.json'
       - 'assets/characters-v2/**/sheet.png'
       - 'assets/characters-v2/**/preview.gif'
       - 'tools/check_mascot_coverage.py'
       - 'tools/render_cat_glossy_contact.py'
       - 'tools/check_cat_glossy_review.py'
-      - 'design/review/glossy-cat-idle.html'
       - '.github/workflows/mascot-v2-coverage.yml'
 permissions:
   contents: write
