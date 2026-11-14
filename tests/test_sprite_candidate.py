@@ -76,6 +76,36 @@ class SpriteCandidateTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Expected"):
                 mod.inspect(p, frames=4)
 
+    def test_unused_final_row_cells_must_be_transparent(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "hidden.png"
+            image = Image.new("RGBA", (1024, 512), (0, 0, 0, 0))
+            draw = ImageDraw.Draw(image)
+            for i in range(5):
+                x = (i % 4) * 256 + 35 + i * 10
+                y = (i // 4) * 256 + 52
+                draw.ellipse((x, y, x + 55, y + 63), fill=(245, 146, 71, 255))
+            # Hidden sixth illustration must not be silently accepted.
+            draw.ellipse((256 + 50, 256 + 55, 256 + 110, 256 + 115),
+                         fill=(245, 146, 71, 255))
+            image.save(p)
+            result = mod.inspect(p, frames=5)
+            self.assertFalse(result["technicalPreflightPassed"])
+            self.assertTrue(any("unused cell 05" in s for s in result["warnings"]))
+
+    def test_clean_unused_cells_are_accepted(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "clean.png"
+            image = Image.new("RGBA", (1024, 512), (0, 0, 0, 0))
+            draw = ImageDraw.Draw(image)
+            for i in range(5):
+                x = (i % 4) * 256 + 35 + i * 10
+                y = (i // 4) * 256 + 52
+                draw.ellipse((x, y, x + 55, y + 63), fill=(245, 146, 71, 255))
+            image.save(p)
+            result = mod.inspect(p, frames=5)
+            self.assertTrue(result["technicalPreflightPassed"], result["warnings"])
+
     def test_no_invalid_frame_count(self):
         with tempfile.TemporaryDirectory() as td:
             p = Path(td) / "valid.png"
