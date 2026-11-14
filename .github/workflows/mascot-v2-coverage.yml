@@ -8,6 +8,7 @@ on:
       - 'assets/characters-v2/**/sheet.png'
       - 'assets/characters-v2/**/preview.gif'
       - 'tools/check_mascot_coverage.py'
+      - 'tools/render_cat_glossy_contact.py'
       - '.github/workflows/mascot-v2-coverage.yml'
 permissions:
   contents: write
@@ -25,12 +26,13 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install --disable-pip-version-check 'Pillow==11.0.0'
       - run: python tools/check_mascot_coverage.py
+      - run: python tools/render_cat_glossy_contact.py
       - name: Commit evidence report
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/OTHER_MASCOT_COVERAGE.md design/review/reports/other-mascot-coverage.json
+          git add docs/OTHER_MASCOT_COVERAGE.md design/review/reports/other-mascot-coverage.json design/review/cat-glossy-v2-contact.png
           if git diff --cached --quiet; then
             echo 'No coverage changes'
           else
