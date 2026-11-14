@@ -1,6 +1,6 @@
 # OneLife – Dog Alarm Glossy V2 (next original art task)
 
-**State:** `dog/alarm` · **Status:** artwork not approved / no production sprite imported. Do NOT count it.
+**State:** `dog/alarm` · **Status:** 12 illustrated poses imported, source integrity pinned; runtime CI and real-device/human visual review tracked separately.
 
 ## Character and unique purpose
 Reuse the actual `assets/characters-v2/dog/master.webp` as the art reference: golden-apricot glossy fur, **floppy ears**, tiny cream forehead curl, brown eyes with catchlights, round pink cheeks, cream paw tips and belly, small nose, fluffy curled tail. No red collar, calendar, green checkmark, or notification bell—those belong to `dog/remind`, which already exists.
@@ -33,3 +33,10 @@ Do not bake a checkerboard, panel lines, captions, numerals, page footer or UI d
 
 ## Design handoff
 Previous attempted Dog Alarm images introduced **a calendar, collar and numbered panels** and therefore were deliberately rejected. Do not publish those as `dog/alarm`.
+
+## Imported visual candidate — 2026-11-15
+- Illustrated 4×3 source (12 distinct 256×256 transparent cells): `assets/characters-v2/dog/alarm/sheet_illustrated.webp`.
+- SHA-256 pinned from real source: `b37dc2989b21625d9caa37cb68fb458f17c8b917d141327d0d15e267d586d485`.
+- Local geometry QA: 12 populated frames, 11 visibly different neighbor pairs, transparent corner, no clipping, preview one-shot at 110 ms/frame.
+- Art source from original project generation based on the approved apricot puppy master; clock has two bells, NOT a notification bell.
+- GitHub renderer/metadata/gallery checks and later visual/physical-phone approval are separate gates. This visual does NOT implement scheduling or OS alarms.

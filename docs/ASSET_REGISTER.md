@@ -184,3 +184,8 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - AI-generated original project illustrations of the **Dog** mascot from the chosen kawaii dog master; no external or copied mascot. Source WebP: `assets/characters-v2/dog/remind/sheet_illustrated.webp` (1024×768, 12 illustrated frames).
 - White source matte removed, separated into RGBA cell frames; SHA-256 `19ce5b7b2031d528346b9d6ceedb995bee849a8ceadd8adb9969a9f4a5bbe9c0`. Source album and compressed runtime result are subject to the applicable image-generation terms; not CC0.
 - Structural checks conducted locally; GitHub Actions outputs and device/human art review are separate acceptance steps. No sensitive notification content collected by this image resource.
+
+## Dog Alarm Glossy V2 (2026-11-15)
+- Original generated 12-pose apricot puppy + red/yellow twin-bell alarm clock illustration, consistent with approved Dog master. AI-generated art; no third-party stock; no CC0 declaration.
+- True-RGBA, 1024×768 source: `assets/characters-v2/dog/alarm/sheet_illustrated.webp`; SHA-256 `b37dc2989b21625d9caa37cb68fb458f17c8b917d141327d0d15e267d586d485`.
+- White matte was removed and original cells scaled to 256×256; PNG/GIF/JSON built with `tools/render_glossy_character_animation.py`. Subject to generator usage terms; edge-matting and real-device approval pending.

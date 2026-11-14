@@ -238,6 +238,20 @@
       "frameDurationMs": 125,
       "loop": false,
       "generationClass": "independently-illustrated-pose-sheet"
+    },
+    {
+      "characterId": "dog",
+      "state": "alarm",
+      "version": "2.20.0-illustrated-candidate",
+      "sourceFile": "sheet_illustrated.webp",
+      "sourceSha256": "b37dc2989b21625d9caa37cb68fb458f17c8b917d141327d0d15e267d586d485",
+      "frames": 12,
+      "columns": 4,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "frameDurationMs": 110,
+      "loop": false,
+      "generationClass": "independently-illustrated-pose-sheet"
     }
   ]
 }

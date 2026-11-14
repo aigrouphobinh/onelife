@@ -77,6 +77,37 @@ def main():
         assert '../../assets/characters-v2/dog/remind/sheet.png' in html
         print('PASS Dog Remind glossy V2: 12 distinct keyframes, one-shot, SHA verified; human/device QA pending')
 
+
+    # Dog Alarm independent original illustrations: clock with hands and two bells, not Remind bell.
+    alarm = [e for e in catalog['animationSources'] if e['characterId']=='dog' and e['state']=='alarm']
+    if alarm:
+        assert len(alarm)==1
+        folder=ROOT/'assets/characters-v2/dog/alarm'
+        spec=alarm[0]
+        meta=json.loads((folder/'metadata.json').read_text())
+        report=json.loads((folder/'qa_report.json').read_text())
+        assert spec['sourceSha256']==sha(folder/'sheet_illustrated.webp')==meta['sourceSha256']
+        assert meta['sha256']==sha(folder/'sheet.png')
+        assert meta['frames']==12 and meta['columns']==4 and meta['rows']==3
+        assert meta['frameDurationMs']==110 and meta['loop'] is False
+        assert report['passed'] is True and report['previewLoop']=='once'
+        with Image.open(folder/'sheet.png') as sheet:
+            assert sheet.size==(1024,768)
+            atlas=sheet.convert('RGBA')
+        frames=[atlas.crop(((i%4)*256,(i//4)*256,((i%4)+1)*256,((i//4)+1)*256)) for i in range(12)]
+        for i,frame in enumerate(frames):
+            bbox=frame.getchannel('A').getbbox()
+            assert bbox is not None and min(bbox[0],bbox[1],256-bbox[2],256-bbox[3])>=2, f'Dog Alarm clipped: {i}'
+            assert frame.getpixel((0,0))[3]<=20, f'Dog Alarm opaque background: {i}'
+        for i,(left,right) in enumerate(zip(frames,frames[1:])):
+            rms=sum(ImageStat.Stat(ImageChops.difference(visible(left),visible(right))).rms)/3
+            assert rms>=2, f'Dog Alarm near duplicate: {i},{i+1}'
+        with Image.open(folder/'preview.gif') as gif:
+            assert gif.n_frames==12 and gif.info.get('loop') is None
+        assert '../../assets/characters-v2/dog/alarm/sheet.png' in html
+        assert 'value="alarm"' in html
+        print('PASS Dog Alarm V2: 12 original poses, one-shot, pinned SHA and gallery path; visual/device sign-off pending')
+
     print(f'PASS Dog Idle glossy V2: 8 frames, 7 changing neighbors, min visible RMS {min(motion):.2f}; review and phone QA pending')
 
 if __name__=='__main__': main()
