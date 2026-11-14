@@ -38,6 +38,16 @@ class GlossySpriteSpec {
     frameDurationMs: 130,
     loop: false,
   );
+
+  static const dogFocus = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/focus/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 135,
+    loop: false,
+  );
 }
 
 /// Pure frame indexing: one-shot progress 1.0 holds the final pose.
