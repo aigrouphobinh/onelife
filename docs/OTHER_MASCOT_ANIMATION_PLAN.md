@@ -6,9 +6,10 @@
 - **Cat/idle:** eight original illustrated frames (source WebP), generated PNG/GIF via deterministic local workflow; automated QA before aesthetic/device sign-off.
 - **Cat/remind:** twelve illustrated poses with a gold notification bell, imported as a candidate; independent art and real-device sign-off pending.
 - **Cat/alarm:** twelve new illustrated glossy poses with a gold bedside alarm clock; source, atlas, GIF and metadata on main, technical QA PASS; visual/device review still pending.
-- **Cat remaining:** happy, overloaded, resting, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained: no individually illustrated clip committed yet.
+- **Cat/resting:** 12 original illustrated poses on a purple paw cushion, source WebP plus generated PNG/GIF and checksum metadata on `main`; human art/device review pending.
+- **Cat remaining:** happy, overloaded, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained: no individually illustrated clip committed yet.
 - **Dog/Robot/Sprout:** all 15 character-specific state clips still missing.
-- Total required: 60 illustrated state clips. After Cat Idle exists, 3/60 technically verified candidate assets and 57 remain. The existing V1 SVG art is NOT counted as Glossy V2.
+- Total required: 60 illustrated state clips. After Cat Idle exists, 4/60 technically verified candidate assets and 56 remain. The existing V1 SVG art is NOT counted as Glossy V2.
 
 ## Per-state direction (distinct body acting, not one image with rotation)
 | State | Cat | Dog | Robot | Sprout |
@@ -44,7 +45,7 @@
 Art reviewer must inspect 64/96/144px playback; device profiling on Android/iOS, quiet hours, native permission and Flutter sprite player are not complete. The multi-character animation feature stays open until these gates pass.
 
 ## Cat Resting visual reference (NOT AN ANIMATION)
-Two independently illustrated resting/sleepy key poses were extracted and alpha-matted from a generated concept image, and committed as `design/references/cat_resting_two_keyposes.webp`. They show the approved glossy cat curled on a pillow. **This is a 2-pose reference board, not an eight- or twelve-frame animation and NOT included in the 3/60 coverage count.** Use this as art reference for a truly separate no-alarm Cat Resting sprite sheet. Human alpha-edge QA is still pending.
+Two independently illustrated resting/sleepy key poses were extracted and alpha-matted from a generated concept image, and committed as `design/references/cat_resting_two_keyposes.webp`. They show the approved glossy cat curled on a pillow. **This is a 2-pose reference board, not an eight- or twelve-frame animation and NOT a separate clip counted toward 4/60.** Use this as art reference for a truly separate no-alarm Cat Resting sprite sheet. Human alpha-edge QA is still pending.
 
 ## Cat Strained / Overloaded concept poses (NOT ANIMATION)
-`design/references/cat_strained_overloaded_keyposes.webp` contains two non-transparent illustrated concept crops for stress expressions (mild strain and over-goal cartoon overload). They are useful for facial/body direction but are **not** independent frame-by-frame clips, are not in the animation catalog, and do not raise the technical coverage above **3/60**. Recreate final poses without baked-on text or background, then review non-shaming, non-clinical wording and small overlay legibility.
+`design/references/cat_strained_overloaded_keyposes.webp` contains two non-transparent illustrated concept crops for stress expressions (mild strain and over-goal cartoon overload). They are useful for facial/body direction but are **not** independent frame-by-frame clips, are not in the animation catalog, and do not raise the technical coverage above **4/60**. Recreate final poses without baked-on text or background, then review non-shaming, non-clinical wording and small overlay legibility.

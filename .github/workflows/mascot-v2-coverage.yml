@@ -9,6 +9,8 @@ on:
       - 'assets/characters-v2/**/preview.gif'
       - 'tools/check_mascot_coverage.py'
       - 'tools/render_cat_glossy_contact.py'
+      - 'tools/check_cat_glossy_review.py'
+      - 'design/review/glossy-cat-idle.html'
       - '.github/workflows/mascot-v2-coverage.yml'
 permissions:
   contents: write
@@ -27,6 +29,7 @@ jobs:
       - run: python -m pip install --disable-pip-version-check 'Pillow==11.0.0'
       - run: python tools/check_mascot_coverage.py
       - run: python tools/render_cat_glossy_contact.py
+      - run: python tools/check_cat_glossy_review.py
       - name: Commit evidence report
         shell: bash
         run: |

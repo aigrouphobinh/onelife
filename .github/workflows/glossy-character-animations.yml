@@ -33,7 +33,7 @@ jobs:
           if git diff --cached --quiet; then
             echo 'Assets already up to date'
           else
-            git commit -m 'assets: render sourced glossy character animation candidates [skip ci]'
+            git commit -m 'assets: render sourced glossy character animation candidates'
             for attempt in 1 2 3; do
               git fetch origin main
               git rebase origin/main
