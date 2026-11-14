@@ -217,3 +217,12 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 
 Rights: generated material is subject to applicable OpenAI terms. Check originality and usage terms before publication. No user/device art approval was recorded. GIF preview has a presentation matte; use PNG/WebP with alpha for Flutter runtime.
 
+
+## Glossy Kawaii Dog Focus imported (2026-11-15)
+
+- **Original source:** AI-generated orange/cream puppy 12-pose Glossy Kawaii atlas made specifically for OneLife in the current conversation, with no third-party reference image downloaded.
+- **GitHub commit:** `5703355163418f00a109fab33967dab0b8b1a1e3`.
+- **Source:** `assets/characters-v2/dog/focus/sheet_illustrated.webp`, 1024×768 RGBA WebP, SHA-256 `bd84075a2c0aede316170d0270bf8172b619ec61b1b4bbdaa258f5bdf813a6fb`.
+- **Derived:** `sheet.png` (true alpha), `preview.gif` (visual preview), `metadata.json`, `candidate_qa.json`, `qa_report.json`.
+- **Verification:** 12 × 256px cells, 4 columns, 135ms/frame, one-shot; alpha/clip/visible frame differences passed automated checks. Asset remains **candidate / pending art and device signoff**. Do not interpret as clinical focus measurement.
+- **Rights:** original AI-generated output; review applicable generation terms and product/logo policy before commercial release; no CC0 or MIT grant claimed.
