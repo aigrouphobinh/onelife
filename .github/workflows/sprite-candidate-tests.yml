@@ -7,18 +7,22 @@ on:
       - 'tools/check_sprite_candidate.py'
       - 'tools/prepare_glossy_alpha_sheet.py'
       - 'tools/import_glossy_candidate.py'
+      - 'tools/import_robot_v2_pack.py'
       - 'tests/test_sprite_candidate.py'
       - 'tests/test_prepare_glossy_alpha_sheet.py'
       - 'tests/test_import_glossy_candidate.py'
+      - 'tests/test_import_robot_v2_pack.py'
       - '.github/workflows/sprite-candidate-tests.yml'
   pull_request:
     paths:
       - 'tools/check_sprite_candidate.py'
       - 'tools/prepare_glossy_alpha_sheet.py'
       - 'tools/import_glossy_candidate.py'
+      - 'tools/import_robot_v2_pack.py'
       - 'tests/test_sprite_candidate.py'
       - 'tests/test_prepare_glossy_alpha_sheet.py'
       - 'tests/test_import_glossy_candidate.py'
+      - 'tests/test_import_robot_v2_pack.py'
       - '.github/workflows/sprite-candidate-tests.yml'
   workflow_dispatch:
 
@@ -44,3 +48,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_prepare_glossy_alpha_sheet.py' -v
       - name: Verify checksum-locked asset importer
         run: python -m unittest discover -s tests -p 'test_import_glossy_candidate.py' -v
+      - name: Verify Robot V2 batch source-pack importer
+        run: python -m unittest discover -s tests -p 'test_import_robot_v2_pack.py' -v
