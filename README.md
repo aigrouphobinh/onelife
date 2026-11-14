@@ -1,18 +1,16 @@
 # OneLife
 
-## Current asset-first production checkpoint (2026-11-15)
+## Current Glossy Kawaii asset + Flutter checkpoint (2026-11-15)
 
-**Source-illustration coverage: 25/60 clips (35 missing)**, verified from `assets/characters-v2/animation_sources.json` on `main`. This measures original illustration sources, **not** approved or production-ready animations. `docs/NEXT_AUTO_TASK.md` is auto-generated and may lag until its next scheduled update.
+**Original source coverage: 26/60 illustrated clips (34 missing)**, counted from `assets/characters-v2/animation_sources.json` on `main`. **This is not an approval or production-readiness percentage.**
 
-- Cat: 15/15 source clips; Dog: 10/15 including Recovering, Focus and Study; Robot and Sprout: 0/15 each. The existing Brain pack is tracked separately from this 60-clip migration.
-- **Dog Recovering, Dog Focus and Dog Study imported on `main`:** both original Glossy Kawaii 12-frame WebP atlases have **real alpha**, verified source hashes, generated PNG/GIF/metadata and QA. Their `productionReady` remains false pending visual/device review. [Recovering review](docs/DOG_RECOVERING_CANDIDATE_REVIEW.md) · [Focus review](docs/DOG_FOCUS_ART_BRIEF.md) · [Study review](docs/DOG_STUDY_ART_BRIEF.md).
-- **Actual Flutter runtime slice:** `HomePage` now displays the transparent Dog mascot and switches between Recovering, Focus and Study, using `GlossySprite` frame painting, one-shot timing, replay, and reduced-motion support. This is not the full ten-page Flutter design.
-- Keep the **Glossy Kawaii V2** master identity and real frame-by-frame movement. Do not fill missing frames with transformed stills, placeholders, or an unlabeled poster.
-- Run source provenance, SHA-256 registration, sprite render and visual QA gates before promoting coverage. No device art approval, Flutter runtime, or production release is implied by passing GitHub Actions.
-- **Flutter runtime integration started:** `lib/src/glossy_sprite.dart` now loads the real transparent `dog/recovering/sheet.png` from the Flutter asset bundle and paints individual RGBA frames. The Home page displays the mascot with replay; one-shot timing, accessibility semantics and reduced-motion support are implemented. `test/glossy_sprite_test.dart` and `.github/workflows/flutter-glossy-sprite.yml` provide smoke checks. Flutter CI and real phone sign-off have not been verified yet.
-- **Dog Focus:** new transparent 12-pose candidate exported locally; binary source import and approval pending. [Focus brief and QA](docs/DOG_FOCUS_ART_BRIEF.md). Migration coverage remains **23/60** until the exact source is committed and cataloged.
-- The next asset task is **import and review Dog Focus → remaining Dog states → Robot/Sprout**, alongside real-device validation and final Recovering→Idle motion review.
-
+- Cat **15/15**, Dog **11/15** (now including **Recovering, Focus, Study and Done**), Robot **0/15**, Sprout **0/15**. The Brain V2 package is tracked separately.
+- Verified original 12-frame **Dog Done** WebP has real RGBA transparency, checksum-locked import, PNG atlas, GIF preview, metadata and clean technical QA. [Dog Done asset/acceptance record](docs/DOG_DONE_ART_BRIEF.md).
+- **Flutter working slice:** Home supports four manual mascot preview states (**Hồi phục / Tập trung / Học tập / Hoàn thành**) using `GlossySprite` and true-alpha PNG atlases; replay, semantic labels and reduced-motion fallback are present. These are **preview selectors, not an automatic task-completion event engine**.
+- [Dog Recovering](docs/DOG_RECOVERING_CANDIDATE_REVIEW.md) · [Dog Focus](docs/DOG_FOCUS_ART_BRIEF.md) · [Dog Study](docs/DOG_STUDY_ART_BRIEF.md) · [Dog Done](docs/DOG_DONE_ART_BRIEF.md). All four require human art and real-device review; Dog `productionReady=false`.
+- **Next asset target:** Dog **Thinking**, then Sad, Balanced and Strained; Robot/Sprout migration follows. Do not claim a state is sourced until its actual alpha WebP and SHA exist on `main`.
+- Flutter CI has been configured to run analyzer and widget smoke tests; **its passing status has not been independently confirmed**. The full 10-page Flutter app, real OS usage/notifications/overlay, battery and accessibility testing remain outstanding.
+- `docs/NEXT_AUTO_TASK.md` tracks the next original-art task and may be rewritten by the deterministic worker.
 
 ## Design V2 – Trợ lý bộ não nhỏ (2026-11-14)
 
