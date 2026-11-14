@@ -6,15 +6,19 @@ on:
     paths:
       - 'tools/check_sprite_candidate.py'
       - 'tools/prepare_glossy_alpha_sheet.py'
+      - 'tools/import_glossy_candidate.py'
       - 'tests/test_sprite_candidate.py'
       - 'tests/test_prepare_glossy_alpha_sheet.py'
+      - 'tests/test_import_glossy_candidate.py'
       - '.github/workflows/sprite-candidate-tests.yml'
   pull_request:
     paths:
       - 'tools/check_sprite_candidate.py'
       - 'tools/prepare_glossy_alpha_sheet.py'
+      - 'tools/import_glossy_candidate.py'
       - 'tests/test_sprite_candidate.py'
       - 'tests/test_prepare_glossy_alpha_sheet.py'
+      - 'tests/test_import_glossy_candidate.py'
       - '.github/workflows/sprite-candidate-tests.yml'
   workflow_dispatch:
 
@@ -38,3 +42,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_sprite_candidate.py' -v
       - name: Check true-alpha exporter regression cases
         run: python -m unittest discover -s tests -p 'test_prepare_glossy_alpha_sheet.py' -v
+      - name: Verify checksum-locked asset importer
+        run: python -m unittest discover -s tests -p 'test_import_glossy_candidate.py' -v
