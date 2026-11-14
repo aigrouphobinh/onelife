@@ -7,164 +7,164 @@
       "viewport": "390×844",
       "capture": "viewport",
       "file": "home-mobile.png",
-      "bytes": 123860
+      "bytes": 122400
     },
     {
       "page": "home",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "home-mobile-full.png",
-      "bytes": 154619
+      "bytes": 152521
     },
     {
       "page": "tasks",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "tasks-mobile.png",
-      "bytes": 56749
+      "bytes": 56524
     },
     {
       "page": "tasks",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "tasks-mobile-full.png",
-      "bytes": 57433
+      "bytes": 57207
     },
     {
       "page": "schedule",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "schedule-mobile.png",
-      "bytes": 90745
+      "bytes": 89935
     },
     {
       "page": "schedule",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "schedule-mobile-full.png",
-      "bytes": 106993
+      "bytes": 107617
     },
     {
       "page": "habits",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "habits-mobile.png",
-      "bytes": 64334
+      "bytes": 64040
     },
     {
       "page": "habits",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "habits-mobile-full.png",
-      "bytes": 109076
+      "bytes": 112790
     },
     {
       "page": "assistant",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "assistant-mobile.png",
-      "bytes": 88804
+      "bytes": 90320
     },
     {
       "page": "assistant",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "assistant-mobile-full.png",
-      "bytes": 112089
+      "bytes": 117372
     },
     {
       "page": "characters",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "characters-mobile.png",
-      "bytes": 62896
+      "bytes": 62696
     },
     {
       "page": "characters",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "characters-mobile-full.png",
-      "bytes": 120001
+      "bytes": 120407
     },
     {
       "page": "settings",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "settings-mobile.png",
-      "bytes": 63533
+      "bytes": 63366
     },
     {
       "page": "settings",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "settings-mobile-full.png",
-      "bytes": 96304
+      "bytes": 96224
     },
     {
       "page": "onboarding",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "onboarding-mobile.png",
-      "bytes": 90663
+      "bytes": 92274
     },
     {
       "page": "onboarding",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "onboarding-mobile-full.png",
-      "bytes": 106485
+      "bytes": 108979
     },
     {
       "page": "overlay",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "overlay-mobile.png",
-      "bytes": 102970
+      "bytes": 103081
     },
     {
       "page": "overlay",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "overlay-mobile-full.png",
-      "bytes": 124353
+      "bytes": 124536
     },
     {
       "page": "splash",
       "viewport": "390×844",
       "capture": "viewport",
       "file": "splash-mobile.png",
-      "bytes": 82175
+      "bytes": 86236
     },
     {
       "page": "splash",
       "viewport": "390×844",
       "capture": "scroll",
       "file": "splash-mobile-full.png",
-      "bytes": 82175
+      "bytes": 86236
     },
     {
       "page": "home",
       "viewport": "1280×900",
       "file": "home-desktop.png",
-      "bytes": 220361
+      "bytes": 220091
     },
     {
       "page": "habits",
       "viewport": "1280×900",
       "file": "habits-desktop.png",
-      "bytes": 168979
+      "bytes": 168143
     },
     {
       "page": "characters",
       "viewport": "1280×900",
       "file": "characters-desktop.png",
-      "bytes": 169599
+      "bytes": 168396
     },
     {
       "page": "settings",
       "viewport": "1280×900",
       "file": "settings-desktop.png",
-      "bytes": 133565
+      "bytes": 133806
     }
   ]
 }
