@@ -17,11 +17,21 @@
     512
   ],
   "transparentBackground": true,
-  "states": {},
+  "states": {
+    "idle": {
+      "file": "assets/characters-v2/cat/idle/metadata.json",
+      "frames": 8,
+      "reviewStatus": "candidate; phone QA pending"
+    }
+  },
   "animationReady": false,
   "productionReady": false,
   "humanArtReview": "pending",
   "devicePerformanceReview": "pending",
   "licenseRef": "docs/ASSET_REGISTER.md",
-  "provenance": "Original AI-generated OneLife four-mascot concept; transparent masking with local segmentation. No third-party character source."
+  "provenance": "Original AI-generated OneLife four-mascot concept; transparent masking with local segmentation. No third-party character source.",
+  "animationStatesAvailable": [
+    "idle"
+  ],
+  "masterStatus": "approved concept candidate; animation incomplete"
 }

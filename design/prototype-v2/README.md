@@ -19,3 +19,7 @@ This is **not Flutter** and does not schedule alarms, monitor device usage, inte
 
 ## QA and evidence
 The \`v2-prototype-preview.yml\` workflow checks JS syntax, opens all 10 pages with a browser and captures 10 mobile + 4 desktop screenshots in \`screenshots/\`. Design approval, manual contrast review and physical device testing are still required.
+
+
+## Cat animation proof (2026-11-14)
+The Characters card now links to `design/review/glossy-cat-idle.html`, which plays 8 original illustrated frames from committed PNG atlas. This is a design QA preview, not a selectable, fully functioning mascot in the app. The other 14 Cat states and 45 Dog/Robot/Sprout states are not generated.
