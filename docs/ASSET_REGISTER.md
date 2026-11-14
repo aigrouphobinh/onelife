@@ -97,3 +97,7 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Source: `assets/characters-v2/cat/alarm/sheet_illustrated.webp`, 12 newly illustrated poses created for OneLife from the user-selected lavender kawaii cat style.
 - SHA256: `49dde52906a178e33d5e5ad9257ebce3548cdad1ee18c58a4984c4f65b55e333`; generated source had nearly-white/checker texture and was converted to RGBA locally.
 - Rendered atlas and preview are reproducible from the WebP source through `tools/render_glossy_character_animation.py`. Automatic frame geometry/alpha/motion checks do not signify artistic approval or tested device performance. Review any residual fringe on real screens.
+
+## Cat Resting visual key poses (not completed animation)
+- `design/references/cat_resting_two_keyposes.webp`: two original glossy sleepy/resting Cat poses extracted from a OneLife image-generation concept, white/checkered matte removed into RGBA. SHA-256 `eb2bb12914d2f5fd5897f6c9f2b0ea8c1a54569f780522b329a78c4a732532c8`.
+- This is only a visual source to build a future Resting sprite and has not been approved as a finished animation or included in coverage.

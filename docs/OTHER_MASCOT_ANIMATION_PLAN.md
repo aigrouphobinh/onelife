@@ -42,3 +42,6 @@
 
 ## Remaining gates
 Art reviewer must inspect 64/96/144px playback; device profiling on Android/iOS, quiet hours, native permission and Flutter sprite player are not complete. The multi-character animation feature stays open until these gates pass.
+
+## Cat Resting visual reference (NOT AN ANIMATION)
+Two independently illustrated resting/sleepy key poses were extracted and alpha-matted from a generated concept image, and committed as `design/references/cat_resting_two_keyposes.webp`. They show the approved glossy cat curled on a pillow. **This is a 2-pose reference board, not an eight- or twelve-frame animation and NOT included in the 3/60 coverage count.** Use this as art reference for a truly separate no-alarm Cat Resting sprite sheet. Human alpha-edge QA is still pending.
