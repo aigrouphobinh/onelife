@@ -12,6 +12,7 @@ on:
       - 'tests/test_prepare_glossy_alpha_sheet.py'
       - 'tests/test_import_glossy_candidate.py'
       - 'tests/test_import_robot_v2_pack.py'
+      - 'tests/test_robot_v2_pack_guardrails.py'
       - '.github/workflows/sprite-candidate-tests.yml'
   pull_request:
     paths:
@@ -23,6 +24,7 @@ on:
       - 'tests/test_prepare_glossy_alpha_sheet.py'
       - 'tests/test_import_glossy_candidate.py'
       - 'tests/test_import_robot_v2_pack.py'
+      - 'tests/test_robot_v2_pack_guardrails.py'
       - '.github/workflows/sprite-candidate-tests.yml'
   workflow_dispatch:
 
@@ -50,3 +52,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_import_glossy_candidate.py' -v
       - name: Verify Robot V2 batch source-pack importer
         run: python -m unittest discover -s tests -p 'test_import_robot_v2_pack.py' -v
+      - name: Verify Robot V2 ZIP supply-chain and metadata guardrails
+        run: python -m unittest discover -s tests -p 'test_robot_v2_pack_guardrails.py' -v
