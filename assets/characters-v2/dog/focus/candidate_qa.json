@@ -1,0 +1,31 @@
+{
+  "source": "assets/characters-v2/dog/focus/sheet_illustrated.webp",
+  "sha256": "bd84075a2c0aede316170d0270bf8172b619ec61b1b4bbdaa258f5bdf813a6fb",
+  "geometry": {
+    "frames": 12,
+    "columns": 4,
+    "rows": 3,
+    "cellPx": 256,
+    "atlasPx": [
+      1024,
+      768
+    ]
+  },
+  "adjacentVisibleRms": [
+    57.72,
+    56.75,
+    75.22,
+    89.21,
+    78.04,
+    79.64,
+    70.29,
+    84.13,
+    71.7,
+    68.89,
+    57.81
+  ],
+  "warnings": [],
+  "technicalPreflightPassed": true,
+  "humanVisualApproval": "pending",
+  "realDeviceApproval": "pending"
+}
