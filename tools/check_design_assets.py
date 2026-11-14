@@ -27,6 +27,10 @@ def run():
                 errors.append(tag+": required file missing");continue
             try:
                 m=json.loads(required[-1].read_text())
+                # V1 source frame counts remain unchanged; promoted glossy live
+                # art may intentionally have a different number of painted poses.
+                if character=="brain" and state=="happy" and m.get("artStyle")=="glossy-kawaii-v2":
+                    count=12
                 if (m["characterId"],m["state"],m["frames"],m["columns"],m["rows"],m["frameWidth"],m["frameHeight"]) != (character,state,count,4,(count+3)//4,256,256):
                     errors.append(tag+": metadata mismatch")
                 if m.get("sha256")!=sha(required[1]): errors.append(tag+": PNG checksum mismatch")
@@ -105,10 +109,10 @@ def run():
                 if not .1<=(w.getnframes()/w.getframerate())<=5:errors.append("Sound duration "+name)
     except (OSError,KeyError,ValueError) as e:errors.append("Sound manifest: "+str(e))
     total=sum(x["frames"] for x in records)
-    if len(records)!=75 or total!=760:errors.append("Expected 75 clips/760 frames, got "+str((len(records),total)))
+    if len(records)!=75 or total!=762:errors.append("Expected 75 clips/762 active frames, got "+str((len(records),total)))
     report={"schemaVersion":1,"automatedOnly":True,"passed":not errors,"clips":len(records),"frames":total,"errors":errors,"warnings":warnings,"records":records}
     (OUT/"reports/asset-qa.json").write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n")
-    lines=["# Automated OneLife Asset QA","","Status: **"+("PASS" if not errors else "FAIL")+"** — automated only, not visual or device sign-off.","",f"Clips: {len(records)}/50 · frames: {total}/500","",
+    lines=["# Automated OneLife Asset QA","","Status: **"+("PASS" if not errors else "FAIL")+"** — automated only, not visual or device sign-off.","",f"Clips: {len(records)}/75 · active frames: {total}/762","",
            "## Errors"]+["- "+x for x in errors or ["None"]]+["","## Warnings"]+["- "+x for x in warnings or ["None"]]+["","## Contact sheets"]+["- ["+x+"](../contact-sheets/"+x+".png)" for x in CHARS]+["",
            "Unverified: artistic quality, reduced-motion accessibility, battery consumption, real Android/iOS playback and platform permissions."]
     (OUT/"reports/asset-qa.md").write_text("\n".join(lines)+"\n")
