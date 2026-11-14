@@ -110,3 +110,9 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - 12 independently illustrated chibi Cat poses generated for OneLife; purple cushion, gradually relaxed eyes, sleep marks and cheerful wake-up, no alarm prop. Original generated imagery, not third-party artwork.
 - Imported compressed RGBA source: `assets/characters-v2/cat/resting/sheet_illustrated.webp`, SHA-256 `8b7bb34b2429d8d97145dfb2537d47ff235ecdac43875a9d47e856f7b9642860`; source captured as a 4×3 grid of 256px cells.
 - Raster importer outputs PNG atlas/GIF/metadata after SHA/geometry/pose checks. Mask reconstruction from original RGB illustration can leave edge-matting artifacts; device and human artistic review pending. **Not production approved**.
+
+## Cat Overloaded (2026-11-14)
+- Source: `assets/characters-v2/cat/overloaded/sheet_illustrated.webp`, SHA-256 `02abaee3267d5395611872365cb18e3edaf497b603ae3ad6add284866e749e16` (1024×768 RGBA, 12 independent AI-illustrated poses, 4×3 at 256px).
+- Original OneLife Cat Glossy Kawaii artwork; screenshot-like source removed via offline foreground segmentation to establish real transparency. No third-party media.
+- Narrative: user-defined screen-time goal reached, worried eyes, sweat, gentle brief overload, breathing and smile; **not a medical claim of brain damage**. Laptop prop from original brief replaced by a small purple phone to match mobile product.
+- Auto QA: frame geometry, per-frame transparency/clipping, adjacent pose differences and checksum; human 64px/96px/144px preview and phone battery testing pending.
