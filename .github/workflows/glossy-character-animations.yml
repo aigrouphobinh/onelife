@@ -6,6 +6,8 @@ on:
       - 'assets/characters-v2/animation_sources.json'
       - 'assets/characters-v2/**/sheet_illustrated.webp'
       - 'tools/render_glossy_character_animation.py'
+      - 'design/review/glossy-cat-idle.html'
+      - 'tools/check_cat_glossy_review.py'
       - '.github/workflows/glossy-character-animations.yml'
 permissions:
   contents: write
