@@ -36,7 +36,7 @@ a{color:var(--purple)}.foot{margin-top:20px}
 <body data-theme="light">
 <div class="wrap">
   <div class="header"><div class="logo"><img src="../../assets/characters-v2/brain/master.png" alt="Nhân vật bộ não nhỏ"><div><h1>OneLife <span class="tag">Design Lab</span></h1><div class="caption">Duyệt thiết kế trước khi nối Flutter · Local assets, không API ngoài</div></div></div><button id="themeButton">🌙 Đổi nền tối</button></div>
-  <p class="caption">Đây là trang kiểm duyệt nguyên liệu, <strong>không phải ứng dụng đã lập trình</strong>. <strong>Brain/remind sử dụng ảnh V2 glossy; các trạng thái còn lại chưa được vẽ lại V2.</strong> Chuyển đổi trực tiếp 50 clip sprite PNG thật trên nền sáng/tối, kiểm tra từng khung hình và đối chiếu với 10 màn hình UI.</p>
+  <p class="caption">Đây là trang kiểm duyệt nguyên liệu, <strong>không phải ứng dụng đã lập trình</strong>. <strong>Brain/idle và Brain/remind dùng ảnh V2 glossy; 13 biểu cảm Brain còn lại chưa được vẽ lại V2.</strong> Chuyển đổi trực tiếp 50 clip sprite PNG thật trên nền sáng/tối, kiểm tra từng khung hình và đối chiếu với 10 màn hình UI.</p>
   <div class="layout">
     <section class="card" aria-labelledby="animTitle">
       <h2 id="animTitle">01 · Hoạt ảnh nhân vật</h2>
@@ -101,11 +101,11 @@ get('frameLabel').textContent=(frame+1)+' / '+states[get('state').value][0];get(
 }
 function load(){
 var char=get('character').value,state=get('state').value,props=states[state];frame=0;last=0;changing=true;get('frameSeek').max=props[0]-1;
-get('animationInfo').textContent=chars[char]+' · '+props[2]+' · '+props[0]+' khung hình · '+props[1]+' ms/khung · '+(char==='brain'&&state==='remind'?'GLOSSY V2 - ảnh thật':'V1 - chờ thay art V2');
+get('animationInfo').textContent=chars[char]+' · '+props[2]+' · '+props[0]+' khung hình · '+props[1]+' ms/khung · '+(char==='brain'&&(state==='idle'||state==='remind')?'GLOSSY V2 - ảnh thật':'V1 - chờ thay art V2');
 bitmap=new Image();
 bitmap.onload=function(){changing=false;render()};
 bitmap.onerror=function(){changing=false;get('animationInfo').textContent='Chưa tải được sprite PNG. Hãy mở cả thư mục repository.'};
-bitmap.src=(char==='brain'&&state==='remind')?'../../assets/characters-v2/brain/remind/sheet.png':('../../assets/characters/'+char+'/'+state+'/sheet.png');
+bitmap.src=(char==='brain'&&(state==='idle'||state==='remind'))?('../../assets/characters-v2/brain/'+state+'/sheet.png'):('../../assets/characters/'+char+'/'+state+'/sheet.png');
 }
 function loop(t){
 if(!changing&&!paused&&get('motion').value==='animate'&&!document.hidden&&bitmap.complete&&bitmap.naturalWidth){
