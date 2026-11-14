@@ -18,7 +18,7 @@ void main() {
     expect(find.text('Chưa có ghi chú. Nhấn + để bắt đầu.'), findsOneWidget);
   });
 
-  testWidgets('switches four real Glossy Kawaii dog states on Home',
+  testWidgets('switches five real Glossy Kawaii dog states on Home',
       (tester) async {
     await tester.pumpWidget(
       MaterialApp(home: HomePage(repository: FakeRepository())),
@@ -48,6 +48,12 @@ void main() {
     sprite = tester.widget(find.byType(GlossySprite));
     expect(sprite.spec.assetPath,
         'assets/characters-v2/dog/done/sheet.png');
+
+    await tester.tap(find.text('Suy nghĩ'));
+    await tester.pumpAndSettle();
+    sprite = tester.widget(find.byType(GlossySprite));
+    expect(sprite.spec.assetPath,
+        'assets/characters-v2/dog/thinking/sheet.png');
 
     await tester.tap(find.text('Hồi phục'));
     await tester.pumpAndSettle();
