@@ -23,3 +23,4 @@ dev_dependencies:
 flutter:
   assets:
     - assets/characters-v2/dog/recovering/sheet.png
+    - assets/characters-v2/dog/focus/sheet.png
