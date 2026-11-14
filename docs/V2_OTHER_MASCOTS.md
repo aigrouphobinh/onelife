@@ -1,0 +1,47 @@
+# OneLife · Additional Glossy V2 Mascots – Asset-First Handoff
+
+**Stage:** four individual glossy character master candidates are in GitHub. **Not** 15 animation clips per mascot, not an accepted Flutter character picker and not device-tested.
+
+## Visual identity and source assets
+
+| ID | Character design | Color/identity | Source of truth |
+|---|---|---|---|
+| `cat` | Round lavender kitten; large sparkly eyes, white muzzle, rosy cheeks, curly tail | Lilac, purple outline, pink inner ears | `assets/characters-v2/cat/master.webp` |
+| `dog` | Orange floppy-ear puppy, cream muzzle, blush and animated-tail cue | Honey orange, warm gold | `assets/characters-v2/dog/master.webp` |
+| `robot` | White-blue assistant robot, navy/cyan smiling face display, antenna and blue energy core | Blue/cyan/purple | `assets/characters-v2/robot/master.webp` |
+| `sprout` | Friendly green seedling with two leaves, glossy eyes and round feet | Mint, spring green | `assets/characters-v2/sprout/master.webp` |
+
+Source was a single original 2×2 character concept sheet generated for OneLife on 2026-11-14. The generated file had **RGB checkerboard as artwork, not actual transparency**; each quadrant was masked locally, white internal body areas restored by silhouette filling, then normalized to a transparent 1024px PNG. Verified 512px WebP sources were committed to GitHub. The full-resolution local bundle was separately delivered to the user; do not claim it is on GitHub until read back. The transparent edges require visual QA (especially light outlines).
+
+## File contract
+
+```
+assets/characters-v2/{cat,dog,robot,sprout}/
+    master.webp       # immutable 512x512 RGBA source candidate
+    master.png        # deterministic 512x512 RGBA export from GitHub Actions
+    thumbnail.png     # 160x160 RGBA selector candidate
+    metadata.json     # source/destination hashes and quality gate; states = {}
+```
+
+The build tool `tools/render_glossy_mascot_masters.py` validates source sha, transparency, image bounds, outputs PNG and metadata and creates a preview contact sheet. Does not manufacture animations or claim human approval.
+
+## Animation work map – follow the Brain V2 keys
+
+Five mascots total (Brain + 4 new) share **15 keys**: `idle`, `remind`, `happy`, `overloaded`, `resting`, `alarm`, `sleepy`, `recovering`, `focus`, `study`, `done`, `thinking`, `sad`, `balanced`, `strained`.
+
+For **each** new character, storyboard a key pose, draw actual intermediate poses while maintaining its distinctive appendages, then export a 4-column transparent atlas, separate GIF, JSON timing, SHA. Do not use frame duplication/affine wiggle to count an animation complete.
+
+- Cat: ears tilt/blink, tail gesture, paw bell point; when sleepy, curl tail beside body; overloaded uses comic tiny steam puffs, not injury.
+- Dog: ears flap, tail wag, paw bell point and run-hop; resting curls into sleep; alarm ear bounce.
+- Robot: LED facial icons, antenna bounce, arm articulation; overloaded looks like a gentle processor warning, never dangerous overheating; recovering softly brightens LEDs.
+- Sprout: leaves sway, small stem bends, leaf shadows and gentle bounce; strained slightly droops, rest rehydrates symbolically; not a health claim.
+
+## Priority and acceptance gate
+
+1. Verify all 4 WebP Git blobs, generated PNG masters and QA report on `main`.
+2. Human side-by-side approval against Brain style at 64/96/144px and light/dark before generating clips.
+3. Draw `idle`, `remind`, `alarm`, `resting`, `overloaded` first for each character (20 clips across four characters). Make real keyframe acting.
+4. Complete remaining 10 states per character, then integrate selection in Flutter. Until then, UI can show **unavailable preview** but cannot claim selectable/working animation.
+5. Preserve fully local data flow and privacy; no phone permission required for art preview.
+
+**Definition of done:** a new mascot is NOT complete just because `master.webp` exists; it needs 15 verified state clips, human art review and device QA. 

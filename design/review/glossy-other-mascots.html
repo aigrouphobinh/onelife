@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OneLife · Glossy V2 Other Mascots – Art Review</title>
+<style>
+:root{--bg:#f8f5ff;--card:#fff;--ink:#312549;--soft:#eee6ff;--mute:#736886;--stroke:#e0d5ef}
+body[data-theme=dark]{--bg:#19152a;--card:#2b2440;--ink:#f7efff;--soft:#423256;--mute:#c3b7d4;--stroke:#655378}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif;margin:0}
+main{max-width:1050px;margin:auto;padding:22px 18px 50px}h1{font-size:clamp(22px,4vw,36px)}p{color:var(--mute)}.sub{font-size:12px}
+.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0}button{padding:10px 16px;background:var(--soft);color:var(--ink);border:1px solid var(--stroke);border-radius:12px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{padding:18px;background:var(--card);border:1px solid var(--stroke);border-radius:22px}
+.frame{border-radius:16px;background:linear-gradient(145deg,#eee8ff,#fff0f7);min-height:240px;display:grid;place-items:center}
+body[data-theme=dark] .frame{background:linear-gradient(145deg,#443551,#594357)}.frame img{width:min(100%,220px);height:220px;object-fit:contain}
+.label{font-weight:750;margin:12px 0 1px}.badge{border-radius:999px;background:var(--soft);font-size:12px;padding:5px 9px;display:inline-block}
+#size:focus-visible,#theme:focus-visible{outline:3px solid #a98cff;outline-offset:3px}a{color:inherit}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
+</style></head><body data-theme="light"><main>
+<h1>OneLife · 4 bạn nhỏ mới</h1>
+<p>Glossy Kawaii V2 – gallery duyệt <strong>ảnh master có thật</strong> từ repository. Không có animation nào của 4 nhân vật này được nhận là đã hoàn tất.</p>
+<div class="controls"><button type="button" id="theme">Đổi nền sáng/tối</button><label for="size">Kích thước</label><select id="size"><option value="220">220px</option><option value="144">144px</option><option value="96">96px</option><option value="64">64px</option></select></div>
+<section class="grid" aria-label="Thư viện nhân vật">
+<div class="card"><div class="frame"><img src="../../assets/characters-v2/cat/master.webp" alt="Mèo tím má hồng" width="220" height="220"></div><div class="label">Mèo Tím</div><div class="badge">Master ứng viên · Chưa animation</div></div>
+<div class="card"><div class="frame"><img src="../../assets/characters-v2/dog/master.webp" alt="Chó cam tai cụp" width="220" height="220"></div><div class="label">Cún Cam</div><div class="badge">Master ứng viên · Chưa animation</div></div>
+<div class="card"><div class="frame"><img src="../../assets/characters-v2/robot/master.webp" alt="Robot xanh gương mặt LED" width="220" height="220"></div><div class="label">Robot Xanh</div><div class="badge">Master ứng viên · Chưa animation</div></div>
+<div class="card"><div class="frame"><img src="../../assets/characters-v2/sprout/master.webp" alt="Mầm cây xanh hai lá" width="220" height="220"></div><div class="label">Mầm Xanh</div><div class="badge">Master ứng viên · Chưa animation</div></div>
+</section><p class="sub">Nguồn 512px RGBA WebP trên main. Trước khi phát triển animation: duyệt bóng đổ, biên trong suốt, cỡ 64px, định dạng quyền sử dụng và hình mẫu. <a href="../../docs/V2_OTHER_MASCOTS.md">Xem đặc tả kỹ thuật</a>.</p>
+</main><script>
+(function(){'use strict';var body=document.body;document.getElementById('theme').addEventListener('click',function(){body.dataset.theme=body.dataset.theme==='dark'?'light':'dark'});document.getElementById('size').addEventListener('change',function(){var n=parseInt(this.value,10);document.querySelectorAll('.frame img').forEach(function(el){el.style.width=n+'px';el.style.height=n+'px'})})})();
+</script></body></html>

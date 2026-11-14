@@ -1,0 +1,52 @@
+name: Render glossy character masters
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'assets/characters-v2/*/master.webp'
+      - 'tools/render_glossy_mascot_masters.py'
+      - '.github/workflows/glossy-mascot-masters.yml'
+permissions:
+  contents: write
+concurrency:
+  group: onelife-glossy-master-main
+  cancel-in-progress: false
+jobs:
+  masters:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check 'Pillow==11.0.0'
+      - name: Verify originals and render RGBA PNG masters
+        run: |
+          python tools/render_glossy_mascot_masters.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('design/review/glossy-other-mascots-qa.json').read_text())
+          assert report['verifiedMasterCount']==4
+          assert report['animationClipCount']==0
+          assert all((Path('assets/characters-v2') / c / 'master.png').exists() for c in ('cat','dog','robot','sprout'))
+          print('PASS: four master candidates; no animation invented')
+          PY
+      - name: Commit rendered masters and QA to main
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/characters-v2/cat assets/characters-v2/dog assets/characters-v2/robot assets/characters-v2/sprout
+          git add design/review/glossy-other-mascots.png design/review/glossy-other-mascots-qa.json
+          if git diff --cached --quiet; then
+            echo 'No generated master changes'
+          else
+            git commit -m 'assets: render four glossy 512px masters and QA [skip ci]'
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
+          fi

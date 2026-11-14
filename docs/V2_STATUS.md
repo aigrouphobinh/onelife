@@ -43,3 +43,6 @@ Tất cả tám clip này dùng nguồn ảnh bóng có sẵn, **không phải a
 - `design/review/glossy-v2.html` xem đủ 15 clip.
 - `tools/check_glossy_v2_assets.py` là QA kỹ thuật.
 - Nguồn gốc/giới hạn minh họa được ghi trong `docs/ASSET_REGISTER.md`.
+
+## Four additional character masters — 2026-11-14
+- **Cat, Dog, Robot and Sprout**: original glossy 512px transparent WebP sources staged in `assets/characters-v2/<id>/master.webp`, with PNG and thumbnail export handled by dedicated GitHub Actions. These are four individual **master-image candidates**, not 60 new motion clips. Their 15 expressions and animations each, user art approval, and mobile device tests remain outstanding. See `docs/V2_OTHER_MASCOTS.md` and `design/review/glossy-other-mascots.html`.
