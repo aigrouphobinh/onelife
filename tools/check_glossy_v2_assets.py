@@ -15,6 +15,40 @@ LIVE=ROOT/"assets/characters/brain"
 def sha(path:Path)->str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
+def visible_motion_changed(a: Image.Image, b: Image.Image) -> bool:
+    """Ignore RGB values hidden behind fully transparent pixels.
+
+    Compare the actual rendered result on both light and dark mattes. Checking
+    raw RGBA incorrectly counts invisible RGB noise as character animation.
+    """
+    if a.size != b.size:
+        raise ValueError("Animation frames must have equal dimensions")
+    for color in ((247, 243, 252, 255), (30, 27, 40, 255)):
+        matte_a = Image.alpha_composite(Image.new("RGBA", a.size, color), a.convert("RGBA")).convert("RGB")
+        matte_b = Image.alpha_composite(Image.new("RGBA", b.size, color), b.convert("RGBA")).convert("RGB")
+        if ImageChops.difference(matte_a, matte_b).getbbox() is not None:
+            return True
+    return False
+
+
+def regression_test_visible_motion():
+    """Small deterministic checks run by the existing asset-QA workflow."""
+    a = Image.new("RGBA", (8, 8), (255, 0, 0, 0))
+    b = Image.new("RGBA", (8, 8), (0, 255, 255, 0))
+    assert not visible_motion_changed(a, b), "Invisible RGB counted as animation"
+    b.putpixel((4, 4), (255, 255, 255, 255))
+    assert visible_motion_changed(a, b), "Visible change was ignored"
+    c = Image.new("RGBA", (8, 8), (255, 0, 0, 0))
+    c.putpixel((4, 4), (255, 255, 255, 0))
+    assert not visible_motion_changed(a, c), "Transparent pixels counted as motion"
+    try:
+        visible_motion_changed(a, Image.new("RGBA", (9, 8)))
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("Mismatched frame dimensions accepted")
+
+
 def validate_clip(folder:Path, state:str):
     meta=json.loads((folder/state/"metadata.json").read_text(encoding="utf-8"))
     assert meta["characterId"]=="brain" and meta["state"]==state
@@ -37,7 +71,7 @@ def validate_clip(folder:Path, state:str):
         assert bbox and min(bbox[0],bbox[1],cell-bbox[2],cell-bbox[3])>=1,(state,i,bbox)
         assert frame.getpixel((0,0))[3]<16,(state,i,"missing transparent canvas")
         cells.append(frame)
-    transitions=sum(ImageChops.difference(a,b).getbbox() is not None for a,b in zip(cells,cells[1:]))
+    transitions=sum(visible_motion_changed(a,b) for a,b in zip(cells,cells[1:]))
     assert transitions>=max(5,round((n-1)*.75)),(state,transitions)
     with Image.open(folder/state/"preview.gif") as gif:
         assert gif.n_frames>=max(5,n-2),(state,"missing animated review frames")
@@ -50,6 +84,7 @@ def validate_clip(folder:Path, state:str):
     return meta
 
 def main():
+    regression_test_visible_motion()
     manifest=json.loads((STAGING/"manifest.json").read_text(encoding="utf-8"))
     states=manifest["states"]
     assert {"idle","remind","overloaded","happy","resting","alarm","sleepy","recovering","focus","study","done","thinking","sad","balanced","strained"}==set(states),states
