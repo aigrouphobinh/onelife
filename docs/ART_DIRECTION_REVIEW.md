@@ -40,3 +40,6 @@
 
 ## Brain Balance art review addendum
 25 new animations (5 states × 5 mascots) require human evaluation in Design Lab. Check `overloaded` does not portray literal permanent brain damage or use alarming flash effects. Check eye/face behavior, tired/recharge symbolism, transitions and 64px readability. Automated asset validation is not human approval; Issue #27 remains open until feature and real-device tests.
+
+## Visual review decision: 2026-11-14
+**V1 art direction FAIL / superseded**: User explicitly rejected the flat SVG-derived Brain compared with the original glossy kawaii concept. All V1 structural tests remain technically valid; they do not validate visual fidelity. See [design/STYLE_LOCK_V2.md](../design/STYLE_LOCK_V2.md). The v2 master and animation assets must receive user review before replacing runtime art. P0 issue: #28.

@@ -74,3 +74,6 @@ Use assets/sounds/manifest.json for original optional sound effects; never play 
 
 ## 11. Brain Balance – optional screen-usage animation
 See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md) and [ANIMATION_RUNTIME_CONTRACT.md](ANIMATION_RUNTIME_CONTRACT.md). New wellbeing visual states: balanced, strained, overloaded, resting and recovering, available for all five characters as distinct source sprite clips. This is a metaphor and must not be advertised as detected brain damage. User-defined goals, on-device processing, permission-denied fallback, 2 nudges/day maximum and user opt-out are mandatory. UI and native telemetry require separate real-device implementation and design sign-off.
+
+## 12. Visual art direction override
+The user's new visual requirement is **glossy, rounded, dimensional kawaii Brain**. Read [design/STYLE_LOCK_V2.md](../design/STYLE_LOCK_V2.md) and [ART_REBUILD_PLAN_V2.md](ART_REBUILD_PLAN_V2.md) before any new character, icon, animation or UI image work. V1 SVG clips passed structural checks but **failed visual fidelity** against the user-approved original cute style. No future AI agent may call the 75 V1 clips art-approved. Visual approval gates are independent from structural CI.

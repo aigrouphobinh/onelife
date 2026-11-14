@@ -58,3 +58,13 @@ See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md). `overloaded` is a fictio
 - [x] QA now checks all 75 clips / 760 frames and both original 20 + Brain Balance 12 screen images.
 - [ ] Human approval of emotional continuity, 64px readability and real-device tests.
 - [ ] Flutter native usage tracking and real personalized rules (not implemented).
+
+## V2 artistic acceptance gate
+- [x] User selected glossy kawaii image as visual target.
+- [x] Style lock and visual rebuild contract committed.
+- [ ] Full-resolution verified reference image committed into GitHub (the chat-provided/generated artwork is not automatically a repo file).
+- [ ] Glossy v2 Brain master approved.
+- [ ] Glossy v2 animations and other character variants approved.
+- [ ] Visual QA across all states, UI screens and device sizes.
+
+**Do not confuse automated PASS on V1 sprites with art approval.**
