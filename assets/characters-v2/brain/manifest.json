@@ -27,10 +27,14 @@
     "alarm": {
       "file": "assets/characters-v2/brain/alarm/metadata.json",
       "frames": 12
+    },
+    "sleepy": {
+      "file": "assets/characters-v2/brain/sleepy/metadata.json",
+      "frames": 12
     }
   },
   "v1FallbackAllowed": true,
   "productionReady": false,
   "note": "Glossy V2 present for idle, remind, overloaded, happy, resting; Happy is original illustrated, Resting still uses montage; 10 states remain V1.",
-  "artReview": "Alarm original 12 illustrated poses require human and device review; Resting still montage; Alarm illustration must be reviewed on devices"
+  "artReview": "Sleepy original 12 illustrated poses require human and device review; Resting still montage; Sleepy illustration must be reviewed on devices"
 }
