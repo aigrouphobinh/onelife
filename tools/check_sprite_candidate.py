@@ -31,6 +31,9 @@ def inspect(path: Path, *, frames: int = 12, cols: int = 4, cell: int = 256) -> 
         frame = atlas.crop(((i % cols) * cell, (i // cols) * cell,
                             (i % cols + 1) * cell, (i // cols + 1) * cell))
         alpha = frame.getchannel('A')
+        transparent_fraction = alpha.histogram()[0] / (cell * cell)
+        if transparent_fraction < 0.10:
+            warnings.append(f'frame {i:02}: insufficient fully-transparent pixels ({transparent_fraction:.1%}); painted background suspected')
         bbox = alpha.point(lambda a: 255 if a > 24 else 0).getbbox()
         if bbox is None:
             warnings.append(f'frame {i:02}: empty image')
