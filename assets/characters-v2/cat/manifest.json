@@ -53,6 +53,11 @@
       "file": "assets/characters-v2/cat/study/metadata.json",
       "frames": 12,
       "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "done": {
+      "file": "assets/characters-v2/cat/done/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
     }
   },
   "note": "Visual/phone sign-off required; no inferred or synthesized state completion."
