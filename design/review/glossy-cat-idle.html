@@ -18,9 +18,9 @@ input[type=range]{min-width:110px;flex:1;accent-color:var(--accent)}
 .note{font-size:13px;color:var(--muted)}a{color:inherit}
 </style></head><body data-theme="light"><main>
 <h1>🐱 Mèo Tím · Glossy V2</h1>
-<p class="muted">Xem các frame minh họa PNG thật: Idle (8 frame), Remind (12 frame), Alarm (12 frame), Resting (12 frame), Overloaded (12 frame) Happy (12 frame) Sleepy (12 frame), Recovering (12 frame), Focus (12 frame) và Study (12 frame). Chưa có ứng dụng Flutter hoạt động hoặc 15 trạng thái của Mèo.</p>
+<p class="muted">10 trạng thái Mèo Glossy V2 có sprite PNG nguồn thật. Trình xem chỉ phục vụ QA; chưa phải ứng dụng Flutter, chưa nghiệm thu trên điện thoại.</p>
 <div class="card"><span class="tag" id="tag">Idle · ứng viên mỹ thuật</span>
-<div class="controls"><label for="state">Biểu cảm</label><select id="state"><option value="idle">Idle · Bình thường</option><option value="remind">Remind · Nhắc việc</option><option value="alarm">Alarm · Báo thức</option><option value="resting">Resting · Nghỉ ngơi</option><option value="overloaded">Overloaded · Quá tải</option><option value="happy">Happy · Vui vẻ</option><option value="sleepy">Sleepy · Buồn ngủ</option><option value="recovering">Recovering · Tỉnh táo trở lại</option><option value="focus">Focus · Tập trung</option><option value="study">Study · Học tập</option></select>
+<div class="controls"><label for="state">Biểu cảm</label><select id="state"><option value="idle">Idle · Bình thường</option><option value="remind">Remind · Nhắc việc</option><option value="alarm">Alarm · Báo thức</option><option value="happy">Happy · Vui vẻ</option><option value="overloaded">Overloaded · Quá tải minh họa</option><option value="resting">Resting · Nghỉ ngơi</option><option value="sleepy">Sleepy · Buồn ngủ</option><option value="recovering">Recovering · Tỉnh táo trở lại</option><option value="focus">Focus · Tập trung</option><option value="study">Study · Học tập</option></select>
 <label for="size">Kích thước</label><select id="size"><option value="256">256px</option><option value="144">144px</option><option value="96">96px</option><option value="64">64px</option></select></div>
 <div class="stage"><canvas id="stage" width="256" height="256" role="img" aria-label="Hoạt ảnh Mèo Glossy V2"></canvas></div>
 <div class="controls"><button id="toggle">⏸ Tạm dừng</button><button id="next">Frame kế ›</button><button id="theme">Sáng / Tối</button></div>
@@ -32,7 +32,7 @@ input[type=range]{min-width:110px;flex:1;accent-color:var(--accent)}
 </main><script>
 (function(){'use strict';
 const $=id=>document.getElementById(id), c=$('stage'),ctx=c.getContext('2d');
-const config={idle:{frames:8,duration:150,loop:true},remind:{frames:12,duration:125,loop:false},alarm:{frames:12,duration:100,loop:false},resting:{frames:12,duration:190,loop:true},overloaded:{frames:12,duration:125,loop:false},happy:{frames:12,duration:105,loop:true},sleepy:{frames:12,duration:185,loop:true},recovering:{frames:12,duration:115,loop:false},focus:{frames:12,duration:135,loop:false},study:{frames:12,duration:140,loop:false}};
+const config={idle:{frames:8,duration:150,loop:true},remind:{frames:12,duration:125,loop:false},alarm:{frames:12,duration:100,loop:false},happy:{frames:12,duration:105,loop:true},overloaded:{frames:12,duration:125,loop:false},resting:{frames:12,duration:190,loop:true},sleepy:{frames:12,duration:185,loop:true},recovering:{frames:12,duration:115,loop:false},focus:{frames:12,duration:135,loop:false},study:{frames:12,duration:140,loop:false}};
 let image=new Image(),frame=0,ready=false,last=0;
 let playing=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 function state(){return config[$('state').value]}
