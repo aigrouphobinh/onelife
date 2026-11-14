@@ -1,6 +1,6 @@
 # OneLife — Dog Happy Glossy V2 · original sprite production contract
 
-**State:** `dog/happy` · **Status:** NO APPROVED SOURCE. Do not count this animation until illustrated art has been imported, rendered and verified on GitHub.
+**State:** `dog/happy` · **Status:** Illustrated source imported to `main`; automatic build and independent art/device review still required. Do not mark production-approved solely from a generated file.
 
 ## Identity (non-negotiable)
 
@@ -39,12 +39,19 @@ Frames are **separate illustrated drawings**, not rotations/filters/warped dupli
 
 ## Acceptance checklist
 
-- [ ] Source illustration actually depicts HAPPY, not laptop work or stress
-- [ ] 12 individually acted poses, identity checked against Dog master
-- [ ] No props or words that belong to another state
-- [ ] True RGBA/clean matte, 4×3 atlas with margins
+- [x] Illustrated source depicts HAPPY; needs human review against master on device
+- [x] 12 distinct illustrated poses; visual identity review on device pending
+- [x] No props or words from work/reminder/alarm
+- [x] Local transparent 4×3 atlas with validated margins; edge cleanup review pending
 - [ ] Runtime PNG/GIF and verified source SHA on `main`
 - [ ] GIF one-shot playback and smooth transition to Idle
 - [ ] Mobile art/accessibility/performance review explicitly approved
 
 **Current state:** Dog has Idle, Remind, Alarm, Resting, and Overloaded as technical-QA-passed candidates; Happy remains missing.
+
+## Imported original illustrated source
+- `assets/characters-v2/dog/happy/sheet_illustrated.webp` is a source of 12 independently illustrated happy poses (not a flat SVG, not a poster).
+- SHA-256: `da01cc23446339057f8cb9e09025ca4d8ee32cc0283b900c3199fce290e5c50c` (computed from the actual local WebP before upload).
+- Runtime renderer: `tools/render_glossy_character_animation.py`; **PNG/GIF and CI status must be checked after workflow execution**.
+- Local geometric QA: 12/12 populated tiles, 11/11 changing adjacent frames, 256px cell, transparent corners, 110ms one-shot. Pixel variance is not proof of seamless motion.
+- User art approval, 64/96/144px inspection, phone performance and Reduced Motion remain pending.

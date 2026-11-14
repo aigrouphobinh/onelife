@@ -166,6 +166,37 @@ def main():
         assert 'value="overloaded"' in html
         print('PASS Dog Overloaded V2: 12 poses, one-shot, source hash verified; art/mobile QA pending')
 
+
+    # Dog Happy has separate joyful poses and must not silently become a working/reminder clip.
+    happy = [e for e in catalog['animationSources'] if e['characterId']=='dog' and e['state']=='happy']
+    if happy:
+        assert len(happy) == 1, 'Duplicate dog/happy'
+        folder = ROOT/'assets/characters-v2/dog/happy'
+        spec = happy[0]
+        meta = json.loads((folder/'metadata.json').read_text())
+        report = json.loads((folder/'qa_report.json').read_text())
+        assert sha(folder/'sheet_illustrated.webp') == spec['sourceSha256'] == meta['sourceSha256']
+        assert sha(folder/'sheet.png') == meta['sha256']
+        assert meta['frames'] == 12 and meta['columns'] == 4 and meta['rows'] == 3
+        assert meta['frameDurationMs'] == 110 and meta['loop'] is False
+        assert report['passed'] and report['previewLoop'] == 'once'
+        with Image.open(folder/'sheet.png') as image:
+            assert image.size == (1024,768)
+            atlas = image.convert('RGBA')
+        poses = [atlas.crop(((i%4)*256,(i//4)*256,((i%4)+1)*256,((i//4)+1)*256)) for i in range(12)]
+        for i, frame in enumerate(poses):
+            bounds = frame.getchannel('A').getbbox()
+            assert bounds and min(bounds[0], bounds[1], 256-bounds[2], 256-bounds[3]) >= 2, f'Dog Happy clipped {i}'
+            assert frame.getpixel((0,0))[3] <= 20, f'Dog Happy opaque corner {i}'
+        for i,(left,right) in enumerate(zip(poses,poses[1:])):
+            rms = sum(ImageStat.Stat(ImageChops.difference(visible(left),visible(right))).rms)/3
+            assert rms >= 2, f'Dog Happy near-duplicate {i}->{i+1}'
+        with Image.open(folder/'preview.gif') as gif:
+            assert gif.n_frames == 12 and gif.info.get('loop') is None
+        assert '../../assets/characters-v2/dog/happy/sheet.png' in html
+        assert 'value="happy"' in html
+        print('PASS Dog Happy V2: original illustrated poses, 12 frames, 110ms one-shot; phone/art approval pending')
+
     print(f'PASS Dog Idle glossy V2: 8 frames, 7 changing neighbors, min visible RMS {min(motion):.2f}; review and phone QA pending')
 
 if __name__=='__main__': main()
