@@ -1,0 +1,31 @@
+{
+  "source": "/home/runner/work/onelife/onelife/assets/characters-v2/dog/thinking/sheet_illustrated.webp",
+  "sha256": "9dd79993b84c27cf42e1ae13c465b9ec86cc36807be5e41d4d4164f973e167c4",
+  "geometry": {
+    "frames": 12,
+    "columns": 4,
+    "rows": 3,
+    "cellPx": 256,
+    "atlasPx": [
+      1024,
+      768
+    ]
+  },
+  "adjacentVisibleRms": [
+    55.71,
+    66.49,
+    66.85,
+    62.6,
+    67.12,
+    68.48,
+    73.19,
+    74.3,
+    59.9,
+    57.55,
+    51.45
+  ],
+  "warnings": [],
+  "technicalPreflightPassed": true,
+  "humanVisualApproval": "pending",
+  "realDeviceApproval": "pending"
+}
