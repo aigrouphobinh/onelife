@@ -1,6 +1,6 @@
 # OneLife — Cat Done animation art brief (P0 next)
 
-**State:** `done` · **12 illustrated-pose source frames imported on 2026-11-14; structural source checks passed. Runtime PNG/GIF CI and visual/mobile acceptance remain separate.**
+**State:** `done` · **12 illustrated-pose source frames imported on 2026-11-14; structural source checks passed. Runtime PNG/GIF source build verified by repository; visual/mobile acceptance remains pending.**
 
 ## Independent 12-pose acting progression
 1. Looks at a finished task on a small lilac card.

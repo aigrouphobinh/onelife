@@ -61,3 +61,9 @@ Two independently illustrated resting/sleepy key poses were extracted and alpha-
 - Source: `assets/characters-v2/cat/sad/sheet_illustrated.webp` (RGBA WebP atlas 1024×768), SHA-256 `fc69b9241ee15a80bb73a754c2c36b6f8c31cef63a19a10f0fdf7a5147f4ebf2`.
 - Source has been prepared/inspected by automated local alpha and frame tests; runtime PNG/GIF and manifest/coverage are produced by the existing GitHub Action after import.
 - Mobile visual QA, smooth movement and emotional appropriateness still require human sign-off. Never convert structural QA to release approval.
+
+## Current catalog-based checkpoint (2026-11-14)
+- Cat has 13 illustrated candidate clips on main: Idle, Remind, Alarm, Happy, Overloaded, Resting, Sleepy, Recovering, Focus, Study, Done, Thinking, Sad.
+- Done and Thinking were already committed by the automation; Sad source imported in commit `0e6681c2a636920ccc0fb38d60a05298cf19a663` and exported by Actions (run `43617053572`, success).
+- Cat missing: **Balanced** (even calm breathing) and **Strained** (subtle fatigue), both must use distinct character-specific illustrated poses. Briefs: `docs/CAT_BALANCED_ART_BRIEF.md`, `docs/CAT_STRAINED_ART_BRIEF.md`.
+- Full state count remains **60** across four non-Brain mascots; 13 original candidates, 47 missing; mobile art approval still pending for all.
