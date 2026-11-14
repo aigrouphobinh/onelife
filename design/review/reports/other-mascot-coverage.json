@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 1,
+  "totalRequiredClips": 60,
+  "illustratedCandidates": 1,
+  "derivedCandidates": 0,
+  "missing": 59,
+  "availableCandidates": 1,
+  "artApprovedCount": 0,
+  "phoneVerifiedCount": 0,
+  "automatedEvidencePass": true,
+  "errors": [],
+  "clips": [
+    {
+      "characterId": "cat",
+      "state": "idle",
+      "status": "original-candidate-qa",
+      "frames": 8,
+      "generationClass": "independently-illustrated-pose-sheet",
+      "artReview": "pending",
+      "deviceReview": "pending"
+    },
+    {
+      "characterId": "cat",
+      "state": "remind",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "alarm",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "happy",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "overloaded",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "resting",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "sleepy",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "recovering",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "focus",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "study",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "done",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "thinking",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "sad",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "balanced",
+      "status": "missing"
+    },
+    {
+      "characterId": "cat",
+      "state": "strained",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "idle",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "remind",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "alarm",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "happy",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "overloaded",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "resting",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "sleepy",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "recovering",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "focus",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "study",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "done",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "thinking",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "sad",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "balanced",
+      "status": "missing"
+    },
+    {
+      "characterId": "dog",
+      "state": "strained",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "idle",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "remind",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "alarm",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "happy",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "overloaded",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "resting",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "sleepy",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "recovering",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "focus",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "study",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "done",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "thinking",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "sad",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "balanced",
+      "status": "missing"
+    },
+    {
+      "characterId": "robot",
+      "state": "strained",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "idle",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "remind",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "alarm",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "happy",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "overloaded",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "resting",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "sleepy",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "recovering",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "focus",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "study",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "done",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "thinking",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "sad",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "balanced",
+      "status": "missing"
+    },
+    {
+      "characterId": "sprout",
+      "state": "strained",
+      "status": "missing"
+    }
+  ]
+}
