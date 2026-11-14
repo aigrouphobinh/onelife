@@ -26,6 +26,12 @@ STATES = (
     'sad', 'balanced', 'strained',
 )
 MAX_ASSET_BYTES = 12_000_000
+MAX_TOTAL_UNCOMPRESSED_BYTES = 160_000_000
+MAX_COMPRESSION_RATIO = 250
+ALLOWED_STATE_MEMBERS = frozenset({
+    'sheet_illustrated.webp', 'metadata.json', 'sheet.png',
+    'preview.gif', 'candidate_qa.json',
+})
 
 
 def validate_pack(path: Path) -> list[dict]:
@@ -41,12 +47,27 @@ def validate_pack(path: Path) -> list[dict]:
                 raise ValueError(f'Unsafe ZIP member: {name!r}')
             if z.getinfo(name).file_size > MAX_ASSET_BYTES:
                 raise ValueError(f'Oversized ZIP member: {name!r}')
+        # ZIPs from the art pipeline contain review PNG/GIF/QA alongside
+        # immutable WebPs. Reject untracked paths and decompression bombs.
+        if sum(z.getinfo(name).file_size for name in names) > MAX_TOTAL_UNCOMPRESSED_BYTES:
+            raise ValueError('ZIP uncompressed size exceeds safety limit')
+        for name in names:
+            info = z.getinfo(name)
+            if info.file_size > 4096 and info.file_size / max(1, info.compress_size) > MAX_COMPRESSION_RATIO:
+                raise ValueError(f'Excessive ZIP compression ratio: {name!r}')
+            if name == 'BUILD_REPORT.json':
+                continue
+            parts = PurePosixPath(name).parts
+            if len(parts) != 2 or parts[0] not in STATES or parts[1] not in ALLOWED_STATE_MEMBERS:
+                raise ValueError(f'Unexpected ZIP member: {name!r}')
         if 'BUILD_REPORT.json' not in names:
             raise ValueError('Missing BUILD_REPORT.json')
         report = json.loads(z.read('BUILD_REPORT.json'))
         specs = report.get('qa')
         if not isinstance(specs, list) or not specs:
             raise ValueError('Empty candidate report')
+        if 'count' in report and (type(report['count']) is not int or report['count'] != len(specs)):
+            raise ValueError('BUILD_REPORT count does not match listed states')
         seen = set()
         for entry in specs:
             state = entry.get('state')
@@ -70,13 +91,15 @@ def validate_pack(path: Path) -> list[dict]:
             ):
                 if metadata.get(field) != expected:
                     raise ValueError(f'{state}: invalid {field}')
+            if type(metadata.get('loop')) is not bool:
+                raise ValueError(f'{state}: invalid loop flag')
             frames = metadata.get('frames')
             duration = metadata.get('frameDurationMs')
-            if not isinstance(frames, int) or not 2 <= frames <= 24:
+            if type(frames) is not int or not 2 <= frames <= 24:
                 raise ValueError(f'{state}: invalid frame count')
             if frames != entry.get('frames'):
                 raise ValueError(f'{state}: inconsistent frame count')
-            if not isinstance(duration, int) or not 60 <= duration <= 1000:
+            if type(duration) is not int or not 60 <= duration <= 1000:
                 raise ValueError(f'{state}: invalid frame duration')
             if (metadata.get('artReview') != 'pending' or
                     metadata.get('deviceReview') != 'pending'):
@@ -124,6 +147,9 @@ def validate_pack(path: Path) -> list[dict]:
                 'sha256': source_sha, 'bytes': len(source),
                 'zip_member': image_name,
             })
+        extras = {name.split('/', 1)[0] for name in names if name != 'BUILD_REPORT.json'} - seen
+        if extras:
+            raise ValueError(f'Unlisted Robot state assets: {sorted(extras)!r}')
     return result
 
 
