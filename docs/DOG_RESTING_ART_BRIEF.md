@@ -1,6 +1,6 @@
 # OneLife — Dog Resting · Glossy Kawaii V2
 
-**State:** `dog/resting` · **Status:** ART SOURCE MISSING; 0 delivered Resting clips. Do not mark complete from storyboards.
+**State:** `dog/resting` · **Status:** ORIGINAL WEBP SOURCE IMPORTED as illustrated candidate (2026-11-15); GitHub Actions export/QA and user/device sign-off tracked separately.
 
 ## Master and visual invariants
 Use `assets/characters-v2/dog/master.webp`: glossy warm apricot-gold fur, floppy orange ears, little cream curl on forehead, shiny dark-brown eyes, round rosy cheeks, cream belly/paws and fluffy curved tail. Preserve face and silhouette proportions from Dog Idle/Remind/Alarm; this is the **same character**.
@@ -34,10 +34,10 @@ The purple cushion stays the **same size and position** across all 12 frames. St
 
 ## Gates
 - [x] Narrative and source exclusion rules documented.
-- [ ] Genuine 12-pose clean illustration reviewed.
-- [ ] Source WebP committed to `main` with verified hash.
+- [x] Original 12-pose illustrated source created and locally inspected; **loop seam still needs improvement** (11→0 RMS 65.64, 1.35× median adjacent RMS).
+- [x] Source WebP attached to a main commit: SHA-256 `79c4cd1e976d4aaa122d43a33656e247b808b1a307d6e12d14d037d3d304e34d` (verify GitHub readback).
 - [ ] GitHub renderer and coverage PASS, verified actual PNG/GIF.
 - [ ] Manual silhouette/facial identity/loop review.
 - [ ] Flutter mobile integration, reduced motion and low-end Android QA.
 
-**No Resting clip exists until the source is imported and built.** This contract prevents claiming a rejected Alarm sheet is completed Dog Resting artwork.
+**Artwork is an illustrated candidate, not an approved production animation.** GitHub Actions output, seamless loop, mobile review and Flutter integration remain separate gates.

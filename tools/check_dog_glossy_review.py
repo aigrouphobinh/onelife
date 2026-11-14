@@ -108,6 +108,33 @@ def main():
         assert 'value="alarm"' in html
         print('PASS Dog Alarm V2: 12 original poses, one-shot, pinned SHA and gallery path; visual/device sign-off pending')
 
+    resting = [e for e in catalog['animationSources'] if e['characterId']=='dog' and e['state']=='resting']
+    if resting:
+        assert len(resting)==1, 'Duplicate dog resting catalog entries'
+        folder=ROOT/'assets/characters-v2/dog/resting'
+        spec=resting[0]
+        meta=json.loads((folder/'metadata.json').read_text())
+        report=json.loads((folder/'qa_report.json').read_text())
+        assert sha(folder/'sheet_illustrated.webp')==spec['sourceSha256']==meta['sourceSha256']
+        assert sha(folder/'sheet.png')==meta['sha256']
+        assert meta['frames']==12 and meta['columns']==4 and meta['rows']==3
+        assert meta['frameDurationMs']==200 and meta['loop'] is True
+        assert report['passed'] is True and report['previewLoop']=='infinite'
+        with Image.open(folder/'sheet.png') as sheet:
+            assert sheet.size==(1024,768)
+            atlas=sheet.convert('RGBA')
+        frames=[atlas.crop(((i%4)*256,(i//4)*256,((i%4)+1)*256,((i//4)+1)*256)) for i in range(12)]
+        assert all(frame.getchannel('A').getbbox() is not None for frame in frames)
+        for i,(left,right) in enumerate(zip(frames,frames[1:])):
+            rms=sum(ImageStat.Stat(ImageChops.difference(visible(left),visible(right))).rms)/3
+            assert rms >= 2, f'Dog Resting adjacent near duplicate: {i}'
+        with Image.open(folder/'preview.gif') as gif:
+            assert gif.n_frames==12 and gif.info.get('loop')==0
+        assert '../../assets/characters-v2/dog/resting/sheet.png' in html
+        assert 'value="resting"' in html
+        seam=sum(ImageStat.Stat(ImageChops.difference(visible(frames[-1]),visible(frames[0]))).rms)/3
+        print(f'PASS Dog Resting: 12 distinct poses, loop preview; seam RMS {seam:.2f} pending art review')
+
     print(f'PASS Dog Idle glossy V2: 8 frames, 7 changing neighbors, min visible RMS {min(motion):.2f}; review and phone QA pending')
 
 if __name__=='__main__': main()

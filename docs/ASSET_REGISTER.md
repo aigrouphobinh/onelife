@@ -189,3 +189,9 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Original generated 12-pose apricot puppy + red/yellow twin-bell alarm clock illustration, consistent with approved Dog master. AI-generated art; no third-party stock; no CC0 declaration.
 - True-RGBA, 1024×768 source: `assets/characters-v2/dog/alarm/sheet_illustrated.webp`; SHA-256 `b37dc2989b21625d9caa37cb68fb458f17c8b917d141327d0d15e267d586d485`.
 - White matte was removed and original cells scaled to 256×256; PNG/GIF/JSON built with `tools/render_glossy_character_animation.py`. Subject to generator usage terms; edge-matting and real-device approval pending.
+
+## 2026-11-15: Dog Resting illustrated candidate
+- Generated in the OneLife ChatGPT design workflow from an original 12-pose glossy orange Dog sheet (not third-party art), initially on white and processed to transparent RGBA WebP.
+- Source: `assets/characters-v2/dog/resting/sheet_illustrated.webp`; local SHA-256: `79c4cd1e976d4aaa122d43a33656e247b808b1a307d6e12d14d037d3d304e34d`.
+- 12 illustrated frames, 4×3, 256×256 per frame; 200ms looping preview, lilac cushion, no clock/notification.
+- OpenAI-generated character art subject to applicable service terms, not CC0/MIT. Local geometry/visible-motion QA passed. **11→0 seam** remains to polish (measured RMS 65.64, 1.35× median neighboring changes). Full-resolution source and human/device visual acceptance are pending.
