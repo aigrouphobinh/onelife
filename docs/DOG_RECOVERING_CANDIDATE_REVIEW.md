@@ -20,3 +20,12 @@ Before adding `dog/recovering/sheet_illustrated.webp` to the repository:
 5. Record provenance, human visual review and actual-device approval separately. Do not mark productionReady without those gates.
 
 **Current status: Candidate generated and preflight script committed; source binary not committed; visual review blocked.**
+
+## Reproducible regression checkpoint — 2026-11-15
+
+- Added `tests/test_sprite_candidate.py` (six cases: valid, duplicate, edge clipping, opaque background, wrong dimensions, invalid frame count).
+- The corresponding four synthetic fixture categories (valid, duplicate, clipped edge, opaque matte) were executed locally against the preflight implementation; results matched expected pass/fail. The GitHub-hosted unit test suite is **not yet verified by GitHub Actions**.
+- Locally prepared candidate binary: `onelife_dog_recovering_clean.webp`, 1024×768, 12 frames, SHA-256 `8fb0754f38b5bfe73da38e4ea725f1b2a3e3b9d7cc00c429d2cbbb4aa1e30cff`. Preflight returned zero warnings. This hash identifies a **local artifact, not a GitHub blob**.
+- **Do not register the above hash in production catalog** until exact verified bytes are committed to `assets/characters-v2/dog/recovering/sheet_illustrated.webp`.
+- Motion-acting acceptance is still blocked: expression change alone does not implement the required forepaw stretch. Production status remains candidate/pending.
+
