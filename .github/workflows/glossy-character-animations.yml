@@ -6,6 +6,7 @@ on:
       - 'assets/characters-v2/animation_sources.json'
       - 'assets/characters-v2/**/sheet_illustrated.webp'
       - 'tools/render_glossy_character_animation.py'
+      - 'tools/pack_glossy_frames.py'
       - 'design/review/glossy-cat-idle.html'
       - 'tools/check_cat_glossy_review.py'
       - 'tools/render_cat_glossy_contact.py'
@@ -25,6 +26,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install --disable-pip-version-check 'Pillow==11.0.0'
+      - name: Check frame-by-frame source packer
+        run: python tools/pack_glossy_frames.py --self-test
       - name: Render and validate original illustrated frames
         run: python tools/render_glossy_character_animation.py
       - name: Update coverage from newly rendered assets (avoid stale reports)
