@@ -65,9 +65,14 @@ Two independently illustrated resting/sleepy key poses were extracted and alpha-
 ## Current catalog-based checkpoint (2026-11-14)
 - Cat has 13 illustrated candidate clips on main: Idle, Remind, Alarm, Happy, Overloaded, Resting, Sleepy, Recovering, Focus, Study, Done, Thinking, Sad.
 - Done and Thinking were already committed by the automation; Sad source imported in commit `0e6681c2a636920ccc0fb38d60a05298cf19a663` and exported by Actions (run `43617053572`, success).
-- Cat missing: **Balanced** (even calm breathing) and **Strained** (subtle fatigue), both must use distinct character-specific illustrated poses. Briefs: `docs/CAT_BALANCED_ART_BRIEF.md`, `docs/CAT_STRAINED_ART_BRIEF.md`.
-- Full state count remains **60** across four non-Brain mascots; 13 original candidates, 47 missing; mobile art approval still pending for all.
+- Cat now has **15/15 illustrated source candidates** (including Balanced and Strained); see `docs/OTHER_MASCOT_COVERAGE.md`. This is an asset/CI milestone only, not human or mobile art approval.
+- Full state count remains **60** across four non-Brain mascots; 15 original candidates, 45 missing (Dog/Robot/Sprout 15 each); mobile art approval still pending for all.
 
-- **Cat/balanced:** 12 independent illustrated glossy poses of calm breathing, smiling and resetting; source checked into `assets/characters-v2/cat/balanced/sheet_illustrated.webp`, SHA-256 `bb08dda98c2c244e21d1908f6b130d1e52ea02afa7d1ef518629845802d1d6a6`, 180ms loop. Structural source QA only; eye/glow continuity and low-end phone tests pending. Cat Strained remains missing until it has separate illustrated source art.
+- **Cat/balanced:** 12 independent illustrated glossy poses of calm breathing, smiling and resetting; source checked into `assets/characters-v2/cat/balanced/sheet_illustrated.webp`, SHA-256 `bb08dda98c2c244e21d1908f6b130d1e52ea02afa7d1ef518629845802d1d6a6`, 180ms loop. Structural source QA only; eye/glow continuity and low-end phone tests pending. Cat Strained has its own separately illustrated source art and has passed the asset export workflow.
 
-- **Cat/strained:** dedicated 12-frame glossy illustration source committed (SHA-256 `8b67a102fb63f414a7ccb2ed7a8eaab5ae01259e2b91def43b78538281a772d7`); 170 ms/frame, one-shot; gentle fatigue cue only, no medical claims. PNG/GIF pipeline and device approval tracked separately. Completes the *source-candidate* inventory for Cat's 15 states once CI reports successful output.
+- **Cat/strained:** dedicated 12-frame glossy illustration source committed (SHA-256 `8b67a102fb63f414a7ccb2ed7a8eaab5ae01259e2b91def43b78538281a772d7`); 170 ms/frame, one-shot; gentle fatigue cue only, no medical claims. PNG/GIF export PASS via GitHub Actions `43621624466`; automated image QA PASS via `43621624403`. This completes 15/15 Cat source candidates; device approval remains pending.
+
+## Current next character — Dog Idle
+- Canonical reference: `assets/characters-v2/dog/master.webp` (apricot glossy floppy-eared puppy). Do **not** use the lavender Cat as the Dog sprite.
+- 8 specific original frames, 150 ms infinite loop; see `docs/DOG_IDLE_ART_BRIEF.md`. No accepted Dog Idle source exists at time of this update. Do not confuse the static master with a working animation.
+- Production order: Dog Idle → Remind → Alarm → Resting → Overloaded, then 10 other states. After Dog, apply the same art/CI acceptance to Robot and Sprout.
