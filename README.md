@@ -8,7 +8,9 @@
 - **Dog Recovering imported on `main`:** original Glossy Kawaii 12-frame WebP with **real alpha**, 1024×768, verified SHA-256, generated PNG/GIF/metadata and QA. Its `productionReady` remains false pending visual and device review. [Review details](docs/DOG_RECOVERING_CANDIDATE_REVIEW.md).
 - Keep the **Glossy Kawaii V2** master identity and real frame-by-frame movement. Do not fill missing frames with transformed stills, placeholders, or an unlabeled poster.
 - Run source provenance, SHA-256 registration, sprite render and visual QA gates before promoting coverage. No device art approval, Flutter runtime, or production release is implied by passing GitHub Actions.
-- The next asset task is **Dog Focus → remaining Dog states → Robot/Sprout**, alongside real-device validation and final Recovering→Idle motion review.
+- **Flutter runtime integration started:** `lib/src/glossy_sprite.dart` now loads the real transparent `dog/recovering/sheet.png` from the Flutter asset bundle and paints individual RGBA frames. The Home page displays the mascot with replay; one-shot timing, accessibility semantics and reduced-motion support are implemented. `test/glossy_sprite_test.dart` and `.github/workflows/flutter-glossy-sprite.yml` provide smoke checks. Flutter CI and real phone sign-off have not been verified yet.
+- **Dog Focus:** new transparent 12-pose candidate exported locally; binary source import and approval pending. [Focus brief and QA](docs/DOG_FOCUS_ART_BRIEF.md). Migration coverage remains **23/60** until the exact source is committed and cataloged.
+- The next asset task is **import and review Dog Focus → remaining Dog states → Robot/Sprout**, alongside real-device validation and final Recovering→Idle motion review.
 
 
 ## Design V2 – Trợ lý bộ não nhỏ (2026-11-14)
@@ -23,7 +25,7 @@
 
 **Nghiệm thu:** GitHub Actions kiểm thử cấu trúc và ảnh đã PASS. Trong 15 clip Brain, có 8 clip được xây dựng từ các tư thế Glossy đã có (composite) và cần vẽ các frame độc lập trước khi duyệt mỹ thuật cuối. **4 nhân vật Mèo/Chó/Robot/Mầm xanh chưa được chuyển sang phong cách V2**, theo Issues [#31](https://github.com/aigrouphobinh/onelife/issues/31), [#32](https://github.com/aigrouphobinh/onelife/issues/32), [#33](https://github.com/aigrouphobinh/onelife/issues/33), [#34](https://github.com/aigrouphobinh/onelife/issues/34).
 
-**Chưa hoàn thành:** Flutter runtime, Android UsageStats/overlay/báo thức, iOS Screen Time (giới hạn quyền), AI offline, Gemini tùy chọn, kiểm thử pin và phát hành store.
+**Chưa hoàn thành:** phần lớn Flutter runtime (mới tích hợp widget sprite cho Home), Android UsageStats/overlay/báo thức, iOS Screen Time (giới hạn quyền), AI offline, Gemini tùy chọn, kiểm thử pin và phát hành store.
 
 
 One place to remember, find, and finish things.
@@ -56,4 +58,4 @@ See `docs/` for requirements, architecture, delivery roadmap, security and testi
 - [Real Brain V2 master](assets/characters-v2/brain/master.png) and [12-frame reminder sprite](assets/characters-v2/brain/remind/sheet.png) are committed; artwork is still a review candidate.
 - [Interactive browser art review](design/review/glossy-v2.html): compare old/new characters, play/pause and scrub frames, check 64/96/144px.
 - [15-state motion board](docs/V2_MOTION_BOARD.md) and [migration status](docs/GLOSSY_V2_STATUS.md).
-- **Only Brain master + remind are V2.** All other glossy states, character variants and real device tests remain outstanding.
+- **Original historical milestone:** Brain master + remind were first V2 assets; newer Cat/Dog assets are tracked separately in the current checkpoint above. Artwork acceptance and device testing remain outstanding.
