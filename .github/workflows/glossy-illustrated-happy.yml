@@ -1,0 +1,38 @@
+name: Glossy illustrated Happy V2
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'assets/characters-v2/brain/happy/sheet_illustrated.webp'
+      - 'tools/render_illustrated_happy_v2.py'
+      - '.github/workflows/glossy-illustrated-happy.yml'
+permissions:
+  contents: write
+concurrency:
+  group: onelife-illustrated-happy
+  cancel-in-progress: false
+jobs:
+  render:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'Pillow==11.0.0'
+      - run: python tools/render_illustrated_happy_v2.py
+      - run: python tools/check_glossy_v2_assets.py
+      - name: Commit verified PNG, GIF, metadata and live mirror
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/characters-v2/brain/happy assets/characters-v2/brain/manifest.json
+          git add assets/characters/brain/happy assets/characters/brain/manifest.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'assets: render original illustrated Happy V2 atlas [skip ci]'
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
+          fi
