@@ -1,0 +1,94 @@
+name: Import verified Dog Recovering transparent source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-dog-recovering-alpha.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-verified-blob:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow for transparency verification
+        run: python -m pip install 'Pillow>=10,<13'
+      - name: Download exact Git blob (not an opaque painted background)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -fsSL --retry 3 \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/git/blobs/bb607573ca9723cf7acb94255e3d068637e6d320" \
+            -o "$RUNNER_TEMP/recovering-blob.json"
+          python - <<'PY'
+          import base64, hashlib, json, os
+          from pathlib import Path
+          payload = json.loads((Path(os.environ['RUNNER_TEMP']) / 'recovering-blob.json').read_text())
+          if payload.get('encoding') != 'base64':
+              raise SystemExit('GitHub blob is not base64 encoded')
+          raw = base64.b64decode(payload['content'], validate=False)
+          expected = '01903c8a53f8c656e288c602796e544ff448f59393fdf72b006ca54314921df5'
+          if len(raw) != 608202 or hashlib.sha256(raw).hexdigest() != expected:
+              raise SystemExit('Source blob checksum/length mismatch; refusing import')
+          path = Path('assets/characters-v2/dog/recovering/sheet_illustrated.webp')
+          path.parent.mkdir(parents=True, exist_ok=True)
+          if path.is_file() and path.read_bytes() != raw:
+              raise SystemExit('Source path already has different content; refusing overwrite')
+          path.write_bytes(raw)
+          print('Verified transparent source:', path, expected)
+          PY
+      - name: Reject fake alpha, clipped cells and near-duplicate poses
+        run: |
+          python tools/check_sprite_candidate.py assets/characters-v2/dog/recovering/sheet_illustrated.webp --frames 12 --columns 4 --cell 256 --json assets/characters-v2/dog/recovering/candidate_qa.json
+      - name: Register source and render exactly this animation
+        run: |
+          python - <<'PY'
+          import importlib.util, json
+          from pathlib import Path
+          catalog = Path('assets/characters-v2/animation_sources.json')
+          data = json.loads(catalog.read_text(encoding='utf-8'))
+          spec = {
+              'characterId': 'dog', 'state': 'recovering',
+              'version': '2.26.0-illustrated-candidate',
+              'sourceFile': 'sheet_illustrated.webp',
+              'sourceSha256': '01903c8a53f8c656e288c602796e544ff448f59393fdf72b006ca54314921df5',
+              'frames': 12, 'columns': 4,
+              'frameWidth': 256, 'frameHeight': 256,
+              'frameDurationMs': 130, 'loop': False,
+              'generationClass': 'independently-illustrated-pose-sheet',
+          }
+          found = [e for e in data['animationSources']
+                   if e['characterId'] == 'dog' and e['state'] == 'recovering']
+          if found and found != [spec]:
+              raise SystemExit('Conflicting Recovering catalog entry; refusing overwrite')
+          if not found:
+              data['animationSources'].append(spec)
+              catalog.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          module_spec = importlib.util.spec_from_file_location(
+              'glossy_renderer', 'tools/render_glossy_character_animation.py'
+          )
+          module = importlib.util.module_from_spec(module_spec)
+          module_spec.loader.exec_module(module)
+          module.build('dog', 'recovering', spec)
+          PY
+      - name: Commit source, generated animation and QA to main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/characters-v2/animation_sources.json assets/characters-v2/dog/recovering/ assets/characters-v2/dog/manifest.json
+          if git diff --cached --quiet; then
+            echo 'No asset changes to publish'
+            exit 0
+          fi
+          git commit -m 'assets: import transparent Glossy Kawaii Dog Recovering 12-frame source'
+          git push origin HEAD:main
