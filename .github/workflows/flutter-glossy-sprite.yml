@@ -7,22 +7,14 @@ on:
       - 'lib/**'
       - 'test/**'
       - 'pubspec.yaml'
-      - 'assets/characters-v2/dog/recovering/**'
-      - 'assets/characters-v2/dog/focus/**'
-      - 'assets/characters-v2/dog/study/**'
-      - 'assets/characters-v2/dog/done/**'
-      - 'assets/characters-v2/dog/thinking/**'
+      - 'assets/characters-v2/dog/**'
       - '.github/workflows/flutter-glossy-sprite.yml'
   pull_request:
     paths:
       - 'lib/**'
       - 'test/**'
       - 'pubspec.yaml'
-      - 'assets/characters-v2/dog/recovering/**'
-      - 'assets/characters-v2/dog/focus/**'
-      - 'assets/characters-v2/dog/study/**'
-      - 'assets/characters-v2/dog/done/**'
-      - 'assets/characters-v2/dog/thinking/**'
+      - 'assets/characters-v2/dog/**'
       - '.github/workflows/flutter-glossy-sprite.yml'
   workflow_dispatch:
 
