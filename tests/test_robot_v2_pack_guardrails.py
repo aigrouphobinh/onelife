@@ -64,6 +64,34 @@ class RobotPackGuardrailsTest(unittest.TestCase):
             members['BUILD_REPORT.json'] = json.dumps(report).encode()
         self.assert_rejected(change, 'BUILD_REPORT count')
 
+    def test_rejects_poster_mislabeled_as_illustrated(self):
+        def change(members):
+            metadata = json.loads(members['idle/metadata.json'])
+            metadata['generationClass'] = 'derived-pose-composite'
+            members['idle/metadata.json'] = json.dumps(metadata).encode()
+        self.assert_rejected(change, 'invalid generationClass')
+
+    def test_rejects_wrong_atlas_rows(self):
+        def change(members):
+            metadata = json.loads(members['idle/metadata.json'])
+            metadata['rows'] = 3
+            members['idle/metadata.json'] = json.dumps(metadata).encode()
+        self.assert_rejected(change, 'invalid atlas rows')
+
+    def test_rejects_fake_review_approval(self):
+        def change(members):
+            report = json.loads(members['BUILD_REPORT.json'])
+            report['qa'][0]['qaPassed'] = False
+            members['BUILD_REPORT.json'] = json.dumps(report).encode()
+        self.assert_rejected(change, 'build report contains failed source QA')
+
+    def test_rejects_invalid_anchor(self):
+        def change(members):
+            metadata = json.loads(members['idle/metadata.json'])
+            metadata['anchorY'] = 1.5
+            members['idle/metadata.json'] = json.dumps(metadata).encode()
+        self.assert_rejected(change, 'invalid anchorY')
+
     def test_rejects_compressed_bomb_in_review_file(self):
         members = fixture()
         members['idle/candidate_qa.json'] = b' ' * 500_000
