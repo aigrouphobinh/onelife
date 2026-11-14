@@ -3,11 +3,13 @@
 Synthetic source art only. This suite never imports or registers an asset.
 """
 import json
+import sys
 import tempfile
 import unittest
 import zipfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from import_robot_v2_pack import validate_pack
 from test_import_robot_v2_pack import fixture, write_zip
 
