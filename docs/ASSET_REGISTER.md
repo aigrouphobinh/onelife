@@ -133,3 +133,9 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Cat recovery animation: 12 distinct key poses selected and ordered from a generated original glossy character sheet (sleeping, stirring, yawning, eyes opening, sitting and smiling); **not** synthetic one-frame body transforms. 4×3 256px RGBA frames.
 - `assets/characters-v2/cat/recovering/sheet_illustrated.webp`; source SHA-256 `b5c6b28a0f096424d80d281ded5187bacdf84814aecded4ff00855ba56a344a5`.
 - 115 ms/frame, non-looping one-shot. Emblematic illustration of taking a break, **not** physiological brain healing. Source image generated for OneLife, then manually reordered and background-matted; human/phone QA still pending.
+
+## Cat Focus Glossy V2 illustrated candidate (2026-11-14)
+- 12 original generated glossy lavender cat poses with desk/tablet; source `assets/characters-v2/cat/focus/sheet_illustrated.webp` (4×3 RGBA atlas).
+- SHA-256: `88c7ed1504a1a00e7b7ba0e509aa384df2f171136afff39175932cdd9a5dcde0`. Original generated for OneLife, no external media. Check applicable OpenAI terms before distribution.
+- Asset pipeline generates PNG/GIF, meta and report from the pinned WebP source. Local structural QA passed 12 frames, 11 changed transitions, no clipping; Github CI and manual/device art sign-off are separate.
+- Loop intentionally disabled: desk appears during the introductory sequence, so the 12th-to-1st cut would pop. A separately drawn seamless working loop is still an art backlog item.

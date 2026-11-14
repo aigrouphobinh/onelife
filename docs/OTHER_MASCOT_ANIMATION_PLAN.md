@@ -11,9 +11,10 @@
 - **Cat/happy:** twelve newly illustrated joyful poses (jump, wave, sparkle, calm return), 105 ms/frame, WebP/PNG/GIF on main; human QA pending.
 - **Cat/sleepy:** 12 original sleepy poses (half-lidded eyes, yawn, nod, curled sleep), 185 ms/frame and loop; imported glossy source candidate, requires human/device sign-off.
 - **Cat/recovering:** 12 original illustrated waking poses ordered from curled sleep to open eyes, stretch and cheerful return, 115 ms/frame, one-shot; visual/device QA pending.
-- **Cat remaining:** focus, study, done, thinking, sad, balanced, strained: 7 state-specific animation sources still missing.
+- **Cat/focus:** 12 original illustrated glossy poses with a small lavender work desk and tablet; illustrated WebP source imported as candidate, SHA-256 pinned; PNG/GIF CI and mobile art review required. Animation is one-shot and holds the last frame because the early poses do not have a desk; do not advertise it as a seamless loop.
+- **Cat remaining after Focus import:** study, done, thinking, sad, balanced, strained (6 state-specific illustration sources missing).
 - **Dog/Robot/Sprout:** all 15 character-specific state clips still missing.
-- Total required: 60 illustrated state clips. Cat now has 8/15 sourced candidates (92 frames) after GitHub renderer verification; 8/60 original candidates across four non-Brain characters, 52 remain. Art and device approval pending. Human/device QA not done. The existing V1 SVG art is NOT counted as Glossy V2.
+- Total required: 60 illustrated state clips. Cat had 8/15 sourced candidates (92 frames) before Focus source import. Focus adds 12 illustrated frames provisionally; **9/15 and 9/60 only after GitHub rendering and QA passes**. The automatically generated `docs/OTHER_MASCOT_COVERAGE.md` remains the authority on verified clip count. Art and device approval pending. Human/device QA not done. The existing V1 SVG art is NOT counted as Glossy V2.
 
 ## Per-state direction (distinct body acting, not one image with rotation)
 | State | Cat | Dog | Robot | Sprout |
