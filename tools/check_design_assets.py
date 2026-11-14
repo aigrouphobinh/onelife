@@ -30,7 +30,7 @@ def run():
                 m=json.loads(required[-1].read_text())
                 # V1 source frame counts remain unchanged; promoted glossy live
                 # art may intentionally have a different number of painted poses.
-                if character=="brain" and state=="happy" and m.get("artStyle")=="glossy-kawaii-v2":
+                if character=="brain" and state in ("happy", "sleepy") and m.get("artStyle")=="glossy-kawaii-v2":
                     count=12
                 if (m["characterId"],m["state"],m["frames"],m["columns"],m["rows"],m["frameWidth"],m["frameHeight"]) != (character,state,expected,4,(expected+3)//4,256,256):
                     errors.append(tag+": metadata mismatch")
