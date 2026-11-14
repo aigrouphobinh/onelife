@@ -84,6 +84,20 @@
       "frameDurationMs": 105,
       "loop": true,
       "generationClass": "independently-illustrated-pose-sheet"
+    },
+    {
+      "characterId": "cat",
+      "state": "sleepy",
+      "version": "2.10.0-illustrated-candidate",
+      "sourceFile": "sheet_illustrated.webp",
+      "sourceSha256": "3f6d387a8b0bad6346feae15197c32442a8b2b58c2e3708801a899e12d2ef228",
+      "frames": 12,
+      "columns": 4,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "frameDurationMs": 185,
+      "loop": true,
+      "generationClass": "independently-illustrated-pose-sheet"
     }
   ]
 }

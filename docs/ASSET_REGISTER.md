@@ -122,3 +122,9 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Compressed source: `assets/characters-v2/cat/happy/sheet_illustrated.webp`, SHA-256 `0bce152c501ac049b9ca892353c41b04036052b4e00e476ce2513dd38991f721`; Git blob `45c5dcc8a7410df1be2232bd85db7b56ee6cf0a1`.
 - 4×3 atlas of 256×256 RGBA cells. Generated original image had a near-white checker/white background; foreground segmentation and alpha matting were applied before importing WebP, then GitHub Actions generated runtime PNG, GIF and metadata.
 - Automated frame and alpha tests passed, however fine white-fringe cleanup, artistic consistency, jump-loop continuity, 64px appearance and real-device tests are **pending**. Not product-approved yet.
+
+## Cat Sleepy – original Glossy V2 source, 2026-11-14
+- 12 original illustrated drowsy/yawn/curled-sleep key poses created for OneLife; independent AI-generated character artwork, not a third-party licensed character.
+- Source: `assets/characters-v2/cat/sleepy/sheet_illustrated.webp` (1024×768 RGBA); SHA-256 `3f6d387a8b0bad6346feae15197c32442a8b2b58c2e3708801a899e12d2ef228`.
+- Process: generated 4×3 image; removed baked near-white checkerboard matte per tile; standardized to 256×256 RGBA cells; PNG and GIF deterministically exported by `tools/render_glossy_character_animation.py`.
+- 185 ms/frame; intended looping sleepy/rest sequence. Automated alpha, boundary, frame-uniqueness and source integrity checks; visual QA, small-size dark-mode, device power testing pending. Refer to `docs/CAT_SLEEPY_ART_BRIEF.md`.

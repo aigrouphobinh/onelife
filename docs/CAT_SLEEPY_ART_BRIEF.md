@@ -1,6 +1,6 @@
 # OneLife — Cat Sleepy Glossy V2 · Art production brief
 
-**State:** `cat/sleepy` | **Status:** artwork NOT committed as a runtime sprite. The poster/infographic attempts were rejected. Do not count them in animation coverage.
+**State:** `cat/sleepy` | **Status:** original illustrated 4×3 Cat Sleepy source imported as an art candidate on 2026-11-14. The previous Happy poster attempts remain rejected. Runtime PNG/GIF are generated and checked by GitHub Actions; do not mark complete until pipeline verifies. Human and real-device approval pending.
 
 ## Visual invariant
 Use the actual [Cat V2 master](../assets/characters-v2/cat/master.webp) and the approved, glossy reference style in [STYLE_LOCK_V2](../design/STYLE_LOCK_V2.md): lavender fur, pink ears and cheeks, white forehead tuft, rounded paws, long curled tail, rich violet eyes and outlines. No phone required once sleeping. Do NOT recolor a Brain mascot or flatten into generic SVG.
