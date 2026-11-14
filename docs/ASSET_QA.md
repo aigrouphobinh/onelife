@@ -94,3 +94,11 @@ See [BRAIN_BALANCE_DESIGN.md](BRAIN_BALANCE_DESIGN.md). `overloaded` is a fictio
 
 ## Canonical V2 precedence
 Production visual candidate uses assets/characters/brain/master.png (640×640) and assets/characters/brain/remind/sheet.png. The versioned V2 assets mirror these same SHA-256-verified binaries. Previous 512px and 1024px compressed sources remain archival alternatives and never overwrite current canonical output. Device motion review still required.
+
+## Illustrated Happy V2 technical QA update
+- [x] Uploaded original 12-pose WebP source (not a montage) to main and verified its SHA.
+- [x] GitHub Actions 43541512582: PASS, generated Happy PNG/GIF/metadata in V2 and live directories.
+- [x] Verified V2 and live PNG Git blob checksums are identical.
+- [ ] Manual 64/96/144px playback, smooth looping, dark/light composites and real-phone performance.
+- [ ] Transfer locally generated illustrated Alarm source to main and then run CI (not yet delivered).
+- [ ] Sleepy and Recovering original illustrated clips.

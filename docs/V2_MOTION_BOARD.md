@@ -8,7 +8,7 @@ Art baseline: design/STYLE_LOCK_V2.md. The approved look has a glossy, soft pink
 |---|---:|---|---|
 | remind | 12 | Notices alert → surprised O-mouth → raises hand → points at yellow bell → bell swings → hops → settles | V2 raster candidate committed |
 | idle | 8 | Two gentle inhale/exhale cycles, one authentic eye blink, hands relax, headphone gleam changes | V2 raster candidate committed (device review pending) |
-| happy | 12 | Eyes brighten, tiny cheek lift, two distinct hops, hands rise, sparkles, soft landing | Painted-pose montage candidate; replace with dedicated in-between frames before final art approval |
+| happy | 12 | Eyes brighten, tiny cheek lift, two distinct hops, hands rise, sparkles, soft landing | 12 new illustrated Glossy V2 poses committed, generated PNG/GIF verified by CI; human timing/phone review pending |
 | alarm | 12 | Wakes suddenly, genuine startled face, reaches toward clock, bell shakes, settles | Needs V2 illustration |
 | focus | 8 | Calm focused expression, looks down at desk/book, hands still, slow breathing | Needs V2 illustration |
 | study | 12 | Opens book, follows page, turns page, reacts to idea, looks back at book | Needs V2 illustration |
@@ -42,3 +42,9 @@ Existing 75 V1 structure-valid clips remain *old flat art* unless explicitly pro
 - `happy` (12 frames, 105ms) and `resting` (10 frames, 185ms) have PNG/WebP/GIF/metadata in V2 and live paths.
 - Source is recombination of existing genuine painted Idle/Overloaded key poses, **not** new frame-by-frame authored illustrations; motion and visual sign-off are pending. The locally generated standalone Happy sheet is an art experiment and not the same file as the repository candidate.
 - Validate 64px overlay, 96px widget, 144px in-app, transitions and reduced motion before treating these as production art.
+
+## Glossy illustrated Happy correction · 2026-11-14
+- The earlier `happy` source was a recombination of Idle/Overloaded frames. It is superseded by **12 separately illustrated glossy Happy poses** under `assets/characters-v2/brain/happy/sheet_illustrated.webp`.
+- Source SHA-256: `0de17ddd7099186a2993ad41a2477298a49c0d5f75b5d0a7fc9939add949f689`.
+- CI `glossy-illustrated-happy.yml` generated `sheet.png`, `preview.gif`, `metadata.json`, synced V2 and live paths, and validated all five active V2 states. This is NOT a phone-tested animation.
+- A new **Alarm V2** 12-frame source was created locally from original glossy illustrations; local geometry/frame QA passed, but **its binary source is not yet on main** and is not counted among active V2 states. Sleepy and Recovering dedicated illustrated sources remain pending.
