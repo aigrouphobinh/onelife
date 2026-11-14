@@ -12,7 +12,7 @@ Splash, Onboarding, Home, Tasks, Schedule, Habits/Brain Balance, Assistant, Char
 - Add/complete a **sample** task; animate task completion.
 - Change **sample** screen-time minutes and break goal; preview balanced/strained/overloaded/resting/recovering reactions.
 - Preview alert, reminder, thoughtful and focus states.
-- Character selector shows Brain V2 as the only current design-eligible mascot; the other four must be redrawn.
+- Character selector now **previews four real original Glossy master artworks** (Cat, Dog, Robot, Sprout), with explicit disabled/unavailable labels. Brain still is the **only mascot with animation candidate clips**. Four new masters have no animations yet; screenshots and cards must never imply otherwise.
 
 ## Technical honesty
 This is **not Flutter** and does not schedule alarms, monitor device usage, interact with overlays, call Gemini, or persist tasks. Sample values are labeled. Native Android/iOS permissions are not requested. No external CDN or paid API. Production integrations must follow \`docs/DESIGN_BRAIN.md\` and \`docs/BRAIN_BALANCE_DESIGN.md\`.

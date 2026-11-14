@@ -34,6 +34,11 @@ def main():
             page.evaluate("(name) => { const select=document.getElementById('page-select'); select.value=name; select.dispatchEvent(new Event('change',{bubbles:true})); }", name)
             page.wait_for_timeout(130)
             assert page.locator("#current-route").inner_text()==name.upper(),name
+            if name=="characters":
+                char_images=page.locator('.char-card img')
+                assert char_images.count()==5,"Must display Brain plus four original glossy masters"
+                assert all(char_images.nth(i).evaluate('(el)=>el.complete && el.naturalWidth>0') for i in range(5)),"Missing real character art"
+                assert page.locator('.char-card.preview-only').count()==4,"Do not imply four new mascots are selectable or animated"
             file=OUT/(name+"-mobile.png")
             page.screenshot(path=str(file),full_page=False,animations="disabled")
             manifest["screens"].append({"page":name,"viewport":"390×844","capture":"viewport",
