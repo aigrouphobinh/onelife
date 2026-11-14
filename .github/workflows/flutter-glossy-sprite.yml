@@ -9,6 +9,7 @@ on:
       - 'pubspec.yaml'
       - 'assets/characters-v2/dog/recovering/**'
       - 'assets/characters-v2/dog/focus/**'
+      - 'assets/characters-v2/dog/study/**'
       - '.github/workflows/flutter-glossy-sprite.yml'
   pull_request:
     paths:
@@ -17,6 +18,7 @@ on:
       - 'pubspec.yaml'
       - 'assets/characters-v2/dog/recovering/**'
       - 'assets/characters-v2/dog/focus/**'
+      - 'assets/characters-v2/dog/study/**'
       - '.github/workflows/flutter-glossy-sprite.yml'
   workflow_dispatch:
 
