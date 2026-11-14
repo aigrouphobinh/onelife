@@ -12,7 +12,7 @@ Splash, Onboarding, Home, Tasks, Schedule, Habits/Brain Balance, Assistant, Char
 - Add/complete a **sample** task; animate task completion.
 - Change **sample** screen-time minutes and break goal; preview balanced/strained/overloaded/resting/recovering reactions.
 - Preview alert, reminder, thoughtful and focus states.
-- Character selector now **previews four real original Glossy master artworks** (Cat, Dog, Robot, Sprout), with explicit disabled/unavailable labels. Brain still is the **only mascot with animation candidate clips**. Four new masters have no animations yet; screenshots and cards must never imply otherwise.
+- Character selector now **previews four real original Glossy master artworks** (Cat, Dog, Robot, Sprout), with explicit disabled/unavailable labels. Brain has **15 animation candidates**; Cat has **6 separately illustrated candidate clips (68 frames)** viewable in a dedicated reviewer. Dog/Robot/Sprout only have their glossy masters. No character has passed mobile art/device acceptance.
 
 ## Technical honesty
 This is **not Flutter** and does not schedule alarms, monitor device usage, interact with overlays, call Gemini, or persist tasks. Sample values are labeled. Native Android/iOS permissions are not requested. No external CDN or paid API. Production integrations must follow \`docs/DESIGN_BRAIN.md\` and \`docs/BRAIN_BALANCE_DESIGN.md\`.
@@ -22,4 +22,4 @@ The \`v2-prototype-preview.yml\` workflow checks JS syntax, opens all 10 pages w
 
 
 ## Cat animation proof (2026-11-14)
-The Characters card now links to `design/review/glossy-cat-idle.html`, which plays 8 original illustrated frames from committed PNG atlas. This is a design QA preview, not a selectable, fully functioning mascot in the app. The other 14 Cat states and 45 Dog/Robot/Sprout states are not generated.
+The Characters card links to `design/review/glossy-cat-idle.html`, which plays 6 original illustrated Cat states (Idle 8 frames; Remind/Alarm/Resting/Overloaded/Happy 12 frames each = 68 total) from committed PNG atlases. This is a QA preview, not a fully selectable, production-approved mascot. Cat has 9 missing states and Dog/Robot/Sprout have 45.

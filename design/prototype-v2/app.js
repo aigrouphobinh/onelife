@@ -52,13 +52,13 @@ function characters(){
   const cards=items.map(c=>'<div class="char-card '+(c.animated?'selected':'preview-only')+'">'
       +'<div class="figure"><img loading="lazy" src="'+c.asset+'" alt="'+escapeText(c.name)+' — Glossy V2"></div>'
       +'<strong>'+escapeText(c.name)+'</strong><small>'
-      +(c.animated?'15 animation ứng viên':c.id==='cat'?'Idle: 8 frame vẽ riêng · Chờ duyệt':'Chỉ có ảnh master — Chưa animation')
-      +'</small>'+(c.id==='cat'?'<p class="minor"><a href="../review/glossy-cat-idle.html">▶ Xem Cat Idle thật</a></p>':'')+'</div>').join('');
-  return intro("Chọn người bạn đồng hành","Cả 5 nhân vật có master Glossy V2; Brain có 15 clip ứng viên, Mèo có Idle 8 frame minh họa riêng, Chó/Robot/Mầm còn chờ animation.")
+      +(c.animated?'15 animation ứng viên':c.id==='cat'?'6 clip, 68 frame ứng viên · Chờ duyệt':'Chỉ có ảnh master — Chưa animation')
+      +'</small>'+(c.id==='cat'?'<p class="minor"><a href="../review/glossy-cat-idle.html">▶ Xem 6 animation Mèo</a></p>':'')+'</div>').join('');
+  return intro("Chọn người bạn đồng hành","Cả 5 nhân vật có master Glossy V2; Brain có 15 clip ứng viên, Mèo có 6 clip minh họa riêng (68 frame), Chó/Robot/Mầm còn chờ animation.")
     +'<div class="char-grid">'+cards+'</div>'
     +'<p class="muted minor" role="status">Các thẻ chỉ để xem trước. Chọn nhân vật thực tế sẽ khả dụng sau khi đủ animation, duyệt mỹ thuật và kiểm thử trên máy.</p>'
     +'<section class="card" style="margin-top:20px">'
-    +intro("Xem đủ 15 biểu cảm Brain","Đây là sprite Brain PNG thật. Mèo đã có thêm 8 frame Idle để duyệt tại thẻ riêng; Chó/Robot/Mầm mới có hình đại diện.")
+    +intro("Xem đủ 15 biểu cảm Brain","Đây là sprite Brain PNG thật. Mèo có 6 clip và 68 frame ứng viên để duyệt tại thẻ riêng; Chó/Robot/Mầm mới có hình đại diện.")
     +'<div class="row-between"><select class="states-select" id="state-select" data-state-select>'
     +Object.keys(states).map(s=>'<option value="'+s+'" '+(state===s?'selected':'')+'>'+s+'</option>').join('')
     +'</select><span class="micro">256px nguồn · 64px overlay</span></div><div class="screen-stage" style="margin-top:12px">'+canvas(220)+'</div></section>';

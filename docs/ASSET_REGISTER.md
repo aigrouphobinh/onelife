@@ -116,3 +116,9 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Original OneLife Cat Glossy Kawaii artwork; screenshot-like source removed via offline foreground segmentation to establish real transparency. No third-party media.
 - Narrative: user-defined screen-time goal reached, worried eyes, sweat, gentle brief overload, breathing and smile; **not a medical claim of brain damage**. Laptop prop from original brief replaced by a small purple phone to match mobile product.
 - Auto QA: frame geometry, per-frame transparency/clipping, adjacent pose differences and checksum; human 64px/96px/144px preview and phone battery testing pending.
+
+## Cat Happy illustrated source (2026-11-14)
+- Original OneLife glossy kawaii Cat art: 12 individually illustrated joyful poses, purple fur and consistent eyes/ears/cheeks, drawn for this project. No third-party asset was imported.
+- Compressed source: `assets/characters-v2/cat/happy/sheet_illustrated.webp`, SHA-256 `0bce152c501ac049b9ca892353c41b04036052b4e00e476ce2513dd38991f721`; Git blob `45c5dcc8a7410df1be2232bd85db7b56ee6cf0a1`.
+- 4×3 atlas of 256×256 RGBA cells. Generated original image had a near-white checker/white background; foreground segmentation and alpha matting were applied before importing WebP, then GitHub Actions generated runtime PNG, GIF and metadata.
+- Automated frame and alpha tests passed, however fine white-fringe cleanup, artistic consistency, jump-loop continuity, 64px appearance and real-device tests are **pending**. Not product-approved yet.
