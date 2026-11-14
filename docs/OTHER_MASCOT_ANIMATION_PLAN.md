@@ -45,3 +45,6 @@ Art reviewer must inspect 64/96/144px playback; device profiling on Android/iOS,
 
 ## Cat Resting visual reference (NOT AN ANIMATION)
 Two independently illustrated resting/sleepy key poses were extracted and alpha-matted from a generated concept image, and committed as `design/references/cat_resting_two_keyposes.webp`. They show the approved glossy cat curled on a pillow. **This is a 2-pose reference board, not an eight- or twelve-frame animation and NOT included in the 3/60 coverage count.** Use this as art reference for a truly separate no-alarm Cat Resting sprite sheet. Human alpha-edge QA is still pending.
+
+## Cat Strained / Overloaded concept poses (NOT ANIMATION)
+`design/references/cat_strained_overloaded_keyposes.webp` contains two non-transparent illustrated concept crops for stress expressions (mild strain and over-goal cartoon overload). They are useful for facial/body direction but are **not** independent frame-by-frame clips, are not in the animation catalog, and do not raise the technical coverage above **3/60**. Recreate final poses without baked-on text or background, then review non-shaming, non-clinical wording and small overlay legibility.

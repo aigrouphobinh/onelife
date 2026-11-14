@@ -101,3 +101,7 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 ## Cat Resting visual key poses (not completed animation)
 - `design/references/cat_resting_two_keyposes.webp`: two original glossy sleepy/resting Cat poses extracted from a OneLife image-generation concept, white/checkered matte removed into RGBA. SHA-256 `eb2bb12914d2f5fd5897f6c9f2b0ea8c1a54569f780522b329a78c4a732532c8`.
 - This is only a visual source to build a future Resting sprite and has not been approved as a finished animation or included in coverage.
+
+## Cat strained / overloaded visual references, NOT completed animations
+- `design/references/cat_strained_overloaded_keyposes.webp`: two original OneLife ChatGPT image-generated poses with purple pastel background from a larger concept board; SHA-256 `319640667c97a017804f6abef8c719bffcd456d26a05e461b122d95a3e589a10`.
+- Background is not transparent and this is not a sprite sheet. No medical inference or neurological damage claims. Do not import as runtime asset or count in coverage.
