@@ -11,9 +11,13 @@
     "remind": {
       "file": "assets/characters-v2/brain/remind/metadata.json",
       "frames": 12
+    },
+    "overloaded": {
+      "file": "assets/characters-v2/brain/overloaded/metadata.json",
+      "frames": 12
     }
   },
   "v1FallbackAllowed": true,
   "productionReady": false,
-  "note": "Only idle and remind are glossy; 13 other Brain states remain V1"
+  "note": "Glossy Brain V2 states idle, remind, overloaded; 12 others remain V1."
 }

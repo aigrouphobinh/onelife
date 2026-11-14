@@ -1,6 +1,12 @@
 {
   "characterId": "brain",
   "state": "overloaded",
+  "version": "2.0.0",
+  "artStyle": "glossy-kawaii-v2",
+  "source": "sheet.webp",
+  "runtimeAsset": "sheet.png",
+  "webPreviewAsset": "sheet.webp",
+  "preview": "preview.gif",
   "frames": 12,
   "columns": 4,
   "rows": 3,
@@ -10,9 +16,9 @@
   "loop": true,
   "anchorX": 0.5,
   "anchorY": 0.92,
-  "source": "sheet.svg",
-  "runtimeAsset": "sheet.png",
-  "preview": "preview.gif",
+  "sha256": "249f27886aabd7cc6716412ec05ea3062357cbe6417fd20e1b00f6d7a88a419c",
+  "sourceSha256": "e75d3b4c0b07c98c98161fa6141ae2331f04d732f5ce8bc4275c7039181d4f57",
   "licenseRef": "docs/ASSET_REGISTER.md",
-  "sha256": "0d2abd693051f461093c528b3d29731f23074afe896af5c8889a6348085ada4a"
+  "reviewStatus": "illustrated v2 candidate; human motion and real-device checks pending",
+  "interpretation": "Friendly metaphor for a user-defined break goal, not a medical diagnosis"
 }
