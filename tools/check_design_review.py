@@ -72,7 +72,26 @@ def main():
     assert info["frames"] == 12 and info["frameWidth"] == 256
     assert sha256((v2 / "remind/sheet.png").read_bytes()).hexdigest() == info["sha256"]
     assert (ROOT / "design/review/reports/asset-qa.md").is_file(), "Asset QA report must be committed first"
-    print("PASS design preview: JS syntax, 50 local atlas paths, 10 design screens, controls")
+    # Separate V2 preview is a user-facing design acceptance tool. Verify the
+    # *actual* seven glossy state selectors and playback code, not only V1.
+    glossy_html = (ROOT / "design/review/glossy-v2.html").read_text(encoding="utf-8")
+    glossy = Tags()
+    glossy.feed(glossy_html)
+    assert not glossy.external_scripts, "Glossy viewer must use local assets only"
+    assert len(glossy.scripts) == 1, "Glossy viewer needs one inline script"
+    for control in ("motion", "sprite", "seek", "play", "next", "restart", "duration"):
+        assert control in glossy.ids, f"Missing Glossy V2 viewer control {control}"
+    for st in ("idle", "remind", "overloaded", "happy", "resting", "alarm", "sleepy"):
+        assert f'value="{st}"' in glossy_html, f"Missing Glossy V2 selector {st}"
+        assert (v2 / st / "sheet.png").is_file(), f"Missing Glossy V2 atlas {st}"
+    run = subprocess.run(["node", "--check", "-"], input=glossy.scripts[0],
+                         text=True, capture_output=True)
+    assert run.returncode == 0, "Glossy viewer JavaScript syntax failed:\\n" + run.stderr
+    manifest = json.loads((v2 / "manifest.json").read_text(encoding="utf-8"))
+    assert len(manifest["states"]) == 7, "Glossy V2 count must be 7 before adding states"
+    assert sum(st["frames"] for st in manifest["states"].values()) == 78
+    print("PASS design preview: 7 real Glossy V2 sprites, JS syntax, local controls and 10 screens")
+
 
 if __name__ == "__main__":
     main()
