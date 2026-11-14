@@ -16,10 +16,10 @@ input{accent-color:var(--accent);flex:1;min-width:120px}label,small{color:var(--
 </style></head>
 <body data-theme="light"><main>
 <h1>🐶 Cún Cam · Glossy V2</h1>
-<p>Xem sprite PNG thật: Idle (8 frame, lặp), Remind (12 frame), Alarm (12 frame) và Resting (12 frame, lặp). Remind và Alarm chạy một lần; Resting còn phải duyệt độ mượt vòng lặp. Đây là ứng viên mỹ thuật chưa kiểm thử Flutter hoặc điện thoại.</p>
+<p>Xem sprite PNG thật: Idle (8 frame, lặp), Remind (12 frame), Alarm (12 frame), Resting (12 frame, lặp) và Overloaded (12 frame). Remind, Alarm và Overloaded chạy một lần; Resting còn phải duyệt độ mượt vòng lặp. Đây là ứng viên mỹ thuật chưa kiểm thử Flutter hoặc điện thoại.</p>
 <div class="card">
 <div class="controls">
-<label for="state">Trạng thái</label><select id="state" aria-label="Chọn hoạt ảnh"><option value="idle">Idle · Bình thường</option><option value="remind">Remind · Nhắc việc</option><option value="alarm">Alarm · Báo thức</option><option value="resting">Resting · Nghỉ ngơi</option></select>
+<label for="state">Trạng thái</label><select id="state" aria-label="Chọn hoạt ảnh"><option value="idle">Idle · Bình thường</option><option value="remind">Remind · Nhắc việc</option><option value="alarm">Alarm · Báo thức</option><option value="resting">Resting · Nghỉ ngơi</option><option value="overloaded">Overloaded · Nhắc nghỉ nhẹ</option></select>
 <label for="size">Kích thước</label><select id="size" aria-label="Kích thước hiển thị"><option value="256">256px</option><option value="144">144px</option><option value="96">96px</option><option value="64">64px</option></select>
 </div>
 <div class="stage"><canvas id="preview" width="256" height="256" role="img" aria-label="Xem từng tư thế của Cún Cam"></canvas></div>
@@ -38,7 +38,8 @@ const sources={
  idle:{src:'../../assets/characters-v2/dog/idle/sheet.png',frames:8,ms:150,loop:true,label:'Idle'},
  remind:{src:'../../assets/characters-v2/dog/remind/sheet.png',frames:12,ms:125,loop:false,label:'Remind'},
  alarm:{src:'../../assets/characters-v2/dog/alarm/sheet.png',frames:12,ms:110,loop:false,label:'Alarm'},
- resting:{src:'../../assets/characters-v2/dog/resting/sheet.png',frames:12,ms:200,loop:true,label:'Resting'}
+ resting:{src:'../../assets/characters-v2/dog/resting/sheet.png',frames:12,ms:200,loop:true,label:'Resting'},
+ overloaded:{src:'../../assets/characters-v2/dog/overloaded/sheet.png',frames:12,ms:150,loop:false,label:'Overloaded'}
 };
 const reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let mode='idle',frames=8,frame=0,ms=150,loop=true,loaded=false,playing=!reduced,last=0,elapsed=0,sequence=0;

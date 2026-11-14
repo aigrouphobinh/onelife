@@ -195,3 +195,8 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Source: `assets/characters-v2/dog/resting/sheet_illustrated.webp`; local SHA-256: `79c4cd1e976d4aaa122d43a33656e247b808b1a307d6e12d14d037d3d304e34d`.
 - 12 illustrated frames, 4×3, 256×256 per frame; 200ms looping preview, lilac cushion, no clock/notification.
 - OpenAI-generated character art subject to applicable service terms, not CC0/MIT. Local geometry/visible-motion QA passed. **11→0 seam** remains to polish (measured RMS 65.64, 1.35× median neighboring changes). Full-resolution source and human/device visual acceptance are pending.
+
+## Dog Overloaded Glossy V2 candidate (2026-11-15)
+- OneLife project original illustrated 12-pose Dog mascot generated for gentle optional screen-break nudge, consistent with Dog master; no third-party stock artwork.
+- Processed white source matte into true RGBA, 4×3 cells at 256×256; source: `assets/characters-v2/dog/overloaded/sheet_illustrated.webp` (SHA-256 `122b3e9c42c2322fd99d45383df1a2ea77b7180932b044ba7966dd88ee7c5f12`).
+- 150ms/frame, one-shot; no clock, injury or medical claim. Generated art governed by applicable image-generation service terms, not CC0. Automated local checks passed; actual phone performance and human art sign-off pending.

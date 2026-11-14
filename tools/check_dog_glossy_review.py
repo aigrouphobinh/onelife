@@ -135,6 +135,37 @@ def main():
         seam=sum(ImageStat.Stat(ImageChops.difference(visible(frames[-1]),visible(frames[0]))).rms)/3
         print(f'PASS Dog Resting: 12 distinct poses, loop preview; seam RMS {seam:.2f} pending art review')
 
+
+    # Dog Overloaded is a gentle, user-configured screen-break cue, NOT a medical diagnosis.
+    overload = [e for e in catalog['animationSources'] if e['characterId']=='dog' and e['state']=='overloaded']
+    if overload:
+        assert len(overload) == 1, 'Duplicate dog/overloaded source'
+        folder = ROOT/'assets/characters-v2/dog/overloaded'
+        spec = overload[0]
+        meta = json.loads((folder/'metadata.json').read_text())
+        report = json.loads((folder/'qa_report.json').read_text())
+        assert sha(folder/'sheet_illustrated.webp') == spec['sourceSha256'] == meta['sourceSha256']
+        assert sha(folder/'sheet.png') == meta['sha256']
+        assert meta['frames'] == 12 and meta['columns'] == 4 and meta['rows'] == 3
+        assert meta['frameDurationMs'] == 150 and meta['loop'] is False
+        assert report['passed'] and report['previewLoop'] == 'once'
+        with Image.open(folder/'sheet.png') as sheet:
+            assert sheet.size == (1024,768)
+            atlas = sheet.convert('RGBA')
+        frames = [atlas.crop(((i%4)*256,(i//4)*256,((i%4)+1)*256,((i//4)+1)*256)) for i in range(12)]
+        for i, frame in enumerate(frames):
+            bbox = frame.getchannel('A').getbbox()
+            assert bbox and min(bbox[0],bbox[1],256-bbox[2],256-bbox[3]) >= 2, f'Dog Overloaded clipped frame {i}'
+            assert frame.getpixel((0,0))[3] <= 20, f'Dog Overloaded opaque corner frame {i}'
+        for i,(left,right) in enumerate(zip(frames, frames[1:])):
+            rms = sum(ImageStat.Stat(ImageChops.difference(visible(left), visible(right))).rms)/3
+            assert rms >= 2, f'Dog Overloaded near-duplicate {i}->{i+1}'
+        with Image.open(folder/'preview.gif') as gif:
+            assert gif.n_frames == 12 and gif.info.get('loop') is None
+        assert '../../assets/characters-v2/dog/overloaded/sheet.png' in html
+        assert 'value="overloaded"' in html
+        print('PASS Dog Overloaded V2: 12 poses, one-shot, source hash verified; art/mobile QA pending')
+
     print(f'PASS Dog Idle glossy V2: 8 frames, 7 changing neighbors, min visible RMS {min(motion):.2f}; review and phone QA pending')
 
 if __name__=='__main__': main()

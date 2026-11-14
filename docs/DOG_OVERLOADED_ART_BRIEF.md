@@ -1,6 +1,6 @@
 # OneLife — Dog Overloaded Glossy V2 · Production brief
 
-**Status:** art source NOT created, 0/1 Dog Overloaded animation. This specification is not a completed sprite.
+**Status (2026-11-15):** Source image imported as an illustrated **candidate**, pending GitHub-rendered PNG/GIF QA and human/device art sign-off; do not claim release-ready.
 
 ## Visual identity and behavior
 - Use actual `assets/characters-v2/dog/master.webp` warm golden-apricot dog, soft floppy ears, cream forelock/belly/paws and expressive brown eyes.
@@ -28,3 +28,9 @@
 - Register in `assets/characters-v2/animation_sources.json`; verify CI-generated PNG, GIF, manifest, metadata and coverage.
 - Distinguish automatic geometric QA from artistic QA at 64/96/144px and on-device performance. Do not count this state until source is committed and renderer succeeded.
 - Screen-time feedback should be opt-in and user-configurable; do not suggest diagnosing a damaged brain.
+
+## Source record
+- 12 original illustrated poses imported at `assets/characters-v2/dog/overloaded/sheet_illustrated.webp`.
+- Verified source SHA-256 `122b3e9c42c2322fd99d45383df1a2ea77b7180932b044ba7966dd88ee7c5f12` from generated RGBA WebP; derived at 1024×768, 4×3 cells.
+- Source was automatically matted from a white illustration; check subtle white halos, color continuity and acting at 64px.
+- Usage-access permission, quiet hours, opt-in, cooldown and Flutter behavior remain future implementation; these image assets do not implement monitoring.
