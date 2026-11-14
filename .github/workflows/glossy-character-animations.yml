@@ -8,6 +8,7 @@ on:
       - 'tools/render_glossy_character_animation.py'
       - 'design/review/glossy-cat-idle.html'
       - 'tools/check_cat_glossy_review.py'
+      - 'tools/render_cat_glossy_contact.py'
       - '.github/workflows/glossy-character-animations.yml'
 permissions:
   contents: write
@@ -30,6 +31,7 @@ jobs:
         run: |
           python tools/check_mascot_coverage.py
           python tools/check_cat_glossy_review.py
+          python tools/render_cat_glossy_contact.py
       - name: Commit generated RGBA atlases and QA to main
         shell: bash
         run: |
@@ -37,6 +39,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add assets/characters-v2
           git add docs/OTHER_MASCOT_COVERAGE.md design/review/reports/other-mascot-coverage.json
+          git add design/review/cat-glossy-v2-contact.png
           if git diff --cached --quiet; then
             echo 'Assets already up to date'
           else
