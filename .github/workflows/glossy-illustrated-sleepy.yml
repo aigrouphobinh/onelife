@@ -1,0 +1,49 @@
+name: Glossy illustrated Sleepy V2
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'assets/characters-v2/brain/sleepy/sheet_illustrated.webp'
+      - 'tools/render_illustrated_sleepy_v2.py'
+      - '.github/workflows/glossy-illustrated-sleepy.yml'
+permissions:
+  contents: write
+concurrency:
+  group: onelife-illustrated-sleepy
+  cancel-in-progress: false
+jobs:
+  render:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check 'Pillow==11.0.0'
+      - name: Convert original 12 poses to PNG/GIF and validate
+        run: |
+          python tools/render_illustrated_sleepy_v2.py
+          python tools/check_glossy_v2_assets.py
+      - name: Publish validated glossy animation directly to main
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/characters-v2/brain/sleepy assets/characters-v2/brain/manifest.json
+          git add assets/characters/brain/sleepy assets/characters/brain/manifest.json
+          if git diff --cached --quiet; then
+            echo 'No changes'
+          else
+            git commit -m 'assets: export illustrated Sleepy V2 runtime atlases [skip ci]'
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                echo 'Verified Sleepy V2 committed'
+                break
+              fi
+              if [ "$attempt" -eq 3 ]; then exit 1; fi
+              sleep 3
+            done
+          fi
