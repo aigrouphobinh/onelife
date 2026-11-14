@@ -45,7 +45,7 @@ int glossyFrameIndex(double progress, int frames) {
   assert(frames > 0);
   if (!progress.isFinite || progress <= 0) return 0;
   if (progress >= 1) return frames - 1;
-  return (progress * frames).floor().clamp(0, frames - 1);
+  return (progress * frames).floor();
 }
 
 /// Paints only the selected PNG atlas rectangle. Never paints a background,
