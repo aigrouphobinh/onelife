@@ -10,9 +10,10 @@
 - **Cat/overloaded:** twelve independently illustrated stress/wellbeing metaphor poses, WebP/PNG/GIF on main; non-medical, human QA pending.
 - **Cat/happy:** twelve newly illustrated joyful poses (jump, wave, sparkle, calm return), 105 ms/frame, WebP/PNG/GIF on main; human QA pending.
 - **Cat/sleepy:** 12 original sleepy poses (half-lidded eyes, yawn, nod, curled sleep), 185 ms/frame and loop; imported glossy source candidate, requires human/device sign-off.
-- **Cat remaining:** recovering, focus, study, done, thinking, sad, balanced, strained: 8 state-specific animation sources still missing.
+- **Cat/recovering:** 12 original illustrated waking poses ordered from curled sleep to open eyes, stretch and cheerful return, 115 ms/frame, one-shot; visual/device QA pending.
+- **Cat remaining:** focus, study, done, thinking, sad, balanced, strained: 7 state-specific animation sources still missing.
 - **Dog/Robot/Sprout:** all 15 character-specific state clips still missing.
-- Total required: 60 illustrated state clips. Cat now has 7/15 sourced candidates (80 frames) *after source/render verification*; 7/60 original candidates across four non-Brain characters, 53 remain. Human/device QA not done. The existing V1 SVG art is NOT counted as Glossy V2.
+- Total required: 60 illustrated state clips. Cat now has 8/15 sourced candidates (92 frames) after GitHub renderer verification; 8/60 original candidates across four non-Brain characters, 52 remain. Art and device approval pending. Human/device QA not done. The existing V1 SVG art is NOT counted as Glossy V2.
 
 ## Per-state direction (distinct body acting, not one image with rotation)
 | State | Cat | Dog | Robot | Sprout |

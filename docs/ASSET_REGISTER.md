@@ -128,3 +128,8 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Source: `assets/characters-v2/cat/sleepy/sheet_illustrated.webp` (1024×768 RGBA); SHA-256 `3f6d387a8b0bad6346feae15197c32442a8b2b58c2e3708801a899e12d2ef228`.
 - Process: generated 4×3 image; removed baked near-white checkerboard matte per tile; standardized to 256×256 RGBA cells; PNG and GIF deterministically exported by `tools/render_glossy_character_animation.py`.
 - 185 ms/frame; intended looping sleepy/rest sequence. Automated alpha, boundary, frame-uniqueness and source integrity checks; visual QA, small-size dark-mode, device power testing pending. Refer to `docs/CAT_SLEEPY_ART_BRIEF.md`.
+
+## Cat Recovering – original Glossy V2 source, 2026-11-14
+- Cat recovery animation: 12 distinct key poses selected and ordered from a generated original glossy character sheet (sleeping, stirring, yawning, eyes opening, sitting and smiling); **not** synthetic one-frame body transforms. 4×3 256px RGBA frames.
+- `assets/characters-v2/cat/recovering/sheet_illustrated.webp`; source SHA-256 `b5c6b28a0f096424d80d281ded5187bacdf84814aecded4ff00855ba56a344a5`.
+- 115 ms/frame, non-looping one-shot. Emblematic illustration of taking a break, **not** physiological brain healing. Source image generated for OneLife, then manually reordered and background-matted; human/phone QA still pending.
