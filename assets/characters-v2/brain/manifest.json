@@ -27,6 +27,6 @@
   },
   "v1FallbackAllowed": true,
   "productionReady": false,
-  "note": "Glossy V2 present for idle, remind, overloaded, happy, resting; 10 states remain V1; Happy/Resting are montage candidates.",
-  "artReview": "Happy original 12 illustrated poses require human and device review; Resting still montage"
+  "note": "Glossy V2 present for idle, remind, overloaded, happy, resting; Happy is original illustrated, Resting still uses montage; 10 states remain V1.",
+  "artReview": "Happy is original illustrated; Resting is a painted key-pose montage pending original in-betweens"
 }
