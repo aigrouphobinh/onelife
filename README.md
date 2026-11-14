@@ -2,10 +2,11 @@
 
 ## Current asset-first production checkpoint (2026-11-15)
 
-**Source-illustration coverage: 23/60 clips (37 missing)**, verified from `assets/characters-v2/animation_sources.json` on `main`. This measures original illustration sources, **not** approved or production-ready animations. `docs/NEXT_AUTO_TASK.md` is auto-generated and may lag until its next scheduled update.
+**Source-illustration coverage: 24/60 clips (36 missing)**, verified from `assets/characters-v2/animation_sources.json` on `main`. This measures original illustration sources, **not** approved or production-ready animations. `docs/NEXT_AUTO_TASK.md` is auto-generated and may lag until its next scheduled update.
 
-- Cat: 15/15 source clips; Dog: 8/15 including Recovering; Robot and Sprout: 0/15 each. The existing Brain pack is tracked separately from this 60-clip migration.
-- **Dog Recovering imported on `main`:** original Glossy Kawaii 12-frame WebP with **real alpha**, 1024×768, verified SHA-256, generated PNG/GIF/metadata and QA. Its `productionReady` remains false pending visual and device review. [Review details](docs/DOG_RECOVERING_CANDIDATE_REVIEW.md).
+- Cat: 15/15 source clips; Dog: 9/15 including Recovering and Focus; Robot and Sprout: 0/15 each. The existing Brain pack is tracked separately from this 60-clip migration.
+- **Dog Recovering and Dog Focus imported on `main`:** both original Glossy Kawaii 12-frame WebP atlases have **real alpha**, verified source hashes, generated PNG/GIF/metadata and QA. Their `productionReady` remains false pending visual/device review. [Recovering review](docs/DOG_RECOVERING_CANDIDATE_REVIEW.md) · [Focus review](docs/DOG_FOCUS_ART_BRIEF.md).
+- **Actual Flutter runtime slice:** `HomePage` now displays the transparent Dog mascot and toggles between Recovering and Focus, using `GlossySprite` frame painting, one-shot timing, replay, and reduced-motion support. This is not the full ten-page Flutter design.
 - Keep the **Glossy Kawaii V2** master identity and real frame-by-frame movement. Do not fill missing frames with transformed stills, placeholders, or an unlabeled poster.
 - Run source provenance, SHA-256 registration, sprite render and visual QA gates before promoting coverage. No device art approval, Flutter runtime, or production release is implied by passing GitHub Actions.
 - **Flutter runtime integration started:** `lib/src/glossy_sprite.dart` now loads the real transparent `dog/recovering/sheet.png` from the Flutter asset bundle and paints individual RGBA frames. The Home page displays the mascot with replay; one-shot timing, accessibility semantics and reduced-motion support are implemented. `test/glossy_sprite_test.dart` and `.github/workflows/flutter-glossy-sprite.yml` provide smoke checks. Flutter CI and real phone sign-off have not been verified yet.
@@ -23,7 +24,7 @@
 - [Style Lock V2](design/STYLE_LOCK_V2.md) · [Brain Balance rules](docs/BRAIN_BALANCE_DESIGN.md)
 - [Visual and device QA gates](docs/ART_DIRECTION_REVIEW.md)
 
-**Nghiệm thu:** GitHub Actions kiểm thử cấu trúc và ảnh đã PASS. Trong 15 clip Brain, có 8 clip được xây dựng từ các tư thế Glossy đã có (composite) và cần vẽ các frame độc lập trước khi duyệt mỹ thuật cuối. **4 nhân vật Mèo/Chó/Robot/Mầm xanh chưa được chuyển sang phong cách V2**, theo Issues [#31](https://github.com/aigrouphobinh/onelife/issues/31), [#32](https://github.com/aigrouphobinh/onelife/issues/32), [#33](https://github.com/aigrouphobinh/onelife/issues/33), [#34](https://github.com/aigrouphobinh/onelife/issues/34).
+**Nghiệm thu:** GitHub Actions kiểm thử cấu trúc và ảnh đã PASS. Trong 15 clip Brain, có 8 clip được xây dựng từ các tư thế Glossy đã có (composite) và cần vẽ các frame độc lập trước khi duyệt mỹ thuật cuối. **Tiến độ hiện tại: Mèo 15/15, Chó 9/15, Robot 0/15 và Mầm xanh 0/15 nguồn clip (chưa nghiệm thu thiết bị)**, theo Issues [#31](https://github.com/aigrouphobinh/onelife/issues/31), [#32](https://github.com/aigrouphobinh/onelife/issues/32), [#33](https://github.com/aigrouphobinh/onelife/issues/33), [#34](https://github.com/aigrouphobinh/onelife/issues/34).
 
 **Chưa hoàn thành:** phần lớn Flutter runtime (mới tích hợp widget sprite cho Home), Android UsageStats/overlay/báo thức, iOS Screen Time (giới hạn quyền), AI offline, Gemini tùy chọn, kiểm thử pin và phát hành store.
 
