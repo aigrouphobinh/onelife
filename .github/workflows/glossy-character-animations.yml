@@ -10,6 +10,8 @@ on:
       - 'tools/pack_glossy_frames.py'
       - 'tools/check_glossy_source_catalog.py'
       - 'design/review/glossy-cat-idle.html'
+      - 'design/review/glossy-dog-idle.html'
+      - 'tools/check_dog_glossy_review.py'
       - 'tools/check_cat_glossy_review.py'
       - 'tools/render_cat_glossy_contact.py'
       - '.github/workflows/glossy-character-animations.yml'
@@ -37,6 +39,8 @@ jobs:
           python -m unittest discover -s tools -p 'test_visible_sprite_motion.py' -v
       - name: Render and validate original illustrated frames
         run: python tools/render_glossy_character_animation.py
+      - name: Verify Dog Idle original sprite and review
+        run: python tools/check_dog_glossy_review.py
       - name: Update coverage from newly rendered assets (avoid stale reports)
         run: |
           # Sync Cat viewer options/playback and NEXT_AUTO_TASK before strict QA.
