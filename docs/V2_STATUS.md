@@ -1,48 +1,45 @@
-# OneLife – Brain Glossy V2 verified asset status (2026-11-14)
+# OneLife – Brain Glossy V2 status (2026-11-14)
 
-**Source of truth:** `assets/characters-v2/brain/manifest.json` plus `design/review/glossy-v2.html`. Never use promotional images or outdated README percentages as evidence of actual delivery.
+**15/15 trạng thái có asset V2 trên main; 156 khung hình; sản phẩm chưa được nghiệm thu mỹ thuật hoặc kiểm thử điện thoại.**
 
-## Active states (8/15, 90 frames)
+## Bảy clip Glossy đã tạo trước đó
 
-| State | Frames | Art source | Delivery | Art/device review |
-| --- | ---: | --- | --- | --- |
-| idle | 8 | Glossy V2 raster | Active PNG/GIF on main | Pending |
-| remind | 12 | Glossy V2 raster | Active PNG/GIF on main | Pending |
-| overloaded | 12 | Illustrated glossy V2 | Active PNG/GIF on main | Pending |
-| happy | 12 | Illustrated glossy V2 | Active PNG/GIF on main | Pending |
-| resting | 10 | Glossy key-pose montage | Active PNG/GIF on main, needs dedicated in-betweens | Pending |
-| alarm | 12 | Illustrated glossy V2 | Active PNG/GIF on main | Pending |
-| sleepy | 12 | Illustrated glossy V2 | Active PNG/GIF on main | Pending |
-| recovering | 12 | Original illustrated Glossy V2; alpha-reconstructed source | Active PNG/GIF in both V2 and live paths (CI verified) | Pending |
+| Trạng thái | Frame | Kiểu tạo | Trạng thái |
+|---|---:|---|---|
+| idle | 8 | Glossy painted raster | Đã có trên GitHub, chưa duyệt thiết bị |
+| remind | 12 | Glossy painted raster | Chưa duyệt thiết bị |
+| happy | 12 | 12 illustrated key poses | Chưa duyệt thiết bị |
+| overloaded | 12 | 12 illustrated key poses | Chưa duyệt thiết bị |
+| alarm | 12 | 12 illustrated key poses | Chưa duyệt thiết bị |
+| sleepy | 12 | 12 illustrated key poses | Chưa duyệt thiết bị |
+| recovering | 12 | 12 illustrated key poses | Chưa duyệt thiết bị |
 
-## Next art assets (7 not yet on V2)
-- `focus`: calm concentration, book/screen attention
-- `study`: reading and page turns
-- `done`: distinct positive achievement action
-- `thinking`: reflective gaze and thought bubble
-- `sad`: gentle empathetic response, never shaming
-- `balanced`: calm and cheerful personal-goal visualization
-- `strained`: gentle tiredness, no clinical diagnosis
+## 8 clip ứng viên ghép từ tư thế Glossy có sẵn
 
-The latest generated "all completed" infographic is **not** a runnable asset and must not count toward the manifest.
+| State | Frame | Đặc điểm riêng |
+|---|---:|---|
+| focus | 8 | Chú ý bàn làm việc, máy tính |
+| study | 12 | Sách mở và lật trang |
+| done | 12 | Dấu tích, ánh sao chúc mừng |
+| thinking | 8 | Ô suy nghĩ, dấu hỏi và góc nhìn |
+| sad | 8 | Biểu cảm đồng cảm, giọt nước mắt nhỏ |
+| balanced | 8 | Ánh xanh dịu, nhịp cân bằng |
+| strained | 10 | Mệt nhẹ, giọt mồ hôi, không chuẩn đoán bệnh |
+| resting | 10 | Đệm nghỉ, thở chậm, chuyển động nhẹ |
 
-## Validation evidence
-- `glossy-illustrated-alarm.yml` run 43543232807: PASS.
-- `glossy-illustrated-sleepy.yml` run 43544289860: PASS.
-- `mascot-assets.yml` uses protected V2 overrides and updated 156-frame Brain total: latest run PASS.
-- `tools/check_design_assets.py` and `tools/check_glossy_v2_assets.py`: 75 clips, 764 active frames, 7 V2 states, zero automated errors/warnings.
-- Art/device QA and iOS/Android runtime tests: **NOT DONE**.
+Tất cả tám clip này dùng nguồn ảnh bóng có sẵn, **không phải animation minh họa độc lập vẽ mới**. Metadata ghi `generationClass=derived-pose-composite`. Về mỹ thuật, chỉ tính là **candidate**.
 
-## Exit gates
-Do not migrate to Flutter until manually reviewed at 64/96/144 logical pixels with light/dark background, reduced-motion stills, loop continuity, CPU/battery tests, and permissions. Source artwork alone cannot prove these requirements.
+## Tổng hợp
 
-## Recovering source imported on main (2026-11-14)
-- User-aligned glossy Brain frame sheet (`assets/characters-v2/brain/recovering/sheet_illustrated.webp`), 12 original illustrated poses; WebP SHA-256 `1dd19bf59a36c511b28045b9e1f625d968c395bd387710f5c076d43fee51eff4`.
-- Generated from an original high-resolution sheet with a simulated checkerboard; alpha reconstructed using edge-connected background removal, with transparent frame geometry tested locally.
-- `tools/render_illustrated_recovering_v2.py` and GitHub Actions generate PNG, GIF, metadata and mirrors. Local QA passed; check CI before claiming GitHub output present.
-- 8/15 is an asset *candidate* count, not artist/device approval.
+- 7 clip raster Glossy V2 có nguồn tư thế riêng hoặc nguồn đã tạo từ trước: 80 frame.
+- 8 clip review composite: 76 frame.
+- Tổng: 15 clip, 156 frame; 15 sheet PNG + WebP + GIF + metadata ở `assets/characters-v2/brain`, mirror ở `assets/characters/brain`.
+- `productionReady=false`. Không sử dụng 15/15 như bằng chứng tính năng đã hoàn thành trên Flutter.
+- Cần art review 64px/96px/144px; chuyển động loop, pin, accessibility; 4 nhân vật còn lại chưa Glossy V2; native usage tracking chưa xây dựng.
 
-## Rechecked CI status
-- Glossy illustrated Recovering V2 workflow [run 43546460627](https://github.com/aigrouphobinh/onelife/actions/runs/43546460627) passed; PNG/GIF, metadata and live copy verified by GitHub readback.
-- Same-commit QA checks failed because they started before the renderer published new binaries. The post-render QA checks are triggered by this follow-up commit. Do not interpret those earlier pre-render failures as successful tests.
-- No Android/iOS device measurement or manual visual acceptance yet.
+## Công cụ
+
+- `tools/build_brain_v2_remaining.py` là pipeline có thể tái lập cho 8 clip composited.
+- `design/review/glossy-v2.html` xem đủ 15 clip.
+- `tools/check_glossy_v2_assets.py` là QA kỹ thuật.
+- Nguồn gốc/giới hạn minh họa được ghi trong `docs/ASSET_REGISTER.md`.

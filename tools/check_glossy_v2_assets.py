@@ -52,8 +52,8 @@ def validate_clip(folder:Path, state:str):
 def main():
     manifest=json.loads((STAGING/"manifest.json").read_text(encoding="utf-8"))
     states=manifest["states"]
-    assert {"idle","remind","overloaded","happy","resting","alarm","sleepy","recovering"}<=set(states),states
-    assert len(states)==8,f"Unexpected glossy state count {len(states)}"
+    assert {"idle","remind","overloaded","happy","resting","alarm","sleepy","recovering","focus","study","done","thinking","sad","balanced","strained"}==set(states),states
+    assert len(states)==15,f"Expected 15 glossy state clips, found {len(states)}"
     for folder in (STAGING,LIVE):
         with Image.open(folder/"master.png") as image:
             assert image.mode=="RGBA" and image.width==image.height>=256
@@ -63,8 +63,8 @@ def main():
             assert staged["sha256"]==versioned["sha256"],(folder,state)
             assert sha(folder/state/"sheet.png")==sha(STAGING/state/"sheet.png")
     count=sum(json.loads((STAGING/state/"metadata.json").read_text())["frames"] for state in states)
-    assert count==90, f"Expected 90 V2 Brain frames, found {count}"
+    assert count==156, f"Expected 156 V2 Brain frames, found {count}"
     assert manifest.get("productionReady") is False, "V2 must not be marked production-ready without device/art review"
-    print(f"PASS: {len(states)}/15 glossy V2 Brain states, {count} frames; Resting montage candidate; 7 states remain V1")
+    print(f"PASS: {len(states)}/15 glossy Brain V2 review states, {count} frames; composited artwork needs manual review")
 if __name__=="__main__":
     main()

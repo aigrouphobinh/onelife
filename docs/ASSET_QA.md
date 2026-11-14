@@ -102,3 +102,11 @@ Production visual candidate uses assets/characters/brain/master.png (640×640) a
 - [ ] Manual 64/96/144px playback, smooth looping, dark/light composites and real-phone performance.
 - [ ] Transfer locally generated illustrated Alarm source to main and then run CI (not yet delivered).
 - [ ] Sleepy and Recovering original illustrated clips.
+
+## Full 15-state Brain V2 candidate QA (2026-11-14)
+- [x] All 15 state keys have PNG, WebP, GIF and metadata after rendering.
+- [x] 156 total Brain V2 frames; source SHA and mirroring checked in CI.
+- [ ] Human art review of eight composite clips (Focus, Study, Done, Thinking, Sad, Balanced, Strained, Resting), and dedicated independently illustrated animation where quality falls short.
+- [ ] Real Android/iOS device motion, battery and accessibility tests.
+- [ ] Upgrade Cat, Dog, Robot and Sprout to Glossy V2.
+- [ ] Do not mark the app or all character assets as production-ready.

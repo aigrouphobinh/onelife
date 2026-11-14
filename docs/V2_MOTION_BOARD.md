@@ -68,3 +68,6 @@ Existing 75 V1 structure-valid clips remain *old flat art* unless explicitly pro
 ## CI sequencing safeguard
 - When V2 `sheet_illustrated.webp` exists but runtime metadata is still V1, `tools/generate_character_assets.py` **skips V1 replacement**. The illustrated V2 renderer owns PNG/GIF and metadata. Prevents races when two GitHub Actions run simultaneously.
 - Verified generated Recovering files on `main`; asset QA must be re-run after binaries land.
+
+## 2026-11-14 – Candidate full 15-state manifest
+Assets for Focus (8), Study (12), Done (12), Thinking (8), Sad (8), Balanced (8), Strained (10) and Resting rework (10) are available as PNG/WebP/GIF+metadata via `tools/build_brain_v2_remaining.py`. These are **composites of existing illustrated Glossy poses**, NOT individually illustrated final frame-by-frame assets. The 15/15 source manifest is technically complete but **art quality is not approved**. See `docs/V2_STATUS.md` and Issue #28.

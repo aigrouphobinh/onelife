@@ -43,3 +43,6 @@
 
 ## Visual review decision: 2026-11-14
 **V1 art direction FAIL / superseded**: User explicitly rejected the flat SVG-derived Brain compared with the original glossy kawaii concept. All V1 structural tests remain technically valid; they do not validate visual fidelity. See [design/STYLE_LOCK_V2.md](../design/STYLE_LOCK_V2.md). The v2 master and animation assets must receive user review before replacing runtime art. P0 issue: #28.
+
+## 2026-11-14 – All Brain states exported, design approval still open
+The Brain V2 manifest includes 15 states / 156 frames. Eight of these (`focus`, `study`, `done`, `thinking`, `sad`, `balanced`, `strained`, `resting`) are pose-composite review candidates, not full new drawings. They need replacement with individually illustrated in-betweens when manual playback fails the glossy art standard. The four other selectable characters are still V1 art. Keep design sign-off open.
