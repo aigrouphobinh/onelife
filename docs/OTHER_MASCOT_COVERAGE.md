@@ -3,22 +3,22 @@
 **This report measures files, NOT finished product quality.**
 
 - Required: **60** clips = 4 characters × 15 states.
-- Original illustrated candidates: **25**.
+- Original illustrated candidates: **27**.
 - Derived-pose candidates (not independently illustrated): **0**.
-- Missing: **35**.
+- Missing: **33**.
 - Art approved on mobile: **0** (not independently tested).
 
 | Character | Original | Derived | Missing |
 |---|---:|---:|---:|
 | cat | 15 | 0 | 0 |
-| dog | 10 | 0 | 5 |
+| dog | 12 | 0 | 3 |
 | robot | 0 | 0 | 15 |
 | sprout | 0 | 0 | 15 |
 
 ## Missing states
 
 - **cat:** none
-- **dog:** done, thinking, sad, balanced, strained
+- **dog:** sad, balanced, strained
 - **robot:** idle, remind, alarm, happy, overloaded, resting, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained
 - **sprout:** idle, remind, alarm, happy, overloaded, resting, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained
 
