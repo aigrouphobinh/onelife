@@ -29,3 +29,15 @@ Before adding `dog/recovering/sheet_illustrated.webp` to the repository:
 - **Do not register the above hash in production catalog** until exact verified bytes are committed to `assets/characters-v2/dog/recovering/sheet_illustrated.webp`.
 - Motion-acting acceptance is still blocked: expression change alone does not implement the required forepaw stretch. Production status remains candidate/pending.
 
+
+## Transparent Glossy Kawaii candidate — 2026-11-15 (new revision)
+
+- **Reference:** user's original orange/cream floppy-ear puppy sprite sheet, Glossy Kawaii (not the prior soft 3D replacement).
+- **Artwork:** new original 12-pose candidate, now visibly includes both forepaws raised/extended during recovery and an ear lift, not merely blinking.
+- **Source exported locally:** `onelife_dog_recovering_glossy_transparent.webp`, 4×3 cells, 1024×768 RGBA, 256×256 per pose, lossless WebP, SHA-256 `01903c8a53f8c656e288c602796e544ff448f59393fdf72b006ca54314921df5`.
+- **Transparency:** 55.1% of pixels fully transparent; inspected on light and dark matte. WebP/PNG preserve actual alpha; GIF is *only* an opaque-background animation preview.
+- **Technical checks:** original local preflight passed geometry, clipping, alpha border and all 11 adjacent-frame differences. `tools/prepare_glossy_alpha_sheet.py` provides a reusable Pillow-only cleaner, `tests/test_prepare_glossy_alpha_sheet.py` exercises it, and CI includes these tests.
+- **New strict gate:** `tools/check_sprite_candidate.py` now rejects sheet cells with fewer than 10% entirely transparent pixels, to block an opaque painted rectangle with an alpha-only border.
+- **Still blocked:** exact source WebP not yet committed to GitHub. Do not copy the above SHA into production source catalog until the corresponding bytes exist in `assets/characters-v2/dog/recovering/sheet_illustrated.webp`. Final Idle transition and Android device sign-off are pending, so `productionReady=false` and sourced coverage remains **22/60**.
+- **Import sequence:** take the verified WebP, commit it at the required path, add an entry with actual source SHA-256 and `frames=12,columns=4,frameWidth=256,frameHeight=256,frameDurationMs=130,loop=false`, run `python tools/render_glossy_character_animation.py --character dog`, inspect actual GIF and adjust transitions if needed.
+
