@@ -1,0 +1,31 @@
+{
+  "source": "/home/runner/work/onelife/onelife/assets/characters-v2/dog/strained/sheet_illustrated.webp",
+  "sha256": "4c21977047eb194e18ae63dfcff07dbee432e2c65a47b3e75066ec63fc3846ce",
+  "geometry": {
+    "frames": 12,
+    "columns": 4,
+    "rows": 3,
+    "cellPx": 256,
+    "atlasPx": [
+      1024,
+      768
+    ]
+  },
+  "adjacentVisibleRms": [
+    45.79,
+    50.27,
+    55.54,
+    65.05,
+    48.12,
+    42.11,
+    49.91,
+    53.11,
+    48.11,
+    49.53,
+    50.22
+  ],
+  "warnings": [],
+  "technicalPreflightPassed": true,
+  "humanVisualApproval": "pending",
+  "realDeviceApproval": "pending"
+}

@@ -63,6 +63,21 @@
       "file": "assets/characters-v2/dog/thinking/metadata.json",
       "frames": 12,
       "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "sad": {
+      "file": "assets/characters-v2/dog/sad/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "balanced": {
+      "file": "assets/characters-v2/dog/balanced/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "strained": {
+      "file": "assets/characters-v2/dog/strained/metadata.json",
+      "frames": 12,
+      "generationClass": "retargeted-illustrated-pose-sheet"
     }
   },
   "note": "Visual/phone sign-off required; no inferred or synthesized state completion."

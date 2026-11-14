@@ -1,0 +1,31 @@
+{
+  "source": "/home/runner/work/onelife/onelife/assets/characters-v2/dog/sad/sheet_illustrated.webp",
+  "sha256": "dfb69500df076d71a15a0d7078c85f9368d9145e33167e429d55e7f62fffe42e",
+  "geometry": {
+    "frames": 12,
+    "columns": 4,
+    "rows": 3,
+    "cellPx": 256,
+    "atlasPx": [
+      1024,
+      768
+    ]
+  },
+  "adjacentVisibleRms": [
+    55.86,
+    67.84,
+    62.45,
+    44.57,
+    52.28,
+    60.74,
+    71.69,
+    58.64,
+    62.82,
+    46.76,
+    29.42
+  ],
+  "warnings": [],
+  "technicalPreflightPassed": true,
+  "humanVisualApproval": "pending",
+  "realDeviceApproval": "pending"
+}

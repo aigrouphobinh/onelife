@@ -1,0 +1,31 @@
+{
+  "source": "/home/runner/work/onelife/onelife/assets/characters-v2/dog/balanced/sheet_illustrated.webp",
+  "sha256": "39d920af19746138e65eb6b2d8e356ad3274bf1053cc8a4a11b0066fd9363734",
+  "geometry": {
+    "frames": 12,
+    "columns": 4,
+    "rows": 3,
+    "cellPx": 256,
+    "atlasPx": [
+      1024,
+      768
+    ]
+  },
+  "adjacentVisibleRms": [
+    53.25,
+    55.32,
+    40.68,
+    58.17,
+    63.25,
+    55.63,
+    31.24,
+    45.79,
+    38.17,
+    52.69,
+    23.63
+  ],
+  "warnings": [],
+  "technicalPreflightPassed": true,
+  "humanVisualApproval": "pending",
+  "realDeviceApproval": "pending"
+}
