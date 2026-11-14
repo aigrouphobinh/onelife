@@ -15,4 +15,7 @@
 
 /* Programmatic navigation focus should not draw a black frame around the page. */
 #page-content:focus{outline:none}
-#page-content:focus-visible{outline:3px solid var(--primary);outline-offset:4px}
+#page-content:focus-visible{outline:none}
+
+/* Small-screen hero: speech bubble belongs to the mascot, not over body copy. */
+@media(max-width:760px){.hero .bubble{top:auto;bottom:18px;right:12px;max-width:140px}.hero .mascot-wrap{transform:translateX(-25px)}}
