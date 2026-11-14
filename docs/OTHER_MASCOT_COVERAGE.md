@@ -3,23 +3,23 @@
 **This report measures files, NOT finished product quality.**
 
 - Required: **60** clips = 4 characters × 15 states.
-- Original illustrated candidates: **27**.
-- Derived-pose candidates (not independently illustrated): **0**.
-- Missing: **33**.
+- Original illustrated candidates: **30**.
+- Derived-pose candidates (not independently illustrated): **1**.
+- Missing: **29**.
 - Art approved on mobile: **0** (not independently tested).
 
 | Character | Original | Derived | Missing |
 |---|---:|---:|---:|
 | cat | 15 | 0 | 0 |
-| dog | 12 | 0 | 3 |
-| robot | 0 | 0 | 15 |
+| dog | 14 | 1 | 0 |
+| robot | 1 | 0 | 14 |
 | sprout | 0 | 0 | 15 |
 
 ## Missing states
 
 - **cat:** none
-- **dog:** sad, balanced, strained
-- **robot:** idle, remind, alarm, happy, overloaded, resting, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained
+- **dog:** none
+- **robot:** remind, alarm, happy, overloaded, resting, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained
 - **sprout:** idle, remind, alarm, happy, overloaded, resting, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained
 
 Original illustration source, animation review, low-end Android battery test, Flutter integration, accessibility and iOS fallback are separate release gates.
