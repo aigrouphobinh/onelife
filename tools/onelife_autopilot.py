@@ -105,9 +105,12 @@ def sync_cat_gallery(root: Path) -> bool:
         raise ValueError("Cannot update Cat gallery playback configuration")
     intro = (f'<p class="muted">{len(states)} trạng thái Mèo Glossy V2 có sprite PNG nguồn thật. '
              'Trình xem chỉ phục vụ QA; chưa phải ứng dụng Flutter, chưa nghiệm thu trên điện thoại.</p>')
-    newer, count = re.subn(r'<p class="muted">Xem các frame[\s\S]*?</p>', lambda _: intro, newer, count=1)
+    # Asset builds may already have updated the copy. Match a semantic marker,
+    # not obsolete wording, so repeated scheduled runs remain idempotent.
+    intro_rx = r'<p class="muted">[^<]*trạng thái Mèo Glossy V2[^<]*</p>'
+    newer, count = re.subn(intro_rx, lambda _: intro, newer, count=1)
     if count != 1:
-        raise ValueError("Cannot update Cat gallery introduction")
+        raise ValueError("Cannot find Cat gallery introduction by stable marker")
     if newer != source:
         path.write_text(newer, encoding="utf-8")
         return True
