@@ -98,7 +98,9 @@ class _HomePageState extends State<HomePage> {
               Row(children: [
                 GlossySprite(
                   key: ValueKey('dog-$_dogState-$_mascotReplay'),
-                  spec: _dogState == 'done'
+                  spec: _dogState == 'thinking'
+                      ? GlossySpriteSpec.dogThinking
+                      : _dogState == 'done'
                       ? GlossySpriteSpec.dogDone
                       : _dogState == 'study'
                           ? GlossySpriteSpec.dogStudy
@@ -106,7 +108,9 @@ class _HomePageState extends State<HomePage> {
                           ? GlossySpriteSpec.dogFocus
                           : GlossySpriteSpec.dogRecovering,
                   size: 104,
-                  semanticLabel: _dogState == 'done'
+                  semanticLabel: _dogState == 'thinking'
+                      ? 'Chú chó màu cam đang suy nghĩ về một ý tưởng'
+                      : _dogState == 'done'
                       ? 'Chú chó màu cam đang ăn mừng hoàn thành nhiệm vụ'
                       : _dogState == 'study'
                           ? 'Chú chó màu cam đang đọc sách và học tập'
@@ -120,7 +124,9 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(_dogState == 'done'
+                      Text(_dogState == 'thinking'
+                              ? 'Một ý tưởng mới?'
+                              : _dogState == 'done'
                               ? 'Hoàn thành một việc nhỏ!'
                               : _dogState == 'study'
                                   ? 'Một trang sách mới'
@@ -129,7 +135,9 @@ class _HomePageState extends State<HomePage> {
                                   : 'Một nhịp nghỉ dịu dàng',
                           style: Theme.of(context).textTheme.titleSmall),
                       const SizedBox(height: 4),
-                      Text(_dogState == 'done'
+                      Text(_dogState == 'thinking'
+                          ? 'Nhẹ nhàng suy nghĩ và thử một cách khác.'
+                          : _dogState == 'done'
                           ? 'Chúc mừng bạn đã hoàn thành!'
                           : _dogState == 'study'
                               ? 'Hãy khám phá điều thú vị tiếp theo.'
@@ -194,6 +202,18 @@ class _HomePageState extends State<HomePage> {
                       if (selected && _dogState != 'done') {
                         setState(() {
                           _dogState = 'done';
+                          _mascotReplay++;
+                        });
+                      }
+                    },
+                  ),
+                  ChoiceChip(
+                    label: const Text('Suy nghĩ'),
+                    selected: _dogState == 'thinking',
+                    onSelected: (selected) {
+                      if (selected && _dogState != 'thinking') {
+                        setState(() {
+                          _dogState = 'thinking';
                           _mascotReplay++;
                         });
                       }
