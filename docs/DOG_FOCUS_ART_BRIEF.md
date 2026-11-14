@@ -1,6 +1,6 @@
 # OneLife — Dog Focus · Glossy Kawaii V2
 
-**Status:** 12-frame original illustrated candidate generated locally; binary source NOT yet committed to GitHub. This document is not proof of production readiness.
+**Status:** Original 12-frame transparent WebP source imported on `main` in commit `5703355`; PNG atlas, GIF and metadata generated and verified by GitHub Actions. **Artwork candidate only:** visual, accessibility and device approval remain pending.
 
 ## Character lock
 
@@ -34,7 +34,7 @@ The 12 poses must represent genuinely different physical acting; simply zooming 
 - ~43.4% fully transparent pixels, transparent top-left corner, all 11 transitions visually distinct by RMS test, no technical warnings from `tools/check_sprite_candidate.py`.
 - Animation preview: 135 ms per frame, `loop=false`, one-shot. GIF preview uses a colored matte; transparent source remains WebP/PNG only.
 - The alpha cleanup keeps illustrated pixels and removes small isolated specks. This is AI-generated original project candidate, not an externally licensed third-party image.
-- **Not on GitHub yet:** no `assets/characters-v2/dog/focus/sheet_illustrated.webp` binary was committed by this task. Do not copy the above SHA-256 into `animation_sources.json` until the exact file bytes are imported to the repository.
+- **Verified on GitHub:** `assets/characters-v2/dog/focus/sheet_illustrated.webp`, SHA-256 `bd84075a2c0aede316170d0270bf8172b619ec61b1b4bbdaa258f5bdf813a6fb`; matching entry registered in `animation_sources.json`, and real PNG/GIF/metadata/QA generated on `main`.
 - Manual artistic review, transition-to-Idle review, actual Android/iOS rendering, power use and accessibility approval remain pending. `productionReady=false`.
 
 ## Import gate
@@ -46,4 +46,11 @@ The 12 poses must represent genuinely different physical acting; simply zooming 
 5. Use `GlossySpriteSpec` (see `lib/src/glossy_sprite.dart`) to render the imported PNG; respect platform reduced-motion settings.
 6. Only mark art approved after visually inspecting light/dark, 64/96/144 px and real-device playback.
 
-**Current sourced migration coverage remains 23/60, not 24/60.**
+**Verified sourced migration coverage is now 24/60.** This measures original source assets, not approved production animations.
+
+## Flutter integration (2026-11-15)
+
+- `GlossySpriteSpec.dogFocus` loads the committed `sheet.png` (12 × 256px cells, 135ms/frame, one-shot), preserving source alpha.
+- `HomePage` now offers a visible Hồi phục / Tập trung selector, with one-tap replay; existing notes workflow remains available.
+- `pubspec.yaml` bundles both source-derived runtime PNG sheets; tests verify alpha at pixel level and switching behavior.
+- **Pending:** Flutter CI result verification, small-screen/dark-mode/reduced-motion device review, visual movement signoff. The import does not grant `productionReady`.
