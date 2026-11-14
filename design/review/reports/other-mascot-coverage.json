@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "totalRequiredClips": 60,
-  "illustratedCandidates": 4,
+  "illustratedCandidates": 5,
   "derivedCandidates": 0,
-  "missing": 56,
-  "availableCandidates": 4,
+  "missing": 55,
+  "availableCandidates": 5,
   "artApprovedCount": 0,
   "phoneVerifiedCount": 0,
   "automatedEvidencePass": true,
@@ -45,7 +45,11 @@
     {
       "characterId": "cat",
       "state": "overloaded",
-      "status": "missing"
+      "status": "original-candidate-qa",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet",
+      "artReview": "pending",
+      "deviceReview": "pending"
     },
     {
       "characterId": "cat",
