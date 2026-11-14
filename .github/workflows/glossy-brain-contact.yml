@@ -1,0 +1,41 @@
+name: Glossy Brain V2 contact preview
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/render_glossy_brain_contact.py'
+      - '.github/workflows/glossy-brain-contact.yml'
+      - 'assets/characters-v2/brain/**/sheet.png'
+      - 'assets/characters-v2/brain/**/metadata.json'
+permissions:
+  contents: write
+concurrency:
+  group: onelife-glossy-brain-contact
+  cancel-in-progress: false
+jobs:
+  contact:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'Pillow==11.0.0'
+      - run: python tools/render_glossy_brain_contact.py
+      - name: Commit actual visual comparison preview
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add design/review/glossy-brain-v2-contact.png design/review/glossy-brain-v2-contact.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'design: publish 15-state glossy Brain contact preview [skip ci]'
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then break; fi
+              if [ "$attempt" -eq 3 ]; then exit 1; fi
+              sleep 4
+            done
+          fi
