@@ -1,0 +1,128 @@
+name: Import remaining Dog Glossy states (12 to 15)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-dog-final3.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dog-final3-import-main
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install renderer dependency
+        run: python -m pip install 'Pillow>=10,<13'
+
+      - name: Recover exact source blobs from GitHub, verify checksum and true RGBA
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64, hashlib, json, os, urllib.request
+          from io import BytesIO
+          from pathlib import Path
+          from PIL import Image
+          data = json.loads('[{"state":"sad","git":"e389ef76c5d3f567dcbc6d9f41137451922be3b3","sha":"dfb69500df076d71a15a0d7078c85f9368d9145e33167e429d55e7f62fffe42e","bytes":617342,"version":"2.31.0-illustrated-candidate","ms":160,"cls":"independently-illustrated-pose-sheet"},{"state":"balanced","git":"d54963dad76cfa4a14dea97876d2a4b6a7435d8a","sha":"39d920af19746138e65eb6b2d8e356ad3274bf1053cc8a4a11b0066fd9363734","bytes":609018,"version":"2.32.0-illustrated-candidate","ms":180,"cls":"independently-illustrated-pose-sheet"},{"state":"strained","git":"cd89836032b14033e0d202df85ff354ba5e78d46","sha":"4c21977047eb194e18ae63dfcff07dbee432e2c65a47b3e75066ec63fc3846ce","bytes":610498,"version":"2.33.0-retargeted-candidate","ms":155,"cls":"retargeted-illustrated-pose-sheet"}]')
+          for item in data:
+              url = ('https://api.github.com/repos/' +
+                     os.environ['GITHUB_REPOSITORY'] + '/git/blobs/' + item['git'])
+              req = urllib.request.Request(url, headers={
+                  'Accept':'application/vnd.github+json',
+                  'Authorization':'Bearer ' + os.environ['GH_TOKEN'],
+                  'User-Agent':'OneLife-verified-source-import',
+              })
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  blob = json.load(response)
+              if blob.get('encoding') != 'base64':
+                  raise SystemExit('Unexpected Git blob encoding for '+item['state'])
+              raw = base64.b64decode(blob['content'],validate=False)
+              if len(raw) != item['bytes'] or hashlib.sha256(raw).hexdigest() != item['sha']:
+                  raise SystemExit('Source hash/size mismatch for '+item['state'])
+              with Image.open(BytesIO(raw)) as image:
+                  image.load()
+                  if image.format!='WEBP' or image.mode!='RGBA' or image.size!=(1024,768):
+                      raise SystemExit('Invalid WebP alpha sprite for '+item['state'])
+                  if image.getpixel((0,0))[3]>10:
+                      raise SystemExit('Opaque corner for '+item['state'])
+              out = Path('assets/characters-v2/dog')/item['state']/'sheet_illustrated.webp'
+              out.parent.mkdir(parents=True,exist_ok=True)
+              if out.exists() and out.read_bytes()!=raw:
+                  raise SystemExit('Would overwrite different asset: '+item['state'])
+              out.write_bytes(raw)
+              print('Verified original',item['state'],item['sha'])
+          PY
+
+      - name: Preflight, register, and render 12-frame sprites
+        run: |
+          python tools/import_glossy_candidate.py \
+            --character dog --state sad \
+            --source assets/characters-v2/dog/sad/sheet_illustrated.webp \
+            --expected-sha256 dfb69500df076d71a15a0d7078c85f9368d9145e33167e429d55e7f62fffe42e \
+            --version 2.31.0-illustrated-candidate --frames 12 --frame-duration-ms 160
+          python tools/import_glossy_candidate.py \
+            --character dog --state balanced \
+            --source assets/characters-v2/dog/balanced/sheet_illustrated.webp \
+            --expected-sha256 39d920af19746138e65eb6b2d8e356ad3274bf1053cc8a4a11b0066fd9363734 \
+            --version 2.32.0-illustrated-candidate --frames 12 --frame-duration-ms 180
+          python tools/import_glossy_candidate.py \
+            --character dog --state strained \
+            --source assets/characters-v2/dog/strained/sheet_illustrated.webp \
+            --expected-sha256 4c21977047eb194e18ae63dfcff07dbee432e2c65a47b3e75066ec63fc3846ce \
+            --version 2.33.0-retargeted-candidate --frames 12 --frame-duration-ms 155 \
+            --generation-class retargeted-illustrated-pose-sheet
+
+      - name: Require three imported atlases and keep production approval false
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from PIL import Image
+          cat=json.loads(Path('assets/characters-v2/animation_sources.json').read_text())
+          dog=[x for x in cat['animationSources'] if x['characterId']=='dog']
+          assert len(dog)==15, f'Expected 15 sourced Dog states; found {len(dog)}'
+          manifest=json.loads(Path('assets/characters-v2/dog/manifest.json').read_text())
+          assert len(manifest['states'])==15
+          assert manifest['productionReady'] is False
+          for state in ('sad','balanced','strained'):
+              p=Path('assets/characters-v2/dog')/state
+              meta=json.loads((p/'metadata.json').read_text())
+              report=json.loads((p/'qa_report.json').read_text())
+              assert report['passed'] and report['adjacentChanges']==11
+              assert meta['reviewStatus'].endswith('human and phone QA pending')
+              with Image.open(p/'sheet.png') as im:
+                  assert im.mode=='RGBA' and im.size==(1024,768)
+                  assert im.getpixel((0,0))[3]==0
+          print('15/15 source coverage verified; art/device signoff remains open')
+          PY
+
+      - name: Commit original sources and rendered outputs to main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/characters-v2/animation_sources.json \
+            assets/characters-v2/dog/manifest.json \
+            assets/characters-v2/dog/sad/ \
+            assets/characters-v2/dog/balanced/ \
+            assets/characters-v2/dog/strained/
+          if git diff --cached --quiet; then
+            echo 'Everything already imported'
+            exit 0
+          fi
+          git commit -m 'assets: add last 3 transparent Dog states and complete 15 source slots'
+          git pull --rebase origin main
+          git push origin HEAD:main
