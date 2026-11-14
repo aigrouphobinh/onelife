@@ -10,8 +10,13 @@ Updated November 14, 2026. Source of truth: design/STYLE_LOCK_V2.md.
 - Versioned and live renders may differ by size, compression, and timing: validate each using its own SHA-256 metadata, not byte equality.
 - Browser playback and side-by-side comparison: design/review/glossy-v2.html
 
+## New overloaded artwork (2026-11-14)
+- Glossy Brain original 12-frame overloaded source WebP committed at `assets/characters-v2/brain/overloaded/sheet.webp`.
+- CI builds 1024×768 RGBA sprite PNG, GIF and metadata into both versioned and live paths, with SHA-256 and distinct-frame validation.
+- Quá tải is only a playful visualization of a user-defined screen-break goal, **not** literal brain damage.
+
 ## Remaining
-- 14 other Brain states still use non-approved V1 vector art.
+- 12 other Brain states still use non-approved V1 vector art.
 - Cat, Dog, Robot and Sprout still use V1 art.
 - Real-device Flutter sprite runtime, battery and permission QA is not yet complete.
 - The full-resolution 1024px master and 12-frame candidate generated in ChatGPT this turn are packaged separately and have NOT automatically been pushed as binary assets.
