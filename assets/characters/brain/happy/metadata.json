@@ -1,18 +1,22 @@
 {
   "characterId": "brain",
   "state": "happy",
-  "frames": 10,
+  "version": "2.1.0-candidate",
+  "artStyle": "glossy-kawaii-v2",
+  "frames": 12,
   "columns": 4,
   "rows": 3,
   "frameWidth": 256,
   "frameHeight": 256,
-  "frameDurationMs": 85,
+  "frameDurationMs": 105,
   "loop": true,
   "anchorX": 0.5,
   "anchorY": 0.92,
-  "source": "sheet.svg",
   "runtimeAsset": "sheet.png",
+  "webPreviewAsset": "sheet.webp",
   "preview": "preview.gif",
+  "sha256": "0af486e3a940e1020a287b2dfdcccb32cc38533263c4204fda4bd13638846749",
   "licenseRef": "docs/ASSET_REGISTER.md",
-  "sha256": "62afffe3ebdb02169b7e7c905b5962a2981be5ac1a83b528bdf07b5002d991da"
+  "source": "Montage of existing original painted Brain V2 idle and overloaded key poses",
+  "reviewStatus": "technical candidate; new custom in-between drawings and real-device review pending"
 }

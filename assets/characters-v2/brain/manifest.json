@@ -15,9 +15,18 @@
     "overloaded": {
       "file": "assets/characters-v2/brain/overloaded/metadata.json",
       "frames": 12
+    },
+    "happy": {
+      "file": "assets/characters-v2/brain/happy/metadata.json",
+      "frames": 12
+    },
+    "resting": {
+      "file": "assets/characters-v2/brain/resting/metadata.json",
+      "frames": 10
     }
   },
   "v1FallbackAllowed": true,
   "productionReady": false,
-  "note": "Glossy Brain V2 states idle, remind, overloaded; 12 others remain V1."
+  "note": "Glossy Brain V2 states idle, remind, overloaded; 12 others remain V1.",
+  "artReview": "Happy and Resting use painted key-pose montages; bespoke frame-by-frame artwork pending"
 }

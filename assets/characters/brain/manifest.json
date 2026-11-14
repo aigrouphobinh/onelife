@@ -20,7 +20,7 @@
     },
     "happy": {
       "file": "assets/characters/brain/happy/metadata.json",
-      "frames": 10
+      "frames": 12
     },
     "idle": {
       "file": "assets/characters/brain/idle/metadata.json",
@@ -67,5 +67,7 @@
   "visualStateVersions": {
     "remind": "glossy-kawaii-v2",
     "idle": "glossy-kawaii-v2"
-  }
+  },
+  "productionReady": false,
+  "artReview": "Happy and Resting use painted key-pose montages; bespoke frame-by-frame artwork pending"
 }
