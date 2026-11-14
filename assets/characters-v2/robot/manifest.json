@@ -23,6 +23,36 @@
       "file": "assets/characters-v2/robot/overloaded/metadata.json",
       "frames": 12,
       "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "resting": {
+      "file": "assets/characters-v2/robot/resting/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "alarm": {
+      "file": "assets/characters-v2/robot/alarm/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "sleepy": {
+      "file": "assets/characters-v2/robot/sleepy/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "recovering": {
+      "file": "assets/characters-v2/robot/recovering/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "focus": {
+      "file": "assets/characters-v2/robot/focus/metadata.json",
+      "frames": 8,
+      "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "study": {
+      "file": "assets/characters-v2/robot/study/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
     }
   },
   "note": "Visual/phone sign-off required; no inferred or synthesized state completion."
