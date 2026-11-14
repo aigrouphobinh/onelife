@@ -1,32 +1,50 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>OneLife · Cat Glossy V2 animation review</title>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OneLife · Mèo Glossy V2 · Animation Review</title>
 <style>
-:root{--bg:#f7f4ff;--surface:#fff;--ink:#32274c;--muted:#786d88;--line:#dcd4e9;--accent:#8d67d5}
-body[data-theme=dark]{--bg:#18152a;--surface:#2d2643;--ink:#f7f2ff;--muted:#cbc1de;--line:#5a4c79}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif}main{max-width:680px;margin:0 auto;padding:26px 16px}
-h1{font-size:24px;margin:0 0 5px}.muted{color:var(--muted)}.card{border-radius:22px;border:1px solid var(--line);background:var(--surface);padding:18px;margin:16px 0}
-.stage{min-height:305px;border-radius:20px;background:linear-gradient(135deg,#e6dbfc,#ffeff8);display:flex;justify-content:center;align-items:center}
-body[data-theme=dark] .stage{background:linear-gradient(135deg,#342a50,#50374d)}canvas{image-rendering:auto;max-width:100%}
-.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}button,select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 11px;min-height:44px}
-button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b696f7;outline-offset:2px}
-input[type=range]{accent-color:var(--accent);flex:1;min-width:110px}.note{font-size:13px}.tag{display:inline-block;background:#e9defc;color:#523b80;border-radius:99px;padding:3px 10px;font-size:12px}
-a{color:inherit}
+:root{--bg:#F8F6FF;--surface:#FFF;--ink:#302746;--muted:#756A89;--border:#E1D8ED;--accent:#8961DA}
+[data-theme=dark]{--bg:#171429;--surface:#2A2341;--ink:#F9F5FF;--muted:#C8BFDA;--border:#554B70}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:760px;margin:auto;padding:24px 16px 40px}h1{font-size:25px;margin:0 0 6px}
+small,.muted{color:var(--muted)}.card{border-radius:24px;border:1px solid var(--border);background:var(--surface);padding:17px;margin:16px 0}
+.stage{min-height:300px;display:flex;justify-content:center;align-items:center;border-radius:20px;background:linear-gradient(145deg,#EAE0FF,#FFF0F8)}
+[data-theme=dark] .stage{background:linear-gradient(145deg,#342B52,#4B3252)}
+canvas{max-width:100%;image-rendering:auto}
+.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:13px 0}
+select,button{color:var(--ink);border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:10px;min-height:44px;font:inherit}
+button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #C6AAFF;outline-offset:3px}
+input[type=range]{min-width:110px;flex:1;accent-color:var(--accent)}
+.tag{display:inline-block;padding:4px 11px;background:#EADDFC;color:#4A317A;border-radius:99px;font-weight:700;font-size:12px}
+.note{font-size:13px;color:var(--muted)}a{color:inherit}
 </style></head><body data-theme="light"><main>
-<h1>Mèo Tím · Glossy V2</h1><p class="muted">Trình xem <strong>8 tư thế minh họa Idle</strong> thực tế. Không dùng CSS/rotation để giả tạo frame. Không đại diện cho 15 trạng thái hoàn thành.</p>
-<div class="card"><span class="tag">Idle · illustrated candidate</span><div class="stage"><canvas id="anim" width="256" height="256" role="img" aria-label="Mèo OneLife: thở, chớp mắt, đuôi và tai chuyển động"></canvas></div>
-<div class="controls"><button id="toggle">⏸ Dừng</button><button id="next">Frame tiếp ›</button><button id="theme">Đổi nền sáng/tối</button></div>
-<div class="controls"><label for="size">Kích thước:</label><select id="size"><option value="256">256px</option><option value="144">144px</option><option value="96">96px</option><option value="64">64px</option></select>
-<label for="seek">Frame <output id="label">1/8</output></label><input type="range" id="seek" min="0" max="7" value="0"></div>
-<p class="note muted">Nguồn: <a href="../../assets/characters-v2/cat/idle/sheet_illustrated.webp">WebP minh họa gốc</a> · PNG RGBA runtime · GIF preview · metadata JSON. Không gửi dữ liệu ra bên ngoài.</p></div>
-<p class="note muted">Mỹ thuật và khả năng nhìn rõ ở 64px vẫn cần người duyệt. Frame 8 và frame 1 có thể cần chỉnh để vòng lặp mượt hơn. Khả năng chạy trong Flutter/Android/iOS chưa được nghiệm thu.</p>
-<a href="glossy-other-mascots.html">Xem các nhân vật khác</a>
+<h1>🐱 Mèo Tím · Glossy V2</h1>
+<p class="muted">Xem các frame minh họa PNG thật: Idle (8 frame) và Remind (12 frame). Chưa có ứng dụng Flutter hoạt động hoặc 15 trạng thái của Mèo.</p>
+<div class="card"><span class="tag" id="tag">Idle · ứng viên mỹ thuật</span>
+<div class="controls"><label for="state">Biểu cảm</label><select id="state"><option value="idle">Idle · Bình thường</option><option value="remind">Remind · Nhắc việc</option></select>
+<label for="size">Kích thước</label><select id="size"><option value="256">256px</option><option value="144">144px</option><option value="96">96px</option><option value="64">64px</option></select></div>
+<div class="stage"><canvas id="stage" width="256" height="256" role="img" aria-label="Hoạt ảnh Mèo Glossy V2"></canvas></div>
+<div class="controls"><button id="toggle">⏸ Tạm dừng</button><button id="next">Frame kế ›</button><button id="theme">Sáng / Tối</button></div>
+<div class="controls"><label for="seek">Frame <output id="counter">1/8</output></label><input id="seek" type="range" min="0" max="7" value="0"></div>
+<p class="note" id="status">Đang tải ảnh...</p>
+<p class="note">Từng frame lấy từ atlas PNG, không dùng CSS xoay/đổi miệng để giả động tác. Remind là chuỗi phản ứng một lần; việc gửi thông báo điện thoại thật chưa được lập trình.</p>
+</div>
+<p class="note">Đánh giá tự động không thay thế kiểm duyệt ở 64px, xem viền nền trong suốt, khả năng hiển thị chuông và thử trên Android/iOS. <a href="../../docs/OTHER_MASCOT_COVERAGE.md">Báo cáo tiến độ 60 clip</a>.</p>
 </main><script>
-(function(){'use strict';const $=id=>document.getElementById(id),c=$('anim'),ctx=c.getContext('2d');let img=new Image(),frame=0,playing=!(matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches),last=0,ready=false;
-function draw(){if(!ready)return;ctx.clearRect(0,0,256,256);ctx.drawImage(img,(frame%4)*256,Math.floor(frame/4)*256,256,256,0,0,256,256);$('label').textContent=(frame+1)+'/8';$('seek').value=frame}
-img.onload=()=>{ready=true;draw()};img.onerror=()=>{$('label').textContent='Không tải được atlas'};img.src='../../assets/characters-v2/cat/idle/sheet.png';
-function tick(t){if(playing&&!document.hidden&&ready){if(!last)last=t;const dt=150;if(t-last>=dt){const n=Math.floor((t-last)/dt);frame=(frame+n)%8;last+=n*dt;draw()}}else{last=t}requestAnimationFrame(tick)}
-function setPlaying(next){playing=next;$('toggle').textContent=playing?'⏸ Dừng':'▶ Phát';last=0}
-$('toggle').onclick=()=>setPlaying(!playing);$('next').onclick=()=>{setPlaying(false);frame=(frame+1)%8;draw()};$('seek').oninput=function(){setPlaying(false);frame=Number(this.value);draw()};$('size').onchange=function(){c.style.width=this.value+'px';c.style.height=this.value+'px'};$('theme').onclick=()=>{document.body.dataset.theme=document.body.dataset.theme==='dark'?'light':'dark'};requestAnimationFrame(tick)
+(function(){'use strict';
+const $=id=>document.getElementById(id), c=$('stage'),ctx=c.getContext('2d');
+const config={idle:{frames:8,duration:150,loop:true},remind:{frames:12,duration:125,loop:false}};
+let image=new Image(),frame=0,ready=false,last=0;
+let playing=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function state(){return config[$('state').value]}
+function draw(){if(!ready)return;ctx.clearRect(0,0,256,256);ctx.drawImage(image,(frame%4)*256,Math.floor(frame/4)*256,256,256,0,0,256,256);$('counter').textContent=(frame+1)+'/'+state().frames;$('seek').value=frame}
+function load(){const name=$('state').value;frame=0;last=0;ready=false;$('seek').max=state().frames-1;$('tag').textContent=name+' · Ảnh minh họa gốc, chưa duyệt trên điện thoại';$('status').textContent='Đang tải PNG '+name+'...';image=new Image();image.onload=()=>{ready=true;draw();$('status').textContent='Đang dùng PNG atlas thật: '+state().frames+' frame, '+state().duration+'ms/frame';};image.onerror=()=>{$('status').textContent='Không thể tải file PNG; cần tải đủ repository.'};image.src='../../assets/characters-v2/cat/'+name+'/sheet.png'}
+function tick(t){if(playing&&!document.hidden&&ready){if(!last)last=t;const ms=state().duration;if(t-last>=ms){const n=Math.floor((t-last)/ms),next=frame+n;if(!state().loop&&next>=state().frames){frame=state().frames-1;playing=false;$('toggle').textContent='▶ Phát lại';}else{frame=next%state().frames}last=t;draw()}}else{last=t}requestAnimationFrame(tick)}
+$('state').onchange=()=>{playing=true;$('toggle').textContent='⏸ Tạm dừng';load()};
+$('toggle').onclick=()=>{if(!playing&&!state().loop&&frame===state().frames-1)frame=0;playing=!playing;last=0;$('toggle').textContent=playing?'⏸ Tạm dừng':'▶ Tiếp tục';draw()};
+$('next').onclick=()=>{playing=false;frame=(frame+1)%state().frames;draw();$('toggle').textContent='▶ Tiếp tục'};
+$('seek').oninput=function(){playing=false;frame=Number(this.value);draw();$('toggle').textContent='▶ Tiếp tục'};
+$('size').onchange=function(){c.style.width=this.value+'px';c.style.height=this.value+'px'};
+$('theme').onclick=()=>{document.body.dataset.theme=document.body.dataset.theme==='dark'?'light':'dark'};
+load();requestAnimationFrame(tick);
 })();
 </script></body></html>

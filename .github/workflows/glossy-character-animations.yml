@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'assets/characters-v2/animation_sources.json'
-      - 'assets/characters-v2/cat/idle/sheet_illustrated.webp'
+      - 'assets/characters-v2/**/sheet_illustrated.webp'
       - 'tools/render_glossy_character_animation.py'
       - '.github/workflows/glossy-character-animations.yml'
 permissions:
@@ -29,11 +29,11 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/characters-v2/cat/idle assets/characters-v2/cat/manifest.json
+          git add assets/characters-v2
           if git diff --cached --quiet; then
             echo 'Assets already up to date'
           else
-            git commit -m 'assets: render illustrated Cat Idle V2 and QA [skip ci]'
+            git commit -m 'assets: render sourced glossy character animation candidates [skip ci]'
             for attempt in 1 2 3; do
               git fetch origin main
               git rebase origin/main
