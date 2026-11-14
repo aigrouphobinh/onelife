@@ -1,4 +1,7 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onelife/src/glossy_sprite.dart';
 
@@ -15,6 +18,7 @@ void main() {
 
   testWidgets('Dog Recovering uses committed PNG frames with semantics',
       (tester) async {
+    final semantics = tester.ensureSemantics();
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(
@@ -31,6 +35,28 @@ void main() {
     // One-shot playback stops after 12x130ms, so pumpAndSettle must finish.
     await tester.pumpAndSettle(const Duration(milliseconds: 100));
     expect(tester.takeException(), isNull);
+    semantics.dispose();
+  });
+
+  testWidgets('committed runtime PNG keeps real alpha, not a white matte',
+      (tester) async {
+    final spec = GlossySpriteSpec.dogRecovering;
+    final bytes = await rootBundle.load(spec.assetPath);
+    final codec = await ui.instantiateImageCodec(
+      bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes),
+    );
+    final image = (await codec.getNextFrame()).image;
+    expect(image.width, 1024);
+    expect(image.height, 768);
+    final rgba = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
+    expect(rgba, isNotNull);
+    // Four bytes per pixel. First pixel of the atlas must be fully transparent.
+    expect(rgba!.getUint8(3), 0);
+    // The center of Dog's first illustrated cell should contain visible art.
+    final centerAlphaOffset = (128 * image.width + 128) * 4 + 3;
+    expect(rgba.getUint8(centerAlphaOffset), greaterThan(20));
+    image.dispose();
+    codec.dispose();
   });
 
   testWidgets('respects OS reduced-motion preference', (tester) async {
