@@ -104,3 +104,9 @@ A separate **non-medical, opt-in screen-use visual layer** is specified in [BRAI
 
 ### Dispatcher rule
 `showMascotState` selects active high-priority event (`alarm`, `remind`, `done`, `focus`) before optional wellbeing visuals. A user-selected break may show `resting`. A completed break plays `recovering` once before returning to `balanced` / `idle`. If usage data are unavailable/consent denied, show neutral `idle` and `unknown` insight; never pretend to know screen time. Respect cooldowns and quiet hours in the feature design contract.
+
+## 2026-11-14 verified asset handoff
+- Brain Glossy V2 manifest now indexes all **15** state keys, with **156** total image frames and metadata. Always resolve actual per-state frame counts instead of assuming 12 for all clips.
+- **Seven** state sources are earlier independent painted/illustrated assets; **eight** (`focus`, `study`, `done`, `thinking`, `sad`, `balanced`, `strained`, `resting`) are **derived-pose-composite** review candidates and are not final independent frame-by-frame illustrations. Do not silently promote them.
+- Visual prototype uses real PNG assets in `design/prototype-v2/index.html`; it does not implement Flutter/native OS APIs.
+- Dark/light and reduced-motion preview are checked by browser, but real device and human art approvals are still pending. `productionReady=false` is intentional.
