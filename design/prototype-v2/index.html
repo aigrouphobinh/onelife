@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#7b61df">
+<title>OneLife – Glossy V2 Mobile Design Prototype</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="logo-wrap">
+      <img src="../../assets/characters-v2/brain/master.png" alt="Nhân vật Brain OneLife" width="52" height="52">
+      <div><strong class="logo-title">OneLife</strong><span class="micro">Bộ não nhỏ của bạn</span></div>
+    </div>
+    <div class="demo-label">BẢN THIẾT KẾ · KHÔNG CÓ DỮ LIỆU THẬT</div>
+    <nav class="nav-list" aria-label="Điều hướng chính" id="main-nav"></nav>
+    <div class="sidebar-bottom">
+      <label class="micro" for="page-select">Khám phá đủ 10 trang</label>
+      <select id="page-select" aria-label="Chọn trang thiết kế"></select>
+      <p class="micro">Mọi dữ liệu ở đây là mẫu minh họa. Không truy cập thiết bị, không AI/cloud.</p>
+    </div>
+  </aside>
+  <div class="main-area">
+    <header class="topbar">
+      <div><span class="crumb">ONELIFE / <span id="current-route">HOME</span></span><h1 id="page-title">Một ngày thật nhẹ nhàng</h1></div>
+      <div class="top-actions">
+        <button id="theme-toggle" title="Chuyển giao diện sáng/tối" aria-label="Chuyển giao diện sáng tối">☾</button>
+        <button id="motion-toggle" title="Tắt/bật chuyển động" aria-label="Tắt hoặc bật hoạt ảnh">◉</button>
+        <span class="avatar" aria-hidden="true">✿</span>
+      </div>
+    </header>
+    <main id="page-content" tabindex="-1"></main>
+    <footer class="app-footer">Thiết kế OneLife V2 · Hoạt ảnh từ PNG Glossy thật · Không phải bản Flutter đang chạy</footer>
+  </div>
+</div>
+<nav id="mobile-nav" aria-label="Điều hướng trên điện thoại"></nav>
+<script src="app.js"></script>
+</body>
+</html>
