@@ -16,3 +16,8 @@ Do not export the old flat `brain/remind/sheet.svg` over the V2 PNG; `tools/gene
 
 ## Idle glossy upgrade
 `idle/sheet.png` is a distinct 8-frame transparent 4×2 PNG atlas; `idle/sheet.webp` and `idle/preview.gif` are design previews. Mirrored on the legacy Brain idle path for current asset loading. Alpha matting from RGB generated art requires inspection.
+
+## Illustrated Sleepy and Alarm candidates
+- `alarm/` and `sleepy/` use individually illustrated 4×3 / 12-frame transparent source sheets and deterministic render scripts, not V1 flat SVG art. Runtime assets and metadata are mirrored into `assets/characters/brain/`.
+- Alarm plays once (`loop=false`, 95ms/frame); Sleepy gently loops (`loop=true`, 180ms/frame).
+- Current **7/15** states on Glossy V2, 78 frames. Remaining 8 states have V1 fallbacks and must never be described as completed glossy art. Human animation/phone QA still pending.
