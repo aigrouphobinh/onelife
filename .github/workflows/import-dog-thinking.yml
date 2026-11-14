@@ -1,0 +1,51 @@
+name: Import transparent Dog Thinking source on push
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/characters-v2/dog/thinking/sheet_illustrated.webp'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dog-thinking-asset-import
+  cancel-in-progress: false
+
+jobs:
+  render-and-register:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'Pillow>=10,<13'
+      - name: Reject missing/modified/opaque original and render atlas
+        run: |
+          test -f assets/characters-v2/dog/thinking/sheet_illustrated.webp
+          python tools/import_glossy_candidate.py \
+            --character dog --state thinking \
+            --source assets/characters-v2/dog/thinking/sheet_illustrated.webp \
+            --expected-sha256 9dd79993b84c27cf42e1ae13c465b9ec86cc36807be5e41d4d4164f973e167c4 \
+            --version 2.30.0-illustrated-candidate \
+            --frames 12 --frame-duration-ms 145
+      - name: Commit generated runtime PNG/GIF and manifest
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/characters-v2/dog/thinking/ \
+            assets/characters-v2/dog/manifest.json \
+            assets/characters-v2/animation_sources.json
+          if git diff --cached --quiet; then
+            echo "Assets already rendered from exact source"
+            exit 0
+          fi
+          git commit -m 'assets: render verified true-alpha Dog Thinking sprite for Flutter'
+          git push origin HEAD:main
