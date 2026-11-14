@@ -1,23 +1,24 @@
-name: Import transparent Dog Thinking source on push
+name: Import verified transparent Dog Thinking
 
 on:
   push:
     branches: [main]
     paths:
       - 'assets/characters-v2/dog/thinking/sheet_illustrated.webp'
+      - '.github/workflows/import-dog-thinking.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: dog-thinking-asset-import
+  group: dog-thinking-asset-import-main
   cancel-in-progress: false
 
 jobs:
   render-and-register:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
@@ -26,17 +27,52 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install 'Pillow>=10,<13'
-      - name: Reject missing/modified/opaque original and render atlas
+      - name: Install Pillow
+        run: python -m pip install 'Pillow>=10,<13'
+
+      - name: Fetch exact source Git blob and verify before writing
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          test -f assets/characters-v2/dog/thinking/sheet_illustrated.webp
+          curl -fsSL --retry 3 \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/git/blobs/f1cd61fa15da924ee6e220967acbfd6ea74e4246" \
+            -o "$RUNNER_TEMP/dog-thinking-blob.json"
+          python - <<'PY'
+          import base64, hashlib, json, os
+          from pathlib import Path
+          from PIL import Image
+          blob = json.loads((Path(os.environ['RUNNER_TEMP']) / 'dog-thinking-blob.json').read_text())
+          if blob.get('encoding') != 'base64':
+              raise SystemExit('GitHub blob must be base64 encoded')
+          raw = base64.b64decode(blob['content'])
+          expected = '9dd79993b84c27cf42e1ae13c465b9ec86cc36807be5e41d4d4164f973e167c4'
+          if len(raw) != 603910 or hashlib.sha256(raw).hexdigest() != expected:
+              raise SystemExit('WebP byte length or SHA-256 mismatch')
+          output = Path('assets/characters-v2/dog/thinking/sheet_illustrated.webp')
+          output.parent.mkdir(parents=True, exist_ok=True)
+          if output.exists() and output.read_bytes() != raw:
+              raise SystemExit('Conflicting Thinking source exists; refusing overwrite')
+          output.write_bytes(raw)
+          with Image.open(output) as img:
+              if img.format != 'WEBP' or img.mode != 'RGBA' or img.size != (1024, 768):
+                  raise SystemExit('Invalid WebP RGBA atlas')
+              if img.getpixel((0, 0))[3] != 0:
+                  raise SystemExit('Painted opaque background')
+          print('Verified SHA-256:', expected)
+          PY
+
+      - name: Register source and export transparent PNG/GIF/QA
+        run: |
           python tools/import_glossy_candidate.py \
             --character dog --state thinking \
             --source assets/characters-v2/dog/thinking/sheet_illustrated.webp \
             --expected-sha256 9dd79993b84c27cf42e1ae13c465b9ec86cc36807be5e41d4d4164f973e167c4 \
             --version 2.30.0-illustrated-candidate \
             --frames 12 --frame-duration-ms 145
-      - name: Commit generated runtime PNG/GIF and manifest
+
+      - name: Commit real source and runtime assets to main
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -44,8 +80,8 @@ jobs:
             assets/characters-v2/dog/manifest.json \
             assets/characters-v2/animation_sources.json
           if git diff --cached --quiet; then
-            echo "Assets already rendered from exact source"
+            echo 'Verified source already registered'
             exit 0
           fi
-          git commit -m 'assets: render verified true-alpha Dog Thinking sprite for Flutter'
+          git commit -m 'assets: import and render true-alpha Dog Thinking animation'
           git push origin HEAD:main
