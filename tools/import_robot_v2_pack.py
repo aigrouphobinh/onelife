@@ -93,6 +93,14 @@ def validate_pack(path: Path) -> list[dict]:
                     raise ValueError(f'{state}: invalid {field}')
             if type(metadata.get('loop')) is not bool:
                 raise ValueError(f'{state}: invalid loop flag')
+            # Reject spoofed review classifications or atlas geometry: source
+            # registration must never silently reinterpret a poster as art.
+            if metadata.get('sourceFile') != 'sheet_illustrated.webp':
+                raise ValueError(f'{state}: invalid sourceFile')
+            if metadata.get('generationClass') != 'independently-illustrated-pose-sheet':
+                raise ValueError(f'{state}: invalid generationClass')
+            if entry.get('qaPassed') is False or entry.get('warnings'):
+                raise ValueError(f'{state}: build report contains failed source QA')
             frames = metadata.get('frames')
             duration = metadata.get('frameDurationMs')
             if type(frames) is not int or not 2 <= frames <= 24:
@@ -109,6 +117,12 @@ def validate_pack(path: Path) -> list[dict]:
                     raise ValueError(f'{state}: source must be RGBA WebP')
                 atlas = im.convert('RGBA')
             rows = math.ceil(frames / 4)
+            if metadata.get('rows') != rows:
+                raise ValueError(f'{state}: invalid atlas rows')
+            for field in ('anchorX', 'anchorY'):
+                anchor = metadata.get(field)
+                if type(anchor) not in (float, int) or not 0 <= anchor <= 1:
+                    raise ValueError(f'{state}: invalid {field}')
             if atlas.size != (1024, rows * 256):
                 raise ValueError(f'{state}: expected 1024x{rows * 256} pixels')
             slices = []
