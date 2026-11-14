@@ -1,0 +1,39 @@
+name: Flutter Glossy Sprite Smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'pubspec.yaml'
+      - 'assets/characters-v2/dog/recovering/**'
+      - '.github/workflows/flutter-glossy-sprite.yml'
+  pull_request:
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'pubspec.yaml'
+      - 'assets/characters-v2/dog/recovering/**'
+      - '.github/workflows/flutter-glossy-sprite.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flutter-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Resolve Flutter packages
+        run: flutter pub get
+      - name: Run Flutter analyzer
+        run: flutter analyze
+      - name: Verify animation and note screen tests
+        run: flutter test test/glossy_sprite_test.dart test/widget_test.dart
