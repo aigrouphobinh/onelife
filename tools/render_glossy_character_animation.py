@@ -107,6 +107,16 @@ def build(character: str, state: str, spec: dict) -> None:
         expected_loop = 0 if bool(spec['loop']) else None
         if observed_loop != expected_loop:
             raise AssertionError(f'Preview loop mismatch {character}/{state}: {observed_loop} != {expected_loop}')
+        # GIF stores centiseconds: tolerate encoder quantization, not lost timing.
+        # A one-shot or looping preview must retain the intended pacing on EVERY frame.
+        for frame_index in range(check.n_frames):
+            check.seek(frame_index)
+            observed_duration = check.info.get('duration')
+            if not isinstance(observed_duration, (int, float)) or abs(observed_duration - duration) > 10:
+                raise AssertionError(
+                    f'Preview timing mismatch {character}/{state} frame {frame_index}: '
+                    f'{observed_duration}ms != {duration}ms (±10ms GIF tolerance)'
+                )
 
     metadata = {
         'characterId': character, 'state': state, 'version': spec['version'],
