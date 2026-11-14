@@ -40,14 +40,14 @@
       "state": "focus",
       "frames": 8,
       "changingTransitions": 7,
-      "pngBytes": 103268
+      "pngBytes": 374953
     },
     {
       "character": "brain",
       "state": "study",
       "frames": 12,
       "changingTransitions": 11,
-      "pngBytes": 192449
+      "pngBytes": 544439
     },
     {
       "character": "brain",
@@ -61,35 +61,35 @@
       "state": "done",
       "frames": 12,
       "changingTransitions": 11,
-      "pngBytes": 218185
+      "pngBytes": 577441
     },
     {
       "character": "brain",
       "state": "thinking",
       "frames": 8,
       "changingTransitions": 7,
-      "pngBytes": 122690
+      "pngBytes": 362709
     },
     {
       "character": "brain",
       "state": "sad",
       "frames": 8,
       "changingTransitions": 7,
-      "pngBytes": 119565
+      "pngBytes": 380661
     },
     {
       "character": "brain",
       "state": "balanced",
       "frames": 8,
       "changingTransitions": 7,
-      "pngBytes": 108139
+      "pngBytes": 400443
     },
     {
       "character": "brain",
       "state": "strained",
       "frames": 10,
       "changingTransitions": 9,
-      "pngBytes": 158991
+      "pngBytes": 483479
     },
     {
       "character": "brain",
@@ -102,8 +102,8 @@
       "character": "brain",
       "state": "resting",
       "frames": 10,
-      "changingTransitions": 8,
-      "pngBytes": 448914
+      "changingTransitions": 9,
+      "pngBytes": 461287
     },
     {
       "character": "brain",
