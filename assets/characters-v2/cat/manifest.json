@@ -1,0 +1,14 @@
+{
+  "characterId": "cat",
+  "assetVersion": "2.5.0-candidate",
+  "artMaster": "assets/characters-v2/cat/master.png",
+  "productionReady": false,
+  "states": {
+    "idle": {
+      "file": "assets/characters-v2/cat/idle/metadata.json",
+      "frames": 8,
+      "generationClass": "independently-illustrated-pose-sheet"
+    }
+  },
+  "note": "Visual/phone sign-off required; no inferred or synthesized state completion."
+}
