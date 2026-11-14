@@ -38,25 +38,30 @@ void main() {
     semantics.dispose();
   });
 
-  testWidgets('committed runtime PNG keeps real alpha, not a white matte',
+  testWidgets('Dog Recovering and Focus PNG atlases keep true alpha',
       (tester) async {
-    final spec = GlossySpriteSpec.dogRecovering;
-    final bytes = await rootBundle.load(spec.assetPath);
-    final codec = await ui.instantiateImageCodec(
-      bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes),
-    );
-    final image = (await codec.getNextFrame()).image;
-    expect(image.width, 1024);
-    expect(image.height, 768);
-    final rgba = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
-    expect(rgba, isNotNull);
-    // Four bytes per pixel. First pixel of the atlas must be fully transparent.
-    expect(rgba!.getUint8(3), 0);
-    // The center of Dog's first illustrated cell should contain visible art.
-    final centerAlphaOffset = (128 * image.width + 128) * 4 + 3;
-    expect(rgba.getUint8(centerAlphaOffset), greaterThan(20));
-    image.dispose();
-    codec.dispose();
+    for (final spec in [
+      GlossySpriteSpec.dogRecovering,
+      GlossySpriteSpec.dogFocus,
+    ]) {
+      final bytes = await rootBundle.load(spec.assetPath);
+      final codec = await ui.instantiateImageCodec(
+        bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes),
+      );
+      final image = (await codec.getNextFrame()).image;
+      expect(image.width, 1024);
+      expect(image.height, 768);
+      final rgba = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
+      expect(rgba, isNotNull);
+      // Four bytes per pixel: first atlas pixel is fully transparent.
+      expect(rgba!.getUint8(3), 0, reason: spec.assetPath);
+      // The first illustrated cell has opaque art near its center.
+      final centerAlphaOffset = (128 * image.width + 128) * 4 + 3;
+      expect(rgba.getUint8(centerAlphaOffset), greaterThan(20),
+          reason: spec.assetPath);
+      image.dispose();
+      codec.dispose();
+    }
   });
 
   testWidgets('respects OS reduced-motion preference', (tester) async {
