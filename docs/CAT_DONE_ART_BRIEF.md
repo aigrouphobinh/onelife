@@ -1,0 +1,25 @@
+# OneLife — Cat Done animation art brief (P0 next)
+
+**State:** `done` · **Not yet generated or imported to the V2 animation catalog.**
+
+## Independent 12-pose acting progression
+1. Looks at a finished task on a small lilac card.
+2. Reaches a paw to the task's empty checkbox.
+3. Presses/ticks the checkbox with a clear green ✓.
+4. Pauses in a surprised little smile.
+5. Eyes become happy crescents, shoulders rise.
+6. Gives one high-paw gesture, moving paw visibly between frames.
+7. Small jump with feet clearing the ground; no cropped tail.
+8. Peak of jump with two subtle gold sparkle particles.
+9. Starts descending with a body shape that still matches Cat master.
+10. Lands with gentle squash in the legs, no arbitrary whole-image distortion.
+11. Looks proudly at the green check card, rosy cheeks.
+12. Returns to an approved smile/end pose.
+
+## Style and import requirements
+- Follow `design/STYLE_LOCK_V2.md` and use verified Cat master identity (white tuft, purple eyes, pink inner ears, tail shape, glossy lavender shading).
+- Frame-by-frame isolated art, **no desk, book, laptop, generated typography, poster grid labels, transparent checkerboard painted into output, or watermark**. Done should be visually distinct from Happy and Study.
+- 12 RGBA cells at 256×256, 4 columns; 110 ms per frame, `loop=false`. Match bottom-center anchors and preserve alpha margins.
+- Source at `assets/characters-v2/cat/done/sheet_illustrated.webp` and pinned source SHA-256 only after source exists and is inspected.
+- Only then register `cat/done` in `animation_sources.json` and run the existing GitHub renderer and coverage check.
+- Explicit release gates: visual continuity and legibility at 64px, reduced-motion pose, quiet-hour-safe nudge, Android/iOS device playback. Automated success does not indicate human approval.

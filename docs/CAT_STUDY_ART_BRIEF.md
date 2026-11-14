@@ -22,7 +22,7 @@
 
 ## Gates
 - [x] Source geometry/alpha and distinct adjacent pose QA locally.
-- [ ] GitHub source/render SHA verification and automated check pass.
+- [x] GitHub source/render SHA verification and automated check pass (run 43578370280).
 - [ ] Art reviewer confirms expression and page-motion progression (no teleporting props) and stable silhouette.
 - [ ] Confirm alpha edges contain no former white/checkerboard matte, especially around eyes and book at 64px.
 - [ ] Check 64px/96px/144px on light/dark UI; honor reduced motion and voiceover labels.
