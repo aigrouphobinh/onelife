@@ -208,3 +208,12 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - QA: 12 nonempty frames, visible adjacent changes and margins locally checked; frame 11→Idle, art consistency, low-end Android performance and reduced-motion review pending.
 
 | Dog Sleepy illustrated 12-pose source | `assets/characters-v2/dog/sleepy/sheet_illustrated.webp` | First-party AI-generated asset specifically for OneLife, 2026-11-15; white matte removed and cutouts reviewed at 64px | Subject to generating service terms; no CC0 declaration; SHA-256 `3aa07462a3d4819981c532fb2b09761cbf536f5358105589d87891924eedb347` | Automated raster QA passed locally; GitHub CI, visual polish and low-end device approval pending |
+
+## Dog Recovering — original Glossy Kawaii alpha candidate (2026-11-15)
+
+| Asset | Provenance | Format and modifications | Review status |
+|---|---|---|---|
+| Dog Recovering 12-pose concept sheet | Original AI-generated art from this OneLife conversation, guided by user-provided puppy reference; no external character downloads | 4×3 RGBA sprite atlas; detached background speckles removed; original alpha preserved; local lossless WebP SHA-256 `01903c8a53f8c656e288c602796e544ff448f59393fdf72b006ca54314921df5` | Candidate; local structural QA pass. **Binary not on GitHub**; do not count in 22/60 source-illustrated clips or treat as app-ready |
+
+Rights: generated material is subject to applicable OpenAI terms. Check originality and usage terms before publication. No user/device art approval was recorded. GIF preview has a presentation matte; use PNG/WebP with alpha for Flutter runtime.
+
