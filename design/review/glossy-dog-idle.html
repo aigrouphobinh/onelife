@@ -1,67 +1,90 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>OneLife · Cún Cam Glossy V2 · Idle Animation Review</title>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OneLife · Cún Cam Glossy V2 · Review</title>
 <style>
 :root{--bg:#FBF8FF;--card:#fff;--ink:#2D2643;--sub:#756B89;--line:#E6DDF0;--accent:#895DCD;--stage:linear-gradient(145deg,#FFF0D8,#F4E8FF)}
 [data-theme=dark]{--bg:#181427;--card:#28223E;--ink:#F7F3FF;--sub:#CCC1DB;--line:#5C4E73;--stage:linear-gradient(145deg,#3B2C40,#46335F)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
-main{max-width:710px;margin:auto;padding:25px 16px 40px}h1{margin:0;font-size:25px}p{color:var(--sub);margin:8px 0 14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:23px;padding:18px;margin:16px 0}
-.stage{min-height:300px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:var(--stage)}
-canvas{width:256px;height:256px;max-width:100%}
-.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
-button,select{border:1px solid var(--line);background:var(--card);border-radius:12px;min-height:44px;padding:8px 12px;color:var(--ink);font:inherit;cursor:pointer}
+main{max-width:720px;margin:auto;padding:25px 16px 40px}h1{font-size:25px;margin:0}p{color:var(--sub)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:23px;padding:18px;margin:18px 0}
+.stage{min-height:296px;display:flex;align-items:center;justify-content:center;background:var(--stage);border-radius:20px}
+canvas{height:256px;width:256px;max-width:100%;object-fit:contain}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:13px}
+button,select{border:1px solid var(--line);background:var(--card);border-radius:12px;min-height:44px;padding:8px 12px;color:var(--ink);font:inherit}
 button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #A887EA;outline-offset:3px}
-input{accent-color:var(--accent);flex:1;min-width:105px}label{color:var(--sub)}
-.badge{display:inline-block;border-radius:100px;background:#F3E5FF;color:#593B82;padding:5px 10px;font-size:12px;font-weight:bold}
-small{color:var(--sub)}a{color:var(--accent)}
+input{accent-color:var(--accent);flex:1;min-width:120px}label,small{color:var(--sub)}a{color:var(--accent)}
 </style></head>
 <body data-theme="light"><main>
-<h1>🐶 Cún Cam · Dog Idle Glossy V2</h1>
-<p>Trình xem bản thiết kế animation từ ảnh PNG thật. Chưa tích hợp Flutter và chưa nghiệm thu trên điện thoại.</p>
-<div class="card"><span class="badge">8 frame minh họa độc lập · 150 ms/frame · lặp</span>
-<div class="stage"><canvas id="preview" width="256" height="256" role="img" aria-label="Cún Cam chớp mắt, nghiêng đầu, vẫy đuôi và vẫy chân"></canvas></div>
+<h1>🐶 Cún Cam · Glossy V2</h1>
+<p>Xem sprite PNG thật: Idle (8 frame, lặp) và Remind (12 frame, chạy một lần). Đây là ứng viên mỹ thuật chưa kiểm thử Flutter hoặc điện thoại.</p>
+<div class="card">
 <div class="controls">
-<button id="toggle" type="button">⏸ Tạm dừng</button>
-<button id="prev" type="button">‹ Trước</button>
-<button id="next" type="button">Tiếp ›</button>
+<label for="state">Trạng thái</label><select id="state" aria-label="Chọn hoạt ảnh"><option value="idle">Idle · Bình thường</option><option value="remind">Remind · Nhắc việc</option></select>
 <label for="size">Kích thước</label><select id="size" aria-label="Kích thước hiển thị"><option value="256">256px</option><option value="144">144px</option><option value="96">96px</option><option value="64">64px</option></select>
-<button id="theme" type="button">Sáng / Tối</button>
+</div>
+<div class="stage"><canvas id="preview" width="256" height="256" role="img" aria-label="Xem từng tư thế của Cún Cam"></canvas></div>
+<div class="controls">
+<button id="toggle" type="button">▶ Phát</button><button id="prev" type="button">‹ Trước</button><button id="next" type="button">Tiếp ›</button><button id="theme" type="button">Sáng / Tối</button>
 </div>
 <div class="controls"><label for="seek">Frame <output id="counter">1/8</output></label><input id="seek" type="range" min="0" max="7" value="0" aria-label="Xem từng frame"/></div>
 <p id="status" role="status">Đang tải Dog Idle PNG...</p>
 </div>
-<p><small>Độ mượt, viền nền trong suốt, độ giống master và seam frame 8→1 cần xem trực tiếp ở 64/96/144px; QA cấu trúc không thay thế nghiệm thu con người. <a href="../../docs/OTHER_MASCOT_COVERAGE.md">Báo cáo 60 clip</a>.</small></p>
+<p><small>Phải so sánh biểu cảm và tai/chân với Dog master ở kích thước 64/96/144px. QA số frame không chứng minh chuyển động mượt. <a href="../../docs/OTHER_MASCOT_COVERAGE.md">Theo dõi tiến độ 60 clip</a>.</small></p>
 </main><script>
 (function(){
 'use strict';
-const el=id=>document.getElementById(id), canvas=el('preview'), ctx=canvas.getContext('2d');
-const frames=8, columns=4, frameTime=150;
-const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let frame=0,loaded=false,playing=!reduced,last=0,accumulated=0;
+const el=id=>document.getElementById(id),canvas=el('preview'),ctx=canvas.getContext('2d');
+const sources={
+ idle:{src:'../../assets/characters-v2/dog/idle/sheet.png',frames:8,ms:150,loop:true,label:'Idle'},
+ remind:{src:'../../assets/characters-v2/dog/remind/sheet.png',frames:12,ms:125,loop:false,label:'Remind'}
+};
+const reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let mode='idle',frames=8,frame=0,ms=150,loop=true,loaded=false,playing=!reduced,last=0,elapsed=0,sequence=0;
 const sprite=new Image();sprite.decoding='async';
 function draw(){
  if(!loaded)return;
  ctx.clearRect(0,0,256,256);
- ctx.drawImage(sprite,(frame%columns)*256,Math.floor(frame/columns)*256,256,256,0,0,256,256);
- el('counter').textContent=(frame+1)+'/8';el('seek').value=String(frame);
+ ctx.drawImage(sprite,(frame%4)*256,Math.floor(frame/4)*256,256,256,0,0,256,256);
+ el('counter').textContent=(frame+1)+'/'+frames;el('seek').value=String(frame);
 }
-function updateButton(){el('toggle').textContent=playing?'⏸ Tạm dừng':'▶ Phát';}
-sprite.onload=function(){if(sprite.naturalWidth!==1024||sprite.naturalHeight!==512){el('status').textContent='Lỗi: kích thước atlas không đúng';return}loaded=true;el('status').textContent='Dog Idle · 8 frame RGBA PNG · 150ms · ứng viên mỹ thuật';draw()};
-sprite.onerror=function(){el('status').textContent='Không thể tải PNG. Hãy phục vụ cả thư mục repository qua máy chủ HTTP.'};
-sprite.src='../../assets/characters-v2/dog/idle/sheet.png';
+function button(){el('toggle').textContent=playing?'⏸ Tạm dừng':'▶ Phát'}
+function choose(name){
+ const spec=sources[name];if(!spec)return;
+ mode=name;frames=spec.frames;ms=spec.ms;loop=spec.loop;frame=0;elapsed=0;loaded=false;playing=!reduced;
+ el('seek').max=String(frames-1);el('seek').value='0';el('counter').textContent='1/'+frames;
+ el('status').textContent='Đang tải '+spec.label+' PNG...';button();
+ const request=++sequence;
+ sprite.onload=()=>{
+  if(request!==sequence)return;
+  if(sprite.naturalWidth!==1024||sprite.naturalHeight!==Math.ceil(frames/4)*256){el('status').textContent='Lỗi: kích thước atlas không đúng';return}
+  loaded=true;el('status').textContent=spec.label+' · '+frames+' frame · '+ms+'ms · '+(loop?'lặp':'chạy một lần')+' · ứng viên mỹ thuật';draw();
+ };
+ sprite.onerror=()=>{if(request===sequence)el('status').textContent='Không tải được PNG. Hãy chạy trang qua HTTP server trong repository.'};
+ sprite.src=spec.src;
+}
 function tick(now){
- if(!last)last=now;
- const delta=Math.min(250,now-last);last=now;
- if(playing && !document.hidden && loaded){accumulated+=delta;while(accumulated>=frameTime){frame=(frame+1)%frames;accumulated-=frameTime}draw()}else accumulated=0;
+ if(!last)last=now;const delta=Math.min(250,now-last);last=now;
+ if(playing && !document.hidden && loaded){
+  elapsed+=delta;
+  while(elapsed>=ms){
+   elapsed-=ms;
+   if(!loop && frame===frames-1){playing=false;button();break}
+   frame=(frame+1)%frames;
+  }
+  draw();
+ }else elapsed=0;
  requestAnimationFrame(tick);
 }
-el('toggle').onclick=function(){playing=!playing;accumulated=0;updateButton()};
-el('next').onclick=function(){playing=false;frame=(frame+1)%frames;accumulated=0;updateButton();draw()};
-el('prev').onclick=function(){playing=false;frame=(frame+frames-1)%frames;accumulated=0;updateButton();draw()};
-el('seek').oninput=function(){playing=false;frame=Number(this.value);accumulated=0;updateButton();draw()};
+el('state').onchange=function(){choose(this.value)};
+el('toggle').onclick=function(){
+ if(!loop && frame===frames-1)frame=0;
+ playing=!playing;elapsed=0;button();draw();
+};
+el('next').onclick=function(){playing=false;frame=(frame+1)%frames;elapsed=0;button();draw()};
+el('prev').onclick=function(){playing=false;frame=(frame+frames-1)%frames;elapsed=0;button();draw()};
+el('seek').oninput=function(){playing=false;frame=Number(this.value);elapsed=0;button();draw()};
 el('size').onchange=function(){canvas.style.width=this.value+'px';canvas.style.height=this.value+'px'};
 el('theme').onclick=function(){document.body.dataset.theme=document.body.dataset.theme==='dark'?'light':'dark'};
-updateButton();requestAnimationFrame(tick);
+choose('idle');requestAnimationFrame(tick);
 })();
 </script></body></html>

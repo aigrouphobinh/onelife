@@ -48,6 +48,35 @@ def main():
     html=PAGE.read_text(encoding='utf-8')
     for token in ('../../assets/characters-v2/dog/idle/sheet.png','id="toggle"','id="seek"','id="theme"','id="size"','requestAnimationFrame','prefers-reduced-motion'):
         assert token in html, f'Missing gallery contract: {token}'
+
+    # Additional one-shot Dog Remind clip: validate only when declared by catalog.
+    reminder = [e for e in catalog['animationSources'] if e['characterId']=='dog' and e['state']=='remind']
+    if reminder:
+        assert len(reminder)==1
+        folder=ROOT/'assets/characters-v2/dog/remind'
+        spec=reminder[0]
+        meta=json.loads((folder/'metadata.json').read_text())
+        report=json.loads((folder/'qa_report.json').read_text())
+        assert sha(folder/'sheet_illustrated.webp')==spec['sourceSha256']==meta['sourceSha256']
+        assert sha(folder/'sheet.png')==meta['sha256']
+        assert meta['frames']==12 and meta['columns']==4 and meta['rows']==3
+        assert meta['frameDurationMs']==125 and meta['loop'] is False
+        assert report['passed'] is True and report['previewLoop']=='once'
+        with Image.open(folder/'sheet.png') as image:
+            assert image.size==(1024,768)
+            atlas=image.convert('RGBA')
+        frames=[atlas.crop(((i%4)*256,(i//4)*256,((i%4)+1)*256,((i//4)+1)*256)) for i in range(12)]
+        for i,frame in enumerate(frames):
+            bounds=frame.getchannel('A').getbbox()
+            assert bounds is not None and min(bounds[0],bounds[1],256-bounds[2],256-bounds[3])>=2, f'Dog remind frame {i} clipped'
+        for i,(left,right) in enumerate(zip(frames,frames[1:])):
+            rms=sum(ImageStat.Stat(ImageChops.difference(visible(left),visible(right))).rms)/3
+            assert rms>=2, f'Near duplicate Dog Remind frames {i},{i+1}'
+        with Image.open(folder/'preview.gif') as preview:
+            assert preview.n_frames==12 and preview.info.get('loop') is None
+        assert '../../assets/characters-v2/dog/remind/sheet.png' in html
+        print('PASS Dog Remind glossy V2: 12 distinct keyframes, one-shot, SHA verified; human/device QA pending')
+
     print(f'PASS Dog Idle glossy V2: 8 frames, 7 changing neighbors, min visible RMS {min(motion):.2f}; review and phone QA pending')
 
 if __name__=='__main__': main()

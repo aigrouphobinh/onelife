@@ -179,3 +179,8 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - First-party generated original 8-pose glossy golden-apricot puppy character animation, derived from the *design identity* of `assets/characters-v2/dog/master.webp`, not a third-party stock asset. AI generation and background alpha extraction performed in current OneLife project; generated-art use governed by applicable terms, **not CC0**.
 - Compressed source `assets/characters-v2/dog/idle/sheet_illustrated.webp`, SHA-256 `077c0d07e77d07bb618926478bd66f40d8d11f1236851b799d19bff7b525c4de`, 1024×512 RGBA; 4 columns, 2 rows of 256px cells, 150 ms, looping.
 - Physical-device art quality, matte fringe and loop seam sign-off pending. Runtime PNG/GIF generated from catalog via `tools/render_glossy_character_animation.py`.
+
+## Dog Remind Glossy V2 source (2026-11-15)
+- AI-generated original project illustrations of the **Dog** mascot from the chosen kawaii dog master; no external or copied mascot. Source WebP: `assets/characters-v2/dog/remind/sheet_illustrated.webp` (1024×768, 12 illustrated frames).
+- White source matte removed, separated into RGBA cell frames; SHA-256 `19ce5b7b2031d528346b9d6ceedb995bee849a8ceadd8adb9969a9f4a5bbe9c0`. Source album and compressed runtime result are subject to the applicable image-generation terms; not CC0.
+- Structural checks conducted locally; GitHub Actions outputs and device/human art review are separate acceptance steps. No sensitive notification content collected by this image resource.
