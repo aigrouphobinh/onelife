@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   bool _loading = true;
   String? _error;
   int _mascotReplay = 0;
-  bool _focusSelected = false;
+  String _dogState = 'recovering';
 
   @override
   void initState() {
@@ -97,14 +97,18 @@ class _HomePageState extends State<HomePage> {
             children: [
               Row(children: [
                 GlossySprite(
-                  key: ValueKey('dog-${_focusSelected ? 'focus' : 'recovering'}-$_mascotReplay'),
-                  spec: _focusSelected
-                      ? GlossySpriteSpec.dogFocus
-                      : GlossySpriteSpec.dogRecovering,
+                  key: ValueKey('dog-$_dogState-$_mascotReplay'),
+                  spec: _dogState == 'study'
+                      ? GlossySpriteSpec.dogStudy
+                      : _dogState == 'focus'
+                          ? GlossySpriteSpec.dogFocus
+                          : GlossySpriteSpec.dogRecovering,
                   size: 104,
-                  semanticLabel: _focusSelected
-                      ? 'Chú chó màu cam đang tập trung'
-                      : 'Chú chó màu cam đang thức dậy và vươn vai',
+                  semanticLabel: _dogState == 'study'
+                      ? 'Chú chó màu cam đang đọc sách và học tập'
+                      : _dogState == 'focus'
+                          ? 'Chú chó màu cam đang tập trung'
+                          : 'Chú chó màu cam đang thức dậy và vươn vai',
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -112,12 +116,18 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(_focusSelected ? 'Giữ nhịp tập trung' : 'Một nhịp nghỉ dịu dàng',
+                      Text(_dogState == 'study'
+                              ? 'Một trang sách mới'
+                              : _dogState == 'focus'
+                                  ? 'Giữ nhịp tập trung'
+                                  : 'Một nhịp nghỉ dịu dàng',
                           style: Theme.of(context).textTheme.titleSmall),
                       const SizedBox(height: 4),
-                      Text(_focusSelected
-                          ? 'Chọn một việc nhỏ và bắt đầu.'
-                          : 'Nghỉ ngơi rồi trở lại nhẹ nhàng.',
+                      Text(_dogState == 'study'
+                          ? 'Hãy khám phá điều thú vị tiếp theo.'
+                          : _dogState == 'focus'
+                              ? 'Chọn một việc nhỏ và bắt đầu.'
+                              : 'Nghỉ ngơi rồi trở lại nhẹ nhàng.',
                           maxLines: 3, overflow: TextOverflow.ellipsis),
                       TextButton.icon(
                         onPressed: () => setState(() => _mascotReplay++),
@@ -135,11 +145,11 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   ChoiceChip(
                     label: const Text('Hồi phục'),
-                    selected: !_focusSelected,
+                    selected: _dogState == 'recovering',
                     onSelected: (selected) {
-                      if (selected && _focusSelected) {
+                      if (selected && _dogState != 'recovering') {
                         setState(() {
-                          _focusSelected = false;
+                          _dogState = 'recovering';
                           _mascotReplay++;
                         });
                       }
@@ -147,11 +157,23 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ChoiceChip(
                     label: const Text('Tập trung'),
-                    selected: _focusSelected,
+                    selected: _dogState == 'focus',
                     onSelected: (selected) {
-                      if (selected && !_focusSelected) {
+                      if (selected && _dogState != 'focus') {
                         setState(() {
-                          _focusSelected = true;
+                          _dogState = 'focus';
+                          _mascotReplay++;
+                        });
+                      }
+                    },
+                  ),
+                  ChoiceChip(
+                    label: const Text('Học tập'),
+                    selected: _dogState == 'study',
+                    onSelected: (selected) {
+                      if (selected && _dogState != 'study') {
+                        setState(() {
+                          _dogState = 'study';
                           _mascotReplay++;
                         });
                       }
