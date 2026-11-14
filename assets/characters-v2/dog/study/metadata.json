@@ -1,0 +1,23 @@
+{
+  "characterId": "dog",
+  "state": "study",
+  "version": "2.28.0-illustrated-candidate",
+  "artStyle": "glossy-kawaii-v2",
+  "source": "sheet_illustrated.webp",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "frames": 12,
+  "columns": 4,
+  "rows": 3,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 140,
+  "loop": false,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "sourceSha256": "22527ed1447616233b9672df9410baed71cde1641f538f7d64208148f7b12e4c",
+  "sha256": "0353e89289d7595f2756281b2b61d1f7403e221c3812b56656ab1df7301cd00d",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "generationClass": "independently-illustrated-pose-sheet",
+  "reviewStatus": "automated-qa-passed; human and phone QA pending"
+}

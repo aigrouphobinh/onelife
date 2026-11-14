@@ -1,0 +1,31 @@
+{
+  "source": "assets/characters-v2/dog/study/sheet_illustrated.webp",
+  "sha256": "22527ed1447616233b9672df9410baed71cde1641f538f7d64208148f7b12e4c",
+  "geometry": {
+    "frames": 12,
+    "columns": 4,
+    "rows": 3,
+    "cellPx": 256,
+    "atlasPx": [
+      1024,
+      768
+    ]
+  },
+  "adjacentVisibleRms": [
+    68.87,
+    64.03,
+    62.26,
+    74.16,
+    64.63,
+    61.21,
+    58.32,
+    69.43,
+    62.77,
+    58.65,
+    58.1
+  ],
+  "warnings": [],
+  "technicalPreflightPassed": true,
+  "humanVisualApproval": "pending",
+  "realDeviceApproval": "pending"
+}
