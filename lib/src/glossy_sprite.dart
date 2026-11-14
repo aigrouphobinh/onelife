@@ -78,6 +78,106 @@ class GlossySpriteSpec {
     frameDurationMs: 145,
     loop: false,
   );
+
+  static const dogIdle = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/idle/sheet.png',
+    frames: 8,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 150,
+    loop: true,
+  );
+
+  static const dogRemind = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/remind/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 125,
+    loop: false,
+  );
+
+  static const dogAlarm = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/alarm/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 110,
+    loop: false,
+  );
+
+  static const dogResting = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/resting/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 200,
+    loop: true,
+  );
+
+  static const dogOverloaded = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/overloaded/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 150,
+    loop: false,
+  );
+
+  static const dogHappy = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/happy/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 110,
+    loop: false,
+  );
+
+  static const dogSleepy = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/sleepy/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 180,
+    loop: false,
+  );
+
+  static const dogSad = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/sad/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 160,
+    loop: false,
+  );
+
+  static const dogBalanced = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/balanced/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 180,
+    loop: false,
+  );
+
+  static const dogStrained = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/dog/strained/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 155,
+    loop: false,
+  );
 }
 
 /// Pure frame indexing: one-shot progress 1.0 holds the final pose.
