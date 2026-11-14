@@ -92,3 +92,8 @@ Initial RGB 2×2 sprite concept sheet had visible checkerboard; segmentation res
 - Original 12-pose lavender kitten with gold notification bell, generated specifically for OneLife; white/checkered backdrop separated to real RGBA via connected-component matting. No external characters or stock assets.
 - Source: `assets/characters-v2/cat/remind/sheet_illustrated.webp` (1024×768, 4×3, 256px cells). SHA-256: `ca3665368985cd4fb951403b312a5bf8fc2a1206e5c84bc315bc573d05f87d8c`.
 - Sprite PNG/GIF and QA produced from source by `tools/render_glossy_character_animation.py`; alpha masks may need manual edge cleanup, especially at 64px. `generationClass: independently-illustrated-pose-sheet`, with manual art/device approval **pending**.
+
+## Cat Alarm Glossy V2 (2026-11-14)
+- Source: `assets/characters-v2/cat/alarm/sheet_illustrated.webp`, 12 newly illustrated poses created for OneLife from the user-selected lavender kawaii cat style.
+- SHA256: `49dde52906a178e33d5e5ad9257ebce3548cdad1ee18c58a4984c4f65b55e333`; generated source had nearly-white/checker texture and was converted to RGBA locally.
+- Rendered atlas and preview are reproducible from the WebP source through `tools/render_glossy_character_animation.py`. Automatic frame geometry/alpha/motion checks do not signify artistic approval or tested device performance. Review any residual fringe on real screens.
