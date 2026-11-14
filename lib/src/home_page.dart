@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'note_repository.dart';
+import 'glossy_sprite.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.repository});
@@ -14,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   List<Note> _notes = [];
   bool _loading = true;
   String? _error;
+  int _mascotReplay = 0;
 
   @override
   void initState() {
@@ -84,7 +86,42 @@ class _HomePageState extends State<HomePage> {
     appBar: AppBar(title: const Text('OneLife')),
     body: Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text('Một nơi để nhớ, tìm và hoàn thành việc', style: Theme.of(context).textTheme.titleMedium),
-      const SizedBox(height: 16),
+      const SizedBox(height: 12),
+      Card(
+        color: const Color(0xFFF8F6FD),
+        surfaceTintColor: Colors.transparent,
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(children: [
+            GlossySprite(
+              key: ValueKey(_mascotReplay),
+              spec: GlossySpriteSpec.dogRecovering,
+              size: 104,
+              semanticLabel: 'Chú chó màu cam đang thức dậy và vươn vai',
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Một nhịp nghỉ dịu dàng',
+                      style: Theme.of(context).textTheme.titleSmall),
+                  const SizedBox(height: 4),
+                  const Text('Hoạt ảnh Glossy Kawaii, nền trong suốt thật.',
+                      maxLines: 3, overflow: TextOverflow.ellipsis),
+                  TextButton.icon(
+                    onPressed: () => setState(() => _mascotReplay++),
+                    icon: const Icon(Icons.replay, size: 18),
+                    label: const Text('Xem lại'),
+                  ),
+                ],
+              ),
+            ),
+          ]),
+        ),
+      ),
+      const SizedBox(height: 12),
       TextField(controller: _search, onChanged: (_) => _reload(),
         decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Tìm ghi chú...', border: OutlineInputBorder())),
       const SizedBox(height: 12),
