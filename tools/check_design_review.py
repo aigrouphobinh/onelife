@@ -81,16 +81,22 @@ def main():
     assert len(glossy.scripts) == 1, "Glossy viewer needs one inline script"
     for control in ("motion", "sprite", "seek", "play", "next", "restart", "duration"):
         assert control in glossy.ids, f"Missing Glossy V2 viewer control {control}"
-    for st in ("idle", "remind", "overloaded", "happy", "resting", "alarm", "sleepy"):
+    manifest = json.loads((v2 / "manifest.json").read_text(encoding="utf-8"))
+    approved_candidates = manifest["states"]
+    assert len(approved_candidates) >= 8, "Expected 8+ Glossy V2 states after Recovering"
+    count = 0
+    for st, entry in approved_candidates.items():
         assert f'value="{st}"' in glossy_html, f"Missing Glossy V2 selector {st}"
         assert (v2 / st / "sheet.png").is_file(), f"Missing Glossy V2 atlas {st}"
+        clip = json.loads((v2 / st / "metadata.json").read_text(encoding="utf-8"))
+        assert clip["artStyle"] == "glossy-kawaii-v2", f"Not a Glossy V2 state: {st}"
+        assert clip["frames"] == entry["frames"], f"Frame index/metadata mismatch: {st}"
+        count += clip["frames"]
+    assert count >= 90, f"Expected at least 90 glossy frames, found {count}"
     run = subprocess.run(["node", "--check", "-"], input=glossy.scripts[0],
                          text=True, capture_output=True)
     assert run.returncode == 0, "Glossy viewer JavaScript syntax failed:\\n" + run.stderr
-    manifest = json.loads((v2 / "manifest.json").read_text(encoding="utf-8"))
-    assert len(manifest["states"]) == 7, "Glossy V2 count must be 7 before adding states"
-    assert sum(st["frames"] for st in manifest["states"].values()) == 78
-    print("PASS design preview: 7 real Glossy V2 sprites, JS syntax, local controls and 10 screens")
+    print(f"PASS design preview: {len(approved_candidates)} real Glossy V2 candidates, {count} frames, JS syntax and screen assets")
 
 
 if __name__ == "__main__":
