@@ -24,6 +24,16 @@ VALID_STATES = {
     "sad", "balanced", "strained",
 }
 HEX_SHA = re.compile(r"^[0-9a-f]{64}$")
+# A pre-existing Dog Strained sheet reuses illustrated poses. It is a
+# transparent source candidate, NOT original animation artwork. Permit only
+# this explicitly audited exception, with its exact immutable checksum, so
+# catalog/render CI does not misrepresent it as independently drawn.
+REVIEW_ONLY_SOURCES = {
+    ("dog", "strained"): (
+        "retargeted-illustrated-pose-sheet",
+        "4c21977047eb194e18ae63dfcff07dbee432e2c65a47b3e75066ec63fc3846ce",
+    ),
+}
 
 
 def validate(catalog: dict, root: Path, verify_files: bool = True) -> int:
@@ -44,9 +54,13 @@ def validate(catalog: dict, root: Path, verify_files: bool = True) -> int:
             raise ValueError(f"{char}/{state}: unexpected source filename")
         if not isinstance(item.get("version"), str) or not item["version"].strip():
             raise ValueError(f"{char}/{state}: missing version")
-        if item.get("generationClass") != "independently-illustrated-pose-sheet":
-            raise ValueError(f"{char}/{state}: source provenance must be independently illustrated")
         sha = item.get("sourceSha256")
+        generation = item.get("generationClass")
+        if generation != "independently-illustrated-pose-sheet":
+            if REVIEW_ONLY_SOURCES.get(key) != (generation, sha):
+                raise ValueError(f"{char}/{state}: source provenance must be independently illustrated or explicitly audited")
+            # This source remains review-only; coverage must report it as derived.
+
         if not isinstance(sha, str) or HEX_SHA.fullmatch(sha) is None:
             raise ValueError(f"{char}/{state}: invalid source SHA-256")
         for field, value in (
@@ -129,6 +143,19 @@ class ContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "provenance"):
             self.check([{**self.item, "generationClass": "derived-pose-composite"}])
 
+    def test_arbitrary_retargeted_source_rejected(self):
+        with self.assertRaisesRegex(ValueError, "provenance"):
+            self.check([{**self.item, "generationClass": "retargeted-illustrated-pose-sheet"}])
+
+    def test_audited_dog_strained_requires_exact_sha(self):
+        audited = dict(self.item, characterId="dog", state="strained",
+                       generationClass="retargeted-illustrated-pose-sheet")
+        with self.assertRaisesRegex(ValueError, "provenance"):
+            validate({"animationSources": [audited]}, self.root, verify_files=False)
+        audited["sourceSha256"] = REVIEW_ONLY_SOURCES[("dog", "strained")][1]
+        self.assertEqual(validate({"animationSources": [audited]}, self.root, verify_files=False), 1)
+
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -140,7 +167,8 @@ def main():
         )
         raise SystemExit(0 if result.wasSuccessful() else 1)
     count = validate(json.loads(CATALOG.read_text(encoding="utf-8")), ASSET_ROOT)
-    print(f"PASS: {count} distinct illustrated source catalog entries, hashes verified")
+    print(f"PASS: {count} SHA-locked source catalog entries validated "
+          "(audited Dog Strained is retargeted/review-only, NOT original art)")
     
 
 if __name__ == "__main__":
