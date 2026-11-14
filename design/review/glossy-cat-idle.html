@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OneLife · Cat Glossy V2 animation review</title>
+<style>
+:root{--bg:#f7f4ff;--surface:#fff;--ink:#32274c;--muted:#786d88;--line:#dcd4e9;--accent:#8d67d5}
+body[data-theme=dark]{--bg:#18152a;--surface:#2d2643;--ink:#f7f2ff;--muted:#cbc1de;--line:#5a4c79}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif}main{max-width:680px;margin:0 auto;padding:26px 16px}
+h1{font-size:24px;margin:0 0 5px}.muted{color:var(--muted)}.card{border-radius:22px;border:1px solid var(--line);background:var(--surface);padding:18px;margin:16px 0}
+.stage{min-height:305px;border-radius:20px;background:linear-gradient(135deg,#e6dbfc,#ffeff8);display:flex;justify-content:center;align-items:center}
+body[data-theme=dark] .stage{background:linear-gradient(135deg,#342a50,#50374d)}canvas{image-rendering:auto;max-width:100%}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}button,select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 11px;min-height:44px}
+button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b696f7;outline-offset:2px}
+input[type=range]{accent-color:var(--accent);flex:1;min-width:110px}.note{font-size:13px}.tag{display:inline-block;background:#e9defc;color:#523b80;border-radius:99px;padding:3px 10px;font-size:12px}
+a{color:inherit}
+</style></head><body data-theme="light"><main>
+<h1>Mèo Tím · Glossy V2</h1><p class="muted">Trình xem <strong>8 tư thế minh họa Idle</strong> thực tế. Không dùng CSS/rotation để giả tạo frame. Không đại diện cho 15 trạng thái hoàn thành.</p>
+<div class="card"><span class="tag">Idle · illustrated candidate</span><div class="stage"><canvas id="anim" width="256" height="256" role="img" aria-label="Mèo OneLife: thở, chớp mắt, đuôi và tai chuyển động"></canvas></div>
+<div class="controls"><button id="toggle">⏸ Dừng</button><button id="next">Frame tiếp ›</button><button id="theme">Đổi nền sáng/tối</button></div>
+<div class="controls"><label for="size">Kích thước:</label><select id="size"><option value="256">256px</option><option value="144">144px</option><option value="96">96px</option><option value="64">64px</option></select>
+<label for="seek">Frame <output id="label">1/8</output></label><input type="range" id="seek" min="0" max="7" value="0"></div>
+<p class="note muted">Nguồn: <a href="../../assets/characters-v2/cat/idle/sheet_illustrated.webp">WebP minh họa gốc</a> · PNG RGBA runtime · GIF preview · metadata JSON. Không gửi dữ liệu ra bên ngoài.</p></div>
+<p class="note muted">Mỹ thuật và khả năng nhìn rõ ở 64px vẫn cần người duyệt. Frame 8 và frame 1 có thể cần chỉnh để vòng lặp mượt hơn. Khả năng chạy trong Flutter/Android/iOS chưa được nghiệm thu.</p>
+<a href="glossy-other-mascots.html">Xem các nhân vật khác</a>
+</main><script>
+(function(){'use strict';const $=id=>document.getElementById(id),c=$('anim'),ctx=c.getContext('2d');let img=new Image(),frame=0,playing=!(matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches),last=0,ready=false;
+function draw(){if(!ready)return;ctx.clearRect(0,0,256,256);ctx.drawImage(img,(frame%4)*256,Math.floor(frame/4)*256,256,256,0,0,256,256);$('label').textContent=(frame+1)+'/8';$('seek').value=frame}
+img.onload=()=>{ready=true;draw()};img.onerror=()=>{$('label').textContent='Không tải được atlas'};img.src='../../assets/characters-v2/cat/idle/sheet.png';
+function tick(t){if(playing&&!document.hidden&&ready){if(!last)last=t;const dt=150;if(t-last>=dt){const n=Math.floor((t-last)/dt);frame=(frame+n)%8;last+=n*dt;draw()}}else{last=t}requestAnimationFrame(tick)}
+function setPlaying(next){playing=next;$('toggle').textContent=playing?'⏸ Dừng':'▶ Phát';last=0}
+$('toggle').onclick=()=>setPlaying(!playing);$('next').onclick=()=>{setPlaying(false);frame=(frame+1)%8;draw()};$('seek').oninput=function(){setPlaying(false);frame=Number(this.value);draw()};$('size').onchange=function(){c.style.width=this.value+'px';c.style.height=this.value+'px'};$('theme').onclick=()=>{document.body.dataset.theme=document.body.dataset.theme==='dark'?'light':'dark'};requestAnimationFrame(tick)
+})();
+</script></body></html>

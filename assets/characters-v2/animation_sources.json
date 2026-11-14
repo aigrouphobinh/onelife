@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "animationSources": [
+    {
+      "characterId": "cat",
+      "state": "idle",
+      "version": "2.5.0-illustrated-candidate",
+      "sourceFile": "sheet_illustrated.webp",
+      "sourceSha256": "96a74290028103fae6d3a3e0d7d2aea8db2a79d80d561804a6b82f0045e78b8f",
+      "frames": 8,
+      "columns": 4,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "frameDurationMs": 150,
+      "loop": true,
+      "generationClass": "independently-illustrated-pose-sheet"
+    }
+  ]
+}
