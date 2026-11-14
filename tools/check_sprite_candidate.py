@@ -51,6 +51,16 @@ def inspect(path: Path, *, frames: int = 12, cols: int = 4, cell: int = 256) -> 
             warnings.append(f'frame {i:02}: nontransparent border')
         slices.append(frame)
 
+    # Reject art hidden in unused cells of a partial final row. Otherwise a
+    # purported 10-frame source could silently contain 12 painted poses while
+    # the renderer/coverage counts only 10.
+    for i in range(frames, rows * cols):
+        unused = atlas.crop(((i % cols) * cell, (i // cols) * cell,
+                             (i % cols + 1) * cell, (i // cols + 1) * cell))
+        alpha = unused.getchannel('A')
+        if alpha.getextrema()[1] > 24:
+            warnings.append(f'unused cell {i:02}: contains visible pixels')
+
     adjacent = []
     for i in range(1, frames):
         matte = Image.new('RGBA', (cell, cell), (248, 246, 253, 255))
