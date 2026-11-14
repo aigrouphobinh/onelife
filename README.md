@@ -1,5 +1,16 @@
 # OneLife
 
+## Current asset-first production checkpoint (2026-11-15)
+
+**Source-illustration coverage: 22/60 clips (38 missing)**, as reported by the deterministic asset check in [docs/NEXT_AUTO_TASK.md](docs/NEXT_AUTO_TASK.md). This count is for sourced illustrations, **not** app-ready/approved animations.
+
+- Cat: 15/15 source clips; Dog: 7/15 including Sleepy; Robot and Sprout: 0/15 each. The existing Brain pack is tracked separately from this 60-clip migration.
+- **Next production blocker:** [Dog Recovering 12-frame brief](docs/DOG_RECOVERING_ART_BRIEF.md). An original transparent 4×3 illustrated sprite sheet is required at `assets/characters-v2/dog/recovering/sheet_illustrated.webp`; documentation alone is not an asset.
+- Keep the **Glossy Kawaii V2** master identity and real frame-by-frame movement. Do not fill missing frames with transformed stills, placeholders, or an unlabeled poster.
+- Run source provenance, SHA-256 registration, sprite render and visual QA gates before promoting coverage. No device art approval, Flutter runtime, or production release is implied by passing GitHub Actions.
+- The intended next sequence is **Dog Recovering → Dog Focus → remaining Dog states → Robot/Sprout**, with mobile integration and actual-device verification gated on reviewed artwork.
+
+
 ## Design V2 – Trợ lý bộ não nhỏ (2026-11-14)
 
 **Công việc được triển khai trực tiếp trên `main`.** Thiết kế đã có bộ Brain Glossy V2 gồm **15 clip/156 frame** và 10 trang prototype, dùng sprite PNG thật (không dùng ảnh vẽ SVG phẳng cho nhân vật Brain).
