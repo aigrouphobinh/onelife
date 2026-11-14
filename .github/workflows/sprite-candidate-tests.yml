@@ -1,16 +1,20 @@
-name: Glossy Kawaii sprite candidate preflight tests
+name: Glossy Kawaii sprite source and transparency checks
 
 on:
   push:
     branches: [main]
     paths:
       - 'tools/check_sprite_candidate.py'
+      - 'tools/prepare_glossy_alpha_sheet.py'
       - 'tests/test_sprite_candidate.py'
+      - 'tests/test_prepare_glossy_alpha_sheet.py'
       - '.github/workflows/sprite-candidate-tests.yml'
   pull_request:
     paths:
       - 'tools/check_sprite_candidate.py'
+      - 'tools/prepare_glossy_alpha_sheet.py'
       - 'tests/test_sprite_candidate.py'
+      - 'tests/test_prepare_glossy_alpha_sheet.py'
       - '.github/workflows/sprite-candidate-tests.yml'
   workflow_dispatch:
 
@@ -20,7 +24,7 @@ permissions:
 jobs:
   sprite-preflight:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 6
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -30,5 +34,7 @@ jobs:
           python-version: '3.12'
       - name: Install Pillow
         run: python -m pip install 'Pillow>=10,<13'
-      - name: Run synthetic illustrated atlas regression tests
+      - name: Check original sprite candidate geometry and motion
         run: python -m unittest discover -s tests -p 'test_sprite_candidate.py' -v
+      - name: Check true-alpha exporter regression cases
+        run: python -m unittest discover -s tests -p 'test_prepare_glossy_alpha_sheet.py' -v
