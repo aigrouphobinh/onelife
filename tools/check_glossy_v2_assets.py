@@ -52,8 +52,8 @@ def validate_clip(folder:Path, state:str):
 def main():
     manifest=json.loads((STAGING/"manifest.json").read_text(encoding="utf-8"))
     states=manifest["states"]
-    assert {"idle","remind","overloaded","happy","resting","alarm"}<=set(states),states
-    assert len(states)==6,f"Unexpected glossy state count {len(states)}"
+    assert {"idle","remind","overloaded","happy","resting","alarm","sleepy"}<=set(states),states
+    assert len(states)==7,f"Unexpected glossy state count {len(states)}"
     for folder in (STAGING,LIVE):
         with Image.open(folder/"master.png") as image:
             assert image.mode=="RGBA" and image.width==image.height>=256
