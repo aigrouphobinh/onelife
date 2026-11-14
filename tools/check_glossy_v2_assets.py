@@ -62,6 +62,9 @@ def main():
             versioned=json.loads((STAGING/state/"metadata.json").read_text())
             assert staged["sha256"]==versioned["sha256"],(folder,state)
             assert sha(folder/state/"sheet.png")==sha(STAGING/state/"sheet.png")
-    print("PASS: 8/15 glossy V2 Brain states, 90 frames; recovering illustrated; Resting montage candidate; 7 states remain V1")
+    count=sum(json.loads((STAGING/state/"metadata.json").read_text())["frames"] for state in states)
+    assert count==90, f"Expected 90 V2 Brain frames, found {count}"
+    assert manifest.get("productionReady") is False, "V2 must not be marked production-ready without device/art review"
+    print(f"PASS: {len(states)}/15 glossy V2 Brain states, {count} frames; Resting montage candidate; 7 states remain V1")
 if __name__=="__main__":
     main()

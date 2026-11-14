@@ -38,16 +38,24 @@ def generate(path: Path) -> dict:
         raise ValueError(f"Unexpected animation state: {path}")
     # Approved glossy V2 raster takes precedence over the older flat SVG source.
     # Never overwrite the actual user-selected artwork when regenerating SVG assets.
-    if char_id == "brain" and path.with_name("metadata.json").exists():
+    if char_id == "brain":
         metadata_path = path.with_name("metadata.json")
+        source_v2 = ROOT / "assets/characters-v2/brain" / state / "sheet_illustrated.webp"
         if metadata_path.exists():
             current = json.loads(metadata_path.read_text(encoding="utf-8"))
             if current.get("artStyle") == "glossy-kawaii-v2":
                 png_path = path.with_name("sheet.png")
+                if not png_path.is_file():
+                    raise AssertionError("Glossy Brain V2 atlas missing: " + str(png_path))
                 actual = hashlib.sha256(png_path.read_bytes()).hexdigest()
                 if actual != current["sha256"]:
                     raise AssertionError("Glossy Brain V2 atlas checksum mismatch")
-                print("PASS verified glossy Brain V2 atlas (not regenerated from V1 SVG)")
+                print("PASS verified glossy Brain V2 atlas (never regenerated from V1 SVG)")
+                return current
+            if source_v2.is_file():
+                # Separate glossy workflow converts the original illustrated WebP.
+                # Never let an early V1 action overwrite it while CI runs concurrently.
+                print("SKIP V1 raster for pending glossy candidate:", state)
                 return current
     frames, duration, loop = STATES[state]
     columns = 4

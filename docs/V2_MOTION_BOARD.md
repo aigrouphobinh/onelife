@@ -64,3 +64,7 @@ Existing 75 V1 structure-valid clips remain *old flat art* unless explicitly pro
 - Art depicts regaining a cheerful mood after a chosen break; not medical repair of neurons or brain damage.
 - `tools/render_illustrated_recovering_v2.py` converts and mirrors PNG/GIF/metadata when triggered by `glossy-illustrated-recovering.yml`.
 - Human checking of facial consistency, smooth loop transitions and actual 64px phone use remains open.
+
+## CI sequencing safeguard
+- When V2 `sheet_illustrated.webp` exists but runtime metadata is still V1, `tools/generate_character_assets.py` **skips V1 replacement**. The illustrated V2 renderer owns PNG/GIF and metadata. Prevents races when two GitHub Actions run simultaneously.
+- Verified generated Recovering files on `main`; asset QA must be re-run after binaries land.

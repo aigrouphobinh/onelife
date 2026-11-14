@@ -13,7 +13,7 @@
 | resting | 10 | Glossy key-pose montage | Active PNG/GIF on main, needs dedicated in-betweens | Pending |
 | alarm | 12 | Illustrated glossy V2 | Active PNG/GIF on main | Pending |
 | sleepy | 12 | Illustrated glossy V2 | Active PNG/GIF on main | Pending |
-| recovering | 12 | Illustrated glossy V2, transparent WebP source | Rendered PNG/GIF pending workflow verification | Pending |
+| recovering | 12 | Original illustrated Glossy V2; alpha-reconstructed source | Active PNG/GIF in both V2 and live paths (CI verified) | Pending |
 
 ## Next art assets (7 not yet on V2)
 - `focus`: calm concentration, book/screen attention
@@ -41,3 +41,8 @@ Do not migrate to Flutter until manually reviewed at 64/96/144 logical pixels wi
 - Generated from an original high-resolution sheet with a simulated checkerboard; alpha reconstructed using edge-connected background removal, with transparent frame geometry tested locally.
 - `tools/render_illustrated_recovering_v2.py` and GitHub Actions generate PNG, GIF, metadata and mirrors. Local QA passed; check CI before claiming GitHub output present.
 - 8/15 is an asset *candidate* count, not artist/device approval.
+
+## Rechecked CI status
+- Glossy illustrated Recovering V2 workflow [run 43546460627](https://github.com/aigrouphobinh/onelife/actions/runs/43546460627) passed; PNG/GIF, metadata and live copy verified by GitHub readback.
+- Same-commit QA checks failed because they started before the renderer published new binaries. The post-render QA checks are triggered by this follow-up commit. Do not interpret those earlier pre-render failures as successful tests.
+- No Android/iOS device measurement or manual visual acceptance yet.
