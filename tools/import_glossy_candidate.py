@@ -35,7 +35,7 @@ def validate_name(name: str) -> str:
 
 def candidate_spec(*, character: str, state: str, version: str,
                    sha256: str, frames: int, duration_ms: int,
-                   loop: bool) -> dict:
+                   loop: bool, generation_class: str = 'independently-illustrated-pose-sheet') -> dict:
     validate_name(character)
     validate_name(state)
     if not re.fullmatch(r'[0-9a-f]{64}', sha256):
@@ -46,13 +46,16 @@ def candidate_spec(*, character: str, state: str, version: str,
         raise ValueError('frameDurationMs out of range')
     if not version or len(version) > 96:
         raise ValueError('Invalid source version')
+    if generation_class not in ('independently-illustrated-pose-sheet',
+                                'retargeted-illustrated-pose-sheet'):
+        raise ValueError('Invalid generationClass')
     return {
         'characterId': character, 'state': state,
         'version': version, 'sourceFile': 'sheet_illustrated.webp',
         'sourceSha256': sha256, 'frames': frames, 'columns': 4,
         'frameWidth': 256, 'frameHeight': 256,
         'frameDurationMs': duration_ms, 'loop': loop,
-        'generationClass': 'independently-illustrated-pose-sheet',
+        'generationClass': generation_class,
     }
 
 
@@ -116,11 +119,16 @@ def main() -> None:
     parser.add_argument('--frames', type=int, default=12)
     parser.add_argument('--frame-duration-ms', type=int, default=145)
     parser.add_argument('--loop', action='store_true')
+    parser.add_argument('--generation-class',
+        choices=('independently-illustrated-pose-sheet',
+                 'retargeted-illustrated-pose-sheet'),
+        default='independently-illustrated-pose-sheet')
     a = parser.parse_args()
     spec = candidate_spec(
         character=a.character, state=a.state, version=a.version,
         sha256=a.expected_sha256, frames=a.frames,
-        duration_ms=a.frame_duration_ms, loop=a.loop)
+        duration_ms=a.frame_duration_ms, loop=a.loop,
+        generation_class=a.generation_class)
     print(json.dumps(import_candidate(a.source, spec),
                      ensure_ascii=False, indent=2))
 
