@@ -66,6 +66,8 @@ jobs:
       - run: flutter pub get
       - name: Compile Android Brain overlay, QS tiles, widget and task notifications
         run: flutter build apk --debug
+      - name: Run real native Kotlin Brain Break clock tests
+        run: cd android && ./gradlew :app:testDebugUnitTest --no-daemon --stacktrace
       - name: Confirm bundled Glossy Kawaii Brain for native widget
         shell: bash
         run: |
