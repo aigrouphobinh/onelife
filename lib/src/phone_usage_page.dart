@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'brain_break_page.dart';
+
 /// Android UsageEvents summary only. Never replace absent readings with zero.
 class PhoneUsagePage extends StatefulWidget {
   const PhoneUsagePage({super.key});
@@ -233,6 +235,25 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
                 onPressed: loading ? null : refresh,
                 icon: const Icon(Icons.refresh),
                 label: const Text('Đọc lại dữ liệu'),
+              ),
+            ],
+          )),
+          const SizedBox(height: 14),
+          card(Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Nghỉ cùng Brain',
+                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
+              const SizedBox(height: 8),
+              const Text('Bạn có thể bắt đầu phiên nghỉ mà không cấp '
+                  'quyền theo dõi điện thoại.'),
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                icon: const Icon(Icons.bedtime_outlined),
+                label: const Text('Mở bộ hẹn giờ nghỉ'),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(builder: (_) => const BrainBreakPage()),
+                ),
               ),
             ],
           )),
