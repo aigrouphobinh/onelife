@@ -1,0 +1,39 @@
+{
+  "characterId": "sprout",
+  "state": "sleepy",
+  "createdOn": "2026-11-15",
+  "sourceType": "original-ai-generated-sprite-poses",
+  "generator": "OpenAI ImageGen",
+  "originalArtworkDimensions": [
+    1448,
+    1086
+  ],
+  "originalArtworkMode": "RGB with rendered white background",
+  "originalGrid": [
+    4,
+    3
+  ],
+  "selectedOriginalCellIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    8,
+    9,
+    11
+  ],
+  "excludedCells": [
+    5,
+    6,
+    7,
+    10
+  ],
+  "sourcePreparation": "From original separately illustrated poses, cropped cells, segmented white backdrop and reconstructed true alpha, resized each complete source cell to 232x232 and added 12px RGBA inset into 256x256 cells; no fake animation from static transform.",
+  "sourceSha256": "dac4e2bf0d19469688dfb1120c7bc945d7e90876c5f34216308c257606f897f7",
+  "frameCount": 8,
+  "usageRights": "Original AI-generated artwork for OneLife. No third-party sprite packs.",
+  "manualArtReview": "pending",
+  "deviceVerification": "pending",
+  "productionReady": false
+}
