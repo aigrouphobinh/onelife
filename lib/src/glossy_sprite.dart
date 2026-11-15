@@ -418,7 +418,7 @@ class _GlossySpriteState extends State<GlossySprite>
     if (_reducedMotion) {
       _controller.value = 1;
     } else if (widget.spec.loop) {
-      _controller.repeat(from: 0);
+      _controller.repeat(min: 0, max: 1);
     } else {
       _controller.forward(from: 0);
     }
