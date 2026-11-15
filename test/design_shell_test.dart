@@ -174,6 +174,13 @@ void main() {
       140,
       scrollable: find.byType(Scrollable).last,
     );
+    // On the 600px widget-test viewport this tile is initially covered by
+    // the bottom NavigationBar. Scroll it into the tappable content region.
+    await tester.drag(
+      find.byType(Scrollable).last,
+      const Offset(0, -260),
+    );
+    await tester.pump();
     await tester.tap(find.text('Điều khiển nhanh Android'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 250));
