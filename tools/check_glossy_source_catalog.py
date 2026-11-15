@@ -39,6 +39,10 @@ REVIEW_ONLY_SOURCES = {
 def validate(catalog: dict, root: Path, verify_files: bool = True) -> int:
     if not isinstance(catalog, dict) or not isinstance(catalog.get("animationSources"), list):
         raise ValueError("animationSources must be a list")
+    if not catalog["animationSources"]:
+        raise ValueError("animationSources must not be empty")
+    if len(catalog["animationSources"]) > len(VALID_CHARACTERS) * len(VALID_STATES):
+        raise ValueError("animationSources exceeds 4 x 15 supported states")
     seen = set()
     for index, item in enumerate(catalog["animationSources"]):
         if not isinstance(item, dict):
@@ -109,6 +113,14 @@ class ContractTests(unittest.TestCase):
 
     def check(self, entries):
         return validate({"animationSources": entries}, self.root)
+
+    def test_empty_catalog_rejected(self):
+        with self.assertRaisesRegex(ValueError, "must not be empty"):
+            self.check([])
+
+    def test_oversized_catalog_rejected(self):
+        with self.assertRaisesRegex(ValueError, "exceeds"):
+            validate({"animationSources": [dict(self.item)] * 61}, self.root, verify_files=False)
 
     def test_valid_source(self):
         self.assertEqual(self.check([self.item]), 1)
