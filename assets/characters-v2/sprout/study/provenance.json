@@ -1,0 +1,20 @@
+{
+  "characterId": "sprout",
+  "state": "study",
+  "createdOn": "2026-11-15",
+  "origin": "Original OpenAI ImageGen 12 separately illustrated Study poses",
+  "originalArtworkDimensions": [
+    1448,
+    1086
+  ],
+  "grid": [
+    4,
+    3
+  ],
+  "processing": "Extract individual 362px illustrated cells, segment neutral checkerboard to transparent alpha with connected foreground and hole filling, resize uniformly to 232x232 and center in 256px RGBA cells; no transforms of a single image to fake movement.",
+  "sourceSha256": "3b9cf318801fc6d3341f44a4d4e31bc9f892eef2e00c4659a09e82e0d4d4fc5c",
+  "rights": "Original AI-generated asset for OneLife; no third-party image source",
+  "humanArtReview": "pending",
+  "realDeviceReview": "pending",
+  "productionReady": false
+}
