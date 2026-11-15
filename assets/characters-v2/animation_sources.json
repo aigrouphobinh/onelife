@@ -588,6 +588,20 @@
       "frameDurationMs": 145,
       "loop": false,
       "generationClass": "independently-illustrated-pose-sheet"
+    },
+    {
+      "characterId": "robot",
+      "state": "sad",
+      "version": "2.43.0-illustrated-candidate",
+      "sourceFile": "sheet_illustrated.webp",
+      "sourceSha256": "ec4b5e6b9f363c4e7f93bab0795191027a7300e99233d36e0cfc49b276afd736",
+      "frames": 12,
+      "columns": 4,
+      "frameWidth": 256,
+      "frameHeight": 256,
+      "frameDurationMs": 160,
+      "loop": false,
+      "generationClass": "independently-illustrated-pose-sheet"
     }
   ]
 }
