@@ -12,6 +12,7 @@ on:
       - 'pubspec.yaml'
       - 'pubspec.lock'
       - 'tools/test_today_tasks_sql.py'
+      - 'tools/test_home_widget_sql.py'
       - 'android/**'
       - 'ios/**'
       - '.github/workflows/flutter.yml'
@@ -34,6 +35,8 @@ jobs:
       - run: flutter pub get
       - name: Verify native Today Tasks SQL filter
         run: python3 tools/test_today_tasks_sql.py
+      - name: Verify home widget and Quick Settings time-bound SQL
+        run: python3 tools/test_home_widget_sql.py
       - run: dart format --output=none --set-exit-if-changed lib test
       - run: flutter analyze
       - run: flutter test
