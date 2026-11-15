@@ -69,5 +69,8 @@ metadata.
 
 **Art completion status:** Integration of five already existing clips is a
 runtime milestone; it does NOT equal approval of 15 distinct original
-frame-by-frame animations. The separate `resting`/`recovering` break
-session state machine is not shipped by this milestone.
+frame-by-frame animations. The deliberate `resting`/`recovering` break state machine has since been
+added as a separate implementation milestone. Its deadline persistence and
+12-frame one-shot animation are documented in
+[V34_BRAIN_REST_RECOVERY_QA.md](V34_BRAIN_REST_RECOVERY_QA.md); physical
+device art/interaction QA remains pending.
