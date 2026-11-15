@@ -72,6 +72,12 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
       tab = 1;
       taskFilter = 0;
     });
+    // If Focus, Settings or a dialog was previously open, return to the
+    // actual root Tasks tab rather than changing an invisible underlying tab.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    });
     // Tasks can have changed while Flutter was paused or another tile ran.
     reload();
   }
@@ -361,7 +367,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
         .where(
           (t) =>
               t.dueAt == null ||
-              !t.dueAt!.isAfter(DateTime(now.year, now.month, now.day + 1)),
+              t.dueAt!.isBefore(DateTime(now.year, now.month, now.day + 1)),
         )
         .toList();
     return ListView(
@@ -510,10 +516,10 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
       if (t.completed) return false;
       if (taskFilter == 1) {
         return t.dueAt != null &&
-            t.dueAt!.isAfter(DateTime(now.year, now.month, now.day + 1));
+            !t.dueAt!.isBefore(DateTime(now.year, now.month, now.day + 1));
       }
       return t.dueAt == null ||
-          !t.dueAt!.isAfter(DateTime(now.year, now.month, now.day + 1));
+          t.dueAt!.isBefore(DateTime(now.year, now.month, now.day + 1));
     }).toList();
     return ListView(
       padding: const EdgeInsets.all(16),
