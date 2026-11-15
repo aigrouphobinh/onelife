@@ -22,6 +22,12 @@ dev_dependencies:
 # Real PNG atlas with RGBA transparency; no poster art or placeholder sprites.
 flutter:
   assets:
+    - assets/characters-v2/brain/idle/sheet.png
+    - assets/characters-v2/brain/master.png
+    - assets/characters-v2/cat/master.png
+    - assets/characters-v2/dog/master.png
+    - assets/characters-v2/robot/master.png
+    - assets/characters-v2/sprout/master.png
     - assets/characters-v2/dog/recovering/sheet.png
     - assets/characters-v2/dog/focus/sheet.png
     - assets/characters-v2/dog/study/sheet.png
