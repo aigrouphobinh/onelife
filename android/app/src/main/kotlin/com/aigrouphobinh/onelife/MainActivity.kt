@@ -68,6 +68,15 @@ class MainActivity : FlutterActivity() {
                     OneLifeHomeWidgetProvider.refresh(this)
                     result.success(true)
                 }
+                "taskChanged" -> {
+                    val taskId = call.argument<String>("id")
+                    if (taskId.isNullOrBlank()) {
+                        result.error("INVALID_TASK", "Missing task ID", null)
+                    } else {
+                        TaskReminders.taskChanged(this, taskId)
+                        result.success(true)
+                    }
+                }
                 "remindersStatus" -> result.success(TaskReminders.enabled(this))
                 "syncReminders" -> {
                     TaskReminders.sync(this)
