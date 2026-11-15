@@ -1,0 +1,94 @@
+name: Import verified Robot Thinking Glossy Kawaii
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-robot-thinking.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-robot-thinking-main
+  cancel-in-progress: false
+
+jobs:
+  verified-import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out current main
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow
+        run: python -m pip install 'Pillow>=10,<13'
+      - name: Verify exact source Git blob and prepare transparent WebP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -fsSL --retry 3 \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/git/blobs/11f3a58e9dc21ad3de608120388f9ed8001c1c4b" \
+            -o "$RUNNER_TEMP/robot-thinking-blob.json"
+          python - <<'PY'
+          import base64, hashlib, json, os
+          from pathlib import Path
+          from PIL import Image
+          data=json.loads((Path(os.environ['RUNNER_TEMP'])/'robot-thinking-blob.json').read_text())
+          if data.get('encoding')!='base64':
+              raise SystemExit('Expected base64 Git blob')
+          raw=base64.b64decode(data['content'])
+          expected='ed3a1577a6996a02361d0939b6fcfd5047c4daa8e937bae751060f66f5b1626a'
+          if len(raw)!=478964 or hashlib.sha256(raw).hexdigest()!=expected:
+              raise SystemExit('Robot Thinking source bytes SHA-256/length mismatch')
+          target=Path('assets/characters-v2/robot/thinking/sheet_illustrated.webp')
+          target.parent.mkdir(parents=True,exist_ok=True)
+          if target.exists() and target.read_bytes()!=raw:
+              raise SystemExit('Refusing to overwrite a different Robot Thinking source')
+          target.write_bytes(raw)
+          with Image.open(target) as im:
+              if im.format!='WEBP' or im.mode!='RGBA' or im.size!=(1024,768):
+                  raise SystemExit('Source must be RGBA WebP 1024x768')
+              if im.getpixel((0,0))[3]!=0:
+                  raise SystemExit('Atlas background not truly transparent')
+          (target.parent/'provenance.json').write_text(json.dumps({
+             'origin':'original AI-generated Robot Thinking atlas for OneLife',
+             'sourceType':'generated-illustration-cleaned-alpha',
+             'style':'glossy-kawaii-v2',
+             'sourceSha256':expected,
+             'sourceSize':len(raw),
+             'sourceCharacterLock':'review against robot/master.png pending',
+             'rights':'AI output; review applicable generation terms',
+             'humanArtApproval':False,
+             'deviceApproval':False
+          },indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          print('PASS exact WebP SHA-256',expected)
+          PY
+      - name: Register and render actual runtime frames
+        run: |
+          python tools/import_glossy_candidate.py \
+            --character robot --state thinking \
+            --source assets/characters-v2/robot/thinking/sheet_illustrated.webp \
+            --expected-sha256 ed3a1577a6996a02361d0939b6fcfd5047c4daa8e937bae751060f66f5b1626a \
+            --version 2.42.0-illustrated-candidate \
+            --frames 12 --frame-duration-ms 145
+      - name: Commit verified original and generated atlas
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/characters-v2/robot/thinking/ \
+            assets/characters-v2/robot/manifest.json \
+            assets/characters-v2/animation_sources.json
+          if git diff --cached --quiet; then
+            echo 'Robot Thinking already imported'
+            exit 0
+          fi
+          git commit -m 'assets(robot): import true-alpha Thinking twelve-frame source'
+          git push origin HEAD:main
