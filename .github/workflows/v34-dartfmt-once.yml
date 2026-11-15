@@ -1,5 +1,5 @@
 name: OneLife V3.4 source formatter (one-shot)
-# Format V3.4 real Brain overlay permission page and regression tests.
+# Format V3.4 usage-aware Brain insights and permission/privacy widget tests.
 on:
   push:
     branches: [main]
