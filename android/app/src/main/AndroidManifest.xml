@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- Explicit user consent required; overlay never starts automatically. -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- Special usage access, off until user explicitly enables it in Settings. -->
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
     <application
         android:label="OneLife"
         android:name="${applicationName}"
