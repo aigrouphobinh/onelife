@@ -20,16 +20,22 @@ def main():
     test = TEST.read_text(encoding="utf-8")
 
     for required in (
-        "minutes !in listOf(5, 10, 15)",
+        "minutes !in OPTIONS",
+        "SystemClock.elapsedRealtime()",
+        "Settings.Global.BOOT_COUNT",
+        "internal fun bootInvalid(",
+        "internal fun nearDeadline(",
+        "MONO_END",
+        "MONO_START",
         'getString(PHASE, "idle")',
         '"resting"',
         '"recovering"',
         'private const val RECOVERY_MS = 12L * 125L',
         'private const val MAX_LATE_MS = 3_000L',
-        'if (now - deadline in 0L..MAX_LATE_MS)',
+        'if (nearDeadline(remaining))',
         'return state("idle", sequence)',
-        'fun start(c: Context, minutes: Int',
-        'fun finish(c: Context, now: Long',
+        'fun start(',
+        'fun finish(',
         'fun cancel(c: Context)',
         '@Synchronized',
         '.commit()',
@@ -56,6 +62,7 @@ def main():
         'if (frameIndex < count - 1) frameIndex += 1',
         'focused && focusSheet != null',
         'handler.postDelayed(this, nextDelay)',
+        'breakState["remainingMs"] as? Long',
     ):
         assert required in overlay, ("Missing real overlay break integration", required)
 
@@ -70,8 +77,14 @@ def main():
         "AppLifecycleState.resumed",
         "_secondsRemaining",
         "deadlineMs",
+        "_sinceNativeRead",
+        "_remainingMsAtRead",
     ):
         assert required in page, required
+    kotlin_test = (ROOT / "android/app/src/test/kotlin/com/aigrouphobinh/"
+                   "onelife/BrainBreakClockTest.kt").read_text(encoding="utf-8")
+    assert "gracefulRecoveryOnlyOccursNearActualDeadline" in kotlin_test
+    assert "aDifferentBootInvalidatesStoredElapsedDeadline" in kotlin_test
     assert "iOS does not invoke Android break service" in test
     assert "cancelling rest never plays completion animation" in test
     assert "finishing an active rest" in test
