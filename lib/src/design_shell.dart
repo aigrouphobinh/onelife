@@ -63,7 +63,18 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
       _queueQuickCapture();
     } else if (call.method == 'openTasks') {
       _openTodayTasks();
+    } else if (call.method == 'openFocus') {
+      _openFocus();
     }
+  }
+
+  void _openFocus() {
+    if (!mounted) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      open(const FocusPage());
+    });
   }
 
   void _openTodayTasks() {
@@ -90,6 +101,8 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
         _queueQuickCapture();
       } else if (action == 'tasks') {
         _openTodayTasks();
+      } else if (action == 'focus') {
+        _openFocus();
       }
     } on MissingPluginException {
       // iOS and Flutter widget tests have no Android Quick Capture channel.
@@ -146,6 +159,37 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
     }
   }
 
+  Future<void> _refreshNativeWidget() async {
+    try {
+      await _captureChannel.invokeMethod<bool>('refreshWidgets');
+    } on MissingPluginException {
+      // No Android launcher widget on iOS or in widget tests.
+    } catch (_) {
+      // App task management works independently from system widgets.
+    }
+  }
+
+  Future<void> _requestPinWidget() async {
+    if (Theme.of(context).platform != TargetPlatform.android) {
+      notify('Widget này hiện chỉ có trên Android.');
+      return;
+    }
+    try {
+      final status =
+          await _captureChannel.invokeMethod<String>('requestPinWidget');
+      if (!mounted) return;
+      if (status == 'requested') {
+        notify('Đã gửi yêu cầu. Xác nhận với màn hình chính để thêm widget.');
+      } else {
+        notify('Giữ chạm màn hình chính → Widget → chọn OneLife.');
+      }
+    } on MissingPluginException {
+      notify('Cần bản OneLife Android có tích hợp widget native.');
+    } catch (_) {
+      notify('Không gửi được yêu cầu. Hãy thêm widget thủ công.');
+    }
+  }
+
   Future<void> reload() async {
     try {
       final result = await store.loadTasks();
@@ -159,6 +203,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
         error = null;
         loading = false;
       });
+      _refreshNativeWidget();
     } catch (_) {
       if (mounted) {
         setState(() {
@@ -800,6 +845,13 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
             Column(
               children: [
                 ListTile(
+                  leading: const Icon(Icons.widgets_outlined, color: designPurple),
+                  title: const Text('Widget màn hình chính'),
+                  subtitle: const Text('Brain, công việc và Tập trung ngoài ứng dụng'),
+                  onTap: () => open(homeWidgetSetupPage()),
+                ),
+                const Divider(),
+                ListTile(
                   leading: const Icon(Icons.tune_rounded, color: designPurple),
                   title: const Text('Điều khiển nhanh Android'),
                   subtitle:
@@ -836,6 +888,74 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
           ),
         ],
       );
+
+  Widget homeWidgetSetupPage() {
+    final android = Theme.of(context).platform == TargetPlatform.android;
+    return Scaffold(
+      backgroundColor: designBackground,
+      appBar: AppBar(title: const Text('Widget màn hình chính')),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          heading('OneLife bên cạnh bạn', 'Widget thật do Android hiển thị'),
+          card(Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(children: [
+                mascot('brain', size: 88),
+                const SizedBox(width: 12),
+                const Expanded(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Bộ Não · OneLife',
+                      style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18)),
+                    SizedBox(height: 5),
+                    Text('Xem số việc chưa xong và trạng thái tập trung.',
+                      style: TextStyle(color: Color(0xFF796D8B))),
+                  ],
+                )),
+              ]),
+              const SizedBox(height: 14),
+              const Text('Các nút: Công việc · Ghi nhanh · Tập trung',
+                style: TextStyle(fontWeight: FontWeight.w600)),
+              const SizedBox(height: 10),
+              const Text('Dữ liệu lấy từ SQLite trên thiết bị. Không hiện '
+                'tên công việc trên widget; số việc được ẩn khi máy khóa. '
+                'Widget không tự tạo báo thức hay gửi dữ liệu ra ngoài.',
+                style: TextStyle(color: Color(0xFF796D8B))),
+              const SizedBox(height: 14),
+              if (android)
+                FilledButton.icon(
+                  onPressed: _requestPinWidget,
+                  icon: const Icon(Icons.add_to_home_screen),
+                  label: const Text('Thêm widget vào màn hình chính'),
+                )
+              else
+                const Text('iOS cần widget WidgetKit riêng; '
+                  'bản Android không hoạt động trong iOS.'),
+            ],
+          )),
+          const SizedBox(height: 14),
+          card(const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Cách thêm thủ công',
+                style: TextStyle(fontWeight: FontWeight.w800)),
+              SizedBox(height: 10),
+              Text('1. Giữ chạm một vùng trống trên màn hình chính.'),
+              Text('2. Chọn Widget → OneLife.'),
+              Text('3. Kéo widget lên màn hình chính.'),
+              SizedBox(height: 10),
+              Text('Android 8 trở lên có thể hiện lời mời ghim widget '
+                'nếu launcher hỗ trợ. Màu sắc và kích thước còn phụ thuộc '
+                'launcher của điện thoại.',
+                style: TextStyle(color: Color(0xFF796D8B), fontSize: 12)),
+            ],
+          )),
+        ],
+      ),
+    );
+  }
 
   Widget quickSettingsSetupPage() {
     final android = Theme.of(context).platform == TargetPlatform.android;
