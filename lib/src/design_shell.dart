@@ -290,8 +290,8 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
 
   Future<void> editTask(OneLifeTask task) => _saveTask(task: task);
 
-  Future<void> _saveTask({OneLifeTask? task}) async {
-    String title = task?.title ?? '';
+  Future<void> _saveTask({OneLifeTask? task, String? suggestedTitle}) async {
+    String title = task?.title ?? suggestedTitle ?? '';
     DateTime? dueAt = task?.dueAt;
     final saved = await showDialog<bool>(
       context: context,
@@ -1016,7 +1016,23 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
                   leading:
                       const Icon(Icons.note_alt_outlined, color: designPurple),
                   title: const Text('Ghi chú hiện có'),
-                  onTap: () => open(HomePage(repository: NoteRepository())),
+                  onTap: () => open(
+                    HomePage(
+                      repository: NoteRepository(),
+                      onCreateTask: (note) async {
+                        final source = note.title.trim().isNotEmpty
+                            ? note.title.trim()
+                            : note.body.trim();
+                        final normalized =
+                            source.replaceAll(RegExp(r'\s+'), ' ');
+                        await _saveTask(
+                          suggestedTitle: normalized.length > 120
+                              ? normalized.substring(0, 120)
+                              : normalized,
+                        );
+                      },
+                    ),
+                  ),
                 ),
                 ListTile(
                   leading: const Icon(Icons.open_in_new, color: designPurple),
