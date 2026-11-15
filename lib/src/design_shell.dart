@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'glossy_sprite.dart';
+import 'focus_page.dart';
 import 'onelife_store.dart';
 import 'note_repository.dart';
 import 'home_page.dart';
@@ -277,6 +278,10 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
           avatar: const Icon(Icons.alarm_outlined),
           label: const Text('Lịch & Báo thức'),
           onPressed: () => open(schedulePage())),
+        ActionChip(
+          avatar: const Icon(Icons.timer_outlined),
+          label: const Text('Tập trung 25 phút'),
+          onPressed: () => open(const FocusPage())),
         ActionChip(
           avatar: const Icon(Icons.auto_awesome),
           label: const Text('Trợ lý'),
