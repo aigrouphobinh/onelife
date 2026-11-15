@@ -53,6 +53,16 @@ def main():
     assert "refreshActiveBrainBreak()" in activity
     assert "if (!BrainOverlayService.isVisible || !overlayAllowed()) return" in activity
 
+    # The first break update must reach WindowManager BEFORE the slow
+    # UsageEvents query. Recovering lasts only 1500 ms and can be missed if
+    # UsageStatsManager is queried first on a low-end Android phone.
+    first_break = overlay.index("val breakState = BrainBreaks.snapshot(applicationContext)")
+    first_post = overlay.index("handler.post {", first_break)
+    slow_usage = overlay.index("val usage = UsageInsights.snapshot(applicationContext)")
+    assert first_break < first_post < slow_usage
+    assert "renderBrainStatus()" in overlay
+    assert "token != refreshVersion" in overlay
+
     for required in (
         'BrainBreaks.snapshot(applicationContext)',
         'BrainBreaks.start(this, 5)',
