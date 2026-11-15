@@ -111,12 +111,14 @@ void main() {
     expect(find.textContaining('Chưa đặt mục tiêu riêng'), findsOneWidget);
     expect(saveCount, 0);
     await tester.ensureVisible(find.text('2 giờ'));
+    await tester.pump(); // apply the ListView scroll offset before hit testing
     await tester.tap(find.text('2 giờ'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 150));
     expect(chosen, 120);
     expect(find.text('Tắt mục tiêu'), findsOneWidget);
     await tester.ensureVisible(find.text('Tắt mục tiêu'));
+    await tester.pump();
     await tester.tap(find.text('Tắt mục tiêu'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 150));
