@@ -22,18 +22,30 @@ class _BrainBreakPageState extends State<BrainBreakPage>
 
   static const _resting = GlossySpriteSpec(
     assetPath: 'assets/characters-v2/brain/resting/sheet.png',
-    frames: 10, columns: 4, frameWidth: 256, frameHeight: 256,
-    frameDurationMs: 205, loop: true,
+    frames: 10,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 205,
+    loop: true,
   );
   static const _recovering = GlossySpriteSpec(
     assetPath: 'assets/characters-v2/brain/recovering/sheet.png',
-    frames: 12, columns: 4, frameWidth: 256, frameHeight: 256,
-    frameDurationMs: 125, loop: false,
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 125,
+    loop: false,
   );
   static const _idle = GlossySpriteSpec(
     assetPath: 'assets/characters-v2/brain/idle/sheet.png',
-    frames: 8, columns: 4, frameWidth: 256, frameHeight: 256,
-    frameDurationMs: 140, loop: true,
+    frames: 8,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 140,
+    loop: true,
   );
 
   Timer? _ticker;
@@ -161,7 +173,8 @@ class _BrainBreakPageState extends State<BrainBreakPage>
       } else {
         setState(() {});
       }
-    } else if (_phase == 'recovering' && _recoveryStartMs > 0 &&
+    } else if (_phase == 'recovering' &&
+        _recoveryStartMs > 0 &&
         DateTime.now().millisecondsSinceEpoch >=
             _recoveryStartMs + _recoveryDurationMs) {
       _read();
@@ -188,7 +201,8 @@ class _BrainBreakPageState extends State<BrainBreakPage>
     } on MissingPluginException {
       if (mounted) setState(() => _notice = 'APK chưa có phiên nghỉ native.');
     } catch (_) {
-      if (mounted) setState(() => _notice = 'Không lưu được thao tác. Thử lại.');
+      if (mounted)
+        setState(() => _notice = 'Không lưu được thao tác. Thử lại.');
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -206,7 +220,9 @@ class _BrainBreakPageState extends State<BrainBreakPage>
   Widget build(BuildContext context) {
     final current = _phase == 'resting'
         ? _resting
-        : _phase == 'recovering' ? _recovering : _idle;
+        : _phase == 'recovering'
+            ? _recovering
+            : _idle;
     return Scaffold(
       backgroundColor: _background,
       appBar: AppBar(
@@ -237,7 +253,9 @@ class _BrainBreakPageState extends State<BrainBreakPage>
                 },
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  color: _ink, fontSize: 20, fontWeight: FontWeight.w800,
+                  color: _ink,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
               const SizedBox(height: 12),
@@ -254,7 +272,9 @@ class _BrainBreakPageState extends State<BrainBreakPage>
                 Text(
                   _clock,
                   style: const TextStyle(
-                    color: _purple, fontSize: 45, fontWeight: FontWeight.w900,
+                    color: _purple,
+                    fontSize: 45,
+                    fontWeight: FontWeight.w900,
                     fontFeatures: [FontFeature.tabularFigures()],
                   ),
                 )
@@ -277,8 +297,8 @@ class _BrainBreakPageState extends State<BrainBreakPage>
             children: [
               if (_phase == 'idle' && _android && _observed) ...[
                 const Text('Bạn muốn nghỉ bao lâu?',
-                    style: TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w800)),
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
                 const SizedBox(height: 12),
                 Wrap(
                   spacing: 9,
@@ -287,13 +307,15 @@ class _BrainBreakPageState extends State<BrainBreakPage>
                       label: Text('$value phút'),
                       selected: _selected == value,
                       onSelected: _busy
-                          ? null : (_) => setState(() => _selected = value),
+                          ? null
+                          : (_) => setState(() => _selected = value),
                     );
                   }).toList(),
                 ),
                 const SizedBox(height: 12),
                 FilledButton.icon(
-                  onPressed: _busy ? null
+                  onPressed: _busy
+                      ? null
                       : () => _run('startBrainBreak', minutes: _selected),
                   icon: const Icon(Icons.nights_stay_outlined),
                   label: Text('Bắt đầu nghỉ $_selected phút'),
@@ -319,8 +341,7 @@ class _BrainBreakPageState extends State<BrainBreakPage>
                 'Bắt đầu là thao tác chủ động. Đóng màn hình không hủy giờ nghỉ. '
                 'Kết thúc nghỉ phát Recovering; Hủy nghỉ trở về trạng thái '
                 'bình thường ngay, không ghi nhận là nghỉ hoàn thành.',
-                style: TextStyle(
-                    fontSize: 12, color: Color(0xFF796D8B)),
+                style: TextStyle(fontSize: 12, color: Color(0xFF796D8B)),
               ),
             ],
           )),
@@ -335,7 +356,8 @@ class _BrainBreakPageState extends State<BrainBreakPage>
                   'Không yêu cầu Usage Access, quyền overlay hay mạng. '
                   'Không tự bật Không làm phiền hoặc khóa ứng dụng.'),
               SizedBox(height: 8),
-              Text('Nếu ứng dụng bị đóng, thời hạn vẫn được lưu. Khi mở lại '
+              Text(
+                  'Nếu ứng dụng bị đóng, thời hạn vẫn được lưu. Khi mở lại '
                   'sau thời hạn, trạng thái được đối chiếu lại; hoạt ảnh '
                   'Recovering có thể không phát nếu đã trễ quá lâu.',
                   style: TextStyle(color: Color(0xFF796D8B))),

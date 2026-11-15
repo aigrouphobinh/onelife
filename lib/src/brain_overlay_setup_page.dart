@@ -334,7 +334,8 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
                 SizedBox(height: 10),
-                Text('✓ Việc hôm nay · + Ghi nhanh · ◷ Tập trung · ☾ Nghỉ 5 phút · × Ẩn Brain'),
+                Text(
+                    '✓ Việc hôm nay · + Ghi nhanh · ◷ Tập trung · ☾ Nghỉ 5 phút · × Ẩn Brain'),
                 SizedBox(height: 10),
                 Text('Bong bóng nhỏ chỉ nhận thao tác trong vùng Brain. '
                     'Có thể kéo thả và ghi nhớ vị trí trên màn hình. '

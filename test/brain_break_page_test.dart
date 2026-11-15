@@ -23,7 +23,9 @@ void main() {
     };
   }
 
-  testWidgets('break timer is idle until explicitly started and not Usage Access gated', (
+  testWidgets(
+      'break timer is idle until explicitly started and not Usage Access gated',
+      (
     tester,
   ) async {
     final messenger = tester.binding.defaultBinaryMessenger;
@@ -67,7 +69,8 @@ void main() {
     expect(find.text('Kết thúc nghỉ'), findsOneWidget);
   });
 
-  testWidgets('finishing an active rest shows Recovering one-shot, not cancel', (
+  testWidgets('finishing an active rest shows Recovering one-shot, not cancel',
+      (
     tester,
   ) async {
     final messenger = tester.binding.defaultBinaryMessenger;
@@ -137,7 +140,8 @@ void main() {
     expect(find.text('Nghỉ xong — trở lại nhịp của bạn'), findsNothing);
   });
 
-  testWidgets('iOS does not invoke Android break service or show start controls', (
+  testWidgets(
+      'iOS does not invoke Android break service or show start controls', (
     tester,
   ) async {
     final messenger = tester.binding.defaultBinaryMessenger;

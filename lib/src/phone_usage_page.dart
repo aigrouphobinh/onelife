@@ -252,7 +252,8 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
                 icon: const Icon(Icons.bedtime_outlined),
                 label: const Text('Mở bộ hẹn giờ nghỉ'),
                 onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const BrainBreakPage()),
+                  MaterialPageRoute<void>(
+                      builder: (_) => const BrainBreakPage()),
                 ),
               ),
             ],
