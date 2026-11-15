@@ -1,0 +1,32 @@
+{
+  "characterId": "sprout",
+  "state": "done",
+  "createdOn": "2026-11-15",
+  "generator": "OpenAI ImageGen",
+  "sourceType": "original-8-pose-celebration-sheet",
+  "sourceArtDimensions": [
+    1448,
+    1086
+  ],
+  "sourceArtGrid": [
+    4,
+    3
+  ],
+  "selectedOriginalPoseIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "processing": "Isolate connected character foreground per 362x362 illustrated cell, clear detached generator speckles, smooth alpha, resize uniformly to 232x232 and center in transparent 256x256 frame; no fake frame transforms or static poster animation.",
+  "sourceFile": "sheet_illustrated.webp",
+  "sourceSha256": "da8227d1fcec2aadd87188a12aa8fe0a0904011ff106a52716c1cff56ed17c0d",
+  "rights": "Original AI-generated OneLife Sprout art; no third-party artwork",
+  "humanArtReview": "pending",
+  "realDeviceReview": "pending",
+  "productionReady": false
+}
