@@ -1,0 +1,41 @@
+{
+  "characterId": "sprout",
+  "state": "thinking",
+  "candidateQA": "local-pass",
+  "sourceSha256": "644e29a4a7364c4d2179e60a825e3f95c1e57772e0eb6d78daab1614378aaa04",
+  "sourceDimensions": [
+    1024,
+    512
+  ],
+  "frames": 8,
+  "columns": 4,
+  "rows": 2,
+  "frameSize": [
+    256,
+    256
+  ],
+  "frameDurationMs": 150,
+  "loop": true,
+  "selectedOriginalPoseIndices": [
+    0,
+    1,
+    3,
+    5,
+    7,
+    8,
+    10,
+    11
+  ],
+  "minimumFrameMarginPx": 15,
+  "sourceEdgeContactsAllZero": true,
+  "adjacentChanges": 7,
+  "minimumAdjacentVisibleRgbRmsLight": 67.68,
+  "minimumAdjacentVisibleRgbRmsDark": 58.57,
+  "alpha": "true RGBA transparency",
+  "gifFrames": 8,
+  "gifFrameDurationMs": 150,
+  "gifLoop": "infinite",
+  "humanArtReview": "pending",
+  "realDeviceTest": "pending",
+  "productionReady": false
+}

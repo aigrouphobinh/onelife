@@ -1,0 +1,35 @@
+{
+  "characterId": "sprout",
+  "state": "thinking",
+  "createdOn": "2026-11-15",
+  "sourceType": "original-generated-illustration",
+  "generator": "OpenAI ImageGen",
+  "originalArtworkDimensions": [
+    1448,
+    1086
+  ],
+  "originalArtworkGrid": [
+    4,
+    3
+  ],
+  "selectedOriginalPoseIndices": [
+    0,
+    1,
+    3,
+    5,
+    7,
+    8,
+    10,
+    11
+  ],
+  "rejectedClippedOriginalPoseIndices": [
+    9
+  ],
+  "preparation": "Eight independently illustrated poses selected from twelve source illustrations. Neutral checkerboard matte removed with color/dark-ink segmentation and contour fill; each pose uniformly scaled to 232x232, centered in transparent 256x256 frames, with no artificial frame duplication or displacement.",
+  "sourceFile": "sheet_illustrated.webp",
+  "sourceSha256": "644e29a4a7364c4d2179e60a825e3f95c1e57772e0eb6d78daab1614378aaa04",
+  "usageRights": "Original AI-generated illustration for OneLife; no third-party sprite assets",
+  "humanArtReview": "pending",
+  "realDeviceReview": "pending",
+  "productionReady": false
+}
