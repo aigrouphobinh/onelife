@@ -1,9 +1,11 @@
 package com.aigrouphobinh.onelife
 
+import android.Manifest
 import android.app.StatusBarManager
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
@@ -24,10 +26,12 @@ class MainActivity : FlutterActivity() {
         const val EXTRA_TODAY_TASKS = "com.aigrouphobinh.onelife.extra.TODAY_TASKS"
         const val EXTRA_FOCUS = "com.aigrouphobinh.onelife.extra.FOCUS"
         private const val CHANNEL = "onelife/quick_capture"
+        private const val PERMISSION_REQUEST_NOTIFICATIONS = 3411
     }
 
     private var pendingAction: String? = null
     private var actionChannel: MethodChannel? = null
+    private var pendingNotificationResult: MethodChannel.Result? = null
 
     private fun actionFor(intent: Intent?): String? {
         return when {
@@ -62,9 +66,52 @@ class MainActivity : FlutterActivity() {
                     OneLifeHomeWidgetProvider.refresh(this)
                     result.success(true)
                 }
+                "remindersStatus" -> result.success(TaskReminders.enabled(this))
+                "syncReminders" -> {
+                    TaskReminders.sync(this)
+                    result.success(TaskReminders.enabled(this))
+                }
+                "disableReminders" -> {
+                    TaskReminders.disable(this)
+                    result.success(false)
+                }
+                "enableReminders" -> requestReminderPermission(result)
                 else -> result.notImplemented()
             }
         }
+    }
+
+    private fun requestReminderPermission(result: MethodChannel.Result) {
+        if (pendingNotificationResult != null) {
+            result.error("BUSY", "Notification permission prompt already open", null)
+            return
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) !=
+                PackageManager.PERMISSION_GRANTED
+        ) {
+            pendingNotificationResult = result
+            requestPermissions(
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                PERMISSION_REQUEST_NOTIFICATIONS,
+            )
+        } else {
+            result.success(TaskReminders.enable(this))
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray,
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode != PERMISSION_REQUEST_NOTIFICATIONS) return
+        val result = pendingNotificationResult ?: return
+        pendingNotificationResult = null
+        val granted = grantResults.isNotEmpty() &&
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        result.success(granted && TaskReminders.enable(this))
     }
 
     /**
@@ -147,6 +194,8 @@ class MainActivity : FlutterActivity() {
     override fun onResume() {
         super.onResume()
         OneLifeHomeWidgetProvider.refresh(this)
+        // Reconcile future alarms if task status changed via native actions.
+        if (TaskReminders.optedIn(this)) TaskReminders.sync(this)
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -176,6 +225,10 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun onDestroy() {
+        pendingNotificationResult?.error(
+            "CANCELLED", "Activity was destroyed during the permission request", null,
+        )
+        pendingNotificationResult = null
         actionChannel?.setMethodCallHandler(null)
         actionChannel = null
         super.onDestroy()
