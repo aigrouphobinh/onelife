@@ -1,11 +1,11 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onelife/src/glossy_sprite.dart';
 
+import 'helpers/png_header.dart';
+
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   test('one-shot sprite indices clamp to real frame boundaries', () {
     expect(glossyFrameIndex(-1, 12), 0);
     expect(glossyFrameIndex(0, 12), 0);
@@ -39,9 +39,8 @@ void main() {
     semantics.dispose();
   });
 
-  testWidgets('All 15 Dog atlases preserve true RGBA transparency', (
-    tester,
-  ) async {
+  test('All 15 Dog atlases have valid RGBA PNG geometry', () async {
+    // Full-pixel alpha checks run independently in Asset QA with Pillow.
     for (final spec in [
       GlossySpriteSpec.dogRecovering,
       GlossySpriteSpec.dogFocus,
@@ -59,26 +58,11 @@ void main() {
       GlossySpriteSpec.dogBalanced,
       GlossySpriteSpec.dogStrained,
     ]) {
-      final bytes = await rootBundle.load(spec.assetPath);
-      final codec = await ui.instantiateImageCodec(
-        bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes),
+      await expectRgbaSpriteHeader(
+        spec.assetPath,
+        width: spec.columns * spec.frameWidth,
+        height: spec.frameHeight * ((spec.frames + spec.columns - 1) ~/ spec.columns),
       );
-      final image = (await codec.getNextFrame()).image;
-      expect(image.width, 1024);
-      expect(image.height, ((spec.frames + 3) ~/ 4) * 256);
-      final rgba = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
-      expect(rgba, isNotNull);
-      // Four bytes per pixel: first atlas pixel is fully transparent.
-      expect(rgba!.getUint8(3), 0, reason: spec.assetPath);
-      // The first illustrated cell has opaque art near its center.
-      final centerAlphaOffset = (128 * image.width + 128) * 4 + 3;
-      expect(
-        rgba.getUint8(centerAlphaOffset),
-        greaterThan(20),
-        reason: spec.assetPath,
-      );
-      image.dispose();
-      codec.dispose();
     }
   });
 
