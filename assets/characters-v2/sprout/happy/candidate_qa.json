@@ -1,0 +1,23 @@
+{
+  "characterId": "sprout",
+  "state": "happy",
+  "qaStatus": "candidate-local-pass",
+  "frames": 8,
+  "frameDurationMs": 120,
+  "columns": 4,
+  "rows": 2,
+  "sourceDimensions": [
+    1024,
+    512
+  ],
+  "minCellMarginPx": 15,
+  "minAdjacentVisibleRmsLight": 61.13,
+  "minAdjacentVisibleRmsDark": 53.38,
+  "allFramesTrueAlpha": true,
+  "previewGifFrames": 8,
+  "previewGifLoop": "infinite",
+  "sourceSha256": "c07671ac78df1e29bdbd5c03ae6de830368113730defafa575cc3f1b553dec58",
+  "humanArtReview": "pending",
+  "realDeviceReview": "pending",
+  "productionReady": false
+}

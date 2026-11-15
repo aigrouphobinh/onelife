@@ -1,0 +1,29 @@
+{
+  "characterId": "sprout",
+  "state": "happy",
+  "createdOn": "2026-11-15",
+  "generator": "OpenAI ImageGen",
+  "origin": "original AI-generated 12-pose sprite illustration for OneLife",
+  "originalArtworkSha256": "9ac53d0db8e39c8598c51e3a3616bc263f91fa3c599dd48580674a5760f812b0",
+  "originalArtworkDimensions": [
+    1448,
+    1086
+  ],
+  "selectedFrames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "preparation": "Extract 4x2 of original 4x3 poses. Use alpha-channel foreground matting to eliminate translucent generated backdrop, per-cell resize 236x236 and center within 256x256 with 10px padding; lossless RGBA WebP. No algorithmic deformation used as source motion.",
+  "sourceFile": "sheet_illustrated.webp",
+  "sourceSha256": "c07671ac78df1e29bdbd5c03ae6de830368113730defafa575cc3f1b553dec58",
+  "license": "Original AI-generated art for the OneLife project; not sourced from a third-party asset pack",
+  "sourceArtReview": "pending",
+  "mobileDeviceReview": "pending",
+  "productionReady": false
+}
