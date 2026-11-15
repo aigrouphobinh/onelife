@@ -1,5 +1,5 @@
 name: OneLife V3.4 source formatter (one-shot)
-# Final normalization pass after correcting Navigator reminder permission switch rebuild.
+# Format V3.4 real Brain overlay permission page and regression tests.
 on:
   push:
     branches: [main]
