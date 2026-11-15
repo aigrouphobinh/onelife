@@ -92,10 +92,10 @@ class BrainOverlayService : Service() {
             ).use { db ->
                 db.rawQuery(
                     "SELECT phase, deadline_utc FROM focus_session WHERE id=1", null,
-                ).use { cursor ->
+                ).use focusRow@ { cursor ->
                     if (!cursor.moveToFirst() || cursor.getString(0) != "running" ||
                         cursor.isNull(1)
-                    ) return@use false
+                    ) return@focusRow false
                     val deadline = TaskReminders.utcMillis(cursor.getString(1))
                     deadline != null && deadline > System.currentTimeMillis()
                 }
