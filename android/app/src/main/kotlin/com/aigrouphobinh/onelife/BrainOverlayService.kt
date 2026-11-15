@@ -107,8 +107,11 @@ class BrainOverlayService : Service() {
                     val now = System.currentTimeMillis()
                     val nextDelay = when (phase) {
                         "resting" -> {
-                            val deadline = breakState["deadlineMs"] as? Long ?: now
-                            (deadline - now + 100L).coerceIn(250L, 5 * 60 * 1000L)
+                            // Remaining time comes from Android elapsedRealtime,
+                            // not a wall-clock deadline the user can edit.
+                            val remaining = breakState["remainingMs"] as? Long
+                                ?: ((breakState["deadlineMs"] as? Long ?: now) - now)
+                            (remaining + 100L).coerceIn(250L, 5 * 60 * 1000L)
                         }
                         "recovering" -> {
                             val recoveryStart = breakState["recoveryStartMs"] as? Long ?: now
