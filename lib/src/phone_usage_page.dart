@@ -130,8 +130,9 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
         setState(() => notice = 'Android chưa lưu được mục tiêu.');
       }
     } on MissingPluginException {
-      if (mounted)
+      if (mounted) {
         setState(() => notice = 'APK chưa có chức năng lưu mục tiêu.');
+      }
     } catch (_) {
       if (mounted) setState(() => notice = 'Không thể lưu mục tiêu.');
     } finally {
