@@ -76,6 +76,11 @@ class TodayTasksTileService : TileService() {
         }
         try {
             val count = pendingCount() ?: 0
+            // Android 7–9 have no QS subtitle, so expose the count in the
+            // label instead; Android 10+ uses the system-managed subtitle.
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                tile.label = "Việc hôm nay ($count)"
+            }
             tile.state = if (count > 0) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 tile.subtitle = if (count == 0) {
