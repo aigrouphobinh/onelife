@@ -27,6 +27,8 @@ flutter:
     - assets/characters-v2/brain/balanced/sheet.png
     - assets/characters-v2/brain/strained/sheet.png
     - assets/characters-v2/brain/overloaded/sheet.png
+    - assets/characters-v2/brain/resting/sheet.png
+    - assets/characters-v2/brain/recovering/sheet.png
     - assets/characters-v2/brain/master.png
     - assets/characters-v2/cat/master.png
     - assets/characters-v2/dog/master.png
