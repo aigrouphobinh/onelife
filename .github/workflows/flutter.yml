@@ -1,4 +1,8 @@
 name: Flutter checks
+concurrency:
+  group: onelife-flutter-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
   push:
