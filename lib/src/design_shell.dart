@@ -10,6 +10,7 @@ import 'home_page.dart';
 import 'dog_animation_gallery.dart';
 import 'robot_animation_gallery.dart';
 import 'brain_overlay_setup_page.dart';
+import 'usage_history_panel.dart';
 
 const designPurple = Color(0xFF8054E6);
 const designInk = Color(0xFF21183C);
@@ -47,7 +48,6 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
   bool loading = true;
   int tab = 0;
   int taskFilter = 0;
-  int habitPeriod = 0;
   static const MethodChannel _captureChannel =
       MethodChannel('onelife/quick_capture');
   bool _quickCaptureQueued = false;
@@ -835,96 +835,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
     );
   }
 
-  Widget habitsPage() => ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          heading('Thói quen', 'Hiểu nhịp dùng điện thoại của bạn'),
-          Row(
-            children: [
-              for (var i = 0; i < 3; i++)
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 4),
-                    child: ChoiceChip(
-                      label: SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          ['Hôm nay', '7 ngày', '30 ngày'][i],
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      selected: habitPeriod == i,
-                      onSelected: (_) => setState(() => habitPeriod = i),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          card(
-            const ListTile(
-              leading: Icon(Icons.lock_outline, color: designPurple),
-              title: Text('Thời gian sử dụng: chưa có dữ liệu'),
-              subtitle: Text(
-                'Không hiển thị số giờ hoặc biểu đồ giả. '
-                'Android cần Usage Access; iOS cần quyền Screen Time.',
-              ),
-            ),
-          ),
-          const SizedBox(height: 14),
-          card(
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Thói quen nhận diện',
-                  style: TextStyle(fontWeight: FontWeight.w800),
-                ),
-                ListTile(
-                  leading: Icon(Icons.smartphone_outlined, color: designPurple),
-                  title: Text('Mạng xã hội'),
-                  subtitle: Text('Chưa có dữ liệu'),
-                ),
-                Divider(),
-                ListTile(
-                  leading: Icon(Icons.menu_book_outlined, color: designPurple),
-                  title: Text('Học tập / làm việc'),
-                  subtitle: Text('Chưa có dữ liệu'),
-                ),
-                Divider(),
-                ListTile(
-                  leading: Icon(Icons.bedtime_outlined, color: designPurple),
-                  title: Text('Giờ nghỉ ngơi'),
-                  subtitle: Text('Chưa có dữ liệu'),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 14),
-          card(
-            Row(
-              children: [
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Gợi ý cho bạn',
-                        style: TextStyle(fontWeight: FontWeight.w800),
-                      ),
-                      Text(
-                        'Nghỉ mắt vài phút khi bạn muốn. '
-                        'Không suy đoán tổn thương não.',
-                      ),
-                    ],
-                  ),
-                ),
-                mascot('brain', size: 82),
-              ],
-            ),
-          ),
-        ],
-      );
+  Widget habitsPage() => const UsageHistoryPanel();
 
   Widget settingsPage() => ListView(
         padding: const EdgeInsets.all(16),
