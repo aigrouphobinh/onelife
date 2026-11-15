@@ -159,16 +159,22 @@ internal object TaskReminders {
         if (!enabled(c)) return
         val now = System.currentTimeMillis()
         for (task in tasks(c)) {
-            cancel(c, task.id)
             val key = SNOOZE_PREFIX + task.id
             if (task.done) {
+                cancel(c, task.id)
                 prefs(c).edit().remove(key).apply()
                 manager(c)?.cancel(task.id, NOTICE_ID)
                 continue
             }
             val snooze = prefs(c).getLong(key, 0L)
             val time = if (snooze > now) snooze else utcMillis(task.deadline)
-            if (time != null && time > now) schedule(c, task.id, time)
+            when {
+                time == null -> cancel(c, task.id)
+                time > now -> schedule(c, task.id, time)
+                // Keep a past-due pending alarm: Android may be delivering it
+                // late under Doze. Resync must not discard a valid reminder.
+                else -> Unit
+            }
         }
     }
 
