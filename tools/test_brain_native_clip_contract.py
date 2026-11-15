@@ -16,6 +16,8 @@ EXPECTED = {
     "balanced": (8, 2, 140),
     "strained": (10, 3, 160),
     "overloaded": (12, 3, 115),
+    "resting": (10, 3, 205),
+    "recovering": (12, 3, 125),
 }
 
 
@@ -46,15 +48,19 @@ def main():
         path = "assets/characters-v2/brain/" + state + "/sheet.png"
         assert path in pubspec, ("Missing from APK Flutter assets", path)
 
-    assert '"strained" -> 10' in native
-    assert '"overloaded" -> 12' in native
+    assert '"strained", "resting" -> 10' in native
+    assert '"overloaded", "recovering" -> 12' in native
     assert '"focus", "strained" -> 160L' in native
     assert '"overloaded" -> 115L' in native
+    assert '"resting" -> 205L' in native
+    assert '"recovering" -> 125L' in native
+    assert 'if (currentState == "recovering")' in native
+    assert 'breakPhase == "resting" || breakPhase == "recovering"' in native
     assert "frameIndex % frameCount(currentState)" in native
     assert "focused && focusSheet != null" in native
     assert "wellbeingSheet = decode(desired)" in native
     assert "handler.removeCallbacks(refreshBehavior)" in native
-    print("PASS: Five real Brain atlases, 8/10/12 frame geometry, timings and candidate QA status")
+    print("PASS: Seven real Brain atlases, metadata frame geometry, timings and one-shot recovery")
 
 
 if __name__ == "__main__":
