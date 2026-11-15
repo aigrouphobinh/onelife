@@ -49,7 +49,7 @@ class TaskReminderReceiver : BroadcastReceiver() {
             )
         }
 
-        fun show(context: Context, task: TaskReminders.Task) {
+        internal fun show(context: Context, task: TaskReminders.Task) {
             TaskReminders.channel(context)
             val open = Intent(context, MainActivity::class.java).apply {
                 putExtra(MainActivity.EXTRA_TODAY_TASKS, true)
