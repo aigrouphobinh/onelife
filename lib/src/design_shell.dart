@@ -815,6 +815,89 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
         ],
       );
 
+  Widget quickSettingsSetupPage() {
+    final android = Theme.of(context).platform == TargetPlatform.android;
+    return Scaffold(
+      backgroundColor: designBackground,
+      appBar: AppBar(title: const Text('Điều khiển nhanh')),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          heading('OneLife ngoài ứng dụng', 'Thêm lối tắt vào thanh vuốt xuống'),
+          card(Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Android Quick Settings',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
+              ),
+              const SizedBox(height: 8),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.center_focus_strong, color: designPurple),
+                title: const Text('Tập trung · 25 phút'),
+                subtitle: const Text('Chạm để bắt đầu, tạm dừng hoặc tiếp tục'),
+                trailing: android
+                    ? OutlinedButton(
+                        onPressed: () => _requestQuickSettingsTile('focus'),
+                        child: const Text('Thêm'),
+                      )
+                    : null,
+              ),
+              const Divider(),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.edit_note_rounded, color: designPurple),
+                title: const Text('Ghi nhanh'),
+                subtitle: const Text('Mở giao diện tạo công việc trên điện thoại'),
+                trailing: android
+                    ? OutlinedButton(
+                        onPressed: () => _requestQuickSettingsTile('capture'),
+                        child: const Text('Thêm'),
+                      )
+                    : null,
+              ),
+              if (!android)
+                const Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(
+                    'Thiết bị này không có Android Quick Settings. '
+                    'iOS Control Center cần phần tích hợp native riêng.',
+                    style: TextStyle(color: Color(0xFF796D8B)),
+                  ),
+                ),
+            ],
+          )),
+          const SizedBox(height: 14),
+          card(const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Nếu không xuất hiện lời mời thêm ô',
+                style: TextStyle(fontWeight: FontWeight.w800)),
+              SizedBox(height: 9),
+              Text('1. Vuốt từ cạnh trên màn hình xuống hai lần.'),
+              Text('2. Chọn Sửa hoặc biểu tượng bút chì (tùy hãng máy).'),
+              Text('3. Thêm Tập trung / Ghi nhanh vào Quick Settings.'),
+              SizedBox(height: 12),
+              Text(
+                'Android 13 trở lên có thể hiện hộp thoại thêm ô của hệ thống; '
+                'bạn quyết định có thêm hay không. Màu và vị trí tile '
+                'do hệ điều hành quản lý.',
+                style: TextStyle(color: Color(0xFF796D8B), fontSize: 12),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Ghi nhanh yêu cầu mở khóa trước khi nhập công việc. '
+                'Không hiển thị nội dung riêng tư trong thanh trạng thái.',
+                style: TextStyle(color: Color(0xFF796D8B), fontSize: 12),
+              ),
+            ],
+          )),
+        ],
+      ),
+    );
+  }
+
   Widget charactersPage() => Scaffold(
         appBar: AppBar(title: const Text('Chọn nhân vật')),
         backgroundColor: designBackground,
