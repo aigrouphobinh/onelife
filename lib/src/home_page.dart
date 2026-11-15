@@ -30,18 +30,20 @@ class _HomePageState extends State<HomePage> {
   Future<void> _reload() async {
     try {
       final result = await widget.repository.search(_search.text);
-      if (mounted)
+      if (mounted) {
         setState(() {
           _notes = result;
           _loading = false;
           _error = null;
         });
+      }
     } catch (error) {
-      if (mounted)
+      if (mounted) {
         setState(() {
           _loading = false;
           _error = 'Không thể đọc ghi chú. Vui lòng thử lại.';
         });
+      }
     }
   }
 
