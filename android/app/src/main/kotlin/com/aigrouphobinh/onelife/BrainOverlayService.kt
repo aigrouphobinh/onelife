@@ -65,9 +65,11 @@ class BrainOverlayService : Service() {
             val token = ++refreshVersion
             // UsageEvents and Focus SQLite stay off the WindowManager main UI.
             Thread {
-                val breakState = BrainBreaks.snapshot(applicationContext)
                 val usage = UsageInsights.snapshot(applicationContext)
                 val focus = readFocusActive()
+                // Reconcile time-sensitive break last so UsageEvents latency
+                // cannot turn a completed clip into a stale recovery replay.
+                val breakState = BrainBreaks.snapshot(applicationContext)
                 handler.post {
                     if (!isVisible || token != refreshVersion) return@post
                     val phase = breakState["phase"] as? String ?: "idle"
