@@ -1,4 +1,8 @@
 name: Flutter Glossy Sprite Smoke
+concurrency:
+  group: onelife-flutter-sprite-${{ github.ref }}
+  cancel-in-progress: true
+
 
 on:
   push:
