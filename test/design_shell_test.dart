@@ -275,6 +275,58 @@ void main() {
     expect(fake.character, 'sprout');
   });
 
+  testWidgets('V3.4 Android reminders stay off until user explicitly opts in', (
+    tester,
+  ) async {
+    const channel = MethodChannel('onelife/quick_capture');
+    final messenger = tester.binding.defaultBinaryMessenger;
+    var optInCalls = 0;
+    var enabled = false;
+    messenger.setMockMethodCallHandler(channel, (call) async {
+      if (call.method == 'remindersStatus') return enabled;
+      if (call.method == 'enableReminders') {
+        optInCalls++;
+        enabled = true;
+        return true;
+      }
+      if (call.method == 'disableReminders') {
+        enabled = false;
+        return false;
+      }
+      return null;
+    });
+    addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+
+    await tester.pumpWidget(MaterialApp(
+      theme: ThemeData(platform: TargetPlatform.android),
+      home: OneLifeDesignShell(store: FakeOneLifeStore()),
+    ));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 150));
+    expect(optInCalls, 0);
+
+    await tester.tap(find.text('Tôi'));
+    await tester.pump();
+    await tester.scrollUntilVisible(
+      find.text('Nhắc việc & Thông báo'),
+      150,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await tester.drag(find.byType(Scrollable).last, const Offset(0, -180));
+    await tester.pump();
+    await tester.tap(find.text('Nhắc việc & Thông báo'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 220));
+
+    expect(tester.widget<Switch>(find.byType(Switch)).value, isFalse);
+    expect(optInCalls, 0);
+    await tester.tap(find.byType(Switch));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 150));
+    expect(optInCalls, 1);
+    expect(tester.widget<Switch>(find.byType(Switch)).value, isTrue);
+  });
+
   testWidgets('V3.4 setup asks Android for the official Focus tile', (
     tester,
   ) async {
