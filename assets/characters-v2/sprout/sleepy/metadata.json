@@ -1,0 +1,23 @@
+{
+  "characterId": "sprout",
+  "state": "sleepy",
+  "version": "2.55.0-illustrated-candidate",
+  "artStyle": "glossy-kawaii-v2",
+  "source": "sheet_illustrated.webp",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "frames": 8,
+  "columns": 4,
+  "rows": 2,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 160,
+  "loop": true,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "sourceSha256": "dac4e2bf0d19469688dfb1120c7bc945d7e90876c5f34216308c257606f897f7",
+  "sha256": "ce8727f04a289a75d328503578d1201c1879f36f014418f564d10795275e55ac",
+  "licenseRef": "docs/ASSET_REGISTER.md",
+  "generationClass": "independently-illustrated-pose-sheet",
+  "reviewStatus": "automated-qa-passed; human and phone QA pending"
+}
