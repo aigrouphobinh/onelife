@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -160,5 +162,69 @@ void main() {
     expect(nativeCalls, 0);
     expect(find.text('Bắt đầu nghỉ 5 phút'), findsNothing);
     expect(find.textContaining('iOS chưa được tích hợp'), findsOneWidget);
+  });
+
+  testWidgets('a late native snapshot never replaces a newer user action',
+      (tester) async {
+    final messenger = tester.binding.defaultBinaryMessenger;
+    final oldSnapshot = Completer<Map<String, Object?>>();
+    var reads = 0;
+    var starts = 0;
+    messenger.setMockMethodCallHandler(bridge, (call) async {
+      if (call.method == 'breakSnapshot') {
+        reads++;
+        return reads == 1 ? state('idle') : oldSnapshot.future;
+      }
+      if (call.method == 'startBrainBreak') {
+        starts++;
+        return state('resting');
+      }
+      return null;
+    });
+    addTearDown(() => messenger.setMockMethodCallHandler(bridge, null));
+
+    await tester.pumpWidget(MaterialApp(
+      theme: ThemeData(platform: TargetPlatform.android),
+      home: const BrainBreakPage(),
+    ));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 160));
+    expect(find.text('Bắt đầu nghỉ 5 phút'), findsOneWidget);
+
+    // Returning from Settings initiates a snapshot which stays in flight.
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pump();
+    expect(reads, 2);
+
+    await tester.ensureVisible(find.text('Bắt đầu nghỉ 5 phút'));
+    await tester.pump();
+    await tester.tap(find.text('Bắt đầu nghỉ 5 phút'));
+    await tester.pump();
+    expect(starts, 1);
+    expect(find.text('Brain đang thư giãn'), findsOneWidget);
+
+    // The earlier idle read must not roll back the confirmed rest action.
+    oldSnapshot.complete(state('idle'));
+    await tester.pump();
+    expect(find.text('Brain đang thư giãn'), findsOneWidget);
+    expect(find.text('Kết thúc nghỉ'), findsOneWidget);
+  });
+
+  testWidgets('an empty native response exits loading with a real error',
+      (tester) async {
+    final messenger = tester.binding.defaultBinaryMessenger;
+    messenger.setMockMethodCallHandler(bridge, (call) async => null);
+    addTearDown(() => messenger.setMockMethodCallHandler(bridge, null));
+
+    await tester.pumpWidget(MaterialApp(
+      theme: ThemeData(platform: TargetPlatform.android),
+      home: const BrainBreakPage(),
+    ));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 160));
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+    expect(find.text('Android chưa trả trạng thái phiên nghỉ.'),
+        findsOneWidget);
+    expect(find.text('Bắt đầu nghỉ 5 phút'), findsNothing);
   });
 }
