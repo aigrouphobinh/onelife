@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui' show FontFeature;
 
 import 'package:flutter/material.dart';
 
@@ -189,7 +188,7 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
                   ),
                   const SizedBox(height: 14),
                   Semantics(
-                    label: 'Thời gian còn lại ' + _time,
+                    label: 'Thời gian còn lại $_time',
                     liveRegion: false,
                     child: Text(
                       _time,
