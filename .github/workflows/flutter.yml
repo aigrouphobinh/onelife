@@ -17,6 +17,7 @@ on:
       - 'tools/test_brain_overlay_contract.py'
       - 'tools/test_usage_insights_contract.py'
       - 'tools/test_brain_native_clip_contract.py'
+      - 'tools/test_brain_break_contract.py'
       - 'android/**'
       - 'ios/**'
       - '.github/workflows/flutter.yml'
@@ -49,6 +50,8 @@ jobs:
         run: python3 tools/test_usage_insights_contract.py
       - name: Verify native Brain 8/10/12-frame atlas geometry and timing
         run: python3 tools/test_brain_native_clip_contract.py
+      - name: Verify persisted rest timer and one-shot Recovering animation contract
+        run: python3 tools/test_brain_break_contract.py
       - run: dart format --output=none --set-exit-if-changed lib test
       - run: flutter analyze
       - run: flutter test
@@ -69,7 +72,7 @@ jobs:
           unzip -Z1 build/app/outputs/flutter-apk/app-debug.apk | grep -Fx 'assets/flutter_assets/assets/characters-v2/brain/master.png'
           unzip -Z1 build/app/outputs/flutter-apk/app-debug.apk | grep -Fx 'assets/flutter_assets/assets/characters-v2/brain/idle/sheet.png'
           unzip -Z1 build/app/outputs/flutter-apk/app-debug.apk | grep -Fx 'assets/flutter_assets/assets/characters-v2/brain/focus/sheet.png'
-          for state in balanced strained overloaded; do
+          for state in balanced strained overloaded resting recovering; do
             unzip -Z1 build/app/outputs/flutter-apk/app-debug.apk | grep -Fx "assets/flutter_assets/assets/characters-v2/brain/$state/sheet.png"
           done
       - name: Save debug APK for Android device QA
