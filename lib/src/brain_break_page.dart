@@ -85,7 +85,8 @@ class _BrainBreakPageState extends State<BrainBreakPage>
   int get _secondsRemaining {
     if (_phase != 'resting' || _deadlineMs <= 0) return 0;
     return ((_deadlineMs - DateTime.now().millisecondsSinceEpoch + 999) ~/ 1000)
-        .clamp(0, _duration * 60);
+        .clamp(0, _duration * 60)
+        .toInt();
   }
 
   String get _clock {
