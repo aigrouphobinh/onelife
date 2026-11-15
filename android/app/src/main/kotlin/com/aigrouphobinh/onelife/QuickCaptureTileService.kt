@@ -20,6 +20,7 @@ class QuickCaptureTileService : TileService() {
         qsTile?.apply {
             icon = Icon.createWithResource(this@QuickCaptureTileService, R.drawable.ic_onelife_capture)
             label = "Ghi nhanh"
+            contentDescription = "Ghi nhanh OneLife, mở màn nhập công việc"
             state = Tile.STATE_INACTIVE
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 subtitle = "Thêm công việc"
