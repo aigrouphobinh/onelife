@@ -15,11 +15,11 @@ class Note {
   final String updatedAt;
 
   factory Note.fromMap(Map<String, Object?> map) => Note(
-    id: map['id'] as String,
-    title: map['title'] as String,
-    body: map['body'] as String,
-    updatedAt: map['updated_at'] as String,
-  );
+        id: map['id'] as String,
+        title: map['title'] as String,
+        body: map['body'] as String,
+        updatedAt: map['updated_at'] as String,
+      );
 }
 
 class NoteRepository {
@@ -48,7 +48,9 @@ class NoteRepository {
       return (await db.query(
         'notes',
         orderBy: 'updated_at DESC',
-      )).map(Note.fromMap).toList();
+      ))
+          .map(Note.fromMap)
+          .toList();
     }
     // Escape LIKE wildcards so a search is treated as literal text.
     final pattern =
@@ -58,7 +60,9 @@ class NoteRepository {
       where: "title LIKE ? ESCAPE '\\' OR body LIKE ? ESCAPE '\\'",
       whereArgs: [pattern, pattern],
       orderBy: 'updated_at DESC',
-    )).map(Note.fromMap).toList();
+    ))
+        .map(Note.fromMap)
+        .toList();
   }
 
   Future<void> save({required String title, required String body}) async {

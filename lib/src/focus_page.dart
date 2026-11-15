@@ -119,11 +119,11 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
   }
 
   String get _stateLabel => switch (_session.phase) {
-    FocusPhase.idle => 'Sẵn sàng',
-    FocusPhase.running => 'Đang tập trung',
-    FocusPhase.paused => 'Đã tạm dừng',
-    FocusPhase.completed => 'Đã hoàn thành 25 phút tập trung',
-  };
+        FocusPhase.idle => 'Sẵn sàng',
+        FocusPhase.running => 'Đang tập trung',
+        FocusPhase.paused => 'Đã tạm dừng',
+        FocusPhase.completed => 'Đã hoàn thành 25 phút tập trung',
+      };
 
   @override
   Widget build(BuildContext context) {
@@ -262,8 +262,8 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
                   onPressed: _busy
                       ? null
                       : () => _run(
-                          running ? _controller.pause : _controller.resume,
-                        ),
+                            running ? _controller.pause : _controller.resume,
+                          ),
                   icon: Icon(
                     running ? Icons.pause_rounded : Icons.play_arrow_rounded,
                   ),

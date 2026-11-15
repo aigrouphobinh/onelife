@@ -200,70 +200,72 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
         );
 
   Widget card(Widget child) => Container(
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(20),
-      boxShadow: const [
-        BoxShadow(
-          color: Color(0x164F366D),
-          blurRadius: 14,
-          offset: Offset(0, 6),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x164F366D),
+              blurRadius: 14,
+              offset: Offset(0, 6),
+            ),
+          ],
         ),
-      ],
-    ),
-    child: child,
-  );
+        child: child,
+      );
 
   Widget heading(String title, String description) => Padding(
-    padding: const EdgeInsets.only(bottom: 16),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 24,
-            color: designInk,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        const SizedBox(height: 5),
-        Text(description, style: const TextStyle(color: Color(0xFF796D8B))),
-      ],
-    ),
-  );
-
-  Widget taskRow(OneLifeTask task) => Row(
-    children: [
-      Checkbox(
-        value: task.completed,
-        activeColor: designPurple,
-        onChanged: (value) => toggle(task, value ?? false),
-      ),
-      Expanded(
+        padding: const EdgeInsets.only(bottom: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              task.title,
-              style: TextStyle(
+              title,
+              style: const TextStyle(
+                fontSize: 24,
                 color: designInk,
-                fontWeight: FontWeight.w600,
-                decoration: task.completed ? TextDecoration.lineThrough : null,
+                fontWeight: FontWeight.w800,
               ),
             ),
-            Text(
-              task.dueAt == null
-                  ? 'Chưa chọn hạn'
-                  : task.dueAt.toString().substring(0, 16),
-              style: const TextStyle(fontSize: 12, color: Color(0xFF837695)),
-            ),
+            const SizedBox(height: 5),
+            Text(description, style: const TextStyle(color: Color(0xFF796D8B))),
           ],
         ),
-      ),
-    ],
-  );
+      );
+
+  Widget taskRow(OneLifeTask task) => Row(
+        children: [
+          Checkbox(
+            value: task.completed,
+            activeColor: designPurple,
+            onChanged: (value) => toggle(task, value ?? false),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  task.title,
+                  style: TextStyle(
+                    color: designInk,
+                    fontWeight: FontWeight.w600,
+                    decoration:
+                        task.completed ? TextDecoration.lineThrough : null,
+                  ),
+                ),
+                Text(
+                  task.dueAt == null
+                      ? 'Chưa chọn hạn'
+                      : task.dueAt.toString().substring(0, 16),
+                  style:
+                      const TextStyle(fontSize: 12, color: Color(0xFF837695)),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
 
   Widget homePage() {
     final pending = tasks.where((t) => !t.completed).toList();
@@ -535,294 +537,298 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
   }
 
   Widget habitsPage() => ListView(
-    padding: const EdgeInsets.all(16),
-    children: [
-      heading('Thói quen', 'Hiểu nhịp dùng điện thoại của bạn'),
-      Row(
+        padding: const EdgeInsets.all(16),
         children: [
-          for (var i = 0; i < 3; i++)
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 4),
-                child: ChoiceChip(
-                  label: SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      ['Hôm nay', '7 ngày', '30 ngày'][i],
-                      textAlign: TextAlign.center,
+          heading('Thói quen', 'Hiểu nhịp dùng điện thoại của bạn'),
+          Row(
+            children: [
+              for (var i = 0; i < 3; i++)
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 4),
+                    child: ChoiceChip(
+                      label: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          ['Hôm nay', '7 ngày', '30 ngày'][i],
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      selected: habitPeriod == i,
+                      onSelected: (_) => setState(() => habitPeriod = i),
                     ),
                   ),
-                  selected: habitPeriod == i,
-                  onSelected: (_) => setState(() => habitPeriod = i),
                 ),
-              ),
-            ),
-        ],
-      ),
-      const SizedBox(height: 14),
-      card(
-        const ListTile(
-          leading: Icon(Icons.lock_outline, color: designPurple),
-          title: Text('Thời gian sử dụng: chưa có dữ liệu'),
-          subtitle: Text(
-            'Không hiển thị số giờ hoặc biểu đồ giả. '
-            'Android cần Usage Access; iOS cần quyền Screen Time.',
+            ],
           ),
-        ),
-      ),
-      const SizedBox(height: 14),
-      card(
-        const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Thói quen nhận diện',
-              style: TextStyle(fontWeight: FontWeight.w800),
-            ),
-            ListTile(
-              leading: Icon(Icons.smartphone_outlined, color: designPurple),
-              title: Text('Mạng xã hội'),
-              subtitle: Text('Chưa có dữ liệu'),
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.menu_book_outlined, color: designPurple),
-              title: Text('Học tập / làm việc'),
-              subtitle: Text('Chưa có dữ liệu'),
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.bedtime_outlined, color: designPurple),
-              title: Text('Giờ nghỉ ngơi'),
-              subtitle: Text('Chưa có dữ liệu'),
-            ),
-          ],
-        ),
-      ),
-      const SizedBox(height: 14),
-      card(
-        Row(
-          children: [
-            const Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Gợi ý cho bạn',
-                    style: TextStyle(fontWeight: FontWeight.w800),
-                  ),
-                  Text(
-                    'Nghỉ mắt vài phút khi bạn muốn. '
-                    'Không suy đoán tổn thương não.',
-                  ),
-                ],
+          const SizedBox(height: 14),
+          card(
+            const ListTile(
+              leading: Icon(Icons.lock_outline, color: designPurple),
+              title: Text('Thời gian sử dụng: chưa có dữ liệu'),
+              subtitle: Text(
+                'Không hiển thị số giờ hoặc biểu đồ giả. '
+                'Android cần Usage Access; iOS cần quyền Screen Time.',
               ),
             ),
-            mascot('brain', size: 82),
-          ],
-        ),
-      ),
-    ],
-  );
+          ),
+          const SizedBox(height: 14),
+          card(
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Thói quen nhận diện',
+                  style: TextStyle(fontWeight: FontWeight.w800),
+                ),
+                ListTile(
+                  leading: Icon(Icons.smartphone_outlined, color: designPurple),
+                  title: Text('Mạng xã hội'),
+                  subtitle: Text('Chưa có dữ liệu'),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.menu_book_outlined, color: designPurple),
+                  title: Text('Học tập / làm việc'),
+                  subtitle: Text('Chưa có dữ liệu'),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.bedtime_outlined, color: designPurple),
+                  title: Text('Giờ nghỉ ngơi'),
+                  subtitle: Text('Chưa có dữ liệu'),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+          card(
+            Row(
+              children: [
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Gợi ý cho bạn',
+                        style: TextStyle(fontWeight: FontWeight.w800),
+                      ),
+                      Text(
+                        'Nghỉ mắt vài phút khi bạn muốn. '
+                        'Không suy đoán tổn thương não.',
+                      ),
+                    ],
+                  ),
+                ),
+                mascot('brain', size: 82),
+              ],
+            ),
+          ),
+        ],
+      );
 
   Widget settingsPage() => ListView(
-    padding: const EdgeInsets.all(16),
-    children: [
-      heading('Cài đặt', 'Tùy chỉnh trợ lý theo sở thích'),
-      card(
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        padding: const EdgeInsets.all(16),
+        children: [
+          heading('Cài đặt', 'Tùy chỉnh trợ lý theo sở thích'),
+          card(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Nhân vật trợ lý',
+                  style: TextStyle(fontWeight: FontWeight.w800),
+                ),
+                ListTile(
+                  leading: mascot(character, size: 60),
+                  title: Text(characterOptions[character] ?? 'Bộ Não'),
+                  subtitle: const Text('Chạm để đổi nhân vật'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => open(charactersPage()),
+                ),
+                SizedBox(
+                  height: 68,
+                  child: Row(
+                    children: [
+                      for (final id in characterOptions.keys)
+                        Expanded(
+                          child: InkWell(
+                            onTap: () => open(charactersPage()),
+                            child: mascot(id, size: 52),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+          card(
+            const Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.volume_up_outlined, color: designPurple),
+                  title: Text('Giọng nói & phản hồi'),
+                  subtitle: Text('Chưa hỗ trợ giọng nói'),
+                ),
+                Divider(),
+                ListTile(
+                  leading:
+                      Icon(Icons.psychology_alt_outlined, color: designPurple),
+                  title: Text('Hành vi & tính cách'),
+                  subtitle: Text('Nhắc nhở nhẹ nhàng'),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.auto_awesome, color: designPurple),
+                  title: Text('Kết nối Google Gemini'),
+                  subtitle:
+                      Text('Chưa kết nối; cần đồng ý trước khi gửi dữ liệu'),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.devices_outlined, color: designPurple),
+                  title: Text('Đồng bộ nhiều thiết bị'),
+                  subtitle: Text('Chưa hỗ trợ — dữ liệu cục bộ'),
+                ),
+                Divider(),
+                ListTile(
+                  leading:
+                      Icon(Icons.privacy_tip_outlined, color: designPurple),
+                  title: Text('Dữ liệu & Quyền riêng tư'),
+                  subtitle: Text('Chưa đọc thông tin thiết bị'),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+          card(
+            Column(
+              children: [
+                ListTile(
+                  leading:
+                      const Icon(Icons.note_alt_outlined, color: designPurple),
+                  title: const Text('Ghi chú hiện có'),
+                  onTap: () => open(HomePage(repository: NoteRepository())),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.open_in_new, color: designPurple),
+                  title: const Text('Trợ lý nổi Android'),
+                  onTap: () => open(overlayPage()),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.pets_outlined, color: designPurple),
+                  title: const Text('Thư viện animation Cún'),
+                  onTap: () => open(const DogAnimationGalleryPage()),
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.smart_toy_outlined,
+                    color: designPurple,
+                  ),
+                  title: const Text('Thư viện animation Robot'),
+                  onTap: () => open(const RobotAnimationGalleryPage()),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+
+  Widget charactersPage() => Scaffold(
+        appBar: AppBar(title: const Text('Chọn nhân vật')),
+        backgroundColor: designBackground,
+        body: ListView(
+          padding: const EdgeInsets.all(16),
           children: [
+            heading('Bạn đồng hành', '5 nhân vật Glossy Kawaii'),
             const Text(
-              'Nhân vật trợ lý',
-              style: TextStyle(fontWeight: FontWeight.w800),
+              'Brain dùng animation V2; nhân vật khác '
+              'đang hiển thị ảnh master khi chưa tích hợp đầy đủ animation.',
             ),
-            ListTile(
-              leading: mascot(character, size: 60),
-              title: Text(characterOptions[character] ?? 'Bộ Não'),
-              subtitle: const Text('Chạm để đổi nhân vật'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => open(charactersPage()),
-            ),
-            SizedBox(
-              height: 68,
-              child: Row(
+            const SizedBox(height: 14),
+            for (final entry in characterOptions.entries) ...[
+              card(
+                ListTile(
+                  leading: mascot(entry.key, size: 62),
+                  title: Text(entry.value),
+                  subtitle: Text(
+                    entry.key == character ? 'Đang sử dụng' : 'Chọn làm trợ lý',
+                  ),
+                  trailing: Icon(
+                    entry.key == character
+                        ? Icons.check_circle
+                        : Icons.radio_button_unchecked,
+                    color: designPurple,
+                  ),
+                  onTap: () => selectCharacter(entry.key),
+                ),
+              ),
+              const SizedBox(height: 10),
+            ],
+          ],
+        ),
+      );
+
+  Widget assistantPage() => Scaffold(
+        appBar: AppBar(title: const Text('Trợ lý OneLife')),
+        backgroundColor: designBackground,
+        body: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            card(
+              Column(
                 children: [
-                  for (final id in characterOptions.keys)
-                    Expanded(
-                      child: InkWell(
-                        onTap: () => open(charactersPage()),
-                        child: mascot(id, size: 52),
-                      ),
-                    ),
+                  mascot('brain', size: 150),
+                  const Text(
+                    'Mình giúp bạn nhớ từng việc nhỏ',
+                    style: TextStyle(fontWeight: FontWeight.w800),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Trợ lý AI hội thoại chưa được kết nối. '
+                    'Không gửi dữ liệu cá nhân lên mạng.',
+                  ),
+                  const SizedBox(height: 14),
+                  FilledButton.icon(
+                    onPressed: addTask,
+                    icon: const Icon(Icons.add_task),
+                    label: const Text('Thêm việc cục bộ'),
+                  ),
                 ],
               ),
             ),
           ],
         ),
-      ),
-      const SizedBox(height: 14),
-      card(
-        const Column(
-          children: [
-            ListTile(
-              leading: Icon(Icons.volume_up_outlined, color: designPurple),
-              title: Text('Giọng nói & phản hồi'),
-              subtitle: Text('Chưa hỗ trợ giọng nói'),
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.psychology_alt_outlined, color: designPurple),
-              title: Text('Hành vi & tính cách'),
-              subtitle: Text('Nhắc nhở nhẹ nhàng'),
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.auto_awesome, color: designPurple),
-              title: Text('Kết nối Google Gemini'),
-              subtitle: Text('Chưa kết nối; cần đồng ý trước khi gửi dữ liệu'),
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.devices_outlined, color: designPurple),
-              title: Text('Đồng bộ nhiều thiết bị'),
-              subtitle: Text('Chưa hỗ trợ — dữ liệu cục bộ'),
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.privacy_tip_outlined, color: designPurple),
-              title: Text('Dữ liệu & Quyền riêng tư'),
-              subtitle: Text('Chưa đọc thông tin thiết bị'),
-            ),
-          ],
-        ),
-      ),
-      const SizedBox(height: 14),
-      card(
-        Column(
-          children: [
-            ListTile(
-              leading: const Icon(Icons.note_alt_outlined, color: designPurple),
-              title: const Text('Ghi chú hiện có'),
-              onTap: () => open(HomePage(repository: NoteRepository())),
-            ),
-            ListTile(
-              leading: const Icon(Icons.open_in_new, color: designPurple),
-              title: const Text('Trợ lý nổi Android'),
-              onTap: () => open(overlayPage()),
-            ),
-            ListTile(
-              leading: const Icon(Icons.pets_outlined, color: designPurple),
-              title: const Text('Thư viện animation Cún'),
-              onTap: () => open(const DogAnimationGalleryPage()),
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.smart_toy_outlined,
-                color: designPurple,
-              ),
-              title: const Text('Thư viện animation Robot'),
-              onTap: () => open(const RobotAnimationGalleryPage()),
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
-
-  Widget charactersPage() => Scaffold(
-    appBar: AppBar(title: const Text('Chọn nhân vật')),
-    backgroundColor: designBackground,
-    body: ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        heading('Bạn đồng hành', '5 nhân vật Glossy Kawaii'),
-        const Text(
-          'Brain dùng animation V2; nhân vật khác '
-          'đang hiển thị ảnh master khi chưa tích hợp đầy đủ animation.',
-        ),
-        const SizedBox(height: 14),
-        for (final entry in characterOptions.entries) ...[
-          card(
-            ListTile(
-              leading: mascot(entry.key, size: 62),
-              title: Text(entry.value),
-              subtitle: Text(
-                entry.key == character ? 'Đang sử dụng' : 'Chọn làm trợ lý',
-              ),
-              trailing: Icon(
-                entry.key == character
-                    ? Icons.check_circle
-                    : Icons.radio_button_unchecked,
-                color: designPurple,
-              ),
-              onTap: () => selectCharacter(entry.key),
-            ),
-          ),
-          const SizedBox(height: 10),
-        ],
-      ],
-    ),
-  );
-
-  Widget assistantPage() => Scaffold(
-    appBar: AppBar(title: const Text('Trợ lý OneLife')),
-    backgroundColor: designBackground,
-    body: ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        card(
-          Column(
-            children: [
-              mascot('brain', size: 150),
-              const Text(
-                'Mình giúp bạn nhớ từng việc nhỏ',
-                style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Trợ lý AI hội thoại chưa được kết nối. '
-                'Không gửi dữ liệu cá nhân lên mạng.',
-              ),
-              const SizedBox(height: 14),
-              FilledButton.icon(
-                onPressed: addTask,
-                icon: const Icon(Icons.add_task),
-                label: const Text('Thêm việc cục bộ'),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
+      );
 
   Widget overlayPage() => Scaffold(
-    appBar: AppBar(title: const Text('Trợ lý nổi')),
-    backgroundColor: designBackground,
-    body: ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        card(
-          Column(
-            children: [
-              mascot('brain', size: 130),
-              const Text(
-                'Bản xem trước, chưa bật overlay',
-                style: TextStyle(fontWeight: FontWeight.w800),
+        appBar: AppBar(title: const Text('Trợ lý nổi')),
+        backgroundColor: designBackground,
+        body: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            card(
+              Column(
+                children: [
+                  mascot('brain', size: 130),
+                  const Text(
+                    'Bản xem trước, chưa bật overlay',
+                    style: TextStyle(fontWeight: FontWeight.w800),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Android cần quyền hiển thị trên ứng dụng khác. '
+                    'iOS không cho phép overlay nổi tự do. '
+                    'Màn hình này không yêu cầu quyền hoặc tạo lớp phủ giả.',
+                  ),
+                ],
               ),
-              const SizedBox(height: 8),
-              const Text(
-                'Android cần quyền hiển thị trên ứng dụng khác. '
-                'iOS không cho phép overlay nổi tự do. '
-                'Màn hình này không yêu cầu quyền hoặc tạo lớp phủ giả.',
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+      );
 
   @override
   Widget build(BuildContext context) {

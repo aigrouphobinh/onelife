@@ -111,10 +111,13 @@ class SqliteOneLifeStore implements OneLifeStore {
     if (!const {'brain', 'cat', 'dog', 'robot', 'sprout'}.contains(id)) {
       throw ArgumentError('Nhân vật không hợp lệ.');
     }
-    await (await _database).insert('preferences', {
-      'key': 'selected_character',
-      'value': id,
-    }, conflictAlgorithm: ConflictAlgorithm.replace);
+    await (await _database).insert(
+        'preferences',
+        {
+          'key': 'selected_character',
+          'value': id,
+        },
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<void> close() async {

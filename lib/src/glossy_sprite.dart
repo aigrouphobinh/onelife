@@ -15,11 +15,11 @@ class GlossySpriteSpec {
     required this.frameHeight,
     required this.frameDurationMs,
     required this.loop,
-  }) : assert(frames > 0),
-       assert(columns > 0),
-       assert(frameWidth > 0),
-       assert(frameHeight > 0),
-       assert(frameDurationMs > 0);
+  })  : assert(frames > 0),
+        assert(columns > 0),
+        assert(frameWidth > 0),
+        assert(frameHeight > 0),
+        assert(frameDurationMs > 0);
 
   final String assetPath;
   final int frames;
@@ -439,22 +439,22 @@ class _GlossySpriteState extends State<GlossySprite>
         child: _error != null
             ? Center(child: Text(_error!, textAlign: TextAlign.center))
             : _atlas == null
-            ? const SizedBox.shrink()
-            : RepaintBoundary(
-                child: AnimatedBuilder(
-                  animation: _controller,
-                  builder: (context, _) => CustomPaint(
-                    painter: _GlossySpritePainter(
-                      atlas: _atlas!,
-                      spec: widget.spec,
-                      frame: glossyFrameIndex(
-                        _controller.value,
-                        widget.spec.frames,
+                ? const SizedBox.shrink()
+                : RepaintBoundary(
+                    child: AnimatedBuilder(
+                      animation: _controller,
+                      builder: (context, _) => CustomPaint(
+                        painter: _GlossySpritePainter(
+                          atlas: _atlas!,
+                          spec: widget.spec,
+                          frame: glossyFrameIndex(
+                            _controller.value,
+                            widget.spec.frames,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
       ),
     );
   }

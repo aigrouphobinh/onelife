@@ -46,12 +46,12 @@ class FocusSession {
       phase == FocusPhase.running || phase == FocusPhase.paused;
 
   Map<String, Object?> toMap() => {
-    'id': 1,
-    'phase': phase.name,
-    'total_seconds': totalSeconds,
-    'remaining_seconds': remainingSeconds,
-    'deadline_utc': deadlineUtc?.toUtc().toIso8601String(),
-  };
+        'id': 1,
+        'phase': phase.name,
+        'total_seconds': totalSeconds,
+        'remaining_seconds': remainingSeconds,
+        'deadline_utc': deadlineUtc?.toUtc().toIso8601String(),
+      };
 
   factory FocusSession.fromMap(Map<String, Object?> values) {
     final raw = values['phase'] as String?;
@@ -64,9 +64,8 @@ class FocusSession {
       phase: phase,
       totalSeconds: values['total_seconds'] as int,
       remainingSeconds: values['remaining_seconds'] as int,
-      deadlineUtc: rawDeadline == null
-          ? null
-          : DateTime.tryParse(rawDeadline)?.toUtc(),
+      deadlineUtc:
+          rawDeadline == null ? null : DateTime.tryParse(rawDeadline)?.toUtc(),
     );
   }
 }
@@ -119,7 +118,7 @@ class SqliteFocusSessionStorage implements FocusSessionStorage {
 
 class FocusSessionController {
   FocusSessionController(this.storage, {DateTime Function()? now})
-    : _now = now ?? DateTime.now;
+      : _now = now ?? DateTime.now;
 
   final FocusSessionStorage storage;
   final DateTime Function() _now;
@@ -178,8 +177,8 @@ class FocusSessionController {
       totalSeconds: current.totalSeconds,
       remainingSeconds: current.remainingSeconds,
       deadlineUtc: _now().toUtc().add(
-        Duration(seconds: current.remainingSeconds),
-      ),
+            Duration(seconds: current.remainingSeconds),
+          ),
     );
     await storage.write(running);
     return running;
