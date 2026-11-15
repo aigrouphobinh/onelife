@@ -26,12 +26,16 @@ class NoteRepository {
   NoteRepository({this.singleInstance = true});
 
   final bool singleInstance;
-  Database? _database;
+  Future<Database>? _opening;
 
-  Future<Database> get database async {
-    if (_database != null) return _database!;
+  Future<Database> get database => _opening ??= _open().onError((error, stack) {
+        _opening = null;
+        Error.throwWithStackTrace(error, stack);
+      });
+
+  Future<Database> _open() async {
     final directory = await getDatabasesPath();
-    _database = await openDatabase(
+    return openDatabase(
       p.join(directory, 'onelife.db'),
       version: 1,
       singleInstance: singleInstance,
@@ -42,7 +46,6 @@ class NoteRepository {
         await db.execute('CREATE INDEX idx_notes_updated ON notes(updated_at)');
       },
     );
-    return _database!;
   }
 
   Future<List<Note>> search(String query) async {
@@ -114,7 +117,15 @@ class NoteRepository {
   }
 
   Future<void> close() async {
-    await _database?.close();
-    _database = null;
+    final opening = _opening;
+    _opening = null;
+    if (opening == null) return;
+    final Database db;
+    try {
+      db = await opening;
+    } catch (_) {
+      return; // A failed open has no connection to release.
+    }
+    await db.close();
   }
 }

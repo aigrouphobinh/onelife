@@ -15,6 +15,9 @@ import 'schedule_page.dart';
 import 'backup_files.dart';
 import 'backup_page.dart';
 import 'backup_repository.dart';
+import 'local_search.dart';
+import 'search_page.dart';
+import 'note_actions.dart';
 
 const designPurple = Color(0xFF8054E6);
 const designInk = Color(0xFF21183C);
@@ -458,22 +461,43 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
   void open(Widget page) =>
       Navigator.push(context, MaterialPageRoute<void>(builder: (_) => page));
 
-  void openNotes() => open(
-        HomePage(
-          repository: NoteRepository(),
-          onCreateTask: (note) async {
-            final source = note.title.trim().isNotEmpty
-                ? note.title.trim()
-                : note.body.trim();
-            final normalized = source.replaceAll(RegExp(r'\s+'), ' ');
-            await _saveTask(
-              suggestedTitle: normalized.length > 120
-                  ? normalized.substring(0, 120)
-                  : normalized,
-            );
-          },
-        ),
-      );
+  Future<void> createTaskFromNote(Note note) async {
+    final source =
+        note.title.trim().isNotEmpty ? note.title.trim() : note.body.trim();
+    final normalized = source.replaceAll(RegExp(r'\s+'), ' ');
+    await _saveTask(
+        suggestedTitle: normalized.length > 120
+            ? normalized.substring(0, 120)
+            : normalized);
+  }
+
+  void openNotes() => open(HomePage(
+        repository: NoteRepository(),
+        onCreateTask: createTaskFromNote,
+      ));
+
+  Future<void> openSearch() async {
+    // Own this connection so closing search does not close the notes page's DB.
+    final notes = NoteRepository(singleInstance: false);
+    try {
+      await Navigator.of(context).push<void>(MaterialPageRoute(
+          builder: (pageContext) => SearchPage(
+                source: LocalSearch(store: store, notes: notes),
+                onEditTask: editTask,
+                onDeleteTask: deleteTask,
+                onToggleTask: (task) => toggle(task, !task.completed),
+                onEditNote: (note) async {
+                  await showNoteEditor(pageContext, notes, note: note);
+                },
+                onDeleteNote: (note) async {
+                  await confirmDeleteNote(pageContext, notes, note);
+                },
+                onCreateTask: createTaskFromNote,
+              )));
+    } finally {
+      await notes.close();
+    }
+  }
 
   Widget mascot(String id, {double size = 88}) => id == 'brain'
       ? GlossySprite(
@@ -584,6 +608,12 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        ListTile(
+          leading: const Icon(Icons.search, color: designPurple),
+          title: const Text('Tìm ghi chú & công việc'),
+          subtitle: const Text('Tìm nội dung trên thiết bị'),
+          onTap: openSearch,
+        ),
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
@@ -1291,6 +1321,11 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
                     'Không gửi dữ liệu cá nhân lên mạng.',
                   ),
                   const SizedBox(height: 14),
+                  OutlinedButton.icon(
+                    onPressed: openSearch,
+                    icon: const Icon(Icons.search),
+                    label: const Text('Tìm ghi chú & công việc'),
+                  ),
                   FilledButton.icon(
                     onPressed: addTask,
                     icon: const Icon(Icons.add_task),

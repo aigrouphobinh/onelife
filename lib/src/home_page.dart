@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'note_repository.dart';
+import 'note_actions.dart';
 import 'glossy_sprite.dart';
 import 'dog_animation_gallery.dart';
 import 'robot_animation_gallery.dart';
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   bool _loading = true;
   String? _error;
   int _mascotReplay = 0;
+  int _readRequest = 0;
   String _dogState = 'recovering';
 
   @override
@@ -33,9 +35,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _reload() async {
+    final request = ++_readRequest;
     try {
       final result = await widget.repository.search(_search.text);
-      if (mounted) {
+      if (mounted && request == _readRequest) {
         setState(() {
           _notes = result;
           _loading = false;
@@ -43,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         });
       }
     } catch (error) {
-      if (mounted) {
+      if (mounted && request == _readRequest) {
         setState(() {
           _loading = false;
           _error = 'Không thể đọc ghi chú. Vui lòng thử lại.';
@@ -55,87 +58,22 @@ class _HomePageState extends State<HomePage> {
   Future<void> _addNote() => _saveNote();
 
   Future<void> _saveNote({Note? note}) async {
-    final title = TextEditingController(text: note?.title ?? '');
-    final body = TextEditingController(text: note?.body ?? '');
+    if (await showNoteEditor(context, widget.repository, note: note)) {
+      await _reload();
+    }
+  }
+
+  Future<void> _delete(Note note) async {
     try {
-      final shouldSave = await showDialog<bool>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(note == null ? 'Ghi chú mới' : 'Sửa ghi chú'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: title,
-                  autofocus: true,
-                  decoration: const InputDecoration(labelText: 'Tiêu đề'),
-                ),
-                TextField(
-                  controller: body,
-                  maxLines: 4,
-                  decoration: const InputDecoration(labelText: 'Nội dung'),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: const Text('Hủy'),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.pop(context, true),
-              child: const Text('Lưu'),
-            ),
-          ],
-        ),
-      );
-      if (shouldSave == true) {
-        if (note == null) {
-          await widget.repository.save(title: title.text, body: body.text);
-        } else {
-          await widget.repository.update(
-            id: note.id,
-            title: title.text,
-            body: body.text,
-          );
-        }
+      if (await confirmDeleteNote(context, widget.repository, note)) {
         await _reload();
       }
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Không lưu được ghi chú.')),
+          const SnackBar(content: Text('Không xóa được ghi chú. Hãy thử lại.')),
         );
       }
-    } finally {
-      title.dispose();
-      body.dispose();
-    }
-  }
-
-  Future<void> _delete(Note note) async {
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Xóa ghi chú?'),
-        content: Text('Xóa “${note.title}”? Hành động này chưa thể hoàn tác.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Hủy'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Xóa'),
-          ),
-        ],
-      ),
-    );
-    if (confirmed == true) {
-      await widget.repository.delete(note.id);
-      await _reload();
     }
   }
 

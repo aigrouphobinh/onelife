@@ -113,10 +113,16 @@ so native notification changes are reflected. Failed reads expose a retry action
 older asynchronous reads cannot overwrite newer results.
 
 Remaining core work, in order:
-1. Search across tasks and notes with direct access to the matching saved item.
+1. Focus completion notifications and remaining native iOS integrations.
 2. Physical Android verification of reminder delivery, reboot and battery restrictions.
 3. Android/iOS native file picker device verification for backup and restore.
 
 The schedule is task management, not an exact alarm clock. iOS native reminder
 support and conversational AI remain unimplemented. Local notes/tasks backup and
 add-only restore are now implemented; see [backup behavior and QA](V34_BACKUP_RESTORE.md).
+
+## Local search — 2026-11-16
+
+Home and Assistant now expose offline search across tasks and note contents, with
+Vietnamese accent-insensitive matching and direct edit/complete/delete/create-task
+actions. See [search behavior, tests and remaining gaps](V34_LOCAL_SEARCH.md).
