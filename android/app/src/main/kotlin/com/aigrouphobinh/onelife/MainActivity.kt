@@ -82,7 +82,7 @@ class MainActivity : FlutterActivity() {
                     mapOf(
                         "supported" to (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O),
                         "permissionGranted" to overlayAllowed(),
-                        "running" to BrainOverlayService.isVisible,
+                        "running" to (overlayAllowed() && BrainOverlayService.isVisible),
                     ),
                 )
                 "requestOverlayPermission" -> requestOverlayPermission(result)
@@ -253,6 +253,10 @@ class MainActivity : FlutterActivity() {
 
     override fun onResume() {
         super.onResume()
+        // Special access can be revoked outside the app while Brain is shown.
+        if (!overlayAllowed() && BrainOverlayService.isVisible) {
+            stopService(Intent(this, BrainOverlayService::class.java))
+        }
         OneLifeHomeWidgetProvider.refresh(this)
         // Reconcile future alarms if task status changed via native actions.
         if (TaskReminders.optedIn(this)) TaskReminders.sync(this)
