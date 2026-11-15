@@ -6,8 +6,13 @@ import 'dog_animation_gallery.dart';
 import 'robot_animation_gallery.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.repository});
+  const HomePage({
+    super.key,
+    required this.repository,
+    this.onCreateTask,
+  });
   final NoteRepository repository;
+  final Future<void> Function(Note note)? onCreateTask;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -47,14 +52,16 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<void> _addNote() async {
-    final title = TextEditingController();
-    final body = TextEditingController();
+  Future<void> _addNote() => _saveNote();
+
+  Future<void> _saveNote({Note? note}) async {
+    final title = TextEditingController(text: note?.title ?? '');
+    final body = TextEditingController(text: note?.body ?? '');
     try {
       final shouldSave = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Ghi chú mới'),
+          title: Text(note == null ? 'Ghi chú mới' : 'Sửa ghi chú'),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -85,7 +92,15 @@ class _HomePageState extends State<HomePage> {
         ),
       );
       if (shouldSave == true) {
-        await widget.repository.save(title: title.text, body: body.text);
+        if (note == null) {
+          await widget.repository.save(title: title.text, body: body.text);
+        } else {
+          await widget.repository.update(
+            id: note.id,
+            title: title.text,
+            body: body.text,
+          );
+        }
         await _reload();
       }
     } catch (_) {
@@ -352,10 +367,33 @@ class _HomePageState extends State<HomePage> {
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  trailing: IconButton(
-                                    tooltip: 'Xóa ghi chú',
-                                    icon: const Icon(Icons.delete_outline),
-                                    onPressed: () => _delete(note),
+                                  onTap: () => _saveNote(note: note),
+                                  trailing: PopupMenuButton<String>(
+                                    tooltip: 'Tùy chọn ghi chú',
+                                    onSelected: (action) {
+                                      if (action == 'edit') {
+                                        _saveNote(note: note);
+                                      } else if (action == 'delete') {
+                                        _delete(note);
+                                      } else if (action == 'task') {
+                                        widget.onCreateTask?.call(note);
+                                      }
+                                    },
+                                    itemBuilder: (_) => [
+                                      const PopupMenuItem(
+                                        value: 'edit',
+                                        child: Text('Sửa ghi chú'),
+                                      ),
+                                      if (widget.onCreateTask != null)
+                                        const PopupMenuItem(
+                                          value: 'task',
+                                          child: Text('Tạo việc từ ghi chú'),
+                                        ),
+                                      const PopupMenuItem(
+                                        value: 'delete',
+                                        child: Text('Xóa ghi chú'),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               );
