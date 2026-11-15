@@ -231,7 +231,7 @@ class BrainOverlayService : Service() {
         options?.visibility = if (expanded) View.VISIBLE else View.GONE
         params?.apply {
             width = if (expanded) dp(250) else dp(94)
-            height = if (expanded) dp(316) else dp(94)
+            height = if (expanded) dp(340) else dp(94)
             x = x.coerceIn(
                 0, (resources.displayMetrics.widthPixels - width).coerceAtLeast(0),
             )
