@@ -9,6 +9,8 @@ on:
       - 'tools/test_visible_sprite_motion.py'
       - 'tools/pack_glossy_frames.py'
       - 'tools/check_glossy_source_catalog.py'
+      - 'tools/check_sprite_candidate.py'
+      - 'tests/test_sprite_candidate_alpha.py'
       - 'design/review/glossy-cat-idle.html'
       - 'design/review/glossy-dog-idle.html'
       - 'tools/check_dog_glossy_review.py'
@@ -37,6 +39,7 @@ jobs:
         run: |
           python tools/check_glossy_source_catalog.py --self-test
           python tools/check_glossy_source_catalog.py
+          python -m unittest discover -s tests -p 'test_sprite_candidate_alpha.py' -v
           python -m unittest discover -s tools -p 'test_visible_sprite_motion.py' -v
       - name: Render and validate original illustrated frames
         run: python tools/render_glossy_character_animation.py
