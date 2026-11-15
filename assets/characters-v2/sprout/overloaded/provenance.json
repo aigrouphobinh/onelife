@@ -1,0 +1,20 @@
+{
+  "characterId": "sprout",
+  "state": "overloaded",
+  "generatedOn": "2026-11-15",
+  "origin": "Original OpenAI ImageGen chibi Sprout illustration",
+  "sourceArtDimensions": [
+    1448,
+    1086
+  ],
+  "sourceFrameGrid": [
+    4,
+    3
+  ],
+  "generationClass": "independently-illustrated-pose-sheet",
+  "preparation": "Split 12 independently illustrated Sprout Overloaded poses, remove translucent generator matte and tiny isolated alpha artifacts, resize each source cell to 236x236 within 256x256 canvas with transparent margins; export lossless WebP. No synthetic frame duplication, wiggle, or affine tween.",
+  "license": "Original AI-generated asset for OneLife; not copied from a third-party sprite pack",
+  "sourceSha256": "4d7b867df204789f954658bac606b712d839c5ab26f159f492e4abcba5b8a43e",
+  "qa": "Automated candidate QA only. Human art review and phone testing pending.",
+  "productionReady": false
+}

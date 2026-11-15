@@ -1,0 +1,27 @@
+{
+  "characterId": "sprout",
+  "state": "overloaded",
+  "candidateQA": "local-pass",
+  "sourceSha256": "4d7b867df204789f954658bac606b712d839c5ab26f159f492e4abcba5b8a43e",
+  "sourceSize": [
+    1024,
+    768
+  ],
+  "frames": 12,
+  "columns": 4,
+  "cellSize": [
+    256,
+    256
+  ],
+  "minBoundingMarginPx": 17,
+  "minimumAdjacentVisibleRgbRmsLight": 59.37,
+  "minimumAdjacentVisibleRgbRmsDark": 48.76,
+  "gifFrames": 12,
+  "gifDurationMsObserved": 130,
+  "gifDurationMsRequested": 135,
+  "gifLoop": "infinite",
+  "alpha": "RGBA transparent",
+  "sourceArtReview": "pending",
+  "realDeviceTest": "pending",
+  "productionReady": false
+}
