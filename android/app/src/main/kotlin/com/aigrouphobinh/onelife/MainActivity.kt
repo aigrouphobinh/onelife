@@ -117,8 +117,33 @@ class MainActivity : FlutterActivity() {
                         result.success("unavailable")
                     }
                 }
+                "breakSnapshot" -> result.success(BrainBreaks.snapshot(this))
+                "startBrainBreak" -> {
+                    val minutes = call.argument<Int>("minutes") ?: 0
+                    result.success(BrainBreaks.start(this, minutes).also {
+                        refreshActiveBrainBreak()
+                    })
+                }
+                "finishBrainBreak" -> result.success(BrainBreaks.finish(this).also {
+                    refreshActiveBrainBreak()
+                })
+                "cancelBrainBreak" -> result.success(BrainBreaks.cancel(this).also {
+                    refreshActiveBrainBreak()
+                })
                 else -> result.notImplemented()
             }
+        }
+    }
+
+    /** An existing user-started Brain can redraw, but this never starts it. */
+    private fun refreshActiveBrainBreak() {
+        if (!BrainOverlayService.isVisible || !overlayAllowed()) return
+        try {
+            startService(Intent(this, BrainOverlayService::class.java).apply {
+                action = BrainOverlayService.ACTION_REFRESH
+            })
+        } catch (_: Exception) {
+            // A break session works without the optional overlay.
         }
     }
 
