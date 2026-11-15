@@ -229,4 +229,35 @@ void main() {
         findsOneWidget);
     expect(find.text('Bắt đầu nghỉ 5 phút'), findsNothing);
   });
+  testWidgets(
+      'native elapsed remaining takes precedence over user-edited phone clock',
+      (tester) async {
+    final messenger = tester.binding.defaultBinaryMessenger;
+    messenger.setMockMethodCallHandler(bridge, (call) async {
+      if (call.method == 'breakSnapshot') {
+        return <String, Object?>{
+          ...state('resting'),
+          // Simulate a phone clock changed by one hour. The native
+          // monotonic duration must win; do not declare a false expiry.
+          'deadlineMs': DateTime.now()
+              .subtract(const Duration(hours: 1))
+              .millisecondsSinceEpoch,
+          'remainingMs': 90000,
+        };
+      }
+      return null;
+    });
+    addTearDown(() => messenger.setMockMethodCallHandler(bridge, null));
+
+    await tester.pumpWidget(MaterialApp(
+      theme: ThemeData(platform: TargetPlatform.android),
+      home: const BrainBreakPage(),
+    ));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 120));
+    expect(find.text('01:30'), findsOneWidget);
+    expect(find.text('Brain đang thư giãn'), findsOneWidget);
+    expect(find.text('Nghỉ xong — trở lại nhịp của bạn'), findsNothing);
+  });
+
 }
