@@ -87,10 +87,11 @@ class _HomePageState extends State<HomePage> {
         await _reload();
       }
     } catch (_) {
-      if (mounted)
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Không lưu được ghi chú.')),
         );
+      }
     } finally {
       title.dispose();
       body.dispose();
