@@ -75,7 +75,7 @@ class BrainOverlayService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O ||
             !Settings.canDrawOverlays(this)
         ) {
             stopSelf()
