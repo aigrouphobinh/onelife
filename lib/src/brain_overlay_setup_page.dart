@@ -200,7 +200,8 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
                             fontWeight: FontWeight.w800,
                           )),
                       SizedBox(height: 8),
-                      Text('Kéo đến vị trí bạn thích. '
+                      Text(
+                          'Kéo đến vị trí bạn thích. '
                           'Chạm Brain để mở thao tác nhanh.',
                           style: TextStyle(color: Colors.white, fontSize: 13)),
                     ],
@@ -216,12 +217,16 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
               children: [
                 const Text('Quyền hiển thị trên ứng dụng khác',
                     style: TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w800, color: _ink)),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                        color: _ink)),
                 const SizedBox(height: 12),
                 Row(
                   children: [
                     Icon(
-                      _granted ? Icons.verified_user_outlined : Icons.shield_outlined,
+                      _granted
+                          ? Icons.verified_user_outlined
+                          : Icons.shield_outlined,
                       color: _purple,
                     ),
                     const SizedBox(width: 10),
@@ -242,7 +247,8 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
                 const SizedBox(height: 14),
                 if (usable && !_granted)
                   FilledButton.icon(
-                    onPressed: _busy ? null : () => _run('requestOverlayPermission'),
+                    onPressed:
+                        _busy ? null : () => _run('requestOverlayPermission'),
                     icon: const Icon(Icons.settings_outlined),
                     label: const Text('Mở cài đặt cấp quyền'),
                   ),
@@ -277,7 +283,8 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Thao tác nhanh thật',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
                 SizedBox(height: 10),
                 Text('✓ Việc hôm nay · + Ghi nhanh · ◷ Tập trung · × Ẩn Brain'),
                 SizedBox(height: 10),
@@ -285,7 +292,8 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
                     'Có thể kéo thả và ghi nhớ vị trí trên màn hình. '
                     'Không đọc nội dung của ứng dụng khác.'),
                 SizedBox(height: 10),
-                Text('Chỉ xuất hiện khi bạn nhấn Hiện Brain nổi. '
+                Text(
+                    'Chỉ xuất hiện khi bạn nhấn Hiện Brain nổi. '
                     'Android có thể dừng dịch vụ để tiết kiệm bộ nhớ; '
                     'Brain không tự khởi động sau khi khởi động lại điện thoại.',
                     style: TextStyle(color: Color(0xFF786B89))),

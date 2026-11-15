@@ -6,7 +6,8 @@ import 'package:onelife/src/brain_overlay_setup_page.dart';
 void main() {
   const bridge = MethodChannel('onelife/quick_capture');
 
-  testWidgets('Brain overlay never requests special permission or starts itself', (
+  testWidgets(
+      'Brain overlay never requests special permission or starts itself', (
     tester,
   ) async {
     final binary = tester.binding.defaultBinaryMessenger;
