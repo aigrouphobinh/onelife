@@ -68,7 +68,7 @@ def main():
         'Kết thúc nghỉ',
         'Hủy phiên nghỉ',
         "AppLifecycleState.resumed",
-        "remainingSeconds",
+        "_secondsRemaining",
         "deadlineMs",
     ):
         assert required in page, required
