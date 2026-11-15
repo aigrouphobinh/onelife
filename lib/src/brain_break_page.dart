@@ -59,6 +59,8 @@ class _BrainBreakPageState extends State<BrainBreakPage>
   int _selected = 5;
   int _duration = 0;
   int _deadlineMs = 0;
+  int? _remainingMsAtRead;
+  final Stopwatch _sinceNativeRead = Stopwatch();
   int _recoveryStartMs = 0;
   int _recoveryDurationMs = 1500;
   int _sequence = 0;
@@ -92,15 +94,19 @@ class _BrainBreakPageState extends State<BrainBreakPage>
   @override
   void dispose() {
     _ticker?.cancel();
+    _sinceNativeRead.stop();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   int get _secondsRemaining {
-    if (_phase != 'resting' || _deadlineMs <= 0) return 0;
-    return ((_deadlineMs - DateTime.now().millisecondsSinceEpoch + 999) ~/ 1000)
-        .clamp(0, _duration * 60)
-        .toInt();
+    if (_phase != 'resting') return 0;
+    // Native elapsedRealtime is sleep-safe and immune to wall-clock edits.
+    // Stopwatch measures only time since the last confirmed native reading.
+    final remainingMs = _remainingMsAtRead == null
+        ? _deadlineMs - DateTime.now().millisecondsSinceEpoch // legacy APK
+        : _remainingMsAtRead! - _sinceNativeRead.elapsedMilliseconds;
+    return ((remainingMs + 999) ~/ 1000).clamp(0, _duration * 60).toInt();
   }
 
   String get _clock {
@@ -122,8 +128,18 @@ class _BrainBreakPageState extends State<BrainBreakPage>
       });
       return;
     }
+    // Restart the local monotonic display anchor only on a confirmed native
+    // result. MissingPlugin/errors never manufacture a countdown.
+    final phase = data['phase'] as String? ?? 'idle';
+    final nativeMs = data['remainingMs'];
+    _sinceNativeRead
+      ..stop()
+      ..reset();
+    _remainingMsAtRead =
+        phase == 'resting' && nativeMs is int ? nativeMs : null;
+    if (_remainingMsAtRead != null) _sinceNativeRead.start();
     setState(() {
-      _phase = data['phase'] as String? ?? 'idle';
+      _phase = phase;
       _duration = data['durationMinutes'] as int? ?? 0;
       _deadlineMs = data['deadlineMs'] as int? ?? 0;
       _recoveryStartMs = data['recoveryStartMs'] as int? ?? 0;
