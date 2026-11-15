@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,6 +28,8 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
     loop: true,
   );
 
+  bool _android = false;
+  bool _hasChecked = false;
   bool _supported = false;
   bool _granted = false;
   bool _running = false;
@@ -36,13 +37,20 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
   bool _checking = true;
   String? _message;
 
-  bool get _android => defaultTargetPlatform == TargetPlatform.android;
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _checkStatus();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _android = Theme.of(context).platform == TargetPlatform.android;
+    if (!_hasChecked) {
+      _hasChecked = true;
+      _checkStatus();
+    }
   }
 
   @override
