@@ -46,7 +46,7 @@ def main_check() -> None:
     # Brain may be shown without Usage Access, but cannot read without it.
     assert "UsageInsights.snapshot(applicationContext)" in native_overlay
     assert '"unknown"' in native_overlay
-    assert 'usage["goalMinutes"] !is Int' in native_overlay
+    assert 'latestUsage["goalMinutes"] !is Int' in native_overlay
     assert 'usageTier == "balanced"' in native_overlay
     assert 'private val focusSheet = decode("focus")' in native_overlay
     assert '"flutter_assets/assets/characters-v2/brain/"' in native_overlay
