@@ -39,6 +39,7 @@ system-owned and can look different on each OS/OEM.
 | Brain Focus display | Committed alpha sprite `brain/focus/sheet.png` | Art/phone QA still pending |
 | Add Quick Settings tiles | Flutter Settings > Điều khiển nhanh Android | Android 13+ official add-tile prompt; older versions require manual edit |
 | Quick Capture | Native tile launches the real Flutter task-entry dialog | Cold/warm app paths via `onelife/quick_capture`, local SQLite task, device QA pending |
+| Today Tasks QS | Native tile reads only aggregate incomplete/due-before-midnight count from `onelife_ui.db` | Lockscreen hides the count; tap opens real Flutter Tasks tab; device QA pending |
 
 Open `Tập trung 25 phút` from Flutter Home's shortcut; this is an actual timer,
 not a simulated Quick Settings tile.
@@ -49,6 +50,7 @@ not a simulated Quick Settings tile.
 |---|---|---|
 | Android Quick Settings Focus | Native `FocusTileService` shares `onelife_focus.db` with Flutter; tap starts, pauses or resumes 25 minutes | Initial APK compile passed; device lifecycle QA outstanding |
 | Android Quick Settings Ghi nhanh | Native `QuickCaptureTileService` opens Flutter task input after unlock; `MainActivity` delivers cold/warm launch via MethodChannel | Compile and device interaction confirmation for this new service pending |
+| Android Quick Settings Việc hôm nay | `TodayTasksTileService` reads SQLite `tasks` count; 0 means no tasks; hides count when locked; user tap opens Flutter tasks via `MainActivity` | CI compilation and real Android tile QA pending |
 | Android notification actions | Native notification or maintained Flutter plugin with receiver | Permission and action persistence; no false completed state |
 | Home screen widget | Android AppWidget / iOS WidgetKit with shared data bridge | Actual platform hosts and lifecycle testing |
 | iOS Control Center | iOS 18+ WidgetKit `ControlWidgetButton` or `ControlWidgetToggle` | iOS host/extension, intent bridge and device test |
@@ -57,11 +59,11 @@ not a simulated Quick Settings tile.
 | Habits/usage statistics | Android UsageStats with opt-in; iOS entitled Screen Time when available | Distinguish missing permission from zero minutes |
 
 Flutter Android and iOS host project folders were generated under `android/` and `ios/`.
-The Android Focus TileService and Quick Capture TileService are registered in
-`AndroidManifest.xml`. The earlier Focus-only `flutter build apk --debug`
-compilation succeeded in GitHub Actions. The newer Quick Capture tile and
-Android 13+ `StatusBarManager.requestAddTileService` prompt still need
-fresh CI and physical device validation.
+Focus, Ghi nhanh and Việc hôm nay tile services are registered in
+`AndroidManifest.xml`. Earlier versions with Focus and Ghi nhanh passed
+`flutter build apk --debug` in GitHub Actions. The newest Today Tasks tile
+and its deep-link bridge require fresh compilation and physical device QA.
+Android 13+ uses the system `StatusBarManager.requestAddTileService` prompt.
 **This is not device QA**: the user still needs to add the tile and test
 on real Android hardware; the iOS control and other outside-app surfaces
 remain unimplemented.
