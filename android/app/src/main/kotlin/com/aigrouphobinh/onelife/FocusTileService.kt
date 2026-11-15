@@ -176,6 +176,8 @@ class FocusTileService : TileService() {
                 next
             }
             updateUi(updated)
+            // The launcher widget displays the same persisted Focus state.
+            OneLifeHomeWidgetProvider.refresh(this)
         } catch (_: Exception) {
             showUnavailable()
         }
