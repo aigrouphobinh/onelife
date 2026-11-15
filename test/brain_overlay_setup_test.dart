@@ -99,7 +99,10 @@ void main() {
 
     await tester.tap(find.text('Ẩn Brain nổi'));
     await tester.pump();
-    await tester.pump(const Duration(milliseconds: 120));
+    // Native service teardown is asynchronous; the screen waits 180ms
+    // before re-reading actual WindowManager visibility.
+    await tester.pump(const Duration(milliseconds: 220));
+    await tester.pump();
     expect(stopCalls, 1);
     expect(find.text('Hiện Brain nổi'), findsOneWidget);
   });
