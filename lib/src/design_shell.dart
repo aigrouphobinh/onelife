@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show MethodCall, MethodChannel, MissingPluginException;
 
 import 'glossy_sprite.dart';
 import 'focus_page.dart';
@@ -44,11 +45,59 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
   int tab = 0;
   int taskFilter = 0;
   int habitPeriod = 0;
+  static const MethodChannel _captureChannel =
+      MethodChannel('onelife/quick_capture');
+  bool _quickCaptureQueued = false;
 
   @override
   void initState() {
     super.initState();
+    _captureChannel.setMethodCallHandler(_handleNativeAction);
     reload();
+    _consumeLaunchAction();
+  }
+
+  Future<void> _handleNativeAction(MethodCall call) async {
+    if (call.method == 'openCapture') {
+      _queueQuickCapture();
+    }
+  }
+
+  Future<void> _consumeLaunchAction() async {
+    try {
+      final action =
+          await _captureChannel.invokeMethod<String>('consumeLaunchAction');
+      if (action == 'capture') {
+        _queueQuickCapture();
+      }
+    } on MissingPluginException {
+      // iOS and Flutter widget tests have no Android Quick Capture channel.
+    } catch (_) {
+      // Native channel unavailable: the normal Flutter UI remains usable.
+    }
+  }
+
+  void _queueQuickCapture() {
+    // Double tapping the tile must not open two text-entry dialogs.
+    if (!mounted || _quickCaptureQueued) return;
+    _quickCaptureQueued = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!mounted) {
+        _quickCaptureQueued = false;
+        return;
+      }
+      try {
+        await addTask();
+      } finally {
+        _quickCaptureQueued = false;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _captureChannel.setMethodCallHandler(null);
+    super.dispose();
   }
 
   Future<void> reload() async {
