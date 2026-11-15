@@ -8,6 +8,7 @@ on:
       - 'test/**'
       - 'pubspec.yaml'
       - 'assets/characters-v2/dog/**'
+      - 'assets/characters-v2/robot/**'
       - '.github/workflows/flutter-glossy-sprite.yml'
   pull_request:
     paths:
@@ -15,6 +16,7 @@ on:
       - 'test/**'
       - 'pubspec.yaml'
       - 'assets/characters-v2/dog/**'
+      - 'assets/characters-v2/robot/**'
       - '.github/workflows/flutter-glossy-sprite.yml'
   workflow_dispatch:
 
@@ -36,4 +38,4 @@ jobs:
       - name: Run Flutter analyzer
         run: flutter analyze
       - name: Verify animation and note screen tests
-        run: flutter test test/glossy_sprite_test.dart test/widget_test.dart
+        run: flutter test test/glossy_sprite_test.dart test/robot_animation_test.dart test/widget_test.dart
