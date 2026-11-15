@@ -56,13 +56,15 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
     }
     if (mounted) setState(() => loading = true);
     try {
-      final data = await bridge.invokeMapMethod<String, dynamic>('usageSnapshot');
+      final data =
+          await bridge.invokeMapMethod<String, dynamic>('usageSnapshot');
       if (!mounted) return;
       setState(() {
         granted = data?['granted'] == true;
         available = data?['available'] == true;
         minutes = available && data?['minutes'] is int
-            ? data!['minutes'] as int : null;
+            ? data!['minutes'] as int
+            : null;
         tier = available ? (data?['tier'] as String? ?? 'unknown') : 'unknown';
         loading = false;
       });
@@ -89,7 +91,8 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
   Future<void> requestAccess() async {
     if (!android) return;
     try {
-      final answer = await bridge.invokeMethod<String>('openUsageAccessSettings');
+      final answer =
+          await bridge.invokeMethod<String>('openUsageAccessSettings');
       if (!mounted) return;
       setState(() {
         notice = answer == 'opened'
@@ -141,12 +144,14 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Brain nhìn theo nhịp sử dụng',
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800, color: ink)),
+                  style: TextStyle(
+                      fontSize: 19, fontWeight: FontWeight.w800, color: ink)),
               const SizedBox(height: 12),
               if (loading)
                 const LinearProgressIndicator(color: purple)
               else if (!android)
-                const Text('Tính năng cần Android Usage Access. iOS yêu cầu tích hợp Screen Time riêng.')
+                const Text(
+                    'Tính năng cần Android Usage Access. iOS yêu cầu tích hợp Screen Time riêng.')
               else if (!granted) ...[
                 const Text('Chưa cấp quyền Truy cập dữ liệu sử dụng. '
                     'OneLife không tự đoán thời gian sử dụng.'),
@@ -163,14 +168,17 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
                 const Text('Ước tính ứng dụng foreground hôm nay',
                     style: TextStyle(color: Color(0xFF796D8B))),
                 const SizedBox(height: 7),
-                Text(reading, style: const TextStyle(
-                    fontSize: 28, fontWeight: FontWeight.w900, color: ink)),
+                Text(reading,
+                    style: const TextStyle(
+                        fontSize: 28, fontWeight: FontWeight.w900, color: ink)),
                 const SizedBox(height: 10),
                 Row(children: [
                   Icon(Icons.circle, size: 14, color: color),
                   const SizedBox(width: 8),
-                  Expanded(child: Text(stateLabel,
-                      style: TextStyle(fontWeight: FontWeight.w700, color: color))),
+                  Expanded(
+                      child: Text(stateLabel,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, color: color))),
                 ]),
               ],
               if (notice != null) ...[
@@ -196,7 +204,8 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
               Text('90 đến dưới 180 phút: gợi ý nghỉ, màu hổ phách.'),
               Text('Từ 180 phút: gợi ý tạm nghỉ, màu hồng.'),
               SizedBox(height: 10),
-              Text('Khi Focus đang chạy, Brain ưu tiên hoạt ảnh Focus có sẵn. '
+              Text(
+                  'Khi Focus đang chạy, Brain ưu tiên hoạt ảnh Focus có sẵn. '
                   'Chưa có quyền hoặc chưa đủ dữ liệu: giữ trạng thái trung tính.',
                   style: TextStyle(color: Color(0xFF796D8B))),
             ],
@@ -212,12 +221,14 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
                   'Không lưu danh sách ứng dụng hay lịch sử sự kiện '
                   'và không gửi dữ liệu lên máy chủ.'),
               SizedBox(height: 10),
-              Text('Số phút chỉ xấp xỉ, có thể thiếu thời gian khi sự kiện '
+              Text(
+                  'Số phút chỉ xấp xỉ, có thể thiếu thời gian khi sự kiện '
                   'bị mất hoặc phiên dùng bắt đầu trước 00:00. '
                   'Đây không phải kết quả sức khỏe hay chẩn đoán tổn thương não.',
                   style: TextStyle(color: Color(0xFF796D8B))),
               SizedBox(height: 10),
-              Text('Có thể thu hồi quyền trong Cài đặt Android → '
+              Text(
+                  'Có thể thu hồi quyền trong Cài đặt Android → '
                   'Truy cập dữ liệu sử dụng.',
                   style: TextStyle(color: Color(0xFF796D8B))),
             ],

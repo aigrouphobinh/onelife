@@ -45,7 +45,8 @@ void main() {
     expect(find.text('Mở Cài đặt quyền sử dụng'), findsOneWidget);
   });
 
-  testWidgets('foreground evidence is displayed with explicit approximate tier', (
+  testWidgets('foreground evidence is displayed with explicit approximate tier',
+      (
     tester,
   ) async {
     final messenger = tester.binding.defaultBinaryMessenger;
@@ -116,7 +117,8 @@ void main() {
     ));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 80));
-    expect(find.textContaining('iOS yêu cầu tích hợp Screen Time'), findsOneWidget);
+    expect(find.textContaining('iOS yêu cầu tích hợp Screen Time'),
+        findsOneWidget);
     expect(nativeCalls, 0);
   });
 }
