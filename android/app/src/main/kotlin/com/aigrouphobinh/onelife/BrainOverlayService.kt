@@ -59,56 +59,67 @@ class BrainOverlayService : Service() {
     private var sprite: SpriteView? = null
     private var params: WindowManager.LayoutParams? = null
     private var expanded = false
+    // Keep fast break/Focus state independent of slow UsageEvents queries.
+    // Otherwise a 1.5-second Recovering clip can be missed while usage stats
+    // are being calculated on slower devices.
+    private var latestUsage: Map<String, Any?> = emptyMap()
+    private var latestBreak: Map<String, Any?> = emptyMap()
+    private var latestFocus = false
+
+    private fun renderBrainStatus() {
+        val phase = latestBreak["phase"] as? String ?: "idle"
+        val sequence = latestBreak["sequence"] as? Long ?: 0L
+        sprite?.focused = latestFocus
+        sprite?.usageTier = latestUsage["tier"] as? String ?: "unknown"
+        sprite?.setBreakPhase(phase, sequence)
+        usageCaption?.text = when {
+            latestFocus -> "Đang tập trung · Focus được ưu tiên"
+            phase == "resting" -> {
+                val seconds = latestBreak["remainingSeconds"] as? Int ?: 0
+                "Brain đang nghỉ · còn " + ((seconds + 59) / 60) + " phút"
+            }
+            phase == "recovering" -> "Nghỉ xong · Brain đang thư giãn"
+            latestUsage.isEmpty() -> "Đang kiểm tra trạng thái sử dụng"
+            latestUsage["available"] != true -> "Chưa có dữ liệu thời gian dùng"
+            latestUsage["goalMinutes"] !is Int -> "Chưa đặt mục tiêu hằng ngày"
+            else -> {
+                val minutes = latestUsage["minutes"] as? Int
+                val goal = latestUsage["goalMinutes"] as? Int
+                if (minutes == null || goal == null) "Chưa có dữ liệu"
+                else "Hôm nay ~" + minutes + "p / mục tiêu " + goal + "p"
+            }
+        }
+        breakAction?.apply {
+            isEnabled = phase != "recovering"
+            alpha = if (isEnabled) 1f else 0.6f
+            text = when (phase) {
+                "resting" -> "☀  Kết thúc nghỉ"
+                "recovering" -> "✧  Đang hồi phục"
+                else -> "☾  Nghỉ 5 phút"
+            }
+            contentDescription = text
+        }
+    }
+
     private val refreshBehavior = object : Runnable {
         override fun run() {
             if (!isVisible) return
             val token = ++refreshVersion
-            // UsageEvents and Focus SQLite stay off the WindowManager main UI.
             Thread {
-                val usage = UsageInsights.snapshot(applicationContext)
-                val focus = readFocusActive()
-                // Reconcile time-sensitive break last so UsageEvents latency
-                // cannot turn a completed clip into a stale recovery replay.
+                // Reconcile the saved short-lived break FIRST; do not wait for
+                // UsageEvents, which may take longer than the recovery clip.
                 val breakState = BrainBreaks.snapshot(applicationContext)
+                val focus = readFocusActive()
                 handler.post {
                     if (!isVisible || token != refreshVersion) return@post
+                    latestBreak = breakState
+                    latestFocus = focus
+                    renderBrainStatus()
+
                     val phase = breakState["phase"] as? String ?: "idle"
-                    val seq = breakState["sequence"] as? Long ?: 0L
-                    val usageTier = usage["tier"] as? String ?: "unknown"
-                    sprite?.focused = focus
-                    sprite?.usageTier = usageTier
-                    sprite?.setBreakPhase(phase, seq)
-                    usageCaption?.text = when {
-                        focus -> "Đang tập trung · Focus được ưu tiên"
-                        phase == "resting" -> {
-                            val seconds = breakState["remainingSeconds"] as? Int ?: 0
-                            "Brain đang nghỉ · còn " + ((seconds + 59) / 60) + " phút"
-                        }
-                        phase == "recovering" -> "Nghỉ xong · Brain đang thư giãn"
-                        usage["available"] != true -> "Chưa có dữ liệu thời gian dùng"
-                        usage["goalMinutes"] !is Int -> "Chưa đặt mục tiêu hằng ngày"
-                        else -> {
-                            val minutes = usage["minutes"] as? Int
-                            val goal = usage["goalMinutes"] as? Int
-                            if (minutes == null || goal == null) "Chưa có dữ liệu"
-                            else "Hôm nay ~" + minutes + "p / mục tiêu " + goal + "p"
-                        }
-                    }
-                    breakAction?.apply {
-                        isEnabled = phase != "recovering"
-                        alpha = if (isEnabled) 1f else 0.6f
-                        text = when (phase) {
-                            "resting" -> "☀  Kết thúc nghỉ"
-                            "recovering" -> "✧  Đang hồi phục"
-                            else -> "☾  Nghỉ 5 phút"
-                        }
-                        contentDescription = text
-                    }
                     val now = System.currentTimeMillis()
                     val nextDelay = when (phase) {
                         "resting" -> {
-                            // Remaining time comes from Android elapsedRealtime,
-                            // not a wall-clock deadline the user can edit.
                             val remaining = breakState["remainingMs"] as? Long
                                 ?: ((breakState["deadlineMs"] as? Long ?: now) - now)
                             (remaining + 100L).coerceIn(250L, 5 * 60 * 1000L)
@@ -122,6 +133,16 @@ class BrainOverlayService : Service() {
                         else -> 5 * 60 * 1000L
                     }
                     handler.postDelayed(this, nextDelay)
+                }
+
+                // Usage Access can be revoked, so this is always best effort.
+                // A late answer may update the label, but NEVER rewind a
+                // newer break state or replay Recovering animation.
+                val usage = UsageInsights.snapshot(applicationContext)
+                handler.post {
+                    if (!isVisible || token != refreshVersion) return@post
+                    latestUsage = usage
+                    renderBrainStatus()
                 }
             }.start()
         }
