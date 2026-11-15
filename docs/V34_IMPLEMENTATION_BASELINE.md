@@ -43,7 +43,8 @@ system-owned and can look different on each OS/OEM.
 | Today Tasks QS | Native tile reads only aggregate incomplete/due-before-midnight count from `onelife_ui.db` | Lockscreen hides the count; tap opens real Flutter Tasks tab; device QA pending |
 | Interactive notifications (Android) | SQLite-backed inexact alarms; complete and 10-minute snooze actions on native notifications | APK CI passed previously; OS delivery and device QA still pending |
 | Brain nổi Android | Real draggable 8-frame Brain overlay with Focus/Tasks/Capture/Hide and explicit special access | 29/29 Flutter tests and Android debug APK passed at run 43685260232; physical OEM QA remains |
-| Brain phản ứng theo sử dụng máy | UsageInsights from opt-in Android foreground events, Focus sprite priority, no fabricated time | Usage Access permission and device data accuracy QA pending; distinct emotional sprites not yet delivered |
+| Brain phản ứng theo sử dụng máy | UsageInsights + user-set personal goal, real Balanced/Strained/Overloaded atlas candidates with Focus priority | CI completed before break timer milestone; device/visual approval still pending |
+| Brain nghỉ chủ động | Native persisted 5/10/15-minute break; Resting 10-frame loop → Recovering 12-frame one-shot; cancellation does not recover | Source and test added; latest APK/physical QA pending |
 
 Open `Tập trung 25 phút` from Flutter Home's shortcut; this is an actual timer,
 not a simulated Quick Settings tile.
