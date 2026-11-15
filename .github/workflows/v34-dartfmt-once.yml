@@ -1,5 +1,5 @@
 name: OneLife V3.4 source formatter (one-shot)
-# Final normalization pass for V3.4 opt-in native reminder UI and tests.
+# Final normalization pass after correcting Navigator reminder permission switch rebuild.
 on:
   push:
     branches: [main]
