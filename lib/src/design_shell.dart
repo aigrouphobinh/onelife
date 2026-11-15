@@ -55,7 +55,9 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
     try {
       final result = await store.loadTasks();
       final selected = await store.selectedCharacter();
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
       setState(() {
         tasks = result;
         character = characterOptions.containsKey(selected) ? selected : 'brain';
@@ -63,17 +65,19 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
         loading = false;
       });
     } catch (_) {
-      if (mounted)
+      if (mounted) {
         setState(() {
           error = 'Không tải được dữ liệu cục bộ';
           loading = false;
         });
+      }
     }
   }
 
   void notify(String text) {
-    if (mounted)
+    if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+    }
   }
 
   Future<void> addTask() async {
@@ -300,19 +304,12 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Hôm nay có ' +
-                          pending.length.toString() +
-                          ' việc cần làm',
+                      'Hôm nay có ${pending.length} việc cần làm',
                       style: const TextStyle(color: Colors.white),
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Ngày ' +
-                          now.day.toString() +
-                          '/' +
-                          now.month.toString() +
-                          '/' +
-                          now.year.toString(),
+                      'Ngày ${now.day}/${now.month}/${now.year}',
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
@@ -339,7 +336,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'Công việc hôm nay (' + today.length.toString() + ')',
+                      'Công việc hôm nay (${today.length})',
                       style: const TextStyle(fontWeight: FontWeight.w800),
                     ),
                   ),
@@ -460,7 +457,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Danh sách (' + items.length.toString() + ')',
+                'Danh sách (${items.length})',
                 style: const TextStyle(fontWeight: FontWeight.w800),
               ),
               if (items.isEmpty)
