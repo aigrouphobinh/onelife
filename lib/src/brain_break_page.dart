@@ -91,8 +91,8 @@ class _BrainBreakPageState extends State<BrainBreakPage>
 
   String get _clock {
     final seconds = _secondsRemaining;
-    return (seconds ~/ 60).toString().padLeft(2, '0') + ':' +
-        (seconds % 60).toString().padLeft(2, '0');
+    return '${(seconds ~/ 60).toString().padLeft(2, '0')}:'
+        '${(seconds % 60).toString().padLeft(2, '0')}';
   }
 
   void _accept(Map<String, dynamic> data) {
@@ -219,7 +219,7 @@ class _BrainBreakPageState extends State<BrainBreakPage>
           _surface(Column(
             children: [
               GlossySprite(
-                key: ValueKey('brain-break-' + _phase + '-' + _sequence.toString()),
+                key: ValueKey('brain-break-$_phase-$_sequence'),
                 spec: current,
                 size: 160,
                 semanticLabel: switch (_phase) {
@@ -284,7 +284,7 @@ class _BrainBreakPageState extends State<BrainBreakPage>
                   spacing: 9,
                   children: [5, 10, 15].map((value) {
                     return ChoiceChip(
-                      label: Text(value.toString() + ' phút'),
+                      label: Text('$value phút'),
                       selected: _selected == value,
                       onSelected: _busy
                           ? null : (_) => setState(() => _selected = value),
@@ -296,7 +296,7 @@ class _BrainBreakPageState extends State<BrainBreakPage>
                   onPressed: _busy ? null
                       : () => _run('startBrainBreak', minutes: _selected),
                   icon: const Icon(Icons.nights_stay_outlined),
-                  label: Text('Bắt đầu nghỉ ' + _selected.toString() + ' phút'),
+                  label: Text('Bắt đầu nghỉ $_selected phút'),
                 ),
               ] else if (_phase == 'resting' && _android) ...[
                 FilledButton.icon(
