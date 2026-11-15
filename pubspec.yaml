@@ -23,6 +23,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/characters-v2/brain/idle/sheet.png
+    - assets/characters-v2/brain/focus/sheet.png
     - assets/characters-v2/brain/master.png
     - assets/characters-v2/cat/master.png
     - assets/characters-v2/dog/master.png
