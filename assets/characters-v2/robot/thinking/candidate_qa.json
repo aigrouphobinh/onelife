@@ -1,0 +1,31 @@
+{
+  "source": "/home/runner/work/onelife/onelife/assets/characters-v2/robot/thinking/sheet_illustrated.webp",
+  "sha256": "ed3a1577a6996a02361d0939b6fcfd5047c4daa8e937bae751060f66f5b1626a",
+  "geometry": {
+    "frames": 12,
+    "columns": 4,
+    "rows": 3,
+    "cellPx": 256,
+    "atlasPx": [
+      1024,
+      768
+    ]
+  },
+  "adjacentVisibleRms": [
+    50.35,
+    46.4,
+    39.68,
+    32.0,
+    33.26,
+    31.92,
+    46.84,
+    50.93,
+    44.68,
+    46.39,
+    42.23
+  ],
+  "warnings": [],
+  "technicalPreflightPassed": true,
+  "humanVisualApproval": "pending",
+  "realDeviceApproval": "pending"
+}
