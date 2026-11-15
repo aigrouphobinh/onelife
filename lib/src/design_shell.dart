@@ -61,7 +61,19 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
   Future<void> _handleNativeAction(MethodCall call) async {
     if (call.method == 'openCapture') {
       _queueQuickCapture();
+    } else if (call.method == 'openTasks') {
+      _openTodayTasks();
     }
+  }
+
+  void _openTodayTasks() {
+    if (!mounted) return;
+    setState(() {
+      tab = 1;
+      taskFilter = 0;
+    });
+    // Tasks can have changed while Flutter was paused or another tile ran.
+    reload();
   }
 
   Future<void> _consumeLaunchAction() async {
@@ -70,6 +82,8 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
           await _captureChannel.invokeMethod<String>('consumeLaunchAction');
       if (action == 'capture') {
         _queueQuickCapture();
+      } else if (action == 'tasks') {
+        _openTodayTasks();
       }
     } on MissingPluginException {
       // iOS and Flutter widget tests have no Android Quick Capture channel.
