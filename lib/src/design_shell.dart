@@ -11,6 +11,7 @@ import 'dog_animation_gallery.dart';
 import 'robot_animation_gallery.dart';
 import 'brain_overlay_setup_page.dart';
 import 'usage_history_panel.dart';
+import 'schedule_page.dart';
 
 const designPurple = Color(0xFF8054E6);
 const designInk = Color(0xFF21183C);
@@ -799,52 +800,17 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
     );
   }
 
-  Widget schedulePage() {
-    final items = tasks.where((t) => t.dueAt != null && !t.completed).toList()
-      ..sort((a, b) => a.dueAt!.compareTo(b.dueAt!));
-    return Scaffold(
-      appBar: AppBar(title: const Text('Lịch & Báo thức')),
-      backgroundColor: designBackground,
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          heading('Lịch của bạn', 'Dữ liệu lưu trên điện thoại'),
-          card(
-            Column(
-              children: [
-                if (items.isEmpty)
-                  const Text('Chưa có công việc được hẹn giờ.'),
-                for (final task in items)
-                  ListTile(
-                    title: Text(task.title),
-                    subtitle: Text(task.dueAt.toString()),
-                    leading: const Icon(Icons.event, color: designPurple),
-                  ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 14),
-          card(
-            ListTile(
-              leading: const Icon(
-                Icons.notifications_active_outlined,
-                color: designPurple,
-              ),
-              title: Text(_remindersEnabled
-                  ? 'Nhắc việc Android đã bật'
-                  : 'Thông báo nhắc việc đang tắt'),
-              subtitle: const Text(
-                'Nhắc việc theo hạn đã chọn, có thể trễ do tiết kiệm pin. '
-                'Chạm để thiết lập quyền và thao tác thông báo.',
-              ),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => open(reminderSetupPage()),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  Widget schedulePage() => SchedulePage(
+        store: store,
+        onAdd: addTask,
+        onEdit: editTask,
+        onDelete: deleteTask,
+        onComplete: (task) => toggle(task, true),
+        onReminderSettings: () async {
+          await Navigator.of(context).push<void>(
+              MaterialPageRoute(builder: (_) => reminderSetupPage()));
+        },
+      );
 
   Widget habitsPage() => const UsageHistoryPanel();
 

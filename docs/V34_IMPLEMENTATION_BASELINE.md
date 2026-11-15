@@ -101,3 +101,21 @@ remain unimplemented.
 - Android TileService: https://developer.android.com/reference/android/service/quicksettings/TileService
 - iOS Controls: https://developer.apple.com/documentation/widgetkit/controlwidget
 - ActivityKit: https://developer.apple.com/documentation/activitykit/
+
+## Functional continuation — 2026-11-15
+
+The Schedule page now loads actual SQLite tasks independently of the root tab.
+It supports Today, Overdue, All and a selected local calendar date; completed
+and undated tasks are excluded. Editing, completion, deletion and creation reuse
+the existing shell actions (including deletion confirmation and native reminder
+reconciliation). The agenda reloads after actions, pull-to-refresh and app resume,
+so native notification changes are reflected. Failed reads expose a retry action;
+older asynchronous reads cannot overwrite newer results.
+
+Remaining core work, in order:
+1. Local backup/restore with validation, duplicate handling and reminder reconciliation.
+2. Search across tasks and notes with direct access to the matching saved item.
+3. Physical Android verification of reminder delivery, reboot and battery restrictions.
+
+The schedule is task management, not an exact alarm clock. iOS native reminder
+support, backup/restore and conversational AI are not implemented by this change.
