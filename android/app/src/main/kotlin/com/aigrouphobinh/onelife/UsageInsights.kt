@@ -50,8 +50,12 @@ internal object UsageInsights {
             "minutes" to null, "tier" to "unknown",
             "reason" to "permission_required",
         )
-        val unlocked = (context.getSystemService(Context.USER_SERVICE) as? UserManager)
-            ?.isUserUnlocked ?: true
+        val unlocked = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            (context.getSystemService(Context.USER_SERVICE) as? UserManager)
+                ?.isUserUnlocked ?: true
+        } else {
+            true
+        }
         if (!unlocked) return mapOf(
             "granted" to true, "available" to false,
             "minutes" to null, "tier" to "unknown",
