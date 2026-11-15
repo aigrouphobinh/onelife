@@ -67,9 +67,10 @@ class _NoteEditorState extends State<_NoteEditor> {
       }
       if (mounted) Navigator.pop(context, true);
     } catch (_) {
-      if (mounted)
+      if (mounted) {
         setState(() => _error =
             'Không lưu được ghi chú. Nội dung vẫn được giữ để thử lại.');
+      }
     } finally {
       if (mounted) setState(() => _saving = false);
     }

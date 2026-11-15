@@ -28,7 +28,8 @@ class NoteRepository {
   final bool singleInstance;
   Future<Database>? _opening;
 
-  Future<Database> get database => _opening ??= _open().onError((error, stack) {
+  Future<Database> get database =>
+      _opening ??= _open().onError<Object>((error, stack) {
         _opening = null;
         Error.throwWithStackTrace(error, stack);
       });

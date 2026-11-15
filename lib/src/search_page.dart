@@ -86,11 +86,12 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
     try {
       await action();
     } catch (_) {
-      if (mounted)
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text('Không thể hoàn tất thao tác. Hãy thử lại.')),
         );
+      }
     } finally {
       if (mounted) {
         setState(() => _busy = false);
@@ -192,13 +193,14 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
                         padding: const EdgeInsets.all(16),
                         itemCount: results.length + 1,
                         itemBuilder: (context, index) {
-                          if (index == 0)
+                          if (index == 0) {
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 12),
                               child: Text(results.isEmpty
                                   ? 'Không có kết quả phù hợp.'
                                   : '${results.length} kết quả · chỉ dữ liệu trên máy'),
                             );
+                          }
                           final result = results[index - 1];
                           final task = result.task;
                           final due = task?.dueAt
