@@ -39,7 +39,10 @@ class FocusTileService : TileService() {
 
     private fun calculateRemaining(deadline: String?): Int {
         if (deadline == null) return 0
-        val end = dateFormat().parse(deadline)?.time ?: return 0
+        // Dart may serialize microseconds (six fractional digits); Java SSS
+        // expects milliseconds. Drop the final three digits, not the deadline.
+        val normalized = deadline.replace(Regex("\\.(\\d{3})\\d+Z$"), ".$1Z")
+        val end = dateFormat().parse(normalized)?.time ?: return 0
         return max(0L, (end - System.currentTimeMillis() + 999L) / 1000L).toInt()
     }
 
@@ -96,6 +99,9 @@ class FocusTileService : TileService() {
                 "phase TEXT NOT NULL, total_seconds INTEGER NOT NULL, " +
                 "remaining_seconds INTEGER NOT NULL, deadline_utc TEXT)"
             )
+            // A QS tile may be used before Flutter has created this database.
+            // Match sqflite's schema version to avoid onCreate collisions later.
+            if (db.version == 0) db.version = 1
             db.beginTransaction()
             try {
                 val result = block(db)
