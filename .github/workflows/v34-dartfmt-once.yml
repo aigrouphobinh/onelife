@@ -1,5 +1,5 @@
 name: OneLife V3.4 source formatter (one-shot)
-# One-shot formatting for functional V3.4 task/note edits and regression tests.
+# One-shot formatting for the native usage-history and reminder-reschedule implementation.
 on:
   push:
     branches: [main]
