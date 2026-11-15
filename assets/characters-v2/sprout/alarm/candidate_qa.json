@@ -1,0 +1,15 @@
+{
+  "characterId": "sprout",
+  "state": "alarm",
+  "qaStatus": "candidate-local-pass",
+  "frames": 12,
+  "adjacentChanges": 11,
+  "minimumAdjacentVisibleRgbRms": 42.68,
+  "alpha": "RGBA transparent",
+  "clipping": "none in 12 cells",
+  "gifLoop": "once",
+  "sourceSha256": "b1d2ac49fb1e0640d6ce749da1d75c85aea866ed2f3769b7dce4cf86b337de5b",
+  "humanArtReview": "pending",
+  "realDeviceReview": "pending",
+  "productionReady": false
+}

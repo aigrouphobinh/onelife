@@ -1,0 +1,25 @@
+{
+  "characterId": "sprout",
+  "state": "alarm",
+  "generator": "OpenAI ImageGen",
+  "createdOn": "2026-11-15",
+  "sourceType": "original-generated-illustration",
+  "sourceOriginalDimensions": [
+    1448,
+    1086
+  ],
+  "grid": [
+    4,
+    3
+  ],
+  "cellSize": [
+    256,
+    256
+  ],
+  "preprocessing": "Per-cell extraction, remove low-alpha generative matte, Lanczos resize to 256px, WebP RGBA encoding at quality 96 (alpha quality 100)",
+  "sourceSha256": "b1d2ac49fb1e0640d6ce749da1d75c85aea866ed2f3769b7dce4cf86b337de5b",
+  "imageRights": "AI-generated original OneLife project mascot; no third-party source copied",
+  "humanArtReview": "pending",
+  "realDeviceReview": "pending",
+  "productionReady": false
+}
