@@ -71,8 +71,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 150));
     expect(find.text('3 giờ 25 phút'), findsOneWidget);
     expect(
-        find.text('Đã đạt mục tiêu bạn chọn — cân nhắc nghỉ'),
-        findsOneWidget);
+        find.text('Đã đạt mục tiêu bạn chọn — cân nhắc nghỉ'), findsOneWidget);
     expect(find.text('Mở Cài đặt quyền sử dụng'), findsNothing);
   });
 

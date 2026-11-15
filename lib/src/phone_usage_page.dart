@@ -67,9 +67,8 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
         minutes = available && data?['minutes'] is int
             ? data!['minutes'] as int
             : null;
-        goalMinutes = data?['goalMinutes'] is int
-            ? data!['goalMinutes'] as int
-            : null;
+        goalMinutes =
+            data?['goalMinutes'] is int ? data!['goalMinutes'] as int : null;
         tier = available ? (data?['tier'] as String? ?? 'unknown') : 'unknown';
         loading = false;
       });
@@ -131,7 +130,8 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
         setState(() => notice = 'Android chưa lưu được mục tiêu.');
       }
     } on MissingPluginException {
-      if (mounted) setState(() => notice = 'APK chưa có chức năng lưu mục tiêu.');
+      if (mounted)
+        setState(() => notice = 'APK chưa có chức năng lưu mục tiêu.');
     } catch (_) {
       if (mounted) setState(() => notice = 'Không thể lưu mục tiêu.');
     } finally {
@@ -260,20 +260,19 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
               ),
               if (goalMinutes != null) ...[
                 const SizedBox(height: 8),
-                Text('Mục tiêu hiện tại: ${goalMinutes! ~/ 60} giờ '
+                Text(
+                    'Mục tiêu hiện tại: ${goalMinutes! ~/ 60} giờ '
                     '${goalMinutes! % 60} phút',
                     style: const TextStyle(
                         fontWeight: FontWeight.w700, color: ink)),
                 TextButton.icon(
-                  onPressed: android && !savingGoal
-                      ? () => saveDailyGoal(null)
-                      : null,
+                  onPressed:
+                      android && !savingGoal ? () => saveDailyGoal(null) : null,
                   icon: const Icon(Icons.close),
                   label: const Text('Tắt mục tiêu'),
                 ),
               ],
-              if (savingGoal)
-                const LinearProgressIndicator(color: purple),
+              if (savingGoal) const LinearProgressIndicator(color: purple),
             ],
           )),
           const SizedBox(height: 14),
@@ -287,11 +286,13 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
               Text('Từ 80% đến dưới 100%: Strained (10 khung).'),
               Text('Từ 100% trở lên: Overloaded (12 khung).'),
               SizedBox(height: 10),
-              Text('Focus luôn ưu tiên hoạt ảnh Focus có sẵn. '
+              Text(
+                  'Focus luôn ưu tiên hoạt ảnh Focus có sẵn. '
                   'Không có quyền, dữ liệu hay mục tiêu: Brain ở Idle trung tính.',
                   style: TextStyle(color: Color(0xFF796D8B))),
               SizedBox(height: 8),
-              Text('Các atlas biểu cảm hiện là bản ứng viên cần duyệt hình '
+              Text(
+                  'Các atlas biểu cảm hiện là bản ứng viên cần duyệt hình '
                   'và chạy trên điện thoại thật, không phải artwork final.',
                   style: TextStyle(color: Color(0xFF796D8B))),
             ],
