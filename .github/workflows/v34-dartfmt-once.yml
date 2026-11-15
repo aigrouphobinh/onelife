@@ -1,5 +1,5 @@
 name: OneLife V3.4 source formatter (one-shot)
-# Format V3.4 persistent Resting/Recovering screen and new native break widget tests.
+# Format V3.4 sleep-safe monotonic Resting/Recovering UI and clock-regression widget tests.
 on:
   push:
     branches: [main]
