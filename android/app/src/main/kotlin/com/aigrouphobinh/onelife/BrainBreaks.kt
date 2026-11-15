@@ -105,7 +105,7 @@ internal object BrainBreaks {
                     return state("resting", sequence, duration, 0, deadline)
                 }
                 return state("recovering", sequence, duration,
-                    recoveryStart = now)
+                    recoveryStart = now, recoveryRemainingMs = RECOVERY_MS)
             }
             clear(c)
             return state("idle", sequence, reason = "expired_while_inactive")
@@ -128,7 +128,8 @@ internal object BrainBreaks {
                 return state("idle", sequence)
             }
             return state("recovering", sequence, duration,
-                recoveryStart = beganWall)
+                recoveryStart = beganWall,
+                recoveryRemainingMs = RECOVERY_MS - durationPassed)
         }
         return state("idle", sequence)
     }
@@ -179,7 +180,8 @@ internal object BrainBreaks {
             .remove(END).remove(MONO_END).commit()
         if (!saved) return error("storage_error", c)
         return state("recovering", current["sequence"] as Long,
-            current["durationMinutes"] as Int, recoveryStart = now)
+            current["durationMinutes"] as Int,
+            recoveryStart = now, recoveryRemainingMs = RECOVERY_MS)
     }
 
     @Synchronized
@@ -195,13 +197,15 @@ internal object BrainBreaks {
     private fun state(
         phase: String, sequence: Long, duration: Int = 0,
         seconds: Int = 0, deadline: Long = 0L, recoveryStart: Long = 0L,
-        remainingMs: Long = 0L, reason: String? = null,
+        remainingMs: Long = 0L, recoveryRemainingMs: Long = 0L,
+        reason: String? = null,
     ): Map<String, Any?> = mapOf(
         "phase" to phase,
         "sequence" to sequence,
         "durationMinutes" to duration,
         "remainingSeconds" to seconds,
         "remainingMs" to remainingMs,
+        "recoveryRemainingMs" to recoveryRemainingMs,
         "deadlineMs" to deadline,
         "recoveryStartMs" to recoveryStart,
         "recoveryDurationMs" to RECOVERY_MS,
