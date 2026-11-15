@@ -1,0 +1,22 @@
+{
+  "characterId": "sprout",
+  "state": "resting",
+  "createdOn": "2026-11-15",
+  "origin": "Original OpenAI ImageGen 12-pose Sprout Resting illustration",
+  "originalDimensions": [
+    1448,
+    1086
+  ],
+  "originalGrid": [
+    4,
+    3
+  ],
+  "generationClass": "independently-illustrated-pose-sheet",
+  "preparation": "Extract 12 independently illustrated poses, remove baked near-white checkerboard using color-mask and closed contour highlights, resize each original cell to 236×236 within transparent 256×256; export lossless RGBA WebP. No frame duplication or affine motion synthesis.",
+  "license": "Original AI-generated artwork for the OneLife project; no third-party sprite art",
+  "sourceFile": "sheet_illustrated.webp",
+  "sourceSha256": "e8c2bebe90d5ce147ff6a25f8e81770b69b713c9392d525312f2a623d7d4f0cb",
+  "humanArtReview": "pending",
+  "realDeviceTest": "pending",
+  "productionReady": false
+}
