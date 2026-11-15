@@ -38,10 +38,16 @@ internal object TaskReminders {
     private fun prefs(c: Context) = c.getSharedPreferences(PREF, Context.MODE_PRIVATE)
     private fun manager(c: Context) = c.getSystemService(NotificationManager::class.java)
     fun optedIn(c: Context) = prefs(c).getBoolean(ENABLED, false)
-    fun permitted(c: Context) = (manager(c)?.areNotificationsEnabled() == true) &&
-        (Build.VERSION.SDK_INT < 33 ||
-            c.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) ==
-                PackageManager.PERMISSION_GRANTED)
+    fun permitted(c: Context): Boolean {
+        val notifications = manager(c) ?: return false
+        val channelAllowed = Build.VERSION.SDK_INT < Build.VERSION_CODES.O ||
+            notifications.getNotificationChannel(CHANNEL_ID)?.importance !=
+                NotificationManager.IMPORTANCE_NONE
+        return notifications.areNotificationsEnabled() && channelAllowed &&
+            (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+                c.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) ==
+                    PackageManager.PERMISSION_GRANTED)
+    }
     fun enabled(c: Context) = optedIn(c) && permitted(c)
 
     fun enable(c: Context): Boolean {
