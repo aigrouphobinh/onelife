@@ -115,9 +115,7 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
     final seconds = _session.remainingSeconds;
     final minutes = seconds ~/ 60;
     final rest = seconds % 60;
-    return minutes.toString().padLeft(2, '0') +
-        ':' +
-        rest.toString().padLeft(2, '0');
+    return '${minutes.toString().padLeft(2, '0')}:${rest.toString().padLeft(2, '0')}';
   }
 
   String get _stateLabel => switch (_session.phase) {
