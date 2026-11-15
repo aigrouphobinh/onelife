@@ -78,6 +78,32 @@ class NoteRepository {
     });
   }
 
+  Future<void> update({
+    required String id,
+    required String title,
+    required String body,
+  }) async {
+    final cleanTitle = title.trim();
+    final cleanBody = body.trim();
+    if (cleanTitle.isEmpty && cleanBody.isEmpty) {
+      throw ArgumentError('Note must not be empty');
+    }
+    final db = await database;
+    final count = await db.update(
+      'notes',
+      {
+        'title': cleanTitle,
+        'body': cleanBody,
+        'updated_at': DateTime.now().toUtc().toIso8601String(),
+      },
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    if (count != 1) {
+      throw StateError('Note no longer exists');
+    }
+  }
+
   Future<void> delete(String id) async {
     final db = await database;
     await db.delete('notes', where: 'id = ?', whereArgs: [id]);
