@@ -286,19 +286,24 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
     }
   }
 
-  Future<void> addTask() async {
-    String title = '';
-    DateTime? dueAt;
+  Future<void> addTask() => _saveTask();
+
+  Future<void> editTask(OneLifeTask task) => _saveTask(task: task);
+
+  Future<void> _saveTask({OneLifeTask? task}) async {
+    String title = task?.title ?? '';
+    DateTime? dueAt = task?.dueAt;
     final saved = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => StatefulBuilder(
         builder: (dialogContext, update) => AlertDialog(
-          title: const Text('Thêm việc mới'),
+          title: Text(task == null ? 'Thêm việc mới' : 'Sửa công việc'),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextField(
+                TextFormField(
+                  initialValue: title,
                   autofocus: true,
                   maxLength: 120,
                   decoration: const InputDecoration(labelText: 'Tên công việc'),
@@ -307,16 +312,20 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
                 OutlinedButton.icon(
                   onPressed: () async {
                     final now = DateTime.now();
+                    final initialDate =
+                        dueAt != null && dueAt!.isAfter(now) ? dueAt! : now;
                     final date = await showDatePicker(
                       context: dialogContext,
-                      initialDate: now,
+                      initialDate: initialDate,
                       firstDate: DateTime(now.year, now.month, now.day),
-                      lastDate: DateTime(now.year + 5),
+                      lastDate: DateTime(now.year + 5, now.month, now.day),
                     );
                     if (date == null || !dialogContext.mounted) return;
                     final time = await showTimePicker(
                       context: dialogContext,
-                      initialTime: TimeOfDay.now(),
+                      initialTime: dueAt == null
+                          ? TimeOfDay.now()
+                          : TimeOfDay.fromDateTime(dueAt!),
                     );
                     if (time == null || !dialogContext.mounted) return;
                     update(
@@ -336,6 +345,12 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
                         : dueAt.toString().substring(0, 16),
                   ),
                 ),
+                if (dueAt != null)
+                  TextButton.icon(
+                    onPressed: () => update(() => dueAt = null),
+                    icon: const Icon(Icons.event_busy_outlined),
+                    label: const Text('Bỏ lịch hẹn'),
+                  ),
                 const SizedBox(height: 8),
                 const Text(
                   'Nếu bật Nhắc việc trong Cài đặt Android, hệ thống '
@@ -362,12 +377,45 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
     );
     if (saved != true) return;
     try {
-      await store.addTask(title: title, dueAt: dueAt);
+      if (task == null) {
+        await store.addTask(title: title, dueAt: dueAt);
+      } else {
+        await store.updateTask(task.id, title: title, dueAt: dueAt);
+      }
       await reload();
       await _syncNativeReminders();
-      notify('Đã lưu công việc trên thiết bị');
+      notify(task == null ? 'Đã lưu công việc trên thiết bị' : 'Đã sửa công việc');
     } catch (_) {
       notify('Không thể lưu công việc');
+    }
+  }
+
+  Future<void> deleteTask(OneLifeTask task) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Xóa công việc?'),
+        content: Text('Xóa “${task.title}”? Dữ liệu sẽ không thể khôi phục.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: const Text('Hủy'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: const Text('Xóa'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+    try {
+      await store.deleteTask(task.id);
+      await reload();
+      await _syncNativeReminders();
+      notify('Đã xóa công việc');
+    } catch (_) {
+      notify('Không thể xóa công việc');
     }
   }
 
@@ -465,11 +513,27 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
                   task.dueAt == null
                       ? 'Chưa chọn hạn'
                       : task.dueAt.toString().substring(0, 16),
-                  style:
-                      const TextStyle(fontSize: 12, color: Color(0xFF837695)),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF837695),
+                  ),
                 ),
               ],
             ),
+          ),
+          PopupMenuButton<String>(
+            tooltip: 'Tùy chọn công việc',
+            onSelected: (action) {
+              if (action == 'edit') {
+                editTask(task);
+              } else if (action == 'delete') {
+                deleteTask(task);
+              }
+            },
+            itemBuilder: (_) => const [
+              PopupMenuItem(value: 'edit', child: Text('Sửa công việc')),
+              PopupMenuItem(value: 'delete', child: Text('Xóa công việc')),
+            ],
           ),
         ],
       );
