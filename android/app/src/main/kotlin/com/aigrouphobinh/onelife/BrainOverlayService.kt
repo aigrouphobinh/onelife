@@ -114,9 +114,10 @@ class BrainOverlayService : Service() {
                             (remaining + 100L).coerceIn(250L, 5 * 60 * 1000L)
                         }
                         "recovering" -> {
-                            val recoveryStart = breakState["recoveryStartMs"] as? Long ?: now
-                            (recoveryStart + 12 * 125L - now + 100L)
-                                .coerceIn(250L, 1_700L)
+                            val remaining = breakState["recoveryRemainingMs"] as? Long
+                                ?: ((breakState["recoveryStartMs"] as? Long ?: now) +
+                                    12 * 125L - now)
+                            (remaining + 100L).coerceIn(250L, 1_700L)
                         }
                         else -> 5 * 60 * 1000L
                     }
