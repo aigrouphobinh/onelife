@@ -100,6 +100,31 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
     super.dispose();
   }
 
+  Future<void> _requestQuickSettingsTile(String tile) async {
+    if (Theme.of(context).platform != TargetPlatform.android) {
+      notify('Điều khiển nhanh Android không có trên thiết bị này.');
+      return;
+    }
+    try {
+      final status = await _captureChannel.invokeMethod<String>(
+        'requestAddTile',
+        {'tile': tile},
+      );
+      if (!mounted) return;
+      if (status == 'added') {
+        notify('OneLife đã được thêm vào điều khiển nhanh.');
+      } else if (status == 'declined') {
+        notify('Chưa thêm ô. Bạn có thể thêm thủ công trong Quick Settings.');
+      } else {
+        notify('Vuốt từ trên xuống hai lần, chọn Sửa rồi thêm ô OneLife.');
+      }
+    } on MissingPluginException {
+      notify('Tính năng cần bản OneLife Android có tích hợp native.');
+    } catch (_) {
+      notify('Không mở được lời mời thêm ô. Hãy thêm thủ công.');
+    }
+  }
+
   Future<void> reload() async {
     try {
       final result = await store.loadTasks();
@@ -753,6 +778,13 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
           card(
             Column(
               children: [
+                ListTile(
+                  leading: const Icon(Icons.tune_rounded, color: designPurple),
+                  title: const Text('Điều khiển nhanh Android'),
+                  subtitle: const Text('Thêm ô Tập trung và Ghi nhanh'),
+                  onTap: () => open(quickSettingsSetupPage()),
+                ),
+                const Divider(),
                 ListTile(
                   leading:
                       const Icon(Icons.note_alt_outlined, color: designPurple),
