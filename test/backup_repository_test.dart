@@ -21,7 +21,7 @@ void main() {
     sqfliteFfiInit();
     sql.databaseFactory = databaseFactoryFfi;
     directory = await Directory.systemTemp.createTemp('onelife-backup-test-');
-    await sql.setDatabasesPath(directory.path);
+    await sql.databaseFactory.setDatabasesPath(directory.path);
     store = SqliteOneLifeStore();
     notes = NoteRepository();
     repository = SqliteBackupRepository.local(store);
