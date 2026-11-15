@@ -48,7 +48,7 @@ def main_check() -> None:
     assert "if (!observed)" in raw
 
     assert "Thiếu dữ liệu không có nghĩa" in page
-    assert "Không gửi dữ liệu lên máy chủ" not in page or True
+    assert "Không lưu danh sách ứng dụng" in page
     assert "Mở Cài đặt quyền sử dụng" in page
     print("PASS: Brain Usage Access opt-in, no invented values, no per-app data export")
 
