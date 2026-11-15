@@ -191,7 +191,9 @@ void main() {
     await tester.pump(const Duration(milliseconds: 160));
     expect(find.text('Bắt đầu nghỉ 5 phút'), findsOneWidget);
 
-    // Returning from Settings initiates a snapshot which stays in flight.
+    // A real inactive-to-resumed transition initiates a pending snapshot.
+    // This is deterministic even if the test binding starts already resumed.
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     await tester.pump();
     expect(reads, 2);
