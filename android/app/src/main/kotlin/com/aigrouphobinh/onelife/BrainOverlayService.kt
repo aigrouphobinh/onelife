@@ -38,6 +38,7 @@ import kotlin.math.abs
  */
 class BrainOverlayService : Service() {
     companion object {
+        const val ACTION_REFRESH = "com.aigrouphobinh.onelife.overlay.REFRESH"
         private const val PREFS = "onelife_brain_overlay"
         private const val FRAME_MS = 140L
         private const val ATLAS = "flutter_assets/assets/characters-v2/brain/idle/sheet.png"
@@ -56,7 +57,6 @@ class BrainOverlayService : Service() {
     private var sprite: SpriteView? = null
     private var params: WindowManager.LayoutParams? = null
     private var expanded = false
-    private var frame = 0
     private val refreshBehavior = object : Runnable {
         override fun run() {
             if (!isVisible) return
@@ -72,9 +72,13 @@ class BrainOverlayService : Service() {
                     usageCaption?.text = when {
                         isFocusRunning -> "Đang tập trung · chế độ Focus"
                         snapshot["available"] != true -> "Chưa có dữ liệu thời gian dùng"
+                        snapshot["goalMinutes"] !is Int -> "Chưa đặt mục tiêu hằng ngày"
                         else -> {
-                            val mins = snapshot["minutes"] as? Int ?: 0
-                            "Ước tính hôm nay: ${mins / 60} giờ ${mins % 60} phút"
+                            val mins = snapshot["minutes"] as? Int
+                            val goal = snapshot["goalMinutes"] as? Int
+                            if (mins == null || goal == null) "Chưa có dữ liệu"
+                            else "Hôm nay ~" + (mins / 60) + "g" + (mins % 60) +
+                                "p / mục tiêu " + goal + "p"
                         }
                     }
                 }
@@ -106,14 +110,19 @@ class BrainOverlayService : Service() {
     private val animate = object : Runnable {
         override fun run() {
             if (!isVisible) return
-            val interactive =
-                (getSystemService(Context.POWER_SERVICE) as PowerManager).isInteractive
-            if (interactive) {
-                frame = (frame + 1) % 8
-                sprite?.frame = frame
-            }
-            // Do not run 140ms sprite updates while the screen is off.
-            handler.postDelayed(this, if (interactive) FRAME_MS else 1500L)
+            val power = getSystemService(Context.POWER_SERVICE) as PowerManager
+            val interactive = power.isInteractive
+            val motionAllowed = try {
+                Settings.Global.getFloat(
+                    contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f,
+                ) > 0f
+            } catch (_: Exception) { true }
+            if (interactive && motionAllowed) sprite?.advanceFrame()
+            // Reduce updates when screen off, reduced-motion enabled, or
+            // battery-saver active; do not continuously animate at 140ms.
+            val period = if (!interactive || !motionAllowed) 1500L else
+                if (power.isPowerSaveMode) 300L else sprite?.frameDurationMs ?: FRAME_MS
+            handler.postDelayed(this, period)
         }
     }
 
@@ -133,6 +142,14 @@ class BrainOverlayService : Service() {
             !Settings.canDrawOverlays(this)
         ) {
             stopSelf()
+            return START_NOT_STICKY
+        }
+        if (intent?.action == ACTION_REFRESH) {
+            // A background refresh must never create an overlay.
+            if (root != null && isVisible) {
+                handler.removeCallbacks(refreshBehavior)
+                handler.post(refreshBehavior)
+            }
             return START_NOT_STICKY
         }
         if (root == null) {
@@ -357,70 +374,145 @@ class BrainOverlayService : Service() {
     }
 
     /**
-     * Draw the original 4x2 transparent Brain animation atlas from Flutter's
-     * bundled assets, without eight decoded frame copies or fake artwork.
+     * Plays real PNG atlases already committed to Brain V2.4. Their geometry
+     * and timing match state metadata; some are composited review candidates,
+     * not manually approved production animations.
      */
     private inner class SpriteView(context: Context) : View(context) {
-        private val idleSheet: Bitmap? = decode(
-            "flutter_assets/assets/characters-v2/brain/idle/sheet.png"
-        )
-        private val focusSheet: Bitmap? = decode(
-            "flutter_assets/assets/characters-v2/brain/focus/sheet.png"
-        )
-        private val fallbackMaster: Bitmap? = if (idleSheet == null) decode(MASTER) else null
+        private val idleSheet = decode("idle")
+        private val focusSheet = decode("focus")
+        private val master: Bitmap? = if (idleSheet == null) try {
+            context.assets.open(MASTER).use { BitmapFactory.decodeStream(it) }
+        } catch (_: Exception) { null } else null
         private val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
         private val indicator = Paint(Paint.ANTI_ALIAS_FLAG)
-        var frame: Int = 0
-            set(value) { field = value; invalidate() }
-        var usageTier: String = "unknown"
-            set(value) { field = value; invalidate() }
-        var focused: Boolean = false
-            set(value) { field = value; invalidate() }
+        private var wellbeingSheet: Bitmap? = null
+        private var wellbeingState: String? = null
+        private var currentState: String = "idle"
+        private var frameIndex = 0
 
-        private fun decode(path: String): Bitmap? = try {
-            context.assets.open(path).use { BitmapFactory.decodeStream(it) }
+        var usageTier: String = "unknown"
+            set(value) {
+                if (field == value) return
+                field = value
+                chooseClip()
+            }
+        var focused: Boolean = false
+            set(value) {
+                if (field == value) return
+                field = value
+                chooseClip()
+            }
+
+        val frameDurationMs: Long get() = when (currentState) {
+            "focus", "strained" -> 160L
+            "overloaded" -> 115L
+            else -> 140L
+        }
+
+        private fun frameCount(state: String): Int = when (state) {
+            "strained" -> 10
+            "overloaded" -> 12
+            else -> 8
+        }
+
+        private fun decode(state: String): Bitmap? = try {
+            val name = "flutter_assets/assets/characters-v2/brain/" +
+                state + "/sheet.png"
+            context.assets.open(name).use { BitmapFactory.decodeStream(it) }
         } catch (_: Exception) { null }
+
+        private fun chooseClip() {
+            val desired = when {
+                focused && focusSheet != null -> "focus"
+                usageTier == "balanced" || usageTier == "strained" ||
+                    usageTier == "overloaded" -> usageTier
+                else -> "idle"
+            }
+            if (desired != "focus" && desired != "idle" &&
+                wellbeingState != desired
+            ) {
+                wellbeingSheet?.recycle()
+                wellbeingSheet = decode(desired)
+                wellbeingState = desired
+            }
+            val available = when (desired) {
+                "focus" -> focusSheet != null
+                "idle" -> idleSheet != null
+                else -> wellbeingSheet != null
+            }
+            val next = if (available) desired else "idle"
+            if (currentState != next) {
+                currentState = next
+                frameIndex = 0
+                contentDescription = when (next) {
+                    "focus" -> "Brain đang tập trung"
+                    "strained" -> "Brain gợi ý nghỉ mắt theo mục tiêu đã chọn"
+                    "overloaded" -> "Brain báo bạn đã đạt mục tiêu sử dụng tự chọn"
+                    "balanced" -> "Brain theo nhịp mục tiêu đã chọn"
+                    else -> "Brain OneLife, chạm để mở thao tác"
+                }
+            }
+            invalidate()
+        }
+
+        fun advanceFrame() {
+            frameIndex = (frameIndex + 1) % frameCount(currentState)
+            invalidate()
+        }
 
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            val sheet = if (focused && focusSheet != null) focusSheet else idleSheet
-            val bitmap = sheet ?: fallbackMaster ?: return
-            val isAtlas = sheet != null && bitmap.width >= 1024 && bitmap.height >= 512
-            val columns = if (isAtlas) 4 else 1
-            val rows = if (isAtlas) 2 else 1
-            val fw = bitmap.width / columns
+            val selected = when (currentState) {
+                "focus" -> focusSheet
+                "balanced", "strained", "overloaded" -> wellbeingSheet
+                else -> idleSheet
+            }
+            val atlas = selected ?: idleSheet
+            val bitmap = atlas ?: master ?: return
+            val animated = atlas != null &&
+                bitmap.width >= 1024 && bitmap.height >= 512
+            val cols = if (animated) 4 else 1
+            val rows = if (animated) {
+                if (currentState == "strained" || currentState == "overloaded") 3
+                else 2
+            } else 1
+            val fw = bitmap.width / cols
             val fh = bitmap.height / rows
-            val index = if (isAtlas) frame % 8 else 0
+            val index = if (animated) frameIndex % frameCount(currentState) else 0
             val source = Rect(
-                (index % columns) * fw, (index / columns) * fh,
-                (index % columns + 1) * fw, (index / columns + 1) * fh,
+                (index % cols) * fw, (index / cols) * fh,
+                (index % cols + 1) * fw, (index / cols + 1) * fh,
             )
             val inset = dp(7).toFloat()
-            // Uses the genuine original artist's sprites. State is communicated
-            // through a small accent indicator, never replaced by fabricated art.
             canvas.drawBitmap(
                 bitmap, source,
                 RectF(inset, inset, width - inset, height - inset), paint,
             )
             val color = when {
                 focused -> Color.rgb(120, 77, 229)
-                usageTier == "high" -> Color.rgb(231, 85, 104)
-                usageTier == "break" -> Color.rgb(246, 160, 64)
-                usageTier == "balanced" -> Color.rgb(79, 181, 142)
+                currentState == "overloaded" -> Color.rgb(231, 85, 104)
+                currentState == "strained" -> Color.rgb(246, 160, 64)
+                currentState == "balanced" -> Color.rgb(79, 181, 142)
                 else -> Color.TRANSPARENT
             }
             if (color != Color.TRANSPARENT) {
                 indicator.color = Color.WHITE
-                canvas.drawCircle(width - dp(15).toFloat(), dp(14).toFloat(), dp(7).toFloat(), indicator)
+                canvas.drawCircle(
+                    width - dp(15).toFloat(), dp(14).toFloat(), dp(7).toFloat(), indicator,
+                )
                 indicator.color = color
-                canvas.drawCircle(width - dp(15).toFloat(), dp(14).toFloat(), dp(5).toFloat(), indicator)
+                canvas.drawCircle(
+                    width - dp(15).toFloat(), dp(14).toFloat(), dp(5).toFloat(), indicator,
+                )
             }
         }
 
         fun release() {
             idleSheet?.recycle()
             focusSheet?.recycle()
-            fallbackMaster?.recycle()
+            wellbeingSheet?.recycle()
+            master?.recycle()
         }
     }
 }
