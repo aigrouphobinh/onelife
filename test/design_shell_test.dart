@@ -92,9 +92,20 @@ void main() {
     await tester.tap(find.text('Tôi'));
     await tester.pump();
     expect(find.text('Nhân vật trợ lý'), findsOneWidget);
-    await tester.tap(find.text('Bộ Não'));
+    await tester.tap(find.text('Bộ Não').first);
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Chọn nhân vật'), findsOneWidget);
+    // The five character options live in a lazily built ListView; scroll
+    // rather than asserting an offscreen item is immediately rendered.
+    await tester.scrollUntilVisible(
+      find.text('Mầm Xanh'),
+      160,
+      scrollable: find.byType(Scrollable).last,
+    );
     expect(find.text('Mầm Xanh'), findsOneWidget);
-    expect(find.text('Robot Thông Minh'), findsOneWidget);
+    await tester.tap(find.text('Mầm Xanh'));
+    await tester.pump();
+    expect(fake.character, 'sprout');
   });
 }
