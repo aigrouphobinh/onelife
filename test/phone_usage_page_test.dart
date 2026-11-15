@@ -56,7 +56,8 @@ void main() {
           'granted': true,
           'available': true,
           'minutes': 205,
-          'tier': 'high',
+          'goalMinutes': 180,
+          'tier': 'overloaded',
         };
       }
       return null;
@@ -69,8 +70,60 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 150));
     expect(find.text('3 giờ 25 phút'), findsOneWidget);
-    expect(find.text('Đã dùng nhiều — cân nhắc nghỉ'), findsOneWidget);
+    expect(
+        find.text('Đã đạt mục tiêu bạn chọn — cân nhắc nghỉ'),
+        findsOneWidget);
     expect(find.text('Mở Cài đặt quyền sử dụng'), findsNothing);
+  });
+
+  testWidgets('personal goal is absent by default and removable on device', (
+    tester,
+  ) async {
+    final messenger = tester.binding.defaultBinaryMessenger;
+    int? chosen;
+    var saveCount = 0;
+    messenger.setMockMethodCallHandler(bridge, (call) async {
+      if (call.method == 'usageSnapshot') {
+        return <String, Object?>{
+          'granted': true,
+          'available': true,
+          'minutes': 100,
+          'goalMinutes': chosen,
+          'tier': chosen == null
+              ? 'unknown'
+              : (100 >= chosen! ? 'overloaded' : 'balanced'),
+        };
+      }
+      if (call.method == 'setUsageDailyGoal') {
+        saveCount++;
+        chosen = (call.arguments as Map)['minutes'] as int?;
+        return true;
+      }
+      return null;
+    });
+    addTearDown(() => messenger.setMockMethodCallHandler(bridge, null));
+
+    await tester.pumpWidget(MaterialApp(
+      theme: ThemeData(platform: TargetPlatform.android),
+      home: const PhoneUsagePage(),
+    ));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 150));
+    expect(find.textContaining('Chưa đặt mục tiêu riêng'), findsOneWidget);
+    expect(saveCount, 0);
+    await tester.ensureVisible(find.text('2 giờ'));
+    await tester.tap(find.text('2 giờ'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 150));
+    expect(chosen, 120);
+    expect(find.text('Tắt mục tiêu'), findsOneWidget);
+    await tester.ensureVisible(find.text('Tắt mục tiêu'));
+    await tester.tap(find.text('Tắt mục tiêu'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 150));
+    expect(chosen, isNull);
+    expect(saveCount, 2);
+    expect(find.textContaining('Chưa đặt mục tiêu riêng'), findsOneWidget);
   });
 
   testWidgets('permission granted but no events shows unknown, not zero', (
