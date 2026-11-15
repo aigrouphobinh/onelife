@@ -127,7 +127,7 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
         ? 'Chưa có dữ liệu'
         : minutes == 0
             ? 'Dưới 1 phút quan sát được'
-            : '\${minutes! ~/ 60} giờ \${minutes! % 60} phút';
+            : '${minutes! ~/ 60} giờ ${minutes! % 60} phút';
     return Scaffold(
       backgroundColor: const Color(0xFFF8F3FF),
       appBar: AppBar(
