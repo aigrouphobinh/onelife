@@ -1,5 +1,5 @@
 name: OneLife V3.4 source formatter (one-shot)
-# Format V3.4 sleep-safe monotonic Resting/Recovering UI and clock-regression widget tests.
+# One-shot formatting for functional V3.4 task/note edits and regression tests.
 on:
   push:
     branches: [main]
