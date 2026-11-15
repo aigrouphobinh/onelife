@@ -1,5 +1,5 @@
 name: OneLife V3.4 source formatter (one-shot)
-# Final normalization pass for V3.4 native home widget routing and regression tests.
+# Final normalization pass for V3.4 opt-in native reminder UI and tests.
 on:
   push:
     branches: [main]
