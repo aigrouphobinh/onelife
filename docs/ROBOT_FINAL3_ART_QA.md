@@ -1,7 +1,6 @@
 # OneLife Robot Glossy V2 — final three independent sprite candidates
 
-**Checkpoint: 2026-11-15.** Asset handoff only. This document is not a claim
-that these image files are present on GitHub or that art/device gates passed.
+**Checkpoint: 2026-11-15.** All three original WebP source atlases have now been SHA-locked and committed to `main`. Human art and real-device QA remain pending.
 
 ## Original art produced in this session
 
@@ -20,8 +19,7 @@ poses were not fabricated by scaling one still across frames.
 
 Source files are packaged in **`OneLife_Robot_V2_Final3_ImportReady.zip`**
 and larger review previews in **`OneLife_Robot_V2_Final3_Sad_Balanced_Strained.zip`**
-in the producing conversation; **the ZIPs and binary images are NOT committed by
-this documentation update**. The known original image-generation IDs:
+in the producing conversation. The ZIP files remain conversation artifacts; the three **source WebPs** are now actually committed to `main`. Original image-generation IDs:
 
 - Sad: `840f1871-c07f-4978-9773-992d6faedfd7`
 - Balanced: `5ada4ebe-af61-4e60-b7e5-b13278a7f3f0`
@@ -45,25 +43,17 @@ image-generation platform terms apply; no CC0/MIT ownership claim is made.
 - Light/dark desk previews were exported. Review at 64, 96 and 144 logical
   pixels on an actual phone remains pending.
 
-## Import the exact binary art — after placing ZIP in repository checkout
+## Reproduce and inspect the already-registered sources
 
 ```bash
 python tools/import_robot_v2_pack.py /path/to/OneLife_Robot_V2_Final3_ImportReady.zip
-python tools/import_robot_v2_pack.py /path/to/OneLife_Robot_V2_Final3_ImportReady.zip --apply --version 2.43.0-illustrated-candidate
 python tools/check_glossy_source_catalog.py
 python tools/render_glossy_character_animation.py --character robot
 ```
 
-Inspect the Git diff and run existing sprite and Flutter QA before pushing.
-The importer must reject SHA mismatches, conflicting catalog entries, unknown
-ZIP paths or metadata, nontransparent/clipped frames, near duplicates and
-false production-approval flags. Do not re-encode the WebPs before matching
-the SHA values above.
+The command without `--apply` revalidates the original ZIP. Do **not** run `--apply` on the current `main`: the three source entries are already registered and the importer protects them from overwrites. GitHub Actions generates PNG/GIF/metadata/QA from committed source files.
 
-After binary files, metadata and preview are verifiably committed, the Robot
-catalog can advance **12/15 → 15/15 source candidates** (overall **42/60 → 45/60**)
-only if no intervening agent has added those states. No increase on the basis
-of this handoff document.
+Confirmed source commits: [Sad](https://github.com/aigrouphobinh/onelife/commit/420635c2b221672c6c4a557d53508a5d8e955e24), [Balanced](https://github.com/aigrouphobinh/onelife/commit/1983d41b82d3decabbbbfb3d248f308ced45d732), [Strained](https://github.com/aigrouphobinh/onelife/commit/ee319cdf08e1e425d13f5f0917dcdee62e2c7aec). The catalog is now **Robot 15/15** and **45/60 total source candidates**; this does not grant production approval.
 
 ## Open release gates
 
