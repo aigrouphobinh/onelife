@@ -89,7 +89,7 @@ class MainActivity : FlutterActivity() {
                 "startBrainOverlay" -> startBrainOverlay(result)
                 "stopBrainOverlay" -> {
                     stopService(Intent(this, BrainOverlayService::class.java))
-                    result.success(true)
+                    result.success("requested")
                 }
                 else -> result.notImplemented()
             }
