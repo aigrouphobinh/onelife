@@ -60,6 +60,7 @@ class _BrainBreakPageState extends State<BrainBreakPage>
   int _duration = 0;
   int _deadlineMs = 0;
   int? _remainingMsAtRead;
+  int? _recoveryMsAtRead;
   final Stopwatch _sinceNativeRead = Stopwatch();
   int _recoveryStartMs = 0;
   int _recoveryDurationMs = 1500;
@@ -137,7 +138,12 @@ class _BrainBreakPageState extends State<BrainBreakPage>
       ..reset();
     _remainingMsAtRead =
         phase == 'resting' && nativeMs is int ? nativeMs : null;
-    if (_remainingMsAtRead != null) _sinceNativeRead.start();
+    final recoveryMs = data['recoveryRemainingMs'];
+    _recoveryMsAtRead =
+        phase == 'recovering' && recoveryMs is int ? recoveryMs : null;
+    if (_remainingMsAtRead != null || _recoveryMsAtRead != null) {
+      _sinceNativeRead.start();
+    }
     setState(() {
       _phase = phase;
       _duration = data['durationMinutes'] as int? ?? 0;
@@ -200,11 +206,13 @@ class _BrainBreakPageState extends State<BrainBreakPage>
       } else {
         setState(() {});
       }
-    } else if (_phase == 'recovering' &&
-        _recoveryStartMs > 0 &&
-        DateTime.now().millisecondsSinceEpoch >=
-            _recoveryStartMs + _recoveryDurationMs) {
-      _read();
+    } else if (_phase == 'recovering') {
+      final expired = _recoveryMsAtRead != null
+          ? _sinceNativeRead.elapsedMilliseconds >= _recoveryMsAtRead!
+          : _recoveryStartMs > 0 &&
+              DateTime.now().millisecondsSinceEpoch >=
+                  _recoveryStartMs + _recoveryDurationMs;
+      if (expired) _read();
     }
   }
 
