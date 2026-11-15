@@ -80,6 +80,8 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
     await tester.tap(find.text('Việc cần làm').first);
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Sắp tới'));
+    await tester.pumpAndSettle();
 
     await tester.tap(find.byTooltip('Tùy chọn công việc'));
     await tester.pumpAndSettle();
@@ -93,6 +95,9 @@ void main() {
 
     expect(store.items.single.title, 'Việc đã đổi');
     expect(store.items.single.dueAt, isNull);
+    // Clearing the deadline moves the task from Future to Today.
+    await tester.tap(find.text('Hôm nay'));
+    await tester.pumpAndSettle();
 
     await tester.tap(find.byTooltip('Tùy chọn công việc'));
     await tester.pumpAndSettle();
