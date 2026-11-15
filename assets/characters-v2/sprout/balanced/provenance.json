@@ -1,0 +1,39 @@
+{
+  "characterId": "sprout",
+  "state": "balanced",
+  "createdOn": "2026-11-15",
+  "sourceType": "original-ai-generated-12-pose-sheet-with-11-selected",
+  "generator": "OpenAI ImageGen",
+  "sourceArtDimensions": [
+    1448,
+    1086
+  ],
+  "sourceArtGrid": [
+    4,
+    3
+  ],
+  "selectedOriginalPoseIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11
+  ],
+  "omittedOriginalPoseIndices": [
+    9
+  ],
+  "reasonForOmission": "Source pose 9 touches cell upper boundary and contains clipped leaf; adjacent-row stray leaf fragment in source pose 5 was removed as contamination.",
+  "processing": "Crop 11 independently illustrated original poses; segment neutral source checkerboard from foreground using connected components and filled silhouette highlights; remove a detached neighboring-cell fragment, then uniformly resize 232x232 and inset into transparent 256x256 RGBA frame. Atlas unused twelfth cell fully transparent. No synthetic motion from static frame.",
+  "sourceFile": "sheet_illustrated.webp",
+  "sourceSha256": "404ea3efae99e932500d2c8b075e8ebec3f1aa6a25575e7078c414142cee3e26",
+  "rights": "Original generated art for OneLife, not third-party assets",
+  "humanArtReview": "pending",
+  "realDeviceTest": "pending",
+  "productionReady": false
+}
