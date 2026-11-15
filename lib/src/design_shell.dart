@@ -199,20 +199,18 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
           semanticLabel: characterOptions[id],
         );
 
-  Widget card(Widget child) => Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x164F366D),
-              blurRadius: 14,
-              offset: Offset(0, 6),
-            ),
-          ],
+  // Material is the nearest ink surface: ListTile ripples and focus highlights
+  // must paint *inside* the rounded V3.4 card, not behind a DecoratedBox.
+  Widget card(Widget child) => Material(
+        color: Colors.white,
+        elevation: 2,
+        shadowColor: const Color(0x164F366D),
+        borderRadius: BorderRadius.circular(20),
+        clipBehavior: Clip.antiAlias,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: child,
         ),
-        child: child,
       );
 
   Widget heading(String title, String description) => Padding(
