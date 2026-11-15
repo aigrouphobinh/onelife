@@ -39,6 +39,7 @@ system-owned and can look different on each OS/OEM.
 | Brain Focus display | Committed alpha sprite `brain/focus/sheet.png` | Art/phone QA still pending |
 | Add Quick Settings tiles | Flutter Settings > Điều khiển nhanh Android | Android 13+ official add-tile prompt; older versions require manual edit |
 | Quick Capture | Native tile launches the real Flutter task-entry dialog | Cold/warm app paths via `onelife/quick_capture`, local SQLite task, device QA pending |
+| Android home widget | Native AppWidgetProvider/RemoteViews with bundled Brain master, SQLite task count, Focus state and three deep links | Added in source, pending APK and launcher QA; no iOS widget yet |
 | Today Tasks QS | Native tile reads only aggregate incomplete/due-before-midnight count from `onelife_ui.db` | Lockscreen hides the count; tap opens real Flutter Tasks tab; device QA pending |
 
 Open `Tập trung 25 phút` from Flutter Home's shortcut; this is an actual timer,
@@ -52,7 +53,8 @@ not a simulated Quick Settings tile.
 | Android Quick Settings Ghi nhanh | Native `QuickCaptureTileService` opens Flutter task input after unlock; `MainActivity` delivers cold/warm launch via MethodChannel | Compile and device interaction confirmation for this new service pending |
 | Android Quick Settings Việc hôm nay | `TodayTasksTileService` reads SQLite `tasks` count; 0 means no tasks; hides count when locked; user tap opens Flutter tasks via `MainActivity` | CI compilation and real Android tile QA pending |
 | Android notification actions | Native notification or maintained Flutter plugin with receiver | Permission and action persistence; no false completed state |
-| Home screen widget | Android AppWidget / iOS WidgetKit with shared data bridge | Actual platform hosts and lifecycle testing |
+| Home screen widget (Android) | `OneLifeHomeWidgetProvider` reads real local data, masks counts when locked, can request pin from compatible launchers | APK compilation and device/home-launcher QA pending |
+| Home screen widget (iOS) | WidgetKit extension, shared App Group data bridge | Not implemented |
 | iOS Control Center | iOS 18+ WidgetKit `ControlWidgetButton` or `ControlWidgetToggle` | iOS host/extension, intent bridge and device test |
 | Focus Live Activity | ActivityKit on compatible iOS | Native extension, user consent, lifecycle test |
 | Android Brain overlay | `SYSTEM_ALERT_WINDOW` after explicit opt-in | Android host, drag/dismiss controls and low-memory QA |
@@ -83,6 +85,8 @@ remain unimplemented.
 - Verify Ghi nhanh saves exactly one local task, not an unconfirmed fake toast.
 - No invented usage metrics, weather, alarms or background guarantees.
 - Sensitive content hidden by default on lock-screen surfaces.
+- Widget uses `requestPinAppWidget` only after the user taps a setup button; OS
+  confirmation is necessary and `requested` is not misreported as installed.
 - Keep the prior scheduled OneLife automation disabled until user re-enables it.
 
 ## References
