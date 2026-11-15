@@ -133,8 +133,9 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
         case 'stopBrainOverlay':
           _message = 'Đã yêu cầu ẩn Brain nổi.';
       }
-      if (method == 'startBrainOverlay') {
-        // Android returns "requested" before Service actually adds its window.
+      if (method == 'startBrainOverlay' || method == 'stopBrainOverlay') {
+        // Android returns "requested" before Service adds/removes its window.
+        // Never present requested state as confirmed window visibility.
         await Future<void>.delayed(const Duration(milliseconds: 180));
       }
       await _checkStatus();
