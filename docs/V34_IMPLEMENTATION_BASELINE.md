@@ -42,7 +42,8 @@ system-owned and can look different on each OS/OEM.
 | Android home widget | Native AppWidgetProvider/RemoteViews with bundled Brain master, SQLite task count, Focus state and three deep links | Added in source, pending APK and launcher QA; no iOS widget yet |
 | Today Tasks QS | Native tile reads only aggregate incomplete/due-before-midnight count from `onelife_ui.db` | Lockscreen hides the count; tap opens real Flutter Tasks tab; device QA pending |
 | Interactive notifications (Android) | SQLite-backed inexact alarms; complete and 10-minute snooze actions on native notifications | APK CI passed previously; OS delivery and device QA still pending |
-| Brain nổi Android | Real draggable animated 8-frame Brain overlay with Focus/Tasks/Capture/Hide | Opt-in special permission, compiled source pending latest APK and physical OEM QA |
+| Brain nổi Android | Real draggable 8-frame Brain overlay with Focus/Tasks/Capture/Hide and explicit special access | 29/29 Flutter tests and Android debug APK passed at run 43685260232; physical OEM QA remains |
+| Brain phản ứng theo sử dụng máy | UsageInsights from opt-in Android foreground events, Focus sprite priority, no fabricated time | Usage Access permission and device data accuracy QA pending; distinct emotional sprites not yet delivered |
 
 Open `Tập trung 25 phút` from Flutter Home's shortcut; this is an actual timer,
 not a simulated Quick Settings tile.
@@ -59,8 +60,8 @@ not a simulated Quick Settings tile.
 | Home screen widget (iOS) | WidgetKit extension, shared App Group data bridge | Not implemented |
 | iOS Control Center | iOS 18+ WidgetKit `ControlWidgetButton` or `ControlWidgetToggle` | iOS host/extension, intent bridge and device test |
 | Focus Live Activity | ActivityKit on compatible iOS | Native extension, user consent, lifecycle test |
-| Android Brain overlay | `BrainOverlayService` creates `TYPE_APPLICATION_OVERLAY`; real Brain 4×2 atlas, drag, four native actions; only after `Settings.canDrawOverlays` | Build artifact and Android device/permission/revocation QA still pending |
-| Habits/usage statistics | Android UsageStats with opt-in; iOS entitled Screen Time when available | Distinguish missing permission from zero minutes |
+| Android Brain overlay | BrainOverlayService creates TYPE_APPLICATION_OVERLAY, real Idle/Focus atlases and drag/actions | APK built at run 43685260232; Android device/permission/revocation QA pending |
+| Habits/usage statistics | Android UsageInsights reads UsageEvents after explicit Usage Access; Flutter PhoneUsagePage displays observed minutes and 90/180-minute nudge tiers | Approximate foreground time, Android device QA pending; iOS Screen Time entitlement not implemented |
 
 Flutter Android and iOS host project folders were generated under `android/` and `ios/`.
 Focus, Ghi nhanh and Việc hôm nay tile services are registered in
