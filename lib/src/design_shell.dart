@@ -384,7 +384,8 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
       }
       await reload();
       await _syncNativeReminders();
-      notify(task == null ? 'Đã lưu công việc trên thiết bị' : 'Đã sửa công việc');
+      notify(
+          task == null ? 'Đã lưu công việc trên thiết bị' : 'Đã sửa công việc');
     } catch (_) {
       notify('Không thể lưu công việc');
     }
