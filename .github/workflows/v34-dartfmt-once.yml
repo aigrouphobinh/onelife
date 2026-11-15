@@ -1,5 +1,5 @@
 name: OneLife V3.4 source formatter (one-shot)
-# Final normalization pass for V3.4 Quick Capture + UI regression tests.
+# Final normalization pass for V3.4 Today Tasks QS routing and tests.
 on:
   push:
     branches: [main]
