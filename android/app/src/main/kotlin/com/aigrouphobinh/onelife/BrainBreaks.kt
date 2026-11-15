@@ -173,6 +173,9 @@ internal object BrainBreaks {
         elapsed: Long = SystemClock.elapsedRealtime(),
     ): Map<String, Any?> {
         val current = snapshot(c, now, elapsed)
+        // Duplicate rapid taps (or a button racing natural expiry) must
+        // not restart or replay a 12-frame Recovering animation.
+        if (current["phase"] == "recovering") return current
         if (current["phase"] != "resting") return error("not_resting", c)
         val saved = prefs(c).edit().putString(PHASE, "recovering")
             .putLong(RECOVERY_START, now)
