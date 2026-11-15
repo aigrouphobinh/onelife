@@ -65,6 +65,15 @@ class TodayTasksTileService : TileService() {
         tile.icon = Icon.createWithResource(this, R.drawable.ic_onelife_today)
         tile.label = "Việc hôm nay"
         tile.contentDescription = "Việc hôm nay trong OneLife"
+        // Don't expose even an aggregate count in the shade before unlock.
+        if (isLocked) {
+            tile.state = Tile.STATE_INACTIVE
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                tile.subtitle = "Mở khóa để xem"
+            }
+            tile.updateTile()
+            return
+        }
         try {
             val count = pendingCount() ?: 0
             tile.state = if (count > 0) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
