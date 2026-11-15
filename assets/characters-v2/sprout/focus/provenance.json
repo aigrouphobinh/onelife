@@ -1,0 +1,20 @@
+{
+  "characterId": "sprout",
+  "state": "focus",
+  "createdOn": "2026-11-15",
+  "origin": "Original OpenAI ImageGen illustration of twelve distinct Sprout Focus poses",
+  "originalArtworkDimensions": [
+    1448,
+    1086
+  ],
+  "originalGrid": [
+    4,
+    3
+  ],
+  "preprocessing": "Crop twelve source cells, segment neutral checkerboard to alpha, discard disconnected noise under 50px, fill internal figure mask, smooth edge alpha 0.6px, uniformly resize to 232x232 within transparent 256x256 cells; no fake motion from transforms.",
+  "sourceSha256": "01c7f7fa3a25aa9ca73ad3b72ffd71f69117abfde320563ebc3f9eefbccb41fa",
+  "license": "Original AI-generated illustration for OneLife; not from third-party asset library",
+  "humanArtReview": "pending",
+  "realDeviceTest": "pending",
+  "productionReady": false
+}
