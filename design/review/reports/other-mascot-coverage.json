@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "totalRequiredClips": 60,
-  "illustratedCandidates": 57,
+  "illustratedCandidates": 58,
   "derivedCandidates": 1,
-  "missing": 2,
-  "availableCandidates": 58,
+  "missing": 1,
+  "availableCandidates": 59,
   "artApprovedCount": 0,
   "phoneVerifiedCount": 0,
   "automatedEvidencePass": true,
@@ -535,7 +535,11 @@
     {
       "characterId": "sprout",
       "state": "balanced",
-      "status": "missing"
+      "status": "original-candidate-qa",
+      "frames": 11,
+      "generationClass": "independently-illustrated-pose-sheet",
+      "artReview": "pending",
+      "deviceReview": "pending"
     },
     {
       "characterId": "sprout",
