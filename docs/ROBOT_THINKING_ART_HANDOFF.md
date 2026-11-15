@@ -1,11 +1,16 @@
-# Robot Thinking — original Glossy V2 animation candidate (not yet on main)
+# Robot Thinking — alternate artwork candidate (not registered)
 
-**Candidate produced: 2026-11-15.** This is a practical handoff for the
-OneLife Robot animation backlog. It is **not** evidence of an imported or
+**Candidate produced: 2026-11-15.** This is an **alternate, non-canonical**
+visual reference. Another workstream has already registered Robot Thinking on
+`main` with source SHA-256
+`ed3a1577a6996a02361d0939b6fcfd5047c4daa8e937bae751060f66f5b1626a`.
+The alternative candidate below has a **different SHA** and must not be
+auto-imported, overwrite the existing source, or increase clip coverage.
+This is a practical handoff for potential human side-by-side art review. It is **not** evidence of an imported or
 human-approved clip. The binary source is available as the conversation
 attachment `OneLife_Robot_Thinking_V2_candidate.zip`, not in this repository.
-Do not register it or increment coverage until its exact WebP bytes are
-committed to `main`.
+Do not register or increment coverage for this alternative. The registered
+Thinking clip must be retained unless a separately approved replacement is made.
 
 ## Acting and appearance
 
@@ -53,11 +58,11 @@ source atlas. Visual choices are playful, not health diagnoses.
 - **Still pending:** comparison with the canonical Robot master at small
   sizes, human art approval, Flutter preview, real device QA.
 
-## Import when the exact binary is in the checkout
+## Optional import procedure only if an art reviewer explicitly approves replacing the registered source
 
 The ZIP contains `BUILD_REPORT.json` and
 `thinking/{sheet_illustrated.webp,sheet.png,preview.gif,metadata.json,candidate_qa.json}`.
-Run from the checkout with the actual file path (not from a poster):
+The following import commands are archival reference only. **Do not run against the current `main`** because Robot Thinking is already registered and the importer correctly rejects duplicates. If a reviewer elects to replace that source, use a deliberate migration with updated art approval and tests. Original procedure:
 
 ```bash
 python tools/import_robot_v2_pack.py /path/to/OneLife_Robot_Thinking_V2_candidate.zip
