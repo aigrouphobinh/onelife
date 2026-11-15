@@ -53,6 +53,8 @@ class _BrainBreakPageState extends State<BrainBreakPage>
   bool _checked = false;
   bool _loading = true;
   bool _busy = false;
+  bool _reading = false;
+  int _requestGeneration = 0;
   bool _observed = false;
   int _selected = 5;
   int _duration = 0;
@@ -138,30 +140,39 @@ class _BrainBreakPageState extends State<BrainBreakPage>
       if (mounted) setState(() => _loading = false);
       return;
     }
-    if (_busy) return;
+    // Only one snapshot at a time. A native reply must not overwrite a newer
+    // explicit start/finish/cancel action while Android is returning data.
+    if (_busy || _reading) return;
+    _reading = true;
+    final generation = ++_requestGeneration;
     try {
       final data =
           await _channel.invokeMapMethod<String, dynamic>('breakSnapshot');
-      if (!mounted) return;
+      if (!mounted || _busy || generation != _requestGeneration) return;
       if (data == null) {
-        setState(() => _notice = 'Android chưa trả trạng thái phiên nghỉ.');
+        setState(() {
+          _loading = false;
+          _notice = 'Android chưa trả trạng thái phiên nghỉ.';
+        });
         return;
       }
       _accept(data);
     } on MissingPluginException {
-      if (mounted) {
+      if (mounted && !_busy && generation == _requestGeneration) {
         setState(() {
           _loading = false;
           _notice = 'Phiên bản Android chưa có bộ hẹn giờ nghỉ native.';
         });
       }
     } catch (_) {
-      if (mounted) {
+      if (mounted && !_busy && generation == _requestGeneration) {
         setState(() {
           _loading = false;
           _notice = 'Không đọc được phiên nghỉ đã lưu.';
         });
       }
+    } finally {
+      _reading = false;
     }
   }
 
@@ -183,6 +194,8 @@ class _BrainBreakPageState extends State<BrainBreakPage>
 
   Future<void> _run(String method, {int? minutes}) async {
     if (!_android || _busy) return;
+    // Invalidate an older, still-pending snapshot before changing the state.
+    ++_requestGeneration;
     setState(() {
       _busy = true;
       _notice = null;
