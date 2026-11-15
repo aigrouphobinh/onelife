@@ -91,6 +91,21 @@ class MainActivity : FlutterActivity() {
                     stopService(Intent(this, BrainOverlayService::class.java))
                     result.success("requested")
                 }
+                "usageSnapshot" -> {
+                    // UsageEvents may contain many events: never query on UI thread.
+                    Thread {
+                        val snapshot = UsageInsights.snapshot(applicationContext)
+                        runOnUiThread { result.success(snapshot) }
+                    }.start()
+                }
+                "openUsageAccessSettings" -> {
+                    try {
+                        startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+                        result.success("opened")
+                    } catch (_: Exception) {
+                        result.success("unavailable")
+                    }
+                }
                 else -> result.notImplemented()
             }
         }
