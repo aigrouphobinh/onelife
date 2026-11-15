@@ -47,7 +47,7 @@ jobs:
         run: python3 tools/test_brain_overlay_contract.py
       - name: Verify opt-in usage insight and Brain behavior privacy contract
         run: python3 tools/test_usage_insights_contract.py
-      - name: Verify five native Brain candidate atlas geometries and timing
+      - name: Verify native Brain 8/10/12-frame atlas geometry and timing
         run: python3 tools/test_brain_native_clip_contract.py
       - run: dart format --output=none --set-exit-if-changed lib test
       - run: flutter analyze
