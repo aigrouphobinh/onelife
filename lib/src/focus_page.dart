@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show MethodChannel;
 
 import 'focus_session.dart';
 import 'glossy_sprite.dart';
@@ -40,6 +41,17 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
     loop: true,
   );
 
+  static const MethodChannel _widgetBridge =
+      MethodChannel('onelife/quick_capture');
+
+  Future<void> _notifyHomeWidget() async {
+    try {
+      await _widgetBridge.invokeMethod<bool>('refreshWidgets');
+    } catch (_) {
+      // Focus logic works even when an Android home widget is not installed.
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -59,11 +71,13 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
     try {
       final result = await _controller.load();
       if (!mounted) return;
+      final phaseChanged = _session.phase != result.phase;
       setState(() {
         _session = result;
         _loading = false;
         _error = null;
       });
+      if (phaseChanged) _notifyHomeWidget();
     } catch (_) {
       if (!mounted) return;
       setState(() {
@@ -94,6 +108,7 @@ class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
       final updated = await action();
       if (!mounted) return;
       setState(() => _session = updated);
+      _notifyHomeWidget();
     } catch (_) {
       if (!mounted) return;
       setState(() {
