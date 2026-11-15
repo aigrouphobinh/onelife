@@ -75,7 +75,9 @@ void main() {
     expect(notes.current?.title, 'Ghi chú đã sửa');
 
     await tester.tap(find.byTooltip('Tùy chọn ghi chú'));
-    await tester.pump(const Duration(milliseconds: 220));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Tạo việc từ ghi chú'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Tạo việc từ ghi chú'));
     await tester.pump(const Duration(milliseconds: 150));
     expect(captured?.id, 'note-1');
