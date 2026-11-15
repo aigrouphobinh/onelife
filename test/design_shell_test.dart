@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show MethodChannel;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onelife/src/design_shell.dart';
 import 'package:onelife/src/onelife_store.dart';
@@ -83,6 +84,37 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
     expect(fake.items.single.completed, isTrue);
   });
+
+
+  testWidgets('Android Quick Capture intent saves a real local task', (
+    tester,
+  ) async {
+    const captureChannel = MethodChannel('onelife/quick_capture');
+    final messenger = tester.binding.defaultBinaryMessenger;
+    messenger.setMockMethodCallHandler(captureChannel, (call) async {
+      if (call.method == 'consumeLaunchAction') return 'capture';
+      return null;
+    });
+    addTearDown(() {
+      messenger.setMockMethodCallHandler(captureChannel, null);
+    });
+
+    final fake = FakeOneLifeStore();
+    await tester.pumpWidget(MaterialApp(home: OneLifeDesignShell(store: fake)));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 250));
+
+    expect(find.text('Thêm việc mới'), findsOneWidget);
+    await tester.enterText(find.byType(TextField).first, 'Việc ghi nhanh');
+    await tester.pump();
+    await tester.tap(find.text('Lưu'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 150));
+
+    expect(fake.items.single.title, 'Việc ghi nhanh');
+    expect(fake.items.single.completed, false);
+  });
+
 
   testWidgets('V2 settings opens five real mascot options', (tester) async {
     final fake = FakeOneLifeStore();
