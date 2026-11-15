@@ -114,6 +114,37 @@ void main() {
     expect(fake.items.single.completed, false);
   });
 
+  testWidgets('Android Today Tasks cold launch opens real local task list', (
+    tester,
+  ) async {
+    const channel = MethodChannel('onelife/quick_capture');
+    final messenger = tester.binding.defaultBinaryMessenger;
+    messenger.setMockMethodCallHandler(channel, (call) async {
+      if (call.method == 'consumeLaunchAction') return 'tasks';
+      return null;
+    });
+    addTearDown(() {
+      messenger.setMockMethodCallHandler(channel, null);
+    });
+
+    final fake = FakeOneLifeStore();
+    fake.items.add(
+      const OneLifeTask(
+        id: 'today-1',
+        title: 'Việc chưa hoàn thành',
+        completed: false,
+      ),
+    );
+    await tester.pumpWidget(MaterialApp(home: OneLifeDesignShell(store: fake)));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 120));
+
+    expect(find.text('Danh sách (1)'), findsOneWidget);
+    expect(find.text('Việc chưa hoàn thành'), findsOneWidget);
+    expect(find.text('Việc cần làm'), findsWidgets);
+    expect(find.text('Thêm việc mới'), findsNothing);
+  });
+
   testWidgets('V2 settings opens five real mascot options', (tester) async {
     final fake = FakeOneLifeStore();
     await tester.pumpWidget(MaterialApp(home: OneLifeDesignShell(store: fake)));
@@ -195,5 +226,12 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(requests, ['focus']);
+    final todayAddButton = find.widgetWithText(OutlinedButton, 'Thêm').at(1);
+    await tester.ensureVisible(todayAddButton);
+    await tester.pump();
+    await tester.tap(todayAddButton);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(requests, ['focus', 'today']);
   });
 }
