@@ -122,6 +122,10 @@ void main() {
     await tester.pump(const Duration(milliseconds: 150));
     expect(chosen, isNull);
     expect(saveCount, 2);
+    // The no-goal explanation sits above the goal chooser in the scrolled
+    // ListView; return to that region before checking its rendered copy.
+    await tester.drag(find.byType(Scrollable).last, const Offset(0, 750));
+    await tester.pump();
     expect(find.textContaining('Chưa đặt mục tiêu riêng'), findsOneWidget);
   });
 
