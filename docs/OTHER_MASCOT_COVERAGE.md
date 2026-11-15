@@ -3,9 +3,9 @@
 **This report measures files, NOT finished product quality.**
 
 - Required: **60** clips = 4 characters × 15 states.
-- Original illustrated candidates: **46**.
+- Original illustrated candidates: **47**.
 - Derived-pose candidates (not independently illustrated): **1**.
-- Missing: **13**.
+- Missing: **12**.
 - Art approved on mobile: **0** (not independently tested).
 
 | Character | Original | Derived | Missing |
@@ -13,14 +13,14 @@
 | cat | 15 | 0 | 0 |
 | dog | 14 | 1 | 0 |
 | robot | 15 | 0 | 0 |
-| sprout | 2 | 0 | 13 |
+| sprout | 3 | 0 | 12 |
 
 ## Missing states
 
 - **cat:** none
 - **dog:** none
 - **robot:** none
-- **sprout:** alarm, happy, overloaded, resting, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained
+- **sprout:** happy, overloaded, resting, sleepy, recovering, focus, study, done, thinking, sad, balanced, strained
 
 Original illustration source, animation review, low-end Android battery test, Flutter integration, accessibility and iOS fallback are separate release gates.
 The 5×15 glossy infographic is NOT a production sprite library and must never be counted.
