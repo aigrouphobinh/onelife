@@ -49,10 +49,18 @@ internal object BrainBreaks {
         .remove(MONO_START).remove(MONO_END).remove(RECOVERY_MONO_START)
         .remove(BOOT).commit()
 
-    private fun bootChanged(c: Context, previous: Int): Boolean {
-        val current = bootCount(c)
-        return previous >= 0 && current != null && previous != current
-    }
+    /** Pure policy functions are JVM-unit-testable, without a fake Android UI. */
+    internal fun bootInvalid(
+        previousBoot: Int,
+        currentBoot: Int?,
+        startedElapsed: Long,
+        nowElapsed: Long,
+    ): Boolean =
+        (startedElapsed > 0L && nowElapsed < startedElapsed) ||
+            (previousBoot >= 0 && currentBoot != null && previousBoot != currentBoot)
+
+    internal fun nearDeadline(remainingMs: Long): Boolean =
+        remainingMs in -MAX_LATE_MS..0L
 
     @Synchronized
     fun snapshot(
@@ -73,7 +81,7 @@ internal object BrainBreaks {
             val monoStart = p.getLong(MONO_START, 0L)
             val monoEnd = p.getLong(MONO_END, 0L)
             val previousBoot = p.getInt(BOOT, -1)
-            if (monoEnd > 0L && (elapsed < monoStart || bootChanged(c, previousBoot))) {
+            if (monoEnd > 0L && bootInvalid(previousBoot, bootCount(c), monoStart, elapsed)) {
                 // Never carry a per-boot elapsedRealtime deadline into a new boot.
                 clear(c)
                 return state("idle", sequence, reason = "rebooted")
@@ -88,7 +96,7 @@ internal object BrainBreaks {
             }
             // A recovered interval must be observed within 3 seconds of its
             // actual deadline. If resumed much later, do not replay recovery.
-            if (remaining in -MAX_LATE_MS..0L) {
+            if (nearDeadline(remaining)) {
                 val saved = p.edit().putString(PHASE, "recovering")
                     .putLong(RECOVERY_START, now)
                     .putLong(RECOVERY_MONO_START, elapsed)
@@ -107,7 +115,7 @@ internal object BrainBreaks {
             val beganElapsed = p.getLong(RECOVERY_MONO_START, 0L)
             val previousBoot = p.getInt(BOOT, -1)
             val invalidBoot = beganElapsed > 0L &&
-                (elapsed < beganElapsed || bootChanged(c, previousBoot))
+                bootInvalid(previousBoot, bootCount(c), beganElapsed, elapsed)
             val durationPassed = if (beganElapsed > 0L) {
                 elapsed - beganElapsed
             } else {
