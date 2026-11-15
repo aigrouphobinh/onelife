@@ -85,6 +85,41 @@ void main() {
     expect(fake.items.single.completed, isTrue);
   });
 
+  testWidgets('Today filter and native QS agree on local midnight', (
+    tester,
+  ) async {
+    final now = DateTime.now();
+    final tomorrow = DateTime(now.year, now.month, now.day + 1);
+    final fake = FakeOneLifeStore();
+    fake.items.addAll([
+      OneLifeTask(
+        id: 'before',
+        title: 'Trước nửa đêm',
+        completed: false,
+        dueAt: tomorrow.subtract(const Duration(seconds: 1)),
+      ),
+      OneLifeTask(
+        id: 'at',
+        title: 'Đúng nửa đêm',
+        completed: false,
+        dueAt: tomorrow,
+      ),
+    ]);
+
+    await tester.pumpWidget(MaterialApp(home: OneLifeDesignShell(store: fake)));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.tap(find.text('Việc cần làm'));
+    await tester.pump();
+
+    expect(find.text('Trước nửa đêm'), findsOneWidget);
+    expect(find.text('Đúng nửa đêm'), findsNothing);
+    await tester.tap(find.text('Sắp tới'));
+    await tester.pump();
+    expect(find.text('Đúng nửa đêm'), findsOneWidget);
+    expect(find.text('Trước nửa đêm'), findsNothing);
+  });
+
   testWidgets('Android Quick Capture intent saves a real local task', (
     tester,
   ) async {
