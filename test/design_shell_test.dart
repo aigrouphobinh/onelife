@@ -186,7 +186,12 @@ void main() {
     await tester.pump(const Duration(milliseconds: 250));
     expect(find.text('Tập trung · 25 phút'), findsOneWidget);
 
-    await tester.tap(find.text('Thêm').first);
+    // Match the OS-tile setup button, not the 'Thêm' bottom navigation
+    // destination retained below this route in the Navigator.
+    final focusAddButton = find.widgetWithText(OutlinedButton, 'Thêm').first;
+    await tester.ensureVisible(focusAddButton);
+    await tester.pump();
+    await tester.tap(focusAddButton);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(requests, ['focus']);
