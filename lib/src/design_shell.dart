@@ -203,8 +203,9 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
     setState(() => _remindersBusy = true);
     try {
       final activated = await _captureChannel.invokeMethod<bool>(
-        enabled ? 'enableReminders' : 'disableReminders',
-      ) ?? false;
+            enabled ? 'enableReminders' : 'disableReminders',
+          ) ??
+          false;
       if (!mounted) return;
       setState(() => _remindersEnabled = activated);
       if (enabled && !activated) {
@@ -999,8 +1000,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
                         : 'Đang tắt · bật để xin quyền thông báo')
                     : 'Chưa triển khai trên iOS'),
                 value: android && _remindersEnabled,
-                onChanged: android && !_remindersBusy
-                    ? _changeReminders : null,
+                onChanged: android && !_remindersBusy ? _changeReminders : null,
               ),
               const Divider(),
               const Text(
@@ -1022,7 +1022,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Riêng tư & quyền kiểm soát',
-                style: TextStyle(fontWeight: FontWeight.w800)),
+                  style: TextStyle(fontWeight: FontWeight.w800)),
               SizedBox(height: 10),
               Text('Android 13 trở lên sẽ yêu cầu quyền thông báo.'),
               Text('Màn hình khóa chỉ hiển thị lời nhắc chung, '
@@ -1032,9 +1032,10 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
               Text('Nhắc lại 10 phút được lưu trên thiết bị để tiếp tục '
                   'sau khi điện thoại khởi động lại.'),
               SizedBox(height: 12),
-              Text('Nếu trước đó bạn đã từ chối quyền, '
+              Text(
+                  'Nếu trước đó bạn đã từ chối quyền, '
                   'hãy mở Cài đặt hệ thống → Ứng dụng → OneLife → Thông báo.',
-                style: TextStyle(color: Color(0xFF796D8B), fontSize: 12)),
+                  style: TextStyle(color: Color(0xFF796D8B), fontSize: 12)),
             ],
           )),
         ],
