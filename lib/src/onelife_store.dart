@@ -31,6 +31,8 @@ abstract class OneLifeStore {
   Future<List<OneLifeTask>> loadTasks();
   Future<void> addTask({required String title, DateTime? dueAt});
   Future<void> setTaskCompleted(String id, bool completed);
+  Future<void> updateTask(String id, {required String title, DateTime? dueAt});
+  Future<void> deleteTask(String id);
   Future<String> selectedCharacter();
   Future<void> selectCharacter(String id);
 }
@@ -92,6 +94,42 @@ class SqliteOneLifeStore implements OneLifeStore {
       where: 'id = ?',
       whereArgs: [id],
     );
+  }
+
+  @override
+  Future<void> updateTask(
+    String id, {
+    required String title,
+    DateTime? dueAt,
+  }) async {
+    final trimmed = title.trim();
+    if (trimmed.isEmpty) {
+      throw ArgumentError('Tên công việc không được để trống.');
+    }
+    final count = await (await _database).update(
+      'tasks',
+      {
+        'title': trimmed,
+        'due_at_utc': dueAt?.toUtc().toIso8601String(),
+      },
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    if (count != 1) {
+      throw StateError('Công việc không còn tồn tại.');
+    }
+  }
+
+  @override
+  Future<void> deleteTask(String id) async {
+    final count = await (await _database).delete(
+      'tasks',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    if (count != 1) {
+      throw StateError('Công việc không còn tồn tại.');
+    }
   }
 
   @override
