@@ -201,8 +201,9 @@ class _BrainBreakPageState extends State<BrainBreakPage>
     } on MissingPluginException {
       if (mounted) setState(() => _notice = 'APK chưa có phiên nghỉ native.');
     } catch (_) {
-      if (mounted)
+      if (mounted) {
         setState(() => _notice = 'Không lưu được thao tác. Thử lại.');
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }
