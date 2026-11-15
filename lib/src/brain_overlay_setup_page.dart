@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'glossy_sprite.dart';
+import 'phone_usage_page.dart';
 
 /// V3.4 real Android special-access setup; no fake floating Flutter preview.
 /// Android alone owns the TYPE_APPLICATION_OVERLAY window and permission.
@@ -280,6 +281,28 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
               ],
             ),
           ),
+          const SizedBox(height: 14),
+          _panel(Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Nhịp sử dụng điện thoại',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+              const SizedBox(height: 8),
+              const Text('Chỉ sau khi cấp quyền Android, Brain mới '
+                  'đổi dấu trạng thái theo dữ liệu foreground quan sát được. '
+                  'Không có quyền thì không tự đoán số phút.'),
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                icon: const Icon(Icons.monitor_heart_outlined),
+                label: const Text('Xem dữ liệu sử dụng thực tế'),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const PhoneUsagePage(),
+                  ),
+                ),
+              ),
+            ],
+          )),
           const SizedBox(height: 14),
           _panel(
             const Column(
