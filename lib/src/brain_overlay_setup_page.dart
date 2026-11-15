@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'glossy_sprite.dart';
 import 'phone_usage_page.dart';
+import 'brain_break_page.dart';
 
 /// V3.4 real Android special-access setup; no fake floating Flutter preview.
 /// Android alone owns the TYPE_APPLICATION_OVERLAY window and permission.
@@ -304,6 +305,27 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
             ],
           )),
           const SizedBox(height: 14),
+          _panel(Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Nghỉ cùng Brain',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+              const SizedBox(height: 8),
+              const Text('Tự chọn nghỉ 5, 10 hoặc 15 phút. Brain phát Resting '
+                  'và Recovering từ sprite atlas thật, không yêu cầu Usage Access.'),
+              const SizedBox(height: 12),
+              FilledButton.icon(
+                icon: const Icon(Icons.bedtime_outlined),
+                label: const Text('Bắt đầu / Xem phiên nghỉ'),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const BrainBreakPage(),
+                  ),
+                ),
+              ),
+            ],
+          )),
+          const SizedBox(height: 14),
           _panel(
             const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -312,7 +334,7 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
                 SizedBox(height: 10),
-                Text('✓ Việc hôm nay · + Ghi nhanh · ◷ Tập trung · × Ẩn Brain'),
+                Text('✓ Việc hôm nay · + Ghi nhanh · ◷ Tập trung · ☾ Nghỉ 5 phút · × Ẩn Brain'),
                 SizedBox(height: 10),
                 Text('Bong bóng nhỏ chỉ nhận thao tác trong vùng Brain. '
                     'Có thể kéo thả và ghi nhớ vị trí trên màn hình. '
