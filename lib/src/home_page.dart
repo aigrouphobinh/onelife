@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'note_repository.dart';
 import 'glossy_sprite.dart';
 import 'dog_animation_gallery.dart';
+import 'robot_animation_gallery.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.repository});
@@ -156,14 +157,29 @@ class _HomePageState extends State<HomePage> {
                 ),
               ]),
               const SizedBox(height: 8),
-              TextButton.icon(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const DogAnimationGalleryPage(),
+              Wrap(
+                spacing: 8,
+                runSpacing: 2,
+                children: [
+                  TextButton.icon(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const DogAnimationGalleryPage(),
+                      ),
+                    ),
+                    icon: const Icon(Icons.pets),
+                    label: const Text('Chó · 15 hoạt ảnh'),
                   ),
-                ),
-                icon: const Icon(Icons.grid_view),
-                label: const Text('Xem đủ 15 hoạt ảnh'),
+                  TextButton.icon(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const RobotAnimationGalleryPage(),
+                      ),
+                    ),
+                    icon: const Icon(Icons.smart_toy_outlined),
+                    label: const Text('Robot · 12 hoạt ảnh'),
+                  ),
+                ],
               ),
               Wrap(
                 spacing: 8,
