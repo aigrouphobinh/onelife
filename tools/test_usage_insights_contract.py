@@ -25,17 +25,20 @@ def main_check() -> None:
 
     assert "AppOpsManager.OPSTR_GET_USAGE_STATS" in raw
     assert "AppOpsManager.MODE_ALLOWED" in raw
-    assert "queryEvents(startOfToday, end)" in raw
+    assert "queryEvents(start, end)" in raw
     assert "UsageEvents.Event.MOVE_TO_FOREGROUND" in raw
     assert "UsageEvents.Event.MOVE_TO_BACKGROUND" in raw
-    assert "if (!observed) return unknown(" in raw
+    assert "if (!observed) return unavailable(" in raw
     assert '"minutes" to null' in raw
-    assert 'minutes >= THREE_HOURS -> "high"' in raw
-    assert 'minutes >= NINETY_MINUTES -> "break"' in raw
-    assert "NINETY_MINUTES = 90L" in raw
-    assert "THREE_HOURS = 180L" in raw
+    assert 'minutes >= goal -> "overloaded"' in raw
+    assert 'minutes.toLong() * 5 >= goal.toLong() * 4 -> "strained"' in raw
+    assert 'if (goal == null' in raw
+    assert "fun saveGoal(context: Context, minutes: Int?): Boolean" in raw
+    assert "GOAL = \"daily_reflection_goal_minutes\"" in raw
+    assert "MIN_GOAL = 30" in raw and "MAX_GOAL = 720" in raw
     assert "Build.VERSION_CODES.N" in raw
     assert '"usageSnapshot"' in activity
+    assert '"setUsageDailyGoal"' in activity
     assert '"openUsageAccessSettings"' in activity
     assert "Settings.ACTION_USAGE_ACCESS_SETTINGS" in activity
     assert "Thread {" in activity
@@ -43,6 +46,8 @@ def main_check() -> None:
     # Brain may be shown without Usage Access, but cannot read without it.
     assert "UsageInsights.snapshot(applicationContext)" in native_overlay
     assert '"unknown"' in native_overlay
+    assert 'snapshot["goalMinutes"] !is Int' in native_overlay
+    assert 'usageTier == "balanced"' in native_overlay
     assert 'brain/focus/sheet.png' in native_overlay
     assert "5 * 60 * 1000L" in native_overlay
     assert "if (!observed)" in raw
@@ -50,7 +55,9 @@ def main_check() -> None:
     assert "Thiếu dữ liệu không có nghĩa" in page
     assert "Không lưu danh sách ứng dụng" in page
     assert "Mở Cài đặt quyền sử dụng" in page
-    print("PASS: Brain Usage Access opt-in, no invented values, no per-app data export")
+    assert "Mục tiêu phản ánh hằng ngày" in page
+    assert "Tắt mục tiêu" in page
+    print("PASS: Brain Usage Access, user goals, no default judgment or per-app data export")
 
 
 if __name__ == "__main__":
