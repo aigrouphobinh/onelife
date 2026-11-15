@@ -98,6 +98,14 @@ class MainActivity : FlutterActivity() {
                         runOnUiThread { result.success(snapshot) }
                     }.start()
                 }
+                "usageHistory" -> {
+                    // Range queries can be large. Keep event iteration off UI thread.
+                    val days = call.argument<Int>("days") ?: 1
+                    Thread {
+                        val history = UsageInsights.history(applicationContext, days)
+                        runOnUiThread { result.success(history) }
+                    }.start()
+                }
                 "setUsageDailyGoal" -> {
                     val minutes = call.argument<Int>("minutes")
                     val valid = UsageInsights.saveGoal(this, minutes)
