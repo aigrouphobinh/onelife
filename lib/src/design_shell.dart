@@ -984,73 +984,75 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
           final android =
               Theme.of(sheetContext).platform == TargetPlatform.android;
           return Scaffold(
-      backgroundColor: designBackground,
-      appBar: AppBar(title: const Text('Nhắc việc & Thông báo')),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          heading('Brain nhắc đúng lúc', 'Chỉ thông báo khi bạn đồng ý'),
-          card(Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                secondary: const Icon(Icons.notifications_active_outlined,
-                    color: designPurple),
-                title: const Text('Nhắc việc theo thời hạn'),
-                subtitle: Text(android
-                    ? (_remindersEnabled
-                        ? 'Đã cho phép và bật nhắc việc trên thiết bị'
-                        : 'Đang tắt · bật để xin quyền thông báo')
-                    : 'Chưa triển khai trên iOS'),
-                value: android && _remindersEnabled,
-                onChanged: android && !_remindersBusy
-                    ? (value) async {
-                        final update = _changeReminders(value);
-                        refreshSheet(() {}); // show busy while OS asks permission
-                        await update;
-                        if (sheetContext.mounted) refreshSheet(() {});
-                      }
-                    : null,
-              ),
-              const Divider(),
-              const Text(
-                'Khi đến hạn, OneLife gửi thông báo hệ thống với hai nút '
-                'Hoàn thành và Nhắc lại 10 phút. Bạn không phải mở app '
-                'để thực hiện hai thao tác này.',
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Chỉ công việc có thời hạn trong tương lai được lên lịch. '
-                'Android có thể trì hoãn thông báo khi tiết kiệm pin hoặc '
-                'trong Doze; đây không phải báo thức chính xác từng phút.',
-                style: TextStyle(color: Color(0xFF796D8B)),
-              ),
-            ],
-          )),
-          const SizedBox(height: 14),
-          card(const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Riêng tư & quyền kiểm soát',
-                  style: TextStyle(fontWeight: FontWeight.w800)),
-              SizedBox(height: 10),
-              Text('Android 13 trở lên sẽ yêu cầu quyền thông báo.'),
-              Text('Màn hình khóa chỉ hiển thị lời nhắc chung, '
-                  'không hiện tên công việc.'),
-              Text('Tắt nhắc việc sẽ hủy các lịch đã tạo nhưng '
-                  'không xóa công việc trong SQLite.'),
-              Text('Nhắc lại 10 phút được lưu trên thiết bị để tiếp tục '
-                  'sau khi điện thoại khởi động lại.'),
-              SizedBox(height: 12),
-              Text(
-                  'Nếu trước đó bạn đã từ chối quyền, '
-                  'hãy mở Cài đặt hệ thống → Ứng dụng → OneLife → Thông báo.',
-                  style: TextStyle(color: Color(0xFF796D8B), fontSize: 12)),
-            ],
-          )),
-        ],
-      ),
+            backgroundColor: designBackground,
+            appBar: AppBar(title: const Text('Nhắc việc & Thông báo')),
+            body: ListView(
+              padding: const EdgeInsets.all(16),
+              children: [
+                heading('Brain nhắc đúng lúc', 'Chỉ thông báo khi bạn đồng ý'),
+                card(Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SwitchListTile(
+                      contentPadding: EdgeInsets.zero,
+                      secondary: const Icon(Icons.notifications_active_outlined,
+                          color: designPurple),
+                      title: const Text('Nhắc việc theo thời hạn'),
+                      subtitle: Text(android
+                          ? (_remindersEnabled
+                              ? 'Đã cho phép và bật nhắc việc trên thiết bị'
+                              : 'Đang tắt · bật để xin quyền thông báo')
+                          : 'Chưa triển khai trên iOS'),
+                      value: android && _remindersEnabled,
+                      onChanged: android && !_remindersBusy
+                          ? (value) async {
+                              final update = _changeReminders(value);
+                              refreshSheet(
+                                  () {}); // show busy while OS asks permission
+                              await update;
+                              if (sheetContext.mounted) refreshSheet(() {});
+                            }
+                          : null,
+                    ),
+                    const Divider(),
+                    const Text(
+                      'Khi đến hạn, OneLife gửi thông báo hệ thống với hai nút '
+                      'Hoàn thành và Nhắc lại 10 phút. Bạn không phải mở app '
+                      'để thực hiện hai thao tác này.',
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Chỉ công việc có thời hạn trong tương lai được lên lịch. '
+                      'Android có thể trì hoãn thông báo khi tiết kiệm pin hoặc '
+                      'trong Doze; đây không phải báo thức chính xác từng phút.',
+                      style: TextStyle(color: Color(0xFF796D8B)),
+                    ),
+                  ],
+                )),
+                const SizedBox(height: 14),
+                card(const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Riêng tư & quyền kiểm soát',
+                        style: TextStyle(fontWeight: FontWeight.w800)),
+                    SizedBox(height: 10),
+                    Text('Android 13 trở lên sẽ yêu cầu quyền thông báo.'),
+                    Text('Màn hình khóa chỉ hiển thị lời nhắc chung, '
+                        'không hiện tên công việc.'),
+                    Text('Tắt nhắc việc sẽ hủy các lịch đã tạo nhưng '
+                        'không xóa công việc trong SQLite.'),
+                    Text('Nhắc lại 10 phút được lưu trên thiết bị để tiếp tục '
+                        'sau khi điện thoại khởi động lại.'),
+                    SizedBox(height: 12),
+                    Text(
+                        'Nếu trước đó bạn đã từ chối quyền, '
+                        'hãy mở Cài đặt hệ thống → Ứng dụng → OneLife → Thông báo.',
+                        style:
+                            TextStyle(color: Color(0xFF796D8B), fontSize: 12)),
+                  ],
+                )),
+              ],
+            ),
           );
         },
       );
