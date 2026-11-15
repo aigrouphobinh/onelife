@@ -1,5 +1,5 @@
 name: OneLife V3.4 source formatter (one-shot)
-# Format V3.4 user-goal wellbeing UI and updated Brain runtime tests.
+# Format V3.4 persistent Resting/Recovering screen and new native break widget tests.
 on:
   push:
     branches: [main]
