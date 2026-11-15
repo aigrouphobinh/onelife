@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onelife_widget_title">OneLife · Trợ lý</string>
+    <string name="onelife_widget_description">Brain đồng hành, công việc hôm nay và các thao tác nhanh</string>
+    <string name="onelife_widget_mascot">Nhân vật Bộ Não OneLife</string>
+    <string name="onelife_widget_empty">Chưa có dữ liệu</string>
+    <string name="onelife_widget_refresh">Làm mới thông tin OneLife</string>
+    <string name="onelife_widget_focus">Tập trung 25 phút</string>
+    <string name="onelife_widget_tasks">Công việc</string>
+    <string name="onelife_widget_capture">Ghi nhanh</string>
+    <string name="onelife_widget_focus_button">Tập trung</string>
+</resources>
