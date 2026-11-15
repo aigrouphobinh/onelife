@@ -1,6 +1,5 @@
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onelife/src/robot_animation_gallery.dart';
