@@ -1,0 +1,21 @@
+{
+  "characterId": "sprout",
+  "state": "recovering",
+  "createdOn": "2026-11-15",
+  "generator": "OpenAI ImageGen",
+  "sourceType": "independently-illustrated-12-pose-sheet",
+  "sourceArtDimensions": [
+    1448,
+    1086
+  ],
+  "sourceArtGrid": [
+    4,
+    3
+  ],
+  "preprocessing": "Clean tiny disconnected green alpha-matte components per source cell, uniformly resize authored 362px cells to 232px within 256px RGBA cells. Original art has 12 unique acting poses; no generated tweening or affine animation.",
+  "sourceSha256": "10e103da4042f862490d5c1e4279fd7e53ae4af9139e7d7cbdeee6b35218cdc3",
+  "usageRights": "Original AI-generated illustration for OneLife",
+  "humanArtReview": "pending",
+  "realDeviceReview": "pending",
+  "productionReady": false
+}
