@@ -72,7 +72,8 @@ class SqliteOneLifeStore implements OneLifeStore {
   @override
   Future<void> addTask({required String title, DateTime? dueAt}) async {
     final trimmed = title.trim();
-    if (trimmed.isEmpty) throw ArgumentError('Tên công việc không được để trống.');
+    if (trimmed.isEmpty)
+      throw ArgumentError('Tên công việc không được để trống.');
     await (await _database).insert('tasks', {
       'id': const Uuid().v4(),
       'title': trimmed,
@@ -109,11 +110,10 @@ class SqliteOneLifeStore implements OneLifeStore {
     if (!const {'brain', 'cat', 'dog', 'robot', 'sprout'}.contains(id)) {
       throw ArgumentError('Nhân vật không hợp lệ.');
     }
-    await (await _database).insert(
-      'preferences',
-      {'key': 'selected_character', 'value': id},
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    await (await _database).insert('preferences', {
+      'key': 'selected_character',
+      'value': id,
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<void> close() async {

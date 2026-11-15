@@ -15,28 +15,104 @@ class DogAnimationEntry {
 /// This gallery is a *manual preview*, not a phone usage diagnosis or
 /// automatic task-completion event detector.
 const dogAnimationEntries = <DogAnimationEntry>[
-  DogAnimationEntry('idle', 'Bình thường', 'Chú chó ngồi chờ bình yên', GlossySpriteSpec.dogIdle),
-  DogAnimationEntry('remind', 'Nhắc nhở', 'Chú chó nhắc một việc đã chọn', GlossySpriteSpec.dogRemind),
-  DogAnimationEntry('alarm', 'Báo thức', 'Chú chó báo thức một cách dễ thương', GlossySpriteSpec.dogAlarm),
-  DogAnimationEntry('resting', 'Nghỉ ngơi', 'Chú chó nghỉ ngơi thư giãn', GlossySpriteSpec.dogResting),
-  DogAnimationEntry('overloaded', 'Quá tải', 'Chú chó có biểu cảm quá tải vui nhộn', GlossySpriteSpec.dogOverloaded),
-  DogAnimationEntry('happy', 'Vui vẻ', 'Chú chó vui vẻ', GlossySpriteSpec.dogHappy),
-  DogAnimationEntry('sleepy', 'Buồn ngủ', 'Chú chó ngáp và buồn ngủ', GlossySpriteSpec.dogSleepy),
-  DogAnimationEntry('recovering', 'Hồi phục', 'Chú chó vươn vai sau khi nghỉ', GlossySpriteSpec.dogRecovering),
-  DogAnimationEntry('focus', 'Tập trung', 'Chú chó chú ý vào một việc', GlossySpriteSpec.dogFocus),
-  DogAnimationEntry('study', 'Học tập', 'Chú chó đọc sách', GlossySpriteSpec.dogStudy),
-  DogAnimationEntry('done', 'Hoàn thành', 'Chú chó ăn mừng hoàn thành nhiệm vụ', GlossySpriteSpec.dogDone),
-  DogAnimationEntry('thinking', 'Suy nghĩ', 'Chú chó đang suy nghĩ', GlossySpriteSpec.dogThinking),
-  DogAnimationEntry('sad', 'Buồn', 'Chú chó có biểu cảm buồn dịu dàng', GlossySpriteSpec.dogSad),
-  DogAnimationEntry('balanced', 'Cân bằng', 'Chú chó hít thở và bình tĩnh', GlossySpriteSpec.dogBalanced),
-  DogAnimationEntry('strained', 'Căng nhẹ', 'Chú chó hơi căng thẳng và thở ra', GlossySpriteSpec.dogStrained),
+  DogAnimationEntry(
+    'idle',
+    'Bình thường',
+    'Chú chó ngồi chờ bình yên',
+    GlossySpriteSpec.dogIdle,
+  ),
+  DogAnimationEntry(
+    'remind',
+    'Nhắc nhở',
+    'Chú chó nhắc một việc đã chọn',
+    GlossySpriteSpec.dogRemind,
+  ),
+  DogAnimationEntry(
+    'alarm',
+    'Báo thức',
+    'Chú chó báo thức một cách dễ thương',
+    GlossySpriteSpec.dogAlarm,
+  ),
+  DogAnimationEntry(
+    'resting',
+    'Nghỉ ngơi',
+    'Chú chó nghỉ ngơi thư giãn',
+    GlossySpriteSpec.dogResting,
+  ),
+  DogAnimationEntry(
+    'overloaded',
+    'Quá tải',
+    'Chú chó có biểu cảm quá tải vui nhộn',
+    GlossySpriteSpec.dogOverloaded,
+  ),
+  DogAnimationEntry(
+    'happy',
+    'Vui vẻ',
+    'Chú chó vui vẻ',
+    GlossySpriteSpec.dogHappy,
+  ),
+  DogAnimationEntry(
+    'sleepy',
+    'Buồn ngủ',
+    'Chú chó ngáp và buồn ngủ',
+    GlossySpriteSpec.dogSleepy,
+  ),
+  DogAnimationEntry(
+    'recovering',
+    'Hồi phục',
+    'Chú chó vươn vai sau khi nghỉ',
+    GlossySpriteSpec.dogRecovering,
+  ),
+  DogAnimationEntry(
+    'focus',
+    'Tập trung',
+    'Chú chó chú ý vào một việc',
+    GlossySpriteSpec.dogFocus,
+  ),
+  DogAnimationEntry(
+    'study',
+    'Học tập',
+    'Chú chó đọc sách',
+    GlossySpriteSpec.dogStudy,
+  ),
+  DogAnimationEntry(
+    'done',
+    'Hoàn thành',
+    'Chú chó ăn mừng hoàn thành nhiệm vụ',
+    GlossySpriteSpec.dogDone,
+  ),
+  DogAnimationEntry(
+    'thinking',
+    'Suy nghĩ',
+    'Chú chó đang suy nghĩ',
+    GlossySpriteSpec.dogThinking,
+  ),
+  DogAnimationEntry(
+    'sad',
+    'Buồn',
+    'Chú chó có biểu cảm buồn dịu dàng',
+    GlossySpriteSpec.dogSad,
+  ),
+  DogAnimationEntry(
+    'balanced',
+    'Cân bằng',
+    'Chú chó hít thở và bình tĩnh',
+    GlossySpriteSpec.dogBalanced,
+  ),
+  DogAnimationEntry(
+    'strained',
+    'Căng nhẹ',
+    'Chú chó hơi căng thẳng và thở ra',
+    GlossySpriteSpec.dogStrained,
+  ),
 ];
 
 class DogAnimationGalleryPage extends StatefulWidget {
   const DogAnimationGalleryPage({super.key});
 
   @override
-  State<DogAnimationGalleryPage> createState() => _DogAnimationGalleryPageState();
+  State<DogAnimationGalleryPage> createState() =>
+      _DogAnimationGalleryPageState();
 }
 
 class _DogAnimationGalleryPageState extends State<DogAnimationGalleryPage> {
@@ -45,7 +121,9 @@ class _DogAnimationGalleryPageState extends State<DogAnimationGalleryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final entry = dogAnimationEntries.firstWhere((item) => item.id == _selected);
+    final entry = dogAnimationEntries.firstWhere(
+      (item) => item.id == _selected,
+    );
     final scheme = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -56,8 +134,10 @@ class _DogAnimationGalleryPageState extends State<DogAnimationGalleryPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text('Glossy Kawaii · Nền trong suốt',
-                  style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                'Glossy Kawaii · Nền trong suốt',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               const SizedBox(height: 8),
               const Text(
                 'Chọn một trạng thái để xem nhân vật thật. '
@@ -77,8 +157,10 @@ class _DogAnimationGalleryPageState extends State<DogAnimationGalleryPage> {
                         semanticLabel: entry.description,
                       ),
                       const SizedBox(height: 8),
-                      Text(entry.label,
-                          style: Theme.of(context).textTheme.titleLarge),
+                      Text(
+                        entry.label,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
                       const SizedBox(height: 4),
                       Text(entry.description, textAlign: TextAlign.center),
                       const SizedBox(height: 8),
@@ -98,8 +180,10 @@ class _DogAnimationGalleryPageState extends State<DogAnimationGalleryPage> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text('Danh sách 15 trạng thái',
-                  style: Theme.of(context).textTheme.titleSmall),
+              Text(
+                'Danh sách 15 trạng thái',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,

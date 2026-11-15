@@ -21,10 +21,9 @@ class FocusPage extends StatefulWidget {
   State<FocusPage> createState() => _FocusPageState();
 }
 
-class _FocusPageState extends State<FocusPage>
-    with WidgetsBindingObserver {
-  late final FocusSessionController _controller = widget.controller ??
-      FocusSessionController(SqliteFocusSessionStorage());
+class _FocusPageState extends State<FocusPage> with WidgetsBindingObserver {
+  late final FocusSessionController _controller =
+      widget.controller ?? FocusSessionController(SqliteFocusSessionStorage());
 
   Timer? _ticker;
   FocusSession _session = FocusSession.empty;
@@ -118,15 +117,16 @@ class _FocusPageState extends State<FocusPage>
     final minutes = seconds ~/ 60;
     final rest = seconds % 60;
     return minutes.toString().padLeft(2, '0') +
-        ':' + rest.toString().padLeft(2, '0');
+        ':' +
+        rest.toString().padLeft(2, '0');
   }
 
   String get _stateLabel => switch (_session.phase) {
-        FocusPhase.idle => 'Sẵn sàng',
-        FocusPhase.running => 'Đang tập trung',
-        FocusPhase.paused => 'Đã tạm dừng',
-        FocusPhase.completed => 'Đã hoàn thành 25 phút tập trung',
-      };
+    FocusPhase.idle => 'Sẵn sàng',
+    FocusPhase.running => 'Đang tập trung',
+    FocusPhase.paused => 'Đã tạm dừng',
+    FocusPhase.completed => 'Đã hoàn thành 25 phút tập trung',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -165,58 +165,59 @@ class _FocusPageState extends State<FocusPage>
                   bottomRight: Radius.circular(28),
                 ),
               ),
-              child: Column(children: [
-                const Text(
-                  'Một việc nhỏ, một khoảng thời gian yên tĩnh',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFFF1E6FF), fontSize: 14,
+              child: Column(
+                children: [
+                  const Text(
+                    'Một việc nhỏ, một khoảng thời gian yên tĩnh',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Color(0xFFF1E6FF), fontSize: 14),
                   ),
-                ),
-                const SizedBox(height: 4),
-                const GlossySprite(
-                  spec: _brainFocus,
-                  size: 174,
-                  semanticLabel: 'Bộ Não OneLife đang tập trung',
-                ),
-                Text(
-                  _stateLabel,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 18, fontWeight: FontWeight.w700,
-                    color: Colors.white,
+                  const SizedBox(height: 4),
+                  const GlossySprite(
+                    spec: _brainFocus,
+                    size: 174,
+                    semanticLabel: 'Bộ Não OneLife đang tập trung',
                   ),
-                ),
-                const SizedBox(height: 14),
-                Semantics(
-                  label: 'Thời gian còn lại ' + _time,
-                  liveRegion: false,
-                  child: Text(
-                    _time,
+                  Text(
+                    _stateLabel,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
                       color: Colors.white,
-                      fontSize: 60,
-                      height: 1,
-                      fontFeatures: [FontFeature.tabularFigures()],
-                      fontWeight: FontWeight.w800,
                     ),
                   ),
-                ),
-                const SizedBox(height: 18),
-                LinearProgressIndicator(
-                  value: progress.clamp(0.0, 1.0),
-                  minHeight: 8,
-                  color: const Color(0xFFEDD8FF),
-                  backgroundColor: const Color(0x55FFFFFF),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  '25 phút · không tự bật chế độ Không làm phiền',
-                  style: TextStyle(color: Color(0xFFECE0FF), fontSize: 12),
-                  textAlign: TextAlign.center,
-                ),
-              ]),
+                  const SizedBox(height: 14),
+                  Semantics(
+                    label: 'Thời gian còn lại ' + _time,
+                    liveRegion: false,
+                    child: Text(
+                      _time,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 60,
+                        height: 1,
+                        fontFeatures: [FontFeature.tabularFigures()],
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+                  LinearProgressIndicator(
+                    value: progress.clamp(0.0, 1.0),
+                    minHeight: 8,
+                    color: const Color(0xFFEDD8FF),
+                    backgroundColor: const Color(0x55FFFFFF),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    '25 phút · không tự bật chế độ Không làm phiền',
+                    style: TextStyle(color: Color(0xFFECE0FF), fontSize: 12),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 18),
             if (_loading)
@@ -228,21 +229,32 @@ class _FocusPageState extends State<FocusPage>
               if (_error != null)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 12),
-                  child: Row(children: [
-                    Expanded(child: Text(_error!,
-                      style: const TextStyle(color: Color(0xFFC9304A)))),
-                    TextButton(onPressed: _refresh,
-                      child: const Text('Thử lại')),
-                  ]),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          _error!,
+                          style: const TextStyle(color: Color(0xFFC9304A)),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: _refresh,
+                        child: const Text('Thử lại'),
+                      ),
+                    ],
+                  ),
                 ),
               if (inactive)
                 FilledButton.icon(
-                  onPressed: _busy ? null : () => _run(
-                    () => _controller.start(minutes: 25),
-                  ),
+                  onPressed: _busy
+                      ? null
+                      : () => _run(() => _controller.start(minutes: 25)),
                   icon: const Icon(Icons.play_arrow_rounded),
-                  label: Text(_session.phase == FocusPhase.completed
-                      ? 'Bắt đầu phiên mới' : 'Bắt đầu 25 phút'),
+                  label: Text(
+                    _session.phase == FocusPhase.completed
+                        ? 'Bắt đầu phiên mới'
+                        : 'Bắt đầu 25 phút',
+                  ),
                   style: FilledButton.styleFrom(
                     backgroundColor: _violet,
                     minimumSize: const Size.fromHeight(54),
@@ -250,9 +262,11 @@ class _FocusPageState extends State<FocusPage>
                 ),
               if (running || paused) ...[
                 FilledButton.icon(
-                  onPressed: _busy ? null : () => _run(
-                    running ? _controller.pause : _controller.resume,
-                  ),
+                  onPressed: _busy
+                      ? null
+                      : () => _run(
+                          running ? _controller.pause : _controller.resume,
+                        ),
                   icon: Icon(
                     running ? Icons.pause_rounded : Icons.play_arrow_rounded,
                   ),
@@ -282,19 +296,27 @@ class _FocusPageState extends State<FocusPage>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text('Tập trung nhẹ nhàng',
-                      style: TextStyle(fontWeight: FontWeight.w800,
-                        fontSize: 16, color: _deepPurple)),
+                    Text(
+                      'Tập trung nhẹ nhàng',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16,
+                        color: _deepPurple,
+                      ),
+                    ),
                     SizedBox(height: 8),
-                    Text('Bộ đếm sử dụng thời gian thực và lưu phiên '
+                    Text(
+                      'Bộ đếm sử dụng thời gian thực và lưu phiên '
                       'trên thiết bị. Nếu rời ứng dụng rồi quay lại, '
-                      'thời gian còn lại được tính từ mốc đã lưu.'),
+                      'thời gian còn lại được tính từ mốc đã lưu.',
+                    ),
                     SizedBox(height: 10),
-                    Text('Thông báo nền, Quick Settings và Live Activity '
+                    Text(
+                      'Thông báo nền, Quick Settings và Live Activity '
                       'chưa được kết nối; không có lời hứa về báo thức '
                       'khi ứng dụng bị đóng.',
-                      style: TextStyle(color: Color(0xFF766C8A),
-                        fontSize: 12)),
+                      style: TextStyle(color: Color(0xFF766C8A), fontSize: 12),
+                    ),
                   ],
                 ),
               ),

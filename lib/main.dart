@@ -11,25 +11,23 @@ class OneLifeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'OneLife',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFF7954D8),
-          ),
-          scaffoldBackgroundColor: const Color(0xFFF8F6FD),
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Color(0xFFF8F6FD),
-            foregroundColor: Color(0xFF292448),
-          ),
-          filledButtonTheme: FilledButtonThemeData(
-            style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xFF7954D8),
-              minimumSize: const Size(48, 44),
-            ),
-          ),
+    title: 'OneLife',
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF7954D8)),
+      scaffoldBackgroundColor: const Color(0xFFF8F6FD),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xFFF8F6FD),
+        foregroundColor: Color(0xFF292448),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: const Color(0xFF7954D8),
+          minimumSize: const Size(48, 44),
         ),
-        home: const OneLifeDesignShell(),
-      );
+      ),
+    ),
+    home: const OneLifeDesignShell(),
+  );
 }

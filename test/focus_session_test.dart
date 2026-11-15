@@ -33,28 +33,29 @@ void main() {
     expect(loaded.phase, FocusPhase.running);
   });
 
-  test('Pause freezes elapsed time and resume uses remaining seconds',
-      () async {
-    final storage = MemoryFocusStorage();
-    var now = DateTime.utc(2026, 11, 15, 9);
-    final controller = FocusSessionController(storage, now: () => now);
+  test(
+    'Pause freezes elapsed time and resume uses remaining seconds',
+    () async {
+      final storage = MemoryFocusStorage();
+      var now = DateTime.utc(2026, 11, 15, 9);
+      final controller = FocusSessionController(storage, now: () => now);
 
-    await controller.start();
-    now = now.add(const Duration(minutes: 10));
-    final paused = await controller.pause();
-    expect(paused.phase, FocusPhase.paused);
-    expect(paused.remainingSeconds, 900);
-    expect(paused.deadlineUtc, isNull);
+      await controller.start();
+      now = now.add(const Duration(minutes: 10));
+      final paused = await controller.pause();
+      expect(paused.phase, FocusPhase.paused);
+      expect(paused.remainingSeconds, 900);
+      expect(paused.deadlineUtc, isNull);
 
-    now = now.add(const Duration(hours: 3));
-    expect((await controller.load()).remainingSeconds, 900);
-    final resumed = await controller.resume();
-    expect(resumed.deadlineUtc, now.add(const Duration(minutes: 15)));
-    expect((await controller.load()).phase, FocusPhase.running);
-  });
+      now = now.add(const Duration(hours: 3));
+      expect((await controller.load()).remainingSeconds, 900);
+      final resumed = await controller.resume();
+      expect(resumed.deadlineUtc, now.add(const Duration(minutes: 15)));
+      expect((await controller.load()).phase, FocusPhase.running);
+    },
+  );
 
-  test('Recover after process restart and store completed session',
-      () async {
+  test('Recover after process restart and store completed session', () async {
     final storage = MemoryFocusStorage();
     var now = DateTime.utc(2026, 11, 15, 9);
     final firstProcess = FocusSessionController(storage, now: () => now);
@@ -86,13 +87,14 @@ void main() {
     await expectLater(controller.start(minutes: 0), throwsArgumentError);
   });
 
-  testWidgets('V3.4 Focus presents real start pause and resume controls',
-      (tester) async {
+  testWidgets('V3.4 Focus presents real start pause and resume controls', (
+    tester,
+  ) async {
     final storage = MemoryFocusStorage();
     final controller = FocusSessionController(storage);
-    await tester.pumpWidget(MaterialApp(
-      home: FocusPage(controller: controller),
-    ));
+    await tester.pumpWidget(
+      MaterialApp(home: FocusPage(controller: controller)),
+    );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(find.text('Bắt đầu 25 phút'), findsOneWidget);

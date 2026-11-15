@@ -46,12 +46,12 @@ class FocusSession {
       phase == FocusPhase.running || phase == FocusPhase.paused;
 
   Map<String, Object?> toMap() => {
-        'id': 1,
-        'phase': phase.name,
-        'total_seconds': totalSeconds,
-        'remaining_seconds': remainingSeconds,
-        'deadline_utc': deadlineUtc?.toUtc().toIso8601String(),
-      };
+    'id': 1,
+    'phase': phase.name,
+    'total_seconds': totalSeconds,
+    'remaining_seconds': remainingSeconds,
+    'deadline_utc': deadlineUtc?.toUtc().toIso8601String(),
+  };
 
   factory FocusSession.fromMap(Map<String, Object?> values) {
     final raw = values['phase'] as String?;
@@ -118,10 +118,8 @@ class SqliteFocusSessionStorage implements FocusSessionStorage {
 }
 
 class FocusSessionController {
-  FocusSessionController(
-    this.storage, {
-    DateTime Function()? now,
-  }) : _now = now ?? DateTime.now;
+  FocusSessionController(this.storage, {DateTime Function()? now})
+    : _now = now ?? DateTime.now;
 
   final FocusSessionStorage storage;
   final DateTime Function() _now;

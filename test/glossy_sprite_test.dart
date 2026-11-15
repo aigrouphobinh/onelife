@@ -16,8 +16,9 @@ void main() {
     expect(glossyFrameIndex(double.nan, 12), 0);
   });
 
-  testWidgets('Dog Recovering uses committed PNG frames with semantics',
-      (tester) async {
+  testWidgets('Dog Recovering uses committed PNG frames with semantics', (
+    tester,
+  ) async {
     final semantics = tester.ensureSemantics();
     await tester.pumpWidget(
       const MaterialApp(
@@ -38,8 +39,9 @@ void main() {
     semantics.dispose();
   });
 
-  testWidgets('All 15 Dog atlases preserve true RGBA transparency',
-      (tester) async {
+  testWidgets('All 15 Dog atlases preserve true RGBA transparency', (
+    tester,
+  ) async {
     for (final spec in [
       GlossySpriteSpec.dogRecovering,
       GlossySpriteSpec.dogFocus,
@@ -70,8 +72,11 @@ void main() {
       expect(rgba!.getUint8(3), 0, reason: spec.assetPath);
       // The first illustrated cell has opaque art near its center.
       final centerAlphaOffset = (128 * image.width + 128) * 4 + 3;
-      expect(rgba.getUint8(centerAlphaOffset), greaterThan(20),
-          reason: spec.assetPath);
+      expect(
+        rgba.getUint8(centerAlphaOffset),
+        greaterThan(20),
+        reason: spec.assetPath,
+      );
       image.dispose();
       codec.dispose();
     }

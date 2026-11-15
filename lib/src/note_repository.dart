@@ -3,18 +3,23 @@ import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
 
 class Note {
-  const Note({required this.id, required this.title, required this.body, required this.updatedAt});
+  const Note({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.updatedAt,
+  });
   final String id;
   final String title;
   final String body;
   final String updatedAt;
 
   factory Note.fromMap(Map<String, Object?> map) => Note(
-        id: map['id'] as String,
-        title: map['title'] as String,
-        body: map['body'] as String,
-        updatedAt: map['updated_at'] as String,
-      );
+    id: map['id'] as String,
+    title: map['title'] as String,
+    body: map['body'] as String,
+    updatedAt: map['updated_at'] as String,
+  );
 }
 
 class NoteRepository {
@@ -27,7 +32,9 @@ class NoteRepository {
       p.join(directory, 'onelife.db'),
       version: 1,
       onCreate: (db, version) async {
-        await db.execute('CREATE TABLE notes (id TEXT PRIMARY KEY, title TEXT NOT NULL, body TEXT NOT NULL, updated_at TEXT NOT NULL)');
+        await db.execute(
+          'CREATE TABLE notes (id TEXT PRIMARY KEY, title TEXT NOT NULL, body TEXT NOT NULL, updated_at TEXT NOT NULL)',
+        );
         await db.execute('CREATE INDEX idx_notes_updated ON notes(updated_at)');
       },
     );
@@ -38,15 +45,20 @@ class NoteRepository {
     final db = await database;
     final trimmed = query.trim();
     if (trimmed.isEmpty) {
-      return (await db.query('notes', orderBy: 'updated_at DESC'))
-          .map(Note.fromMap).toList();
+      return (await db.query(
+        'notes',
+        orderBy: 'updated_at DESC',
+      )).map(Note.fromMap).toList();
     }
     // Escape LIKE wildcards so a search is treated as literal text.
-    final pattern = '%${trimmed.replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_')}%';
-    return (await db.query('notes',
-            where: "title LIKE ? ESCAPE '\\' OR body LIKE ? ESCAPE '\\'",
-            whereArgs: [pattern, pattern], orderBy: 'updated_at DESC'))
-        .map(Note.fromMap).toList();
+    final pattern =
+        '%${trimmed.replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_')}%';
+    return (await db.query(
+      'notes',
+      where: "title LIKE ? ESCAPE '\\' OR body LIKE ? ESCAPE '\\'",
+      whereArgs: [pattern, pattern],
+      orderBy: 'updated_at DESC',
+    )).map(Note.fromMap).toList();
   }
 
   Future<void> save({required String title, required String body}) async {

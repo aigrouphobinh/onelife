@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'glossy_sprite.dart';
 
 @immutable
@@ -13,18 +14,78 @@ class RobotAnimationEntry {
 /// Exactly 12 source-backed Robot animations present on main.
 /// Missing Sad / Balanced / Strained are intentionally not previewed as fake art.
 const robotAnimationEntries = <RobotAnimationEntry>[
-  RobotAnimationEntry('idle', 'Bình thường', 'Robot đứng chờ, đèn sáng dịu', GlossySpriteSpec.robotIdle),
-  RobotAnimationEntry('remind', 'Nhắc nhở', 'Robot nhắc một việc đã chọn', GlossySpriteSpec.robotRemind),
-  RobotAnimationEntry('happy', 'Vui vẻ', 'Robot mỉm cười và nhún nhảy', GlossySpriteSpec.robotHappy),
-  RobotAnimationEntry('overloaded', 'Quá tải', 'Robot giảm nhịp khi cần nghỉ', GlossySpriteSpec.robotOverloaded),
-  RobotAnimationEntry('resting', 'Nghỉ ngơi', 'Robot thư giãn và hạ tay', GlossySpriteSpec.robotResting),
-  RobotAnimationEntry('alarm', 'Báo thức', 'Robot đánh thức nhẹ nhàng', GlossySpriteSpec.robotAlarm),
-  RobotAnimationEntry('sleepy', 'Buồn ngủ', 'Robot buồn ngủ và chớp mắt', GlossySpriteSpec.robotSleepy),
-  RobotAnimationEntry('recovering', 'Hồi phục', 'Robot khôi phục sau giờ nghỉ', GlossySpriteSpec.robotRecovering),
-  RobotAnimationEntry('focus', 'Tập trung', 'Robot hướng sự chú ý vào một việc', GlossySpriteSpec.robotFocus),
-  RobotAnimationEntry('study', 'Học tập', 'Robot đọc và khám phá kiến thức', GlossySpriteSpec.robotStudy),
-  RobotAnimationEntry('done', 'Hoàn thành', 'Robot ăn mừng hoàn thành việc nhỏ', GlossySpriteSpec.robotDone),
-  RobotAnimationEntry('thinking', 'Suy nghĩ', 'Robot nghiêng đầu, suy nghĩ và có ý tưởng', GlossySpriteSpec.robotThinking),
+  RobotAnimationEntry(
+    'idle',
+    'Bình thường',
+    'Robot đứng chờ, đèn sáng dịu',
+    GlossySpriteSpec.robotIdle,
+  ),
+  RobotAnimationEntry(
+    'remind',
+    'Nhắc nhở',
+    'Robot nhắc một việc đã chọn',
+    GlossySpriteSpec.robotRemind,
+  ),
+  RobotAnimationEntry(
+    'happy',
+    'Vui vẻ',
+    'Robot mỉm cười và nhún nhảy',
+    GlossySpriteSpec.robotHappy,
+  ),
+  RobotAnimationEntry(
+    'overloaded',
+    'Quá tải',
+    'Robot giảm nhịp khi cần nghỉ',
+    GlossySpriteSpec.robotOverloaded,
+  ),
+  RobotAnimationEntry(
+    'resting',
+    'Nghỉ ngơi',
+    'Robot thư giãn và hạ tay',
+    GlossySpriteSpec.robotResting,
+  ),
+  RobotAnimationEntry(
+    'alarm',
+    'Báo thức',
+    'Robot đánh thức nhẹ nhàng',
+    GlossySpriteSpec.robotAlarm,
+  ),
+  RobotAnimationEntry(
+    'sleepy',
+    'Buồn ngủ',
+    'Robot buồn ngủ và chớp mắt',
+    GlossySpriteSpec.robotSleepy,
+  ),
+  RobotAnimationEntry(
+    'recovering',
+    'Hồi phục',
+    'Robot khôi phục sau giờ nghỉ',
+    GlossySpriteSpec.robotRecovering,
+  ),
+  RobotAnimationEntry(
+    'focus',
+    'Tập trung',
+    'Robot hướng sự chú ý vào một việc',
+    GlossySpriteSpec.robotFocus,
+  ),
+  RobotAnimationEntry(
+    'study',
+    'Học tập',
+    'Robot đọc và khám phá kiến thức',
+    GlossySpriteSpec.robotStudy,
+  ),
+  RobotAnimationEntry(
+    'done',
+    'Hoàn thành',
+    'Robot ăn mừng hoàn thành việc nhỏ',
+    GlossySpriteSpec.robotDone,
+  ),
+  RobotAnimationEntry(
+    'thinking',
+    'Suy nghĩ',
+    'Robot nghiêng đầu, suy nghĩ và có ý tưởng',
+    GlossySpriteSpec.robotThinking,
+  ),
 ];
 
 class RobotAnimationGalleryPage extends StatefulWidget {
@@ -51,8 +112,10 @@ class _RobotAnimationGalleryPageState extends State<RobotAnimationGalleryPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text('Glossy Kawaii · PNG nền trong suốt',
-                  style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                'Glossy Kawaii · PNG nền trong suốt',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               const SizedBox(height: 8),
               const Text(
                 'Hiện có 12/15 animation nguồn Robot. '
@@ -73,8 +136,10 @@ class _RobotAnimationGalleryPageState extends State<RobotAnimationGalleryPage> {
                         semanticLabel: current.description,
                       ),
                       const SizedBox(height: 8),
-                      Text(current.label,
-                          style: Theme.of(context).textTheme.titleLarge),
+                      Text(
+                        current.label,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
                       Text(current.description, textAlign: TextAlign.center),
                       Text(
                         '${current.sprite.frames} frame · '
@@ -93,8 +158,10 @@ class _RobotAnimationGalleryPageState extends State<RobotAnimationGalleryPage> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text('12 trạng thái có asset thật',
-                  style: Theme.of(context).textTheme.titleSmall),
+              Text(
+                '12 trạng thái có asset thật',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
