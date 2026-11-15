@@ -72,8 +72,9 @@ class SqliteOneLifeStore implements OneLifeStore {
   @override
   Future<void> addTask({required String title, DateTime? dueAt}) async {
     final trimmed = title.trim();
-    if (trimmed.isEmpty)
+    if (trimmed.isEmpty) {
       throw ArgumentError('Tên công việc không được để trống.');
+    }
     await (await _database).insert('tasks', {
       'id': const Uuid().v4(),
       'title': trimmed,
