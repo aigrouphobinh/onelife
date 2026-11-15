@@ -8,9 +8,9 @@ import 'home_page.dart';
 import 'dog_animation_gallery.dart';
 import 'robot_animation_gallery.dart';
 
-const designPurple = Color(0xFF7954D8);
-const designInk = Color(0xFF292448);
-const designBackground = Color(0xFFF8F6FD);
+const designPurple = Color(0xFF8054E6);
+const designInk = Color(0xFF21183C);
+const designBackground = Color(0xFFF8F3FF);
 const brainIdle = GlossySpriteSpec(
   assetPath: 'assets/characters-v2/brain/idle/sheet.png',
   frames: 8,
