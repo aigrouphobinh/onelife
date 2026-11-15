@@ -160,6 +160,19 @@ internal object TaskReminders {
             .setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, deadline, p)
     }
 
+    /**
+     * Called after an existing task was edited or deleted in SQLite.
+     * Removes the old alarm and stale Snooze preference before rebuilding
+     * from the current due date. Deleted tasks have nothing to reschedule.
+     */
+    fun taskChanged(c: Context, id: String) {
+        if (id.isBlank()) return
+        cancel(c, id)
+        prefs(c).edit().remove(SNOOZE_PREFIX + id).apply()
+        manager(c)?.cancel(id, NOTICE_ID)
+        sync(c)
+    }
+
     /** Called after Flutter saves/tasks, Android action buttons, or reboot. */
     fun sync(c: Context) {
         if (!enabled(c)) return
