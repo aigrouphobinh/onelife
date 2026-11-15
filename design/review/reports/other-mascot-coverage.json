@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "totalRequiredClips": 60,
-  "illustratedCandidates": 42,
+  "illustratedCandidates": 43,
   "derivedCandidates": 1,
-  "missing": 17,
-  "availableCandidates": 43,
+  "missing": 16,
+  "availableCandidates": 44,
   "artApprovedCount": 0,
   "phoneVerifiedCount": 0,
   "automatedEvidencePass": true,
@@ -400,7 +400,11 @@
     {
       "characterId": "robot",
       "state": "balanced",
-      "status": "missing"
+      "status": "original-candidate-qa",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet",
+      "artReview": "pending",
+      "deviceReview": "pending"
     },
     {
       "characterId": "robot",
