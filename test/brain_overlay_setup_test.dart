@@ -75,7 +75,7 @@ void main() {
       if (call.method == 'stopBrainOverlay') {
         stopCalls++;
         running = false;
-        return true;
+        return 'requested';
       }
       return null;
     });
