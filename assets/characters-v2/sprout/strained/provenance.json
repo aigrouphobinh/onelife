@@ -1,0 +1,22 @@
+{
+  "characterId": "sprout",
+  "state": "strained",
+  "createdOn": "2026-11-15",
+  "generator": "OpenAI ImageGen",
+  "sourceType": "original-ai-generated-twelve-distinct-illustrated-poses",
+  "sourceArtwork": "a_clean_high_resolution_kawaii_cartoon_sprite_she.png",
+  "sourceArtDimensions": [
+    1448,
+    1086
+  ],
+  "sourceGrid": [
+    4,
+    3
+  ],
+  "preprocessing": "Split 12 independently illustrated original 362x362 cells. Segment neutral checkerboard RGB matte into transparent alpha using saturation and dark-outline connected-component silhouettes; fill interior highlights; remove stray small blobs; downscale each pose uniformly to 232x232 and center inside 256x256 RGBA cells. No affine wiggle, transform of one static still, duplicated frame, or poster.",
+  "rights": "Original AI-generated asset prepared for OneLife; no third-party licensed clip copied",
+  "sourceSha256": "2d14f0c40f217564c6cb9b8c991fd9e5c94993fd7ea41a3ace817c85eff15e52",
+  "humanArtReview": "pending",
+  "realDeviceReview": "pending",
+  "productionReady": false
+}
