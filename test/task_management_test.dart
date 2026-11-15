@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onelife/src/design_shell.dart';
 import 'package:onelife/src/onelife_store.dart';
@@ -71,9 +72,20 @@ void main() {
     tester,
   ) async {
     final store = MemoryTasks();
+    const bridge = MethodChannel('onelife/quick_capture');
+    final changed = <String>[];
+    final messenger = tester.binding.defaultBinaryMessenger;
+    messenger.setMockMethodCallHandler(bridge, (call) async {
+      if (call.method == 'taskChanged') {
+        changed.add((call.arguments as Map)['id'] as String);
+        return true;
+      }
+      return null;
+    });
+    addTearDown(() => messenger.setMockMethodCallHandler(bridge, null));
     await tester.pumpWidget(
       MaterialApp(
-        theme: ThemeData(platform: TargetPlatform.iOS),
+        theme: ThemeData(platform: TargetPlatform.android),
         home: OneLifeDesignShell(store: store),
       ),
     );
@@ -95,6 +107,7 @@ void main() {
 
     expect(store.items.single.title, 'Việc đã đổi');
     expect(store.items.single.dueAt, isNull);
+    expect(changed, ['task-1']);
     // Clearing the deadline moves the task from Future to Today.
     await tester.tap(find.text('Hôm nay'));
     await tester.pumpAndSettle();
@@ -106,6 +119,7 @@ void main() {
     await tester.tap(find.text('Hủy'));
     await tester.pumpAndSettle();
     expect(store.items, hasLength(1));
+    expect(changed, ['task-1']);
 
     await tester.tap(find.byTooltip('Tùy chọn công việc'));
     await tester.pumpAndSettle();
@@ -114,6 +128,7 @@ void main() {
     await tester.tap(find.text('Xóa'));
     await tester.pumpAndSettle();
     expect(store.items, isEmpty);
+    expect(changed, ['task-1', 'task-1']);
     expect(find.text('Chưa có công việc trong mục này.'), findsOneWidget);
   });
 }
