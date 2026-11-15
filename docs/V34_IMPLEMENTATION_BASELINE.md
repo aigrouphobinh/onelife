@@ -41,11 +41,11 @@ system-owned and can look different on each OS/OEM.
 Open `Tập trung 25 phút` from Flutter Home's shortcut; this is an actual timer,
 not a simulated Quick Settings tile.
 
-## Native capability / implementation gate (NOT shipped)
+## Native capability / implementation gate (Android Focus code compiled, device QA pending)
 
 | Design surface | Correct integration | Minimum precondition |
 |---|---|---|
-| Android Quick Settings | Native `TileService` (Kotlin) linked to shared local Focus state | Generate and build Flutter Android host, declare TileService in manifest, user adds tile |
+| Android Quick Settings | Native `FocusTileService` shares `onelife_focus.db` with Flutter; tap starts, pauses or resumes 25 minutes | Android debug APK compile passed; manual add, OEM and lifecycle device QA outstanding |
 | Android notification actions | Native notification or maintained Flutter plugin with receiver | Permission and action persistence; no false completed state |
 | Home screen widget | Android AppWidget / iOS WidgetKit with shared data bridge | Actual platform hosts and lifecycle testing |
 | iOS Control Center | iOS 18+ WidgetKit `ControlWidgetButton` or `ControlWidgetToggle` | iOS host/extension, intent bridge and device test |
@@ -53,10 +53,12 @@ not a simulated Quick Settings tile.
 | Android Brain overlay | `SYSTEM_ALERT_WINDOW` after explicit opt-in | Android host, drag/dismiss controls and low-memory QA |
 | Habits/usage statistics | Android UsageStats with opt-in; iOS entitled Screen Time when available | Distinguish missing permission from zero minutes |
 
-The repository originally lacks generated `android/` and `ios/` host projects.
-Do **not** claim any native outside-app control exists until its platform project
-and app-level tests are present. Scaffold the hosts as a separate tested milestone;
-don't insert non-buildable Kotlin/Swift pseudo-implementations.
+Flutter Android and iOS host project folders were generated under `android/` and `ios/`.
+The Android Focus TileService is registered in `AndroidManifest.xml` and its
+`flutter build apk --debug` compilation succeeded in GitHub Actions.
+**This is not device QA**: the user still needs to add the tile and test
+on real Android hardware; the iOS control and other outside-app surfaces
+remain unimplemented.
 
 ## Acceptance tests before calling V3.4 complete
 
