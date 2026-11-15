@@ -977,9 +977,13 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
         ],
       );
 
-  Widget reminderSetupPage() {
-    final android = Theme.of(context).platform == TargetPlatform.android;
-    return Scaffold(
+  // This route has its own rebuild scope: the parent shell's setState does
+  // not automatically rebuild a Widget already pushed onto Navigator.
+  Widget reminderSetupPage() => StatefulBuilder(
+        builder: (sheetContext, refreshSheet) {
+          final android =
+              Theme.of(sheetContext).platform == TargetPlatform.android;
+          return Scaffold(
       backgroundColor: designBackground,
       appBar: AppBar(title: const Text('Nhắc việc & Thông báo')),
       body: ListView(
@@ -1000,7 +1004,14 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
                         : 'Đang tắt · bật để xin quyền thông báo')
                     : 'Chưa triển khai trên iOS'),
                 value: android && _remindersEnabled,
-                onChanged: android && !_remindersBusy ? _changeReminders : null,
+                onChanged: android && !_remindersBusy
+                    ? (value) async {
+                        final update = _changeReminders(value);
+                        refreshSheet(() {}); // show busy while OS asks permission
+                        await update;
+                        if (sheetContext.mounted) refreshSheet(() {});
+                      }
+                    : null,
               ),
               const Divider(),
               const Text(
@@ -1040,8 +1051,9 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
           )),
         ],
       ),
-    );
-  }
+          );
+        },
+      );
 
   Widget homeWidgetSetupPage() {
     final android = Theme.of(context).platform == TargetPlatform.android;
