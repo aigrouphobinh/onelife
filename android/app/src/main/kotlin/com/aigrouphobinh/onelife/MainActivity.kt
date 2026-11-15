@@ -98,6 +98,17 @@ class MainActivity : FlutterActivity() {
                         runOnUiThread { result.success(snapshot) }
                     }.start()
                 }
+                "setUsageDailyGoal" -> {
+                    val minutes = call.argument<Int>("minutes")
+                    val valid = UsageInsights.saveGoal(this, minutes)
+                    if (valid && BrainOverlayService.isVisible) {
+                        // Refresh the visible Brain, never start a new overlay.
+                        startService(Intent(this, BrainOverlayService::class.java).apply {
+                            action = BrainOverlayService.ACTION_REFRESH
+                        })
+                    }
+                    result.success(valid)
+                }
                 "openUsageAccessSettings" -> {
                     try {
                         startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
