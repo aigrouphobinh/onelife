@@ -15,6 +15,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.os.PowerManager
 import android.provider.Settings
 import android.view.Gravity
 import android.view.MotionEvent
@@ -57,9 +58,14 @@ class BrainOverlayService : Service() {
     private val animate = object : Runnable {
         override fun run() {
             if (!isVisible) return
-            frame = (frame + 1) % 8
-            sprite?.frame = frame
-            handler.postDelayed(this, FRAME_MS)
+            val interactive =
+                (getSystemService(Context.POWER_SERVICE) as PowerManager).isInteractive
+            if (interactive) {
+                frame = (frame + 1) % 8
+                sprite?.frame = frame
+            }
+            // Do not run 140ms sprite updates while the screen is off.
+            handler.postDelayed(this, if (interactive) FRAME_MS else 1500L)
         }
     }
 
@@ -154,6 +160,10 @@ class BrainOverlayService : Service() {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
             ))
         }
+        // TalkBack activation opens the same menu as a user tap.
+        brain.isClickable = true
+        brain.isFocusable = true
+        brain.setOnClickListener { toggleMenu() }
         // Only Brain itself handles drag/toggle; other screen touches pass through.
         brain.setOnTouchListener(object : View.OnTouchListener {
             var rawX = 0f
@@ -193,9 +203,8 @@ class BrainOverlayService : Service() {
                         if (dragging) {
                             prefs.edit().putInt("x", layout.x).putInt("y", layout.y).apply()
                         } else {
-                            toggleMenu()
+                            view.performClick()
                         }
-                        view.performClick()
                         return true
                     }
                     MotionEvent.ACTION_CANCEL -> return true
