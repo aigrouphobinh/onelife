@@ -225,8 +225,8 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 160));
     expect(find.byType(CircularProgressIndicator), findsNothing);
-    expect(find.text('Android chưa trả trạng thái phiên nghỉ.'),
-        findsOneWidget);
+    expect(
+        find.text('Android chưa trả trạng thái phiên nghỉ.'), findsOneWidget);
     expect(find.text('Bắt đầu nghỉ 5 phút'), findsNothing);
   });
   testWidgets(
@@ -259,5 +259,4 @@ void main() {
     expect(find.text('Brain đang thư giãn'), findsOneWidget);
     expect(find.text('Nghỉ xong — trở lại nhịp của bạn'), findsNothing);
   });
-
 }
