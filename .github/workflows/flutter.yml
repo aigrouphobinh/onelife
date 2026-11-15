@@ -11,6 +11,7 @@ on:
       - 'test/**'
       - 'pubspec.yaml'
       - 'pubspec.lock'
+      - 'tools/test_today_tasks_sql.py'
       - 'android/**'
       - 'ios/**'
       - '.github/workflows/flutter.yml'
@@ -31,6 +32,8 @@ jobs:
         with:
           channel: stable
       - run: flutter pub get
+      - name: Verify native Today Tasks SQL filter
+        run: python3 tools/test_today_tasks_sql.py
       - run: dart format --output=none --set-exit-if-changed lib test
       - run: flutter analyze
       - run: flutter test
