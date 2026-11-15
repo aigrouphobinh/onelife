@@ -11,6 +11,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.drawable.GradientDrawable
+import android.database.sqlite.SQLiteDatabase
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -51,10 +52,57 @@ class BrainOverlayService : Service() {
     private lateinit var manager: WindowManager
     private var root: FrameLayout? = null
     private var options: LinearLayout? = null
+    private var usageCaption: TextView? = null
     private var sprite: SpriteView? = null
     private var params: WindowManager.LayoutParams? = null
     private var expanded = false
     private var frame = 0
+    private val refreshBehavior = object : Runnable {
+        override fun run() {
+            if (!isVisible) return
+            // Heavy usage/event history and Focus SQLite are read off main UI.
+            Thread {
+                val snapshot = UsageInsights.snapshot(applicationContext)
+                val isFocusRunning = readFocusActive()
+                handler.post {
+                    if (!isVisible) return@post
+                    val tier = snapshot["tier"] as? String ?: "unknown"
+                    sprite?.usageTier = tier
+                    sprite?.focused = isFocusRunning
+                    usageCaption?.text = when {
+                        isFocusRunning -> "Đang tập trung · chế độ Focus"
+                        snapshot["available"] != true -> "Chưa có dữ liệu thời gian dùng"
+                        else -> {
+                            val mins = snapshot["minutes"] as? Int ?: 0
+                            "Ước tính hôm nay: ${mins / 60} giờ ${mins % 60} phút"
+                        }
+                    }
+                }
+            }.start()
+            handler.postDelayed(this, 5 * 60 * 1000L)
+        }
+    }
+
+    private fun readFocusActive(): Boolean {
+        val dbFile = getDatabasePath("onelife_focus.db")
+        if (!dbFile.exists()) return false
+        return try {
+            SQLiteDatabase.openDatabase(
+                dbFile.path, null, SQLiteDatabase.OPEN_READONLY,
+            ).use { db ->
+                db.rawQuery(
+                    "SELECT phase, deadline_utc FROM focus_session WHERE id=1", null,
+                ).use { cursor ->
+                    if (!cursor.moveToFirst() || cursor.getString(0) != "running" ||
+                        cursor.isNull(1)
+                    ) return@use false
+                    val deadline = TaskReminders.utcMillis(cursor.getString(1))
+                    deadline != null && deadline > System.currentTimeMillis()
+                }
+            }
+        } catch (_: Exception) { false }
+    }
+
     private val animate = object : Runnable {
         override fun run() {
             if (!isVisible) return
@@ -145,6 +193,17 @@ class BrainOverlayService : Service() {
             gravity = Gravity.CENTER
             setTypeface(typeface, android.graphics.Typeface.BOLD)
         }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(31)))
+        usageCaption = TextView(this).apply {
+            text = "Đang đọc trạng thái (nếu có quyền)"
+            setTextColor(Color.rgb(112, 82, 151))
+            textSize = 11f
+            gravity = Gravity.CENTER
+            maxLines = 2
+        }.also {
+            menu.addView(it, LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, dp(37),
+            ))
+        }
         addAction(menu, "✓  Việc hôm nay") { openTaskAction(MainActivity.EXTRA_TODAY_TASKS) }
         addAction(menu, "+  Ghi nhanh") { openTaskAction(MainActivity.EXTRA_QUICK_CAPTURE) }
         addAction(menu, "◷  Tập trung") { openTaskAction(MainActivity.EXTRA_FOCUS) }
@@ -215,6 +274,7 @@ class BrainOverlayService : Service() {
         manager.addView(root, params)
         isVisible = true
         handler.postDelayed(animate, FRAME_MS)
+        handler.post(refreshBehavior)
     }
 
     private fun addAction(menu: LinearLayout, label: String, click: () -> Unit) {
@@ -240,7 +300,7 @@ class BrainOverlayService : Service() {
         options?.visibility = if (expanded) View.VISIBLE else View.GONE
         params?.apply {
             width = if (expanded) dp(250) else dp(94)
-            height = if (expanded) dp(340) else dp(94)
+            height = if (expanded) dp(384) else dp(94)
             x = x.coerceIn(
                 0, (resources.displayMetrics.widthPixels - width).coerceAtLeast(0),
             )
@@ -282,6 +342,7 @@ class BrainOverlayService : Service() {
     override fun onDestroy() {
         isVisible = false
         handler.removeCallbacks(animate)
+        handler.removeCallbacks(refreshBehavior)
         val view = root
         root = null
         if (view != null) {
@@ -290,6 +351,7 @@ class BrainOverlayService : Service() {
         sprite?.release()
         sprite = null
         options = null
+        usageCaption = null
         params = null
         super.onDestroy()
     }
@@ -299,36 +361,66 @@ class BrainOverlayService : Service() {
      * bundled assets, without eight decoded frame copies or fake artwork.
      */
     private inner class SpriteView(context: Context) : View(context) {
-        private val atlas: Bitmap? = try {
-            context.assets.open(ATLAS).use { BitmapFactory.decodeStream(it) }
-        } catch (_: Exception) {
-            try { context.assets.open(MASTER).use { BitmapFactory.decodeStream(it) } }
-            catch (_: Exception) { null }
-        }
+        private val idleSheet: Bitmap? = decode(
+            "flutter_assets/assets/characters-v2/brain/idle/sheet.png"
+        )
+        private val focusSheet: Bitmap? = decode(
+            "flutter_assets/assets/characters-v2/brain/focus/sheet.png"
+        )
+        private val fallbackMaster: Bitmap? = if (idleSheet == null) decode(MASTER) else null
         private val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
+        private val indicator = Paint(Paint.ANTI_ALIAS_FLAG)
         var frame: Int = 0
             set(value) { field = value; invalidate() }
+        var usageTier: String = "unknown"
+            set(value) { field = value; invalidate() }
+        var focused: Boolean = false
+            set(value) { field = value; invalidate() }
+
+        private fun decode(path: String): Bitmap? = try {
+            context.assets.open(path).use { BitmapFactory.decodeStream(it) }
+        } catch (_: Exception) { null }
 
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            val bitmap = atlas ?: return
-            val animation = bitmap.width >= 1024 && bitmap.height >= 512
-            val columns = if (animation) 4 else 1
-            val rows = if (animation) 2 else 1
+            val sheet = if (focused && focusSheet != null) focusSheet else idleSheet
+            val bitmap = sheet ?: fallbackMaster ?: return
+            val isAtlas = sheet != null && bitmap.width >= 1024 && bitmap.height >= 512
+            val columns = if (isAtlas) 4 else 1
+            val rows = if (isAtlas) 2 else 1
             val fw = bitmap.width / columns
             val fh = bitmap.height / rows
-            val index = if (animation) frame % 8 else 0
+            val index = if (isAtlas) frame % 8 else 0
             val source = Rect(
                 (index % columns) * fw, (index / columns) * fh,
                 (index % columns + 1) * fw, (index / columns + 1) * fh,
             )
             val inset = dp(7).toFloat()
+            // Uses the genuine original artist's sprites. State is communicated
+            // through a small accent indicator, never replaced by fabricated art.
             canvas.drawBitmap(
                 bitmap, source,
                 RectF(inset, inset, width - inset, height - inset), paint,
             )
+            val color = when {
+                focused -> Color.rgb(120, 77, 229)
+                usageTier == "high" -> Color.rgb(231, 85, 104)
+                usageTier == "break" -> Color.rgb(246, 160, 64)
+                usageTier == "balanced" -> Color.rgb(79, 181, 142)
+                else -> Color.TRANSPARENT
+            }
+            if (color != Color.TRANSPARENT) {
+                indicator.color = Color.WHITE
+                canvas.drawCircle(width - dp(15).toFloat(), dp(14).toFloat(), dp(7).toFloat(), indicator)
+                indicator.color = color
+                canvas.drawCircle(width - dp(15).toFloat(), dp(14).toFloat(), dp(5).toFloat(), indicator)
+            }
         }
 
-        fun release() { atlas?.recycle() }
+        fun release() {
+            idleSheet?.recycle()
+            focusSheet?.recycle()
+            fallbackMaster?.recycle()
+        }
     }
 }
