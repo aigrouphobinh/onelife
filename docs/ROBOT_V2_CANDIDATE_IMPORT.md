@@ -1,6 +1,6 @@
 # OneLife Robot Glossy V2 — source-art and review status
 
-**Checkpoint: 2026-11-15.** The 12 Robot entries below are SHA-locked source candidates on `main`, not 11 human-approved production animations. Original source WebPs, rendered PNG atlases, GIF previews, metadata and QA are required before use in Flutter. Robot is not production-ready.
+**Checkpoint: 2026-11-15.** The 15 Robot entries below are SHA-locked source candidates on `main`, not 15 human-approved production animations. Original source WebPs, rendered PNG atlases, GIF previews, metadata and QA are required before use in Flutter. Robot is not production-ready.
 
 ## Already imported to main
 
@@ -18,6 +18,9 @@
 | study | 12 | `7b194c783c4444e316ce6b0f9825b2f02ae513a54e9648c0799af85ea925ac17` |
 | done | 12 | `0f4a6388b88301bfcfe5adaa98d4d30799da1f14256359c18639a783a2b199a4` |
 | thinking | 12 | `ed3a1577a6996a02361d0939b6fcfd5047c4daa8e937bae751060f66f5b1626a` |
+| sad | 12 | `ec4b5e6b9f363c4e7f93bab0795191027a7300e99233d36e0cfc49b276afd736` |
+| balanced | 12 | `4fea809f44da31baa7c9235c1299bdaafe9a6368971722ccdd9ac718d9e08d07` |
+| strained | 12 | `ff4419e3edda5f834c3c909f679cf396cc4788a46ba010f4047fb71053ae4229` |
 
 - Source: `assets/characters-v2/robot/<state>/sheet_illustrated.webp`, registered in `assets/characters-v2/animation_sources.json`.
 - Renderer: `tools/render_glossy_character_animation.py` produces `sheet.png`, `preview.gif`, `metadata.json`, `qa_report.json` and `manifest.json`.
@@ -25,13 +28,17 @@
 - Reference workflow: [Build glossy character animation assets](https://github.com/aigrouphobinh/onelife/actions/workflows/glossy-character-animations.yml). The `main` render workflow for Robot Done passed: [run 43655281677](https://github.com/aigrouphobinh/onelife/actions/runs/43655281677).
 - Source registration commits: [Idle](https://github.com/aigrouphobinh/onelife/commit/d588d6f8161caaa93ff49b62ed6af0a6e4403ce9), [Remind/Happy/Overloaded](https://github.com/aigrouphobinh/onelife/commit/405aafc1315630569d708e7aeefba9fd7974414a), [six additional states](https://github.com/aigrouphobinh/onelife/commit/10315ceb4510ebf43e6ed675c409a935f82dfd0c), [Done](https://github.com/aigrouphobinh/onelife/commit/9f3e57459990430c071e679d7cbe4b82e95c9ded), [Thinking](https://github.com/aigrouphobinh/onelife/commit/2eb6f8b95b92).
 
-## Still missing: three *independent* pose sheets
+## Final Robot sources committed on `main`
 
-- `sad`: gentle empathy, shoulders sink, blink, compose (no shame or medical claim).
-- `balanced`: peaceful posture, stable antenna and steady core glow; separate physical acting, not just color changes.
-- `strained`: a mild overworked expressive metaphor, no injury or frightening overheating.
+- [Sad — original 12-frame WebP](https://github.com/aigrouphobinh/onelife/commit/420635c2b221672c6c4a557d53508a5d8e955e24)
+- [Balanced — original 12-frame WebP](https://github.com/aigrouphobinh/onelife/commit/1983d41b82d3decabbbbfb3d248f308ced45d732)
+- [Strained — original 12-frame WebP](https://github.com/aigrouphobinh/onelife/commit/ee319cdf08e1e425d13f5f0917dcdee62e2c7aec)
 
-Each requires 8–12 distinct illustrated frames in a 4-column atlas of 256×256 true-alpha cells, stable robot identity, no labels or poster layout; SHA-locked WebP + renderer outputs must be added to `main` before increasing coverage. **A 15-state overview poster is not a source animation** and was correctly rejected from registration.
+All 15 Robot source keys now exist on `main`; renderer-produced PNG/GIF,
+metadata and QA must still be verified against GitHub Actions. A poster or
+static master does not count as a motion source. The three new sheets'
+SHA, origins and local technical QA are recorded in
+[Robot final-three art QA](ROBOT_FINAL3_ART_QA.md).
 
 ## Open product gates
 
@@ -55,4 +62,4 @@ Do not change or duplicate the existing 15-minute GitHub Actions schedule.
 - Original new source: `robot/thinking/sheet_illustrated.webp`, 12 poses, 4×3 cells, SHA-256 `ed3a1577a6996a02361d0939b6fcfd5047c4daa8e937bae751060f66f5b1626a`, 145 ms one-shot. Verified renderer QA: 12 frames, 11 visible adjacent differences, minimum RMS 31.85.
 - Source imagery was cleaned from an AI-generated RGB grid into true RGBA. Human comparison against `robot/master.png` is pending; anti-aliased edges and tiny detachable symbols require visual review on real dark/light screens.
 - Flutter now declares the 12 existing Robot PNG atlases and provides `RobotAnimationGalleryPage` with live `GlossySprite`, source-derived timing, replay, accessible descriptions and reduced-motion support. Widget and pixel-alpha tests are committed, but passing Flutter CI has not been independently confirmed.
-- **Source coverage:** Cat 15, Dog 15, Robot 12, Sprout 0 = 42/60, not product release approval. Three Robot art sources still missing: Sad, Balanced, Strained. Do not use previous generated Dog poster images as Robot assets.
+- **Source coverage:** Cat 15, Dog 15, Robot 15, Sprout 0 = 45/60 source candidates, not product release approval. No original Robot state keys are missing. Do not use previous generated Dog poster images as Robot assets.
