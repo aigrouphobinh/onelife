@@ -48,7 +48,8 @@ def main_check() -> None:
     assert '"unknown"' in native_overlay
     assert 'snapshot["goalMinutes"] !is Int' in native_overlay
     assert 'usageTier == "balanced"' in native_overlay
-    assert 'brain/focus/sheet.png' in native_overlay
+    assert 'private val focusSheet = decode("focus")' in native_overlay
+    assert '"flutter_assets/assets/characters-v2/brain/"' in native_overlay
     assert "5 * 60 * 1000L" in native_overlay
     assert "if (!observed)" in raw
 
