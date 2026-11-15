@@ -9,6 +9,7 @@ import 'note_repository.dart';
 import 'home_page.dart';
 import 'dog_animation_gallery.dart';
 import 'robot_animation_gallery.dart';
+import 'brain_overlay_setup_page.dart';
 
 const designPurple = Color(0xFF8054E6);
 const designInk = Color(0xFF21183C);
@@ -1300,32 +1301,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
         ),
       );
 
-  Widget overlayPage() => Scaffold(
-        appBar: AppBar(title: const Text('Trợ lý nổi')),
-        backgroundColor: designBackground,
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            card(
-              Column(
-                children: [
-                  mascot('brain', size: 130),
-                  const Text(
-                    'Bản xem trước, chưa bật overlay',
-                    style: TextStyle(fontWeight: FontWeight.w800),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Android cần quyền hiển thị trên ứng dụng khác. '
-                    'iOS không cho phép overlay nổi tự do. '
-                    'Màn hình này không yêu cầu quyền hoặc tạo lớp phủ giả.',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+  Widget overlayPage() => const BrainOverlaySetupPage();
 
   @override
   Widget build(BuildContext context) {
