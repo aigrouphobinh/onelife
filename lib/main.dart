@@ -15,15 +15,15 @@ class OneLifeApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF7954D8)),
-          scaffoldBackgroundColor: const Color(0xFFF8F6FD),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF8054E6)),
+          scaffoldBackgroundColor: const Color(0xFFF8F3FF),
           appBarTheme: const AppBarTheme(
-            backgroundColor: Color(0xFFF8F6FD),
-            foregroundColor: Color(0xFF292448),
+            backgroundColor: Color(0xFFF8F3FF),
+            foregroundColor: Color(0xFF21183C),
           ),
           filledButtonTheme: FilledButtonThemeData(
             style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xFF7954D8),
+              backgroundColor: const Color(0xFF8054E6),
               minimumSize: const Size(48, 44),
             ),
           ),
