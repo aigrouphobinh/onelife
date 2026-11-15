@@ -41,6 +41,17 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
+        <!-- V3.4 native one-tap Quick Capture; user must add this QS tile. -->
+        <service
+            android:name=".QuickCaptureTileService"
+            android:exported="true"
+            android:label="Ghi nhanh"
+            android:icon="@drawable/ic_onelife_capture"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
