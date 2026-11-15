@@ -1,0 +1,38 @@
+name: OneLife V3.4 source formatter (one-shot)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v34-dartfmt-once.yml'
+permissions:
+  contents: write
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: dart format lib test
+      - name: Publish deterministic Dart formatting
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add lib test
+          if git diff --cached --quiet; then
+            echo 'No formatting changes'
+            exit 0
+          fi
+          git commit -m 'style(v3.4): format Flutter source and tests'
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 3
+          done
+          exit 1
