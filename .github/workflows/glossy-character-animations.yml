@@ -61,21 +61,31 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/characters-v2
-          git add docs/OTHER_MASCOT_COVERAGE.md design/review/reports/other-mascot-coverage.json
-          git add design/review/cat-glossy-v2-contact.png design/review/glossy-cat-idle.html docs/NEXT_AUTO_TASK.md
-          if git diff --cached --quiet; then
-            echo 'Assets already up to date'
-          else
+          # Concurrent asset workers can update manifests and reports while
+          # this job renders. Never rebase stale generated files over newer ones:
+          # refresh the *ephemeral runner*, deterministically regenerate, then
+          # publish one fast-forward commit. No user checkout is reset.
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            python tools/check_glossy_source_catalog.py
+            python tools/render_glossy_character_animation.py
+            python tools/onelife_autopilot.py
+            python tools/render_cat_glossy_contact.py
+            git add assets/characters-v2
+            git add docs/OTHER_MASCOT_COVERAGE.md design/review/reports/other-mascot-coverage.json
+            git add design/review/cat-glossy-v2-contact.png design/review/glossy-cat-idle.html docs/NEXT_AUTO_TASK.md
+            if git diff --cached --quiet; then
+              echo 'Assets already up to date on latest main'
+              exit 0
+            fi
             git commit -m 'assets: render sourced glossy character animation candidates'
-            for attempt in 1 2 3; do
-              git fetch origin main
-              git rebase origin/main
-              if git push origin HEAD:main; then
-                echo 'Published on main'
-                exit 0
-              fi
-              if [ "$attempt" -eq 3 ]; then exit 1; fi
-              sleep 3
-            done
-          fi
+            if git push origin HEAD:main; then
+              echo 'Published on main'
+              exit 0
+            fi
+            echo "main advanced during publish; regenerate on next attempt"
+            sleep 3
+          done
+          echo 'Could not publish generated files after 4 attempts' >&2
+          exit 1
