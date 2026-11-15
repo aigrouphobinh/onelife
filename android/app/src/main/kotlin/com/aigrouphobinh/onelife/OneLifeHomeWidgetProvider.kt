@@ -10,7 +10,6 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.os.Build
 import android.widget.RemoteViews
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -90,8 +89,8 @@ class OneLifeHomeWidgetProvider : AppWidgetProvider() {
                     db.rawQuery(
                         "SELECT phase, deadline_utc FROM focus_session " +
                             "WHERE id = 1 LIMIT 1", null,
-                    ).use { cursor ->
-                        if (!cursor.moveToFirst()) return@use "Tập trung 25 phút"
+                    ).use cursorRead@ { cursor ->
+                        if (!cursor.moveToFirst()) return@cursorRead "Tập trung 25 phút"
                         when (cursor.getString(0)) {
                             "paused" -> "Tập trung đã tạm dừng"
                             "running" -> {
@@ -120,17 +119,24 @@ class OneLifeHomeWidgetProvider : AppWidgetProvider() {
             }
         }
 
-        private fun brainBitmap(context: Context): Bitmap? = try {
-            val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-            context.assets.open(BRAIN_ASSET).use { BitmapFactory.decodeStream(it, null, options) }
-            val largest = maxOf(options.outWidth, options.outHeight)
-            if (largest <= 0) return null
-            var sample = 1
-            while (largest / sample > 160) sample *= 2
-            val sampled = BitmapFactory.Options().apply { inSampleSize = sample }
-            context.assets.open(BRAIN_ASSET).use { BitmapFactory.decodeStream(it, null, sampled) }
-        } catch (_: Exception) {
-            null
+        private fun brainBitmap(context: Context): Bitmap? {
+            return try {
+                val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+                context.assets.open(BRAIN_ASSET).use { BitmapFactory.decodeStream(it, null, options) }
+                val largest = maxOf(options.outWidth, options.outHeight)
+                if (largest <= 0) {
+                    null
+                } else {
+                    var sample = 1
+                    while (largest / sample > 160) sample *= 2
+                    val sampled = BitmapFactory.Options().apply { inSampleSize = sample }
+                    context.assets.open(BRAIN_ASSET).use {
+                        BitmapFactory.decodeStream(it, null, sampled)
+                    }
+                }
+            } catch (_: Exception) {
+                null
+            }
         }
 
         private fun launch(
