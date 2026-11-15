@@ -60,6 +60,15 @@ atlases; no cloud, no background tracking and no medical claims.
   visible, no periodic task runs in the background merely to show a mascot.
 - An existing opt-in overlay schedules its next state refresh **near the
   saved deadline**, not necessarily every five minutes while resting.
+- Overlay **publishes the break / Focus snapshot before reading the slower
+  UsageEvents summary**. A delayed usage result may update the caption and
+  wellbeing state only when the refresh generation is still current. It must
+  never restart Recovering, hide an active Resting clip or supersede a newer
+  user-triggered state change. Static CI verifies this ordering.
+- On a slow device, a natural completion could previously fall through the
+  1.5-second recovery window before UsageStatsManager returned. This ordering
+  avoids that source of delay, but does not guarantee exact timing while
+  Android suspends or kills the optional overlay service.
 - A foreground Break UI page updates countdown once per second, re-reading
   native state on expiry or resume.
 - For new sessions, Android elapsedRealtime includes deep sleep and is
