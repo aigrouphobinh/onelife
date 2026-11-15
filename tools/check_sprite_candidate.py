@@ -21,6 +21,7 @@ def inspect(path: Path, *, frames: int = 12, cols: int = 4, cell: int = 256) -> 
     with Image.open(path) as source:
         atlas = source.convert('RGBA')
         mode = source.mode
+        has_real_alpha = ('A' in source.getbands()) or ('transparency' in source.info)
     expected = (cols * cell, rows * cell)
     if atlas.size != expected:
         raise ValueError(f'Expected {expected} atlas; got {atlas.size}')
@@ -70,8 +71,8 @@ def inspect(path: Path, *, frames: int = 12, cols: int = 4, cell: int = 256) -> 
         adjacent.append(round(rms, 2))
         if rms < 2:
             warnings.append(f'frame {i - 1:02}->{i:02}: near duplicate ({rms:.2f} RMS)')
-    if mode not in ('RGBA', 'LA', 'P'):
-        warnings.append(f'source mode {mode}: verify alpha transparency')
+    if not has_real_alpha:
+        warnings.append(f'source mode {mode}: no alpha channel or transparency metadata')
 
     return {
         'source': str(path),
