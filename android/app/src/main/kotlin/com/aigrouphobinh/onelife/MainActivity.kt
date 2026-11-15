@@ -1,6 +1,7 @@
 package com.aigrouphobinh.onelife
 
 import android.app.StatusBarManager
+import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -21,6 +22,7 @@ class MainActivity : FlutterActivity() {
     companion object {
         const val EXTRA_QUICK_CAPTURE = "com.aigrouphobinh.onelife.extra.QUICK_CAPTURE"
         const val EXTRA_TODAY_TASKS = "com.aigrouphobinh.onelife.extra.TODAY_TASKS"
+        const val EXTRA_FOCUS = "com.aigrouphobinh.onelife.extra.FOCUS"
         private const val CHANNEL = "onelife/quick_capture"
     }
 
@@ -31,6 +33,7 @@ class MainActivity : FlutterActivity() {
         return when {
             intent?.getBooleanExtra(EXTRA_QUICK_CAPTURE, false) == true -> "capture"
             intent?.getBooleanExtra(EXTRA_TODAY_TASKS, false) == true -> "tasks"
+            intent?.getBooleanExtra(EXTRA_FOCUS, false) == true -> "focus"
             else -> null
         }
     }
@@ -54,6 +57,11 @@ class MainActivity : FlutterActivity() {
                     call.argument<String>("tile"),
                     result,
                 )
+                "requestPinWidget" -> requestPinWidget(result)
+                "refreshWidgets" -> {
+                    OneLifeHomeWidgetProvider.refresh(this)
+                    result.success(true)
+                }
                 else -> result.notImplemented()
             }
         }
@@ -112,12 +120,45 @@ class MainActivity : FlutterActivity() {
         }
     }
 
+    /**
+     * Only the launcher/system can pin a widget; this requests the official
+     * UI, never silently places a widget on the user's home screen.
+     */
+    private fun requestPinWidget(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            result.success("manual")
+            return
+        }
+        val manager = AppWidgetManager.getInstance(this)
+        if (!manager.isRequestPinAppWidgetSupported) {
+            result.success("manual")
+            return
+        }
+        try {
+            val component = ComponentName(this, OneLifeHomeWidgetProvider::class.java)
+            val accepted = manager.requestPinAppWidget(component, null, null)
+            // 'requested' means the system accepted a request, not pinned.
+            result.success(if (accepted) "requested" else "manual")
+        } catch (_: Exception) {
+            result.success("manual")
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        OneLifeHomeWidgetProvider.refresh(this)
+    }
+
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
         val action = actionFor(intent) ?: return
         pendingAction = action
-        val method = if (action == "capture") "openCapture" else "openTasks"
+        val method = when (action) {
+            "capture" -> "openCapture"
+            "focus" -> "openFocus"
+            else -> "openTasks"
+        }
         // Retain pendingAction if Flutter hasn't installed its handler yet.
         actionChannel?.invokeMethod(method, null, object : MethodChannel.Result {
             override fun success(result: Any?) {
