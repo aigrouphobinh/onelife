@@ -37,6 +37,28 @@ class FakeOneLifeStore implements OneLifeStore {
   }
 
   @override
+  Future<void> updateTask(
+    String id, {
+    required String title,
+    DateTime? dueAt,
+  }) async {
+    final index = items.indexWhere((task) => task.id == id);
+    if (index < 0) throw StateError('Missing fake task');
+    final previous = items[index];
+    items[index] = OneLifeTask(
+      id: id,
+      title: title.trim(),
+      dueAt: dueAt,
+      completed: previous.completed,
+    );
+  }
+
+  @override
+  Future<void> deleteTask(String id) async {
+    items.removeWhere((task) => task.id == id);
+  }
+
+  @override
   Future<String> selectedCharacter() async => character;
 
   @override
