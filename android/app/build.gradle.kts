@@ -44,6 +44,12 @@ kotlin {
     }
 }
 
+// Runs on the JVM in CI: test the real native break timing policy without
+// claiming Android device rendering has been validated.
+dependencies {
+    testImplementation("junit:junit:4.13.2")
+}
+
 flutter {
     source = "../.."
 }
