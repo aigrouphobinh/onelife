@@ -49,8 +49,12 @@ jobs:
         with:
           channel: stable
       - run: flutter pub get
-      - name: Compile Android app and native Focus TileService
+      - name: Compile Android app, three QS tiles and home widget
         run: flutter build apk --debug
+      - name: Confirm bundled Glossy Kawaii Brain for native widget
+        shell: bash
+        run: |
+          unzip -Z1 build/app/outputs/flutter-apk/app-debug.apk | grep -Fx 'assets/flutter_assets/assets/characters-v2/brain/master.png'
       - name: Save debug APK for Android device QA
         uses: actions/upload-artifact@v4
         with:
