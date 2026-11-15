@@ -6,8 +6,7 @@ import 'package:onelife/src/usage_history_panel.dart';
 void main() {
   const channel = MethodChannel('onelife/quick_capture');
 
-  Widget app({TargetPlatform platform = TargetPlatform.android}) =>
-      MaterialApp(
+  Widget app({TargetPlatform platform = TargetPlatform.android}) => MaterialApp(
         theme: ThemeData(platform: platform),
         home: const Scaffold(body: UsageHistoryPanel()),
       );
@@ -75,21 +74,23 @@ void main() {
     expect(periods, [1, 7, 30]);
     expect(find.textContaining('1/30 ngày có dữ liệu'), findsOneWidget);
     // The missing day is not counted in the observed total or average.
-    expect(find.text('Trung bình ngày có dữ liệu: 3 giờ 25 phút'),
-        findsOneWidget);
+    expect(
+        find.text('Trung bình ngày có dữ liệu: 3 giờ 25 phút'), findsOneWidget);
   });
 
   testWidgets('granted but empty events reports unknown, not zero', (
     tester,
   ) async {
     final messenger = tester.binding.defaultBinaryMessenger;
-    messenger.setMockMethodCallHandler(channel, (call) async => {
-          'granted': true,
-          'available': false,
-          'days': <Map<String, Object?>>[
-            {'date': '2026-11-15', 'minutes': null},
-          ],
-        });
+    messenger.setMockMethodCallHandler(
+        channel,
+        (call) async => {
+              'granted': true,
+              'available': false,
+              'days': <Map<String, Object?>>[
+                {'date': '2026-11-15', 'minutes': null},
+              ],
+            });
     addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
     await tester.pumpWidget(app());
     await tester.pump();
@@ -112,8 +113,7 @@ void main() {
     await tester.pumpWidget(app(platform: TargetPlatform.iOS));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 150));
-    expect(find.textContaining('iOS cần tích hợp Screen Time'),
-        findsOneWidget);
+    expect(find.textContaining('iOS cần tích hợp Screen Time'), findsOneWidget);
     expect(nativeCalls, 0);
   });
 }

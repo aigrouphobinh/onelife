@@ -99,8 +99,7 @@ class _UsageHistoryPanelState extends State<UsageHistoryPanel>
         available = response?['available'] == true &&
             parsed.any((day) => day.minutes != null);
         readings = granted ? parsed : [];
-        observedDays =
-            readings.where((day) => day.minutes != null).length;
+        observedDays = readings.where((day) => day.minutes != null).length;
         loading = false;
       });
     } on MissingPluginException {
@@ -167,7 +166,8 @@ class _UsageHistoryPanelState extends State<UsageHistoryPanel>
       children: [
         const Text(
           'Thói quen',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _ink),
+          style:
+              TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _ink),
         ),
         const SizedBox(height: 5),
         const Text(
