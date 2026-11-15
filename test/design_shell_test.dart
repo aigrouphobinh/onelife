@@ -180,6 +180,73 @@ void main() {
     expect(find.text('Thêm việc mới'), findsNothing);
   });
 
+  testWidgets('Android Home Widget can open the real Focus screen', (
+    tester,
+  ) async {
+    const channel = MethodChannel('onelife/quick_capture');
+    final messenger = tester.binding.defaultBinaryMessenger;
+    messenger.setMockMethodCallHandler(channel, (call) async {
+      if (call.method == 'consumeLaunchAction') return 'focus';
+      return null;
+    });
+    addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+
+    await tester.pumpWidget(
+      MaterialApp(home: OneLifeDesignShell(store: FakeOneLifeStore())),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text('Tập trung · OneLife'), findsOneWidget);
+  });
+
+  testWidgets('Android Home Widget setup requests OS pin approval', (
+    tester,
+  ) async {
+    const channel = MethodChannel('onelife/quick_capture');
+    final messenger = tester.binding.defaultBinaryMessenger;
+    var requested = 0;
+    messenger.setMockMethodCallHandler(channel, (call) async {
+      if (call.method == 'requestPinWidget') {
+        requested++;
+        return 'requested';
+      }
+      return null;
+    });
+    addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+
+    await tester.pumpWidget(MaterialApp(
+      theme: ThemeData(platform: TargetPlatform.android),
+      home: OneLifeDesignShell(store: FakeOneLifeStore()),
+    ));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.tap(find.text('Tôi'));
+    await tester.pump();
+    await tester.scrollUntilVisible(
+      find.text('Widget màn hình chính'),
+      120,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await tester.drag(
+      find.byType(Scrollable).last,
+      const Offset(0, -200),
+    );
+    await tester.pump();
+    await tester.tap(find.text('Widget màn hình chính'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 250));
+    final request = find.widgetWithText(
+      FilledButton, 'Thêm widget vào màn hình chính',
+    );
+    await tester.ensureVisible(request);
+    await tester.tap(request);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(requested, 1);
+    expect(find.textContaining('Đã gửi yêu cầu'), findsOneWidget);
+  });
+
   testWidgets('V2 settings opens five real mascot options', (tester) async {
     final fake = FakeOneLifeStore();
     await tester.pumpWidget(MaterialApp(home: OneLifeDesignShell(store: fake)));
