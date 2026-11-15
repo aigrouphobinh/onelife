@@ -1,0 +1,16 @@
+{
+  "characterId": "wukong",
+  "assetVersion": "1.0.0-candidate",
+  "artMaster": "assets/characters-v2/wukong/master.png",
+  "masterSha256": "c63bcb2361bd81b38641bd78618584b4da4a373e3135cd79cebe88965e0caf7e",
+  "productionReady": false,
+  "scope": "extra mascot candidate; separate from core 4x15 coverage",
+  "states": {
+    "idle": {
+      "file": "assets/characters-v2/wukong/idle/metadata.json",
+      "frames": 8,
+      "generationClass": "independently-illustrated-pose-sheet"
+    }
+  },
+  "note": "Not registered in core animation_sources.json; needs design approval and optional Flutter integration"
+}

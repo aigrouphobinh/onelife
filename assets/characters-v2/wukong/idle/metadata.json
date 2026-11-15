@@ -1,0 +1,23 @@
+{
+  "characterId": "wukong",
+  "state": "idle",
+  "version": "1.0.0-illustrated-candidate",
+  "artStyle": "glossy-kawaii-v2",
+  "source": "sheet_illustrated.webp",
+  "runtimeAsset": "sheet.png",
+  "preview": "preview.gif",
+  "frames": 8,
+  "columns": 4,
+  "rows": 2,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "frameDurationMs": 150,
+  "loop": true,
+  "anchorX": 0.5,
+  "anchorY": 0.92,
+  "sourceSha256": "8919fd7f1287f6bd51bbef6dfcb957fc31d29f484f7157ac2f57cc0f17e425d7",
+  "sha256": "f758872fff183c1c527121902c37d979eccc1645b2769db2ec8c21731260eadd",
+  "licenseRef": "docs/WUKONG_MASCOT_V2.md",
+  "generationClass": "independently-illustrated-pose-sheet",
+  "reviewStatus": "automated-qa-passed; human and phone QA pending"
+}

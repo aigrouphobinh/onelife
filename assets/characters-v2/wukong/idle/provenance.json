@@ -1,0 +1,23 @@
+{
+  "characterId": "wukong",
+  "state": "idle",
+  "generator": "OpenAI ImageGen",
+  "date": "2026-11-15",
+  "masterSource": "original generated Wukong character illustration in the conversation",
+  "masterSha256": "c63bcb2361bd81b38641bd78618584b4da4a373e3135cd79cebe88965e0caf7e",
+  "animationSource": "original generated eight independently illustrated poses",
+  "originalSheetSize": [
+    1774,
+    887
+  ],
+  "originalGrid": [
+    4,
+    2
+  ],
+  "process": "Per-cell connected exterior near-white mask; retain foreground and action marks, feather alpha edges; fit into 256x256 transparent cells. No transforms of a single still to fake movement.",
+  "sourceSha256": "8919fd7f1287f6bd51bbef6dfcb957fc31d29f484f7157ac2f57cc0f17e425d7",
+  "rights": "Original AI generated illustration for OneLife; no external sprite copied",
+  "humanArtApproval": "pending",
+  "deviceApproval": "pending",
+  "productionReady": false
+}

@@ -9,6 +9,7 @@ on:
       - 'assets/characters-v2/**'
       - 'tools/check_glossy_v2_assets.py'
       - 'tools/check_runtime_sprite_alpha.py'
+      - 'tools/check_wukong_candidate.py'
       - 'assets/characters/**/metadata.json'
       - 'assets/sounds/**'
       - 'design/screens/**'
@@ -33,6 +34,7 @@ jobs:
       - run: python tools/check_design_assets.py
       - run: python tools/check_glossy_v2_assets.py
       - run: python tools/check_runtime_sprite_alpha.py
+      - run: python tools/check_wukong_candidate.py
       - run: python tools/check_design_review.py
       - name: Commit contact sheets and reports to main
         if: success()

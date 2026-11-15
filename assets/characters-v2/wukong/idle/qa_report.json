@@ -1,0 +1,185 @@
+{
+  "passed": true,
+  "frames": 8,
+  "minFrameMarginPx": 15,
+  "adjacentChanges": 7,
+  "minimumAdjacentRgbRms": 72.05,
+  "frameDurationMs": 150,
+  "loop": true,
+  "sourceSha256": "8919fd7f1287f6bd51bbef6dfcb957fc31d29f484f7157ac2f57cc0f17e425d7",
+  "runtimeSha256": "f758872fff183c1c527121902c37d979eccc1645b2769db2ec8c21731260eadd",
+  "alpha": "RGBA transparent",
+  "originalIllustratedPoses": 8,
+  "visualReview": "pending",
+  "realDeviceTest": "pending",
+  "details": [
+    {
+      "frame": 0,
+      "sourceBBox": [
+        24,
+        9,
+        418,
+        425
+      ],
+      "sourceCell": [
+        444,
+        444
+      ],
+      "spriteBBox": [
+        21,
+        15,
+        235,
+        241
+      ],
+      "minMargin": 15,
+      "connectedComponents": 1
+    },
+    {
+      "frame": 1,
+      "sourceBBox": [
+        24,
+        25,
+        408,
+        421
+      ],
+      "sourceCell": [
+        443,
+        444
+      ],
+      "spriteBBox": [
+        18,
+        15,
+        237,
+        241
+      ],
+      "minMargin": 15,
+      "connectedComponents": 5
+    },
+    {
+      "frame": 2,
+      "sourceBBox": [
+        23,
+        8,
+        415,
+        425
+      ],
+      "sourceCell": [
+        443,
+        444
+      ],
+      "spriteBBox": [
+        22,
+        15,
+        234,
+        241
+      ],
+      "minMargin": 15,
+      "connectedComponents": 2
+    },
+    {
+      "frame": 3,
+      "sourceBBox": [
+        28,
+        13,
+        415,
+        424
+      ],
+      "sourceCell": [
+        444,
+        444
+      ],
+      "spriteBBox": [
+        21,
+        15,
+        234,
+        241
+      ],
+      "minMargin": 15,
+      "connectedComponents": 4
+    },
+    {
+      "frame": 4,
+      "sourceBBox": [
+        45,
+        21,
+        378,
+        422
+      ],
+      "sourceCell": [
+        444,
+        443
+      ],
+      "spriteBBox": [
+        34,
+        15,
+        222,
+        241
+      ],
+      "minMargin": 15,
+      "connectedComponents": 3
+    },
+    {
+      "frame": 5,
+      "sourceBBox": [
+        45,
+        22,
+        398,
+        421
+      ],
+      "sourceCell": [
+        443,
+        443
+      ],
+      "spriteBBox": [
+        28,
+        15,
+        228,
+        241
+      ],
+      "minMargin": 15,
+      "connectedComponents": 6
+    },
+    {
+      "frame": 6,
+      "sourceBBox": [
+        50,
+        5,
+        375,
+        423
+      ],
+      "sourceCell": [
+        443,
+        443
+      ],
+      "spriteBBox": [
+        40,
+        15,
+        216,
+        241
+      ],
+      "minMargin": 15,
+      "connectedComponents": 3
+    },
+    {
+      "frame": 7,
+      "sourceBBox": [
+        27,
+        7,
+        416,
+        423
+      ],
+      "sourceCell": [
+        444,
+        443
+      ],
+      "spriteBBox": [
+        22,
+        15,
+        233,
+        241
+      ],
+      "minMargin": 15,
+      "connectedComponents": 2
+    }
+  ]
+}
