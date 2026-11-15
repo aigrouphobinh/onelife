@@ -443,6 +443,23 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
   void open(Widget page) =>
       Navigator.push(context, MaterialPageRoute<void>(builder: (_) => page));
 
+  void openNotes() => open(
+        HomePage(
+          repository: NoteRepository(),
+          onCreateTask: (note) async {
+            final source = note.title.trim().isNotEmpty
+                ? note.title.trim()
+                : note.body.trim();
+            final normalized = source.replaceAll(RegExp(r'\s+'), ' ');
+            await _saveTask(
+              suggestedTitle: normalized.length > 120
+                  ? normalized.substring(0, 120)
+                  : normalized,
+            );
+          },
+        ),
+      );
+
   Widget mascot(String id, {double size = 88}) => id == 'brain'
       ? GlossySprite(
           spec: brainIdle,
@@ -670,6 +687,11 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
                 avatar: const Icon(Icons.alarm_outlined),
                 label: const Text('Lịch & Báo thức'),
                 onPressed: () => open(schedulePage()),
+              ),
+              ActionChip(
+                avatar: const Icon(Icons.note_alt_outlined),
+                label: const Text('Ghi chú'),
+                onPressed: openNotes,
               ),
               ActionChip(
                 avatar: const Icon(Icons.timer_outlined),
@@ -1017,23 +1039,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
                   leading:
                       const Icon(Icons.note_alt_outlined, color: designPurple),
                   title: const Text('Ghi chú hiện có'),
-                  onTap: () => open(
-                    HomePage(
-                      repository: NoteRepository(),
-                      onCreateTask: (note) async {
-                        final source = note.title.trim().isNotEmpty
-                            ? note.title.trim()
-                            : note.body.trim();
-                        final normalized =
-                            source.replaceAll(RegExp(r'\s+'), ' ');
-                        await _saveTask(
-                          suggestedTitle: normalized.length > 120
-                              ? normalized.substring(0, 120)
-                              : normalized,
-                        );
-                      },
-                    ),
-                  ),
+                  onTap: openNotes,
                 ),
                 ListTile(
                   leading: const Icon(Icons.open_in_new, color: designPurple),
