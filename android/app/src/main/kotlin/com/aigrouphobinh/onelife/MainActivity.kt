@@ -7,6 +7,8 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.Icon
+import android.net.Uri
+import android.provider.Settings
 import android.os.Build
 import android.os.Bundle
 import io.flutter.embedding.android.FlutterActivity
@@ -76,8 +78,66 @@ class MainActivity : FlutterActivity() {
                     result.success(false)
                 }
                 "enableReminders" -> requestReminderPermission(result)
+                "overlayStatus" -> result.success(
+                    mapOf(
+                        "supported" to (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O),
+                        "permissionGranted" to overlayAllowed(),
+                        "running" to BrainOverlayService.isVisible,
+                    ),
+                )
+                "requestOverlayPermission" -> requestOverlayPermission(result)
+                "startBrainOverlay" -> startBrainOverlay(result)
+                "stopBrainOverlay" -> {
+                    stopService(Intent(this, BrainOverlayService::class.java))
+                    result.success(true)
+                }
                 else -> result.notImplemented()
             }
+        }
+    }
+
+    private fun overlayAllowed(): Boolean =
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
+            Settings.canDrawOverlays(this)
+
+    /** Opens Android's own special-app-access page; no silent permission grant. */
+    private fun requestOverlayPermission(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            result.success("unsupported")
+            return
+        }
+        if (overlayAllowed()) {
+            result.success("granted")
+            return
+        }
+        try {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + packageName),
+            )
+            startActivity(intent)
+            result.success("opened")
+        } catch (_: Exception) {
+            result.success("unavailable")
+        }
+    }
+
+    /** Only called from the user's visible Flutter settings page. */
+    private fun startBrainOverlay(result: MethodChannel.Result) {
+        if (!overlayAllowed()) {
+            result.success("permission_required")
+            return
+        }
+        if (BrainOverlayService.isVisible) {
+            result.success("running")
+            return
+        }
+        try {
+            val component = startService(Intent(this, BrainOverlayService::class.java))
+            // "requested" only: the service must still add its actual window.
+            result.success(if (component != null) "requested" else "unavailable")
+        } catch (_: Exception) {
+            result.success("unavailable")
         }
     }
 
