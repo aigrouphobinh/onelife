@@ -31,7 +31,7 @@ class TodayTasksTileService : TileService() {
             add(Calendar.DAY_OF_MONTH, 1)
         }
         val format = SimpleDateFormat(
-            "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "yyyy-MM-dd'T'HH:mm:ss",
             Locale.US,
         ).apply { timeZone = TimeZone.getTimeZone("UTC") }
         return format.format(calendar.time)
@@ -48,7 +48,8 @@ class TodayTasksTileService : TileService() {
         try {
             db.rawQuery(
                 "SELECT COUNT(*) FROM tasks " +
-                    "WHERE completed = 0 AND (due_at_utc IS NULL OR due_at_utc < ?)",
+                    "WHERE completed = 0 AND " +
+                    "(due_at_utc IS NULL OR substr(due_at_utc, 1, 19) < ?)",
                 arrayOf(nextLocalMidnightUtc()),
             ).use { cursor ->
                 if (!cursor.moveToFirst()) return 0
