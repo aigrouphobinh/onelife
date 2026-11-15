@@ -802,7 +802,8 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
                 ListTile(
                   leading: const Icon(Icons.tune_rounded, color: designPurple),
                   title: const Text('Điều khiển nhanh Android'),
-                  subtitle: const Text('Thêm ô Tập trung, Việc hôm nay và Ghi nhanh'),
+                  subtitle:
+                      const Text('Thêm ô Tập trung, Việc hôm nay và Ghi nhanh'),
                   onTap: () => open(quickSettingsSetupPage()),
                 ),
                 const Divider(),
@@ -918,7 +919,8 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
               SizedBox(height: 9),
               Text('1. Vuốt từ cạnh trên màn hình xuống hai lần.'),
               Text('2. Chọn Sửa hoặc biểu tượng bút chì (tùy hãng máy).'),
-              Text('3. Thêm Tập trung / Việc hôm nay / Ghi nhanh vào Quick Settings.'),
+              Text(
+                  '3. Thêm Tập trung / Việc hôm nay / Ghi nhanh vào Quick Settings.'),
               SizedBox(height: 12),
               Text(
                 'Android 13 trở lên có thể hiện hộp thoại thêm ô của hệ thống; '
