@@ -49,7 +49,9 @@ class _BrainOverlaySetupPageState extends State<BrainOverlaySetupPage>
     _android = Theme.of(context).platform == TargetPlatform.android;
     if (!_hasChecked) {
       _hasChecked = true;
-      _checkStatus();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _checkStatus();
+      });
     }
   }
 
