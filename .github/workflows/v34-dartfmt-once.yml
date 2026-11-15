@@ -31,6 +31,9 @@ jobs:
             exit 0
           fi
           git commit -m 'style(v3.4): format Flutter source and tests'
+          # flutter pub get can update Flutter-managed tracked metadata; keep the
+          # formatting commit while reverting unrelated uncommitted changes.
+          git restore --worktree .
           for n in 1 2 3; do
             git fetch origin main
             git rebase origin/main
