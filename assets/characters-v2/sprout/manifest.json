@@ -63,6 +63,11 @@
       "file": "assets/characters-v2/sprout/thinking/metadata.json",
       "frames": 8,
       "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "sad": {
+      "file": "assets/characters-v2/sprout/sad/metadata.json",
+      "frames": 11,
+      "generationClass": "independently-illustrated-pose-sheet"
     }
   },
   "note": "Visual/phone sign-off required; no inferred or synthesized state completion."
