@@ -41,6 +41,8 @@ system-owned and can look different on each OS/OEM.
 | Quick Capture | Native tile launches the real Flutter task-entry dialog | Cold/warm app paths via `onelife/quick_capture`, local SQLite task, device QA pending |
 | Android home widget | Native AppWidgetProvider/RemoteViews with bundled Brain master, SQLite task count, Focus state and three deep links | Added in source, pending APK and launcher QA; no iOS widget yet |
 | Today Tasks QS | Native tile reads only aggregate incomplete/due-before-midnight count from `onelife_ui.db` | Lockscreen hides the count; tap opens real Flutter Tasks tab; device QA pending |
+| Interactive notifications (Android) | SQLite-backed inexact alarms; complete and 10-minute snooze actions on native notifications | APK CI passed previously; OS delivery and device QA still pending |
+| Brain nổi Android | Real draggable animated 8-frame Brain overlay with Focus/Tasks/Capture/Hide | Opt-in special permission, compiled source pending latest APK and physical OEM QA |
 
 Open `Tập trung 25 phút` from Flutter Home's shortcut; this is an actual timer,
 not a simulated Quick Settings tile.
@@ -52,12 +54,12 @@ not a simulated Quick Settings tile.
 | Android Quick Settings Focus | Native `FocusTileService` shares `onelife_focus.db` with Flutter; tap starts, pauses or resumes 25 minutes | Initial APK compile passed; device lifecycle QA outstanding |
 | Android Quick Settings Ghi nhanh | Native `QuickCaptureTileService` opens Flutter task input after unlock; `MainActivity` delivers cold/warm launch via MethodChannel | Compile and device interaction confirmation for this new service pending |
 | Android Quick Settings Việc hôm nay | `TodayTasksTileService` reads SQLite `tasks` count; 0 means no tasks; hides count when locked; user tap opens Flutter tasks via `MainActivity` | CI compilation and real Android tile QA pending |
-| Android notification actions | Native notification or maintained Flutter plugin with receiver | Permission and action persistence; no false completed state |
+| Android notification actions | `TaskReminders`, receiver actions, opt-in runtime permission, reboot rescheduling | 26 Flutter tests + earlier APK CI passed; device delivery, Doze and lockscreen QA pending |
 | Home screen widget (Android) | `OneLifeHomeWidgetProvider` reads real local data, masks counts when locked, can request pin from compatible launchers | APK compilation and device/home-launcher QA pending |
 | Home screen widget (iOS) | WidgetKit extension, shared App Group data bridge | Not implemented |
 | iOS Control Center | iOS 18+ WidgetKit `ControlWidgetButton` or `ControlWidgetToggle` | iOS host/extension, intent bridge and device test |
 | Focus Live Activity | ActivityKit on compatible iOS | Native extension, user consent, lifecycle test |
-| Android Brain overlay | `SYSTEM_ALERT_WINDOW` after explicit opt-in | Android host, drag/dismiss controls and low-memory QA |
+| Android Brain overlay | `BrainOverlayService` creates `TYPE_APPLICATION_OVERLAY`; real Brain 4×2 atlas, drag, four native actions; only after `Settings.canDrawOverlays` | Build artifact and Android device/permission/revocation QA still pending |
 | Habits/usage statistics | Android UsageStats with opt-in; iOS entitled Screen Time when available | Distinguish missing permission from zero minutes |
 
 Flutter Android and iOS host project folders were generated under `android/` and `ios/`.
@@ -87,6 +89,7 @@ remain unimplemented.
 - Sensitive content hidden by default on lock-screen surfaces.
 - Widget uses `requestPinAppWidget` only after the user taps a setup button; OS
   confirmation is necessary and `requested` is not misreported as installed.
+- Overlay is optional, not started in onCreate/onResume/boot; permission prompt and service start are two distinct user actions.
 - Keep the prior scheduled OneLife automation disabled until user re-enables it.
 
 ## References
