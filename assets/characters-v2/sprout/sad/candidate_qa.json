@@ -1,0 +1,27 @@
+{
+  "characterId": "sprout",
+  "state": "sad",
+  "candidateQA": "local-pass",
+  "sourceSha256": "c22953e4017546a5d298d1924e6f0de3bf0449f308338d6a09d884f98baaa94b",
+  "atlasDimensions": [
+    1024,
+    768
+  ],
+  "frames": 11,
+  "columns": 4,
+  "rows": 3,
+  "frameDurationMs": 160,
+  "loop": false,
+  "minimumCellMarginPx": 14,
+  "adjacentChanges": 10,
+  "minimumAdjacentVisibleRgbRmsLight": 66.83,
+  "minimumAdjacentVisibleRgbRmsDark": 58.94,
+  "alpha": "RGBA transparent",
+  "gifFrames": 11,
+  "gifFrameDurationMs": 160,
+  "gifLoop": "one-shot",
+  "sourceEdgeContacts": "zero for every selected pose",
+  "humanArtReview": "pending",
+  "realDeviceTest": "pending",
+  "productionReady": false
+}

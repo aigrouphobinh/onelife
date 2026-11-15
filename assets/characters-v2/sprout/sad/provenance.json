@@ -1,0 +1,38 @@
+{
+  "characterId": "sprout",
+  "state": "sad",
+  "createdOn": "2026-11-15",
+  "generator": "OpenAI ImageGen",
+  "sourceType": "independently-illustrated-11-pose-selection-from-12-sheet",
+  "sourceArtDimensions": [
+    1448,
+    1086
+  ],
+  "sourceArtGrid": [
+    4,
+    3
+  ],
+  "selectedOriginalPoseIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11
+  ],
+  "omittedOriginalPoseIndices": [
+    8
+  ],
+  "reasonForOmission": "Original pose 8 has an effect contacting the right edge of the source cell, so it was not imported.",
+  "preparation": "Cropped 11 independently illustrated original poses from the 4x3 source illustration; extracted silhouettes from white rendered background with hue and ink mask, filled foreground contours, antialiased edges, resized authored artwork to 232x232 centered in 256x256 RGBA cells. The final atlas has a fully transparent unused 12th cell; no synthetic tweening or static-image motion.",
+  "sourceSha256": "c22953e4017546a5d298d1924e6f0de3bf0449f308338d6a09d884f98baaa94b",
+  "usageRights": "Original AI-generated OneLife art; no external asset pack",
+  "humanArtReview": "pending",
+  "realDeviceReview": "pending",
+  "productionReady": false
+}
