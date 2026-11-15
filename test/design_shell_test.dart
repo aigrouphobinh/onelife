@@ -85,7 +85,6 @@ void main() {
     expect(fake.items.single.completed, isTrue);
   });
 
-
   testWidgets('Android Quick Capture intent saves a real local task', (
     tester,
   ) async {
@@ -114,7 +113,6 @@ void main() {
     expect(fake.items.single.title, 'Việc ghi nhanh');
     expect(fake.items.single.completed, false);
   });
-
 
   testWidgets('V2 settings opens five real mascot options', (tester) async {
     final fake = FakeOneLifeStore();
@@ -186,5 +184,4 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
     expect(requests, ['focus']);
   });
-
 }

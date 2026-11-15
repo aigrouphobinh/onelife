@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show MethodCall, MethodChannel, MissingPluginException;
+import 'package:flutter/services.dart'
+    show MethodCall, MethodChannel, MissingPluginException;
 
 import 'glossy_sprite.dart';
 import 'focus_page.dart';
@@ -823,7 +824,8 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          heading('OneLife ngoài ứng dụng', 'Thêm lối tắt vào thanh vuốt xuống'),
+          heading(
+              'OneLife ngoài ứng dụng', 'Thêm lối tắt vào thanh vuốt xuống'),
           card(Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -834,7 +836,8 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
               const SizedBox(height: 8),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.center_focus_strong, color: designPurple),
+                leading:
+                    const Icon(Icons.center_focus_strong, color: designPurple),
                 title: const Text('Tập trung · 25 phút'),
                 subtitle: const Text('Chạm để bắt đầu, tạm dừng hoặc tiếp tục'),
                 trailing: android
@@ -847,9 +850,11 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
               const Divider(),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.edit_note_rounded, color: designPurple),
+                leading:
+                    const Icon(Icons.edit_note_rounded, color: designPurple),
                 title: const Text('Ghi nhanh'),
-                subtitle: const Text('Mở giao diện tạo công việc trên điện thoại'),
+                subtitle:
+                    const Text('Mở giao diện tạo công việc trên điện thoại'),
                 trailing: android
                     ? OutlinedButton(
                         onPressed: () => _requestQuickSettingsTile('capture'),
@@ -873,7 +878,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Nếu không xuất hiện lời mời thêm ô',
-                style: TextStyle(fontWeight: FontWeight.w800)),
+                  style: TextStyle(fontWeight: FontWeight.w800)),
               SizedBox(height: 9),
               Text('1. Vuốt từ cạnh trên màn hình xuống hai lần.'),
               Text('2. Chọn Sửa hoặc biểu tượng bút chì (tùy hãng máy).'),

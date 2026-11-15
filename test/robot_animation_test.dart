@@ -33,7 +33,8 @@ void main() {
       await expectRgbaSpriteHeader(
         spec.assetPath,
         width: spec.frameWidth * spec.columns,
-        height: spec.frameHeight * ((spec.frames + spec.columns - 1) ~/ spec.columns),
+        height: spec.frameHeight *
+            ((spec.frames + spec.columns - 1) ~/ spec.columns),
       );
     }
   });
