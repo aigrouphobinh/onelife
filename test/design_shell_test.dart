@@ -245,7 +245,9 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(requested, 1);
-    expect(find.textContaining('Đã gửi yêu cầu'), findsOneWidget);
+    // ScaffoldMessenger may render both entering and exiting snackbars in the
+    // same frame; verify the status is visible without assuming one Text node.
+    expect(find.textContaining('Đã gửi yêu cầu'), findsWidgets);
   });
 
   testWidgets('V2 settings opens five real mascot options', (tester) async {
