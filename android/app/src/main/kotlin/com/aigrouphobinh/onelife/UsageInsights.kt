@@ -56,8 +56,12 @@ internal object UsageInsights {
         } else {
             true
         }
-        val locked = (context.getSystemService(Context.KEYGUARD_SERVICE) as? KeyguardManager)
-            ?.isDeviceLocked ?: false
+        val locked = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            (context.getSystemService(Context.KEYGUARD_SERVICE) as? KeyguardManager)
+                ?.isDeviceLocked ?: false
+        } else {
+            false
+        }
         if (!unlocked || locked) return mapOf(
             "granted" to true, "available" to false,
             "minutes" to null, "tier" to "unknown",
