@@ -237,7 +237,8 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 250));
     final request = find.widgetWithText(
-      FilledButton, 'Thêm widget vào màn hình chính',
+      FilledButton,
+      'Thêm widget vào màn hình chính',
     );
     await tester.ensureVisible(request);
     await tester.tap(request);

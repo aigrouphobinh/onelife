@@ -845,9 +845,11 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
             Column(
               children: [
                 ListTile(
-                  leading: const Icon(Icons.widgets_outlined, color: designPurple),
+                  leading:
+                      const Icon(Icons.widgets_outlined, color: designPurple),
                   title: const Text('Widget màn hình chính'),
-                  subtitle: const Text('Brain, công việc và Tập trung ngoài ứng dụng'),
+                  subtitle: const Text(
+                      'Brain, công việc và Tập trung ngoài ứng dụng'),
                   onTap: () => open(homeWidgetSetupPage()),
                 ),
                 const Divider(),
@@ -904,25 +906,28 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
               Row(children: [
                 mascot('brain', size: 88),
                 const SizedBox(width: 12),
-                const Expanded(child: Column(
+                const Expanded(
+                    child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Bộ Não · OneLife',
-                      style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18)),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w800, fontSize: 18)),
                     SizedBox(height: 5),
                     Text('Xem số việc chưa xong và trạng thái tập trung.',
-                      style: TextStyle(color: Color(0xFF796D8B))),
+                        style: TextStyle(color: Color(0xFF796D8B))),
                   ],
                 )),
               ]),
               const SizedBox(height: 14),
               const Text('Các nút: Công việc · Ghi nhanh · Tập trung',
-                style: TextStyle(fontWeight: FontWeight.w600)),
+                  style: TextStyle(fontWeight: FontWeight.w600)),
               const SizedBox(height: 10),
-              const Text('Dữ liệu lấy từ SQLite trên thiết bị. Không hiện '
-                'tên công việc trên widget; số việc được ẩn khi máy khóa. '
-                'Widget không tự tạo báo thức hay gửi dữ liệu ra ngoài.',
-                style: TextStyle(color: Color(0xFF796D8B))),
+              const Text(
+                  'Dữ liệu lấy từ SQLite trên thiết bị. Không hiện '
+                  'tên công việc trên widget; số việc được ẩn khi máy khóa. '
+                  'Widget không tự tạo báo thức hay gửi dữ liệu ra ngoài.',
+                  style: TextStyle(color: Color(0xFF796D8B))),
               const SizedBox(height: 14),
               if (android)
                 FilledButton.icon(
@@ -932,7 +937,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
                 )
               else
                 const Text('iOS cần widget WidgetKit riêng; '
-                  'bản Android không hoạt động trong iOS.'),
+                    'bản Android không hoạt động trong iOS.'),
             ],
           )),
           const SizedBox(height: 14),
@@ -940,16 +945,17 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Cách thêm thủ công',
-                style: TextStyle(fontWeight: FontWeight.w800)),
+                  style: TextStyle(fontWeight: FontWeight.w800)),
               SizedBox(height: 10),
               Text('1. Giữ chạm một vùng trống trên màn hình chính.'),
               Text('2. Chọn Widget → OneLife.'),
               Text('3. Kéo widget lên màn hình chính.'),
               SizedBox(height: 10),
-              Text('Android 8 trở lên có thể hiện lời mời ghim widget '
-                'nếu launcher hỗ trợ. Màu sắc và kích thước còn phụ thuộc '
-                'launcher của điện thoại.',
-                style: TextStyle(color: Color(0xFF796D8B), fontSize: 12)),
+              Text(
+                  'Android 8 trở lên có thể hiện lời mời ghim widget '
+                  'nếu launcher hỗ trợ. Màu sắc và kích thước còn phụ thuộc '
+                  'launcher của điện thoại.',
+                  style: TextStyle(color: Color(0xFF796D8B), fontSize: 12)),
             ],
           )),
         ],
