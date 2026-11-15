@@ -52,6 +52,17 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
+        <!-- V3.4 Today Tasks QS tile: aggregate only, no private task titles. -->
+        <service
+            android:name=".TodayTasksTileService"
+            android:exported="true"
+            android:label="Việc hôm nay"
+            android:icon="@drawable/ic_onelife_today"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
