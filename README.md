@@ -1,14 +1,14 @@
 # OneLife
 
-## Current Glossy Kawaii Dog checkpoint (2026-11-15)
+## Current Glossy Kawaii source + Flutter checkpoint (2026-11-15)
 
-**Source record coverage: 30/60 (50%)** — Cat 15/15, **Dog 15/15**, Robot 0/15 and Sprout 0/15. This is not visual approval, independent artwork coverage or a Flutter release status. The Brain pack is tracked separately.
+**Source records: 42/60 (70%)** — Cat **15/15**, Dog **15/15**, Robot **12/15**, Sprout **0/15**. This measures versioned original illustration sources, **not** human-approved artwork or mobile release readiness. Brain V2 is tracked separately.
 
-- **Dog 15/15 source records:** final three `sad`, `balanced`, `strained` imported to `main` at commit `ce06a1e`. Each has a 12-frame 4×3 true-RGBA WebP, PNG atlas, GIF preview, metadata, SHA and renderer QA. [Source/art classification and acceptance gates](docs/DOG_LAST3_ART_QA.md).
-- **14/15 independent Dog pose sources:** `strained` is currently a **retargeted** original illustration candidate, not 12 newly illustrated Strained acting frames. Keep its QA flag pending and replace with independently illustrated source before art signoff.
-- **Flutter:** Home retains the note workflow and manual mascot previews; a dedicated [15-state Dog gallery](lib/src/dog_animation_gallery.dart) loads the 15 actual transparent PNG atlases (no SVG placeholders), supports replay and OS reduced-motion preferences. Related [widget tests](test/widget_test.dart), [pixel-alpha tests](test/glossy_sprite_test.dart) and [CI workflow](.github/workflows/flutter-glossy-sprite.yml) are committed.
-- **Technical vs release:** source SHA and alpha/geometry/frame change checks have passed on GitHub; manual art acceptance, Flutter CI analyzer/test results, actual Android/iOS device compatibility and performance are not yet independently confirmed. Dog manifest keeps `productionReady=false`.
-- **Next priority:** Robot 15 original Glossy Kawaii source states and Sprout 15 states; separately replace retargeted Strained poses and verify Flutter on hardware. [Next task](docs/NEXT_AUTO_TASK.md).
+- **Robot Thinking imported:** 12-frame 4×3 RGBA WebP source, exact SHA-256 `ed3a1577a6996a02361d0939b6fcfd5047c4daa8e937bae751060f66f5b1626a`, derived transparent PNG/GIF, frame metadata and QA on `main`. [Robot art/status record](docs/ROBOT_V2_CANDIDATE_IMPORT.md) · [GitHub import](https://github.com/aigrouphobinh/onelife/commit/2eb6f8b95b92).
+- **Robot Flutter gallery:** `lib/src/robot_animation_gallery.dart` previews the 12 committed Robot atlases, with actual frame timing, replay, semantic labels and reduced-motion support; `pubspec.yaml` bundles those PNGs. Existing Dog gallery still exposes 15 actual sources. These are **manual previews** rather than OS screen-time or mental-health measurements.
+- **Remaining art:** Robot `sad`, `balanced`, `strained` (three independent illustrated 4×3 sheets), then 15 Sprout sources. Do not register poster/contact-sheet art as a sprite.
+- **Dog source milestone:** 15/15 catalog records, of which 14 have independently illustrated acting; Dog `strained` is a retargeted illustration requiring genuine rework before human signoff. [Dog acceptance note](docs/DOG_LAST3_ART_QA.md).
+- **Open gates:** Flutter analyzer/CI results on the latest Robot gallery are not independently verified. Character-master consistency, transparent edge quality at 64/96/144px, performance/accessibility on Android and iOS, and human art acceptance remain pending. Manifests keep `productionReady=false`.
 
 ## Design V2 – Trợ lý bộ não nhỏ (2026-11-14)
 
@@ -20,7 +20,7 @@
 - [Style Lock V2](design/STYLE_LOCK_V2.md) · [Brain Balance rules](docs/BRAIN_BALANCE_DESIGN.md)
 - [Visual and device QA gates](docs/ART_DIRECTION_REVIEW.md)
 
-**Nghiệm thu:** GitHub Actions kiểm thử cấu trúc và ảnh đã PASS. Trong 15 clip Brain, có 8 clip được xây dựng từ các tư thế Glossy đã có (composite) và cần vẽ các frame độc lập trước khi duyệt mỹ thuật cuối. **Tiến độ hiện tại: Mèo 15/15, Chó 15/15 (14 độc lập + 1 dựng lại), Robot 0/15 và Mầm xanh 0/15 nguồn clip (chưa nghiệm thu thiết bị)**, theo Issues [#31](https://github.com/aigrouphobinh/onelife/issues/31), [#32](https://github.com/aigrouphobinh/onelife/issues/32), [#33](https://github.com/aigrouphobinh/onelife/issues/33), [#34](https://github.com/aigrouphobinh/onelife/issues/34).
+**Nghiệm thu:** GitHub Actions kiểm thử cấu trúc và ảnh đã PASS. Trong 15 clip Brain, có 8 clip được xây dựng từ các tư thế Glossy đã có (composite) và cần vẽ các frame độc lập trước khi duyệt mỹ thuật cuối. **Tiến độ hiện tại: Mèo 15/15, Chó 15/15 (14 độc lập + 1 dựng lại), Robot 12/15 và Mầm xanh 0/15 nguồn clip (chưa nghiệm thu thiết bị)**, theo Issues [#31](https://github.com/aigrouphobinh/onelife/issues/31), [#32](https://github.com/aigrouphobinh/onelife/issues/32), [#33](https://github.com/aigrouphobinh/onelife/issues/33), [#34](https://github.com/aigrouphobinh/onelife/issues/34).
 
 **Chưa hoàn thành:** phần lớn Flutter runtime (mới tích hợp widget sprite cho Home), Android UsageStats/overlay/báo thức, iOS Screen Time (giới hạn quyền), AI offline, Gemini tùy chọn, kiểm thử pin và phát hành store.
 
