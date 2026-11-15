@@ -140,4 +140,51 @@ void main() {
     await tester.pump();
     expect(fake.character, 'sprout');
   });
+
+  testWidgets('V3.4 setup asks Android for the official Focus tile', (
+    tester,
+  ) async {
+    const channel = MethodChannel('onelife/quick_capture');
+    final messenger = tester.binding.defaultBinaryMessenger;
+    final requests = <String>[];
+    messenger.setMockMethodCallHandler(channel, (call) async {
+      if (call.method == 'requestAddTile') {
+        final args = call.arguments as Map<dynamic, dynamic>;
+        requests.add(args['tile'] as String);
+        return 'added';
+      }
+      return null;
+    });
+    addTearDown(() {
+      messenger.setMockMethodCallHandler(channel, null);
+    });
+
+    final fake = FakeOneLifeStore();
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: ThemeData(platform: TargetPlatform.android),
+        home: OneLifeDesignShell(store: fake),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.tap(find.text('Tôi'));
+    await tester.pump();
+
+    await tester.scrollUntilVisible(
+      find.text('Điều khiển nhanh Android'),
+      140,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await tester.tap(find.text('Điều khiển nhanh Android'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 250));
+    expect(find.text('Tập trung · 25 phút'), findsOneWidget);
+
+    await tester.tap(find.text('Thêm').first);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(requests, ['focus']);
+  });
+
 }
