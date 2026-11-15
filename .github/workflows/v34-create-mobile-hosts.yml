@@ -34,6 +34,8 @@ jobs:
             exit 0
           fi
           git commit -m 'build(v3.4): generate Android and iOS Flutter platform hosts'
+          # flutter create/pub get modifies tracked app config outside host folders.
+          git restore --worktree .
           for n in 1 2 3; do
             git fetch origin main
             git rebase origin/main
