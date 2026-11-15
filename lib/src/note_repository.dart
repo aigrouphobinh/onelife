@@ -23,6 +23,9 @@ class Note {
 }
 
 class NoteRepository {
+  NoteRepository({this.singleInstance = true});
+
+  final bool singleInstance;
   Database? _database;
 
   Future<Database> get database async {
@@ -31,6 +34,7 @@ class NoteRepository {
     _database = await openDatabase(
       p.join(directory, 'onelife.db'),
       version: 1,
+      singleInstance: singleInstance,
       onCreate: (db, version) async {
         await db.execute(
           'CREATE TABLE notes (id TEXT PRIMARY KEY, title TEXT NOT NULL, body TEXT NOT NULL, updated_at TEXT NOT NULL)',

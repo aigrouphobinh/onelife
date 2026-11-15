@@ -12,6 +12,9 @@ import 'robot_animation_gallery.dart';
 import 'brain_overlay_setup_page.dart';
 import 'usage_history_panel.dart';
 import 'schedule_page.dart';
+import 'backup_files.dart';
+import 'backup_page.dart';
+import 'backup_repository.dart';
 
 const designPurple = Color(0xFF8054E6);
 const designInk = Color(0xFF21183C);
@@ -923,6 +926,30 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
                   onTap: () => open(quickSettingsSetupPage()),
                 ),
                 const Divider(),
+                ListTile(
+                  leading:
+                      const Icon(Icons.backup_outlined, color: designPurple),
+                  title: const Text('Sao lưu & Khôi phục'),
+                  subtitle:
+                      const Text('Lưu và nhập ghi chú, công việc từ file'),
+                  onTap: () {
+                    final localStore = store;
+                    if (localStore is! SqliteOneLifeStore) return;
+                    open(BackupPage(
+                      repository: SqliteBackupRepository.local(localStore),
+                      files: DeviceBackupFiles(),
+                      onRestored: () async {
+                        await reload();
+                        if (!mounted) return;
+                        if (Theme.of(context).platform ==
+                            TargetPlatform.android) {
+                          await _captureChannel
+                              .invokeMethod<bool>('syncReminders');
+                        }
+                      },
+                    ));
+                  },
+                ),
                 ListTile(
                   leading:
                       const Icon(Icons.note_alt_outlined, color: designPurple),

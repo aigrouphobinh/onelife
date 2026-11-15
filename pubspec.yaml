@@ -13,11 +13,13 @@ dependencies:
   sqflite: ^2.4.1
   path: ^1.9.0
   uuid: ^4.5.1
+  file_picker: 10.3.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  sqflite_common_ffi: '>=2.3.7 <2.4.0'
 
 # Real PNG atlas with RGBA transparency; no poster art or placeholder sprites.
 flutter:

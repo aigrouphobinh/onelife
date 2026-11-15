@@ -113,9 +113,10 @@ so native notification changes are reflected. Failed reads expose a retry action
 older asynchronous reads cannot overwrite newer results.
 
 Remaining core work, in order:
-1. Local backup/restore with validation, duplicate handling and reminder reconciliation.
-2. Search across tasks and notes with direct access to the matching saved item.
-3. Physical Android verification of reminder delivery, reboot and battery restrictions.
+1. Search across tasks and notes with direct access to the matching saved item.
+2. Physical Android verification of reminder delivery, reboot and battery restrictions.
+3. Android/iOS native file picker device verification for backup and restore.
 
 The schedule is task management, not an exact alarm clock. iOS native reminder
-support, backup/restore and conversational AI are not implemented by this change.
+support and conversational AI remain unimplemented. Local notes/tasks backup and
+add-only restore are now implemented; see [backup behavior and QA](V34_BACKUP_RESTORE.md).

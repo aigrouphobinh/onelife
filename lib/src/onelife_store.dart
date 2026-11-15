@@ -43,6 +43,9 @@ class SqliteOneLifeStore implements OneLifeStore {
 
   Future<Database> get _database => _opening ??= _open();
 
+  /// Used by the backup repository to open an independent transaction.
+  Future<Database> get database => _database;
+
   Future<Database> _open() async {
     final directory = await getDatabasesPath();
     return openDatabase(
