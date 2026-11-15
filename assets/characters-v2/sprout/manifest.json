@@ -43,6 +43,16 @@
       "file": "assets/characters-v2/sprout/recovering/metadata.json",
       "frames": 12,
       "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "focus": {
+      "file": "assets/characters-v2/sprout/focus/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
+    },
+    "study": {
+      "file": "assets/characters-v2/sprout/study/metadata.json",
+      "frames": 12,
+      "generationClass": "independently-illustrated-pose-sheet"
     }
   },
   "note": "Visual/phone sign-off required; no inferred or synthesized state completion."
