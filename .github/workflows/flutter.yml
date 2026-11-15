@@ -14,6 +14,7 @@ on:
       - 'tools/test_today_tasks_sql.py'
       - 'tools/test_home_widget_sql.py'
       - 'tools/test_android_reminder_contract.py'
+      - 'tools/test_brain_overlay_contract.py'
       - 'android/**'
       - 'ios/**'
       - '.github/workflows/flutter.yml'
@@ -40,6 +41,8 @@ jobs:
         run: python3 tools/test_home_widget_sql.py
       - name: Verify Android reminder permission and native action contract
         run: python3 tools/test_android_reminder_contract.py
+      - name: Verify real Android Brain overlay and special-access permission contract
+        run: python3 tools/test_brain_overlay_contract.py
       - run: dart format --output=none --set-exit-if-changed lib test
       - run: flutter analyze
       - run: flutter test
@@ -52,7 +55,7 @@ jobs:
         with:
           channel: stable
       - run: flutter pub get
-      - name: Compile Android, QS tiles, widget and actionable task reminders
+      - name: Compile Android Brain overlay, QS tiles, widget and task notifications
         run: flutter build apk --debug
       - name: Confirm bundled Glossy Kawaii Brain for native widget
         shell: bash
