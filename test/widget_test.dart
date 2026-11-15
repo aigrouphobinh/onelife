@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:onelife/src/home_page.dart';
 import 'package:onelife/src/glossy_sprite.dart';
 import 'package:onelife/src/dog_animation_gallery.dart';
+import 'package:onelife/src/robot_animation_gallery.dart';
 import 'package:onelife/src/note_repository.dart';
 
 // Smoke test avoids opening a real SQLite database in the widget test process.
@@ -76,7 +77,7 @@ void main() {
       MaterialApp(home: HomePage(repository: FakeRepository())),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Xem đủ 15 hoạt ảnh'));
+    await tester.tap(find.text('Chó · 15 hoạt ảnh'));
     await tester.pumpAndSettle();
 
     expect(find.byType(DogAnimationGalleryPage), findsOneWidget);
@@ -101,4 +102,33 @@ void main() {
       expect(sprite.spec.frames, 12);
     }
   });
+
+  testWidgets('Robot gallery displays exactly the committed 12 real sources',
+      (tester) async {
+    expect(robotAnimationEntries.length, 12);
+    expect(robotAnimationEntries.map((entry) => entry.id).toSet().length, 12);
+    for (final item in robotAnimationEntries) {
+      expect(item.sprite.assetPath,
+          'assets/characters-v2/robot/${item.id}/sheet.png');
+    }
+    await tester.pumpWidget(
+      MaterialApp(home: HomePage(repository: FakeRepository())),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Robot · 12 hoạt ảnh'));
+    await tester.pumpAndSettle();
+    expect(find.byType(RobotAnimationGalleryPage), findsOneWidget);
+    expect(find.byType(ChoiceChip), findsNWidgets(12));
+    expect(find.textContaining('12/15 animation nguồn Robot'), findsOneWidget);
+    final robotSprite = tester.widget<GlossySprite>(
+      find.descendant(
+        of: find.byType(RobotAnimationGalleryPage),
+        matching: find.byType(GlossySprite),
+      ),
+    );
+    expect(robotSprite.spec.assetPath,
+        'assets/characters-v2/robot/thinking/sheet.png');
+    expect(robotSprite.spec.frameDurationMs, 145);
+  });
+
 }
