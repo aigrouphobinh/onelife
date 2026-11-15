@@ -195,6 +195,15 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
     }
   }
 
+  Future<void> _reconcileChangedTask(String id) async {
+    try {
+      await _captureChannel.invokeMethod<bool>('taskChanged', {'id': id});
+    } catch (_) {
+      // Older Android APKs and iOS can still use the normal best-effort sync.
+      await _syncNativeReminders();
+    }
+  }
+
   Future<void> _changeReminders(bool enabled) async {
     if (_remindersBusy) return;
     if (Theme.of(context).platform != TargetPlatform.android) {
@@ -379,11 +388,13 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
     try {
       if (task == null) {
         await store.addTask(title: title, dueAt: dueAt);
+        await reload();
+        await _syncNativeReminders();
       } else {
         await store.updateTask(task.id, title: title, dueAt: dueAt);
+        await reload();
+        await _reconcileChangedTask(task.id);
       }
-      await reload();
-      await _syncNativeReminders();
       notify(
           task == null ? 'Đã lưu công việc trên thiết bị' : 'Đã sửa công việc');
     } catch (_) {
@@ -413,7 +424,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell>
     try {
       await store.deleteTask(task.id);
       await reload();
-      await _syncNativeReminders();
+      await _reconcileChangedTask(task.id);
       notify('Đã xóa công việc');
     } catch (_) {
       notify('Không thể xóa công việc');
