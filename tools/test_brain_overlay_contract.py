@@ -38,7 +38,7 @@ def main() -> None:
         "override fun onDestroy()",
         "manager.removeViewImmediate(view)",
         "addAction(menu, \"×  Ẩn Brain\")",
-        "assets/characters-v2/brain/idle/sheet.png",
+        '"flutter_assets/assets/characters-v2/brain/"',
     ):
         assert item in service, f"Missing real Android implementation: {item}"
     for method in (
