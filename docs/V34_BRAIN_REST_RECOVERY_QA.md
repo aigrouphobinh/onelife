@@ -34,9 +34,12 @@ atlases; no cloud, no background tracking and no medical claims.
 
 1. **Idle:** no session. Only a visible user action can start one.
 2. **Resting:** user selects **5, 10 or 15 minutes**, saves an absolute
-   deadline in Android private SharedPreferences. Closing Flutter does not
-   delete the deadline. The Flutter view uses the persisted deadline for
-   countdown; reopening or the visible overlay reconciles it.
+   deadline in Android private SharedPreferences. New sessions store
+   both the display wall-clock deadline and the **SystemClock.elapsedRealtime**
+   deadline with the boot count. Closing Flutter does not delete it;
+   reopening or the visible overlay reconciles it. Flutter shows a
+   Stopwatch-anchored native remaining duration instead of trusting a
+   user-editable phone clock.
 3. **Natural finish:** if due time is observed within **3 seconds** of
    expiry, transition into Recovering for one actual **12 × 125ms**
    animation. If the app is reopened much later, become Idle with no
@@ -46,8 +49,11 @@ atlases; no cloud, no background tracking and no medical claims.
 5. **Cancel:** **Hủy phiên nghỉ** clears the session directly to Idle.
    Cancellation is **not** counted as a successful break.
 6. **Recovering:** lasts 1500ms, clamps at frame 11 instead of looping.
-   On the next status reconciliation, transitions to Idle/personal usage
-   state. Another session cannot start while recovery is still in progress.
+   The monotonic recovery TTL is also returned to Flutter, so a manual
+   clock edit cannot make it repeat. On the next status reconciliation,
+   returns to Idle/personal usage state. A duplicate Finish call during
+   Recovering is idempotent and never restarts the clip; another break
+   cannot start while recovery is in progress.
 
 - There is **no AlarmManager wakeup, notification, foreground service or
   automatic new overlay** for the break timer. When the app/overlay is not
@@ -56,8 +62,13 @@ atlases; no cloud, no background tracking and no medical claims.
   saved deadline**, not necessarily every five minutes while resting.
 - A foreground Break UI page updates countdown once per second, re-reading
   native state on expiry or resume.
-- Android wall-clock changes can shift a stored deadline; this is not a
-  precision alarm and does not implement elapsedRealtime persistence.
+- For new sessions, Android elapsedRealtime includes deep sleep and is
+  unaffected by manual clock/timezone edits. BOOT_COUNT (API 24+) detects
+  reboot; elapsed-time rollback is a fallback for older devices.
+  Reboot invalidates the session rather than fabricating a completion.
+  Old V3.4 sessions with no monotonic timestamp use the original wall-clock
+  fallback until they expire. This is still NOT an exact background alarm
+  and does not keep a process or overlay alive.
 
 ## Physical-device checklist (not proven by CI)
 
@@ -78,11 +89,20 @@ atlases; no cloud, no background tracking and no medical claims.
    remains usable. Revoking overlay must remove only the overlay.
 10. Verify TalkBack labels and reduced-motion preference; test light/dark,
     64/96/144px, orientation/small-screen menu boundaries and low-end phone.
-11. Test screen-off, battery saver, timezone changes, clock correction and
-    Android process death; document observed limitations rather than
-    claiming background precision.
+11. Test screen-off, battery saver, timezone changes, clock correction,
+    Android process death and reboot. New monotonic sessions must preserve
+    countdown after phone-clock edits; reboot must not replay Recovering.
+12. Test repeated Finish taps and expiry-vs-Finish races: Recovering should
+    not restart from the beginning.
+13. Android JVM regression: run `cd android && ./gradlew :app:testDebugUnitTest`.
+    These are actual Kotlin tests of reboot/grace window policy, not proof
+    that overlay rendering works on a device.
 
 **Release gate:** Flutter widget tests + analyzer + Android Kotlin compile +
 real-art PNG checks + physical device QA. CI green alone is NOT device QA.
 `assets/characters-v2/brain/manifest.json` remains
 `productionReady=false` until art review is signed off.
+
+Reference: [Android SystemClock.elapsedRealtime](https://developer.android.com/reference/android/os/SystemClock)
+counts time spent asleep and is monotonic; [Settings.Global.BOOT_COUNT](https://developer.android.com/reference/android/provider/Settings.Global#BOOT_COUNT)
+is available on Android API 24+.
