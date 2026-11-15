@@ -37,3 +37,16 @@ flutter:
     - assets/characters-v2/dog/sad/sheet.png
     - assets/characters-v2/dog/balanced/sheet.png
     - assets/characters-v2/dog/strained/sheet.png
+
+    - assets/characters-v2/robot/idle/sheet.png
+    - assets/characters-v2/robot/remind/sheet.png
+    - assets/characters-v2/robot/happy/sheet.png
+    - assets/characters-v2/robot/overloaded/sheet.png
+    - assets/characters-v2/robot/resting/sheet.png
+    - assets/characters-v2/robot/alarm/sheet.png
+    - assets/characters-v2/robot/sleepy/sheet.png
+    - assets/characters-v2/robot/recovering/sheet.png
+    - assets/characters-v2/robot/focus/sheet.png
+    - assets/characters-v2/robot/study/sheet.png
+    - assets/characters-v2/robot/done/sheet.png
+    - assets/characters-v2/robot/thinking/sheet.png
