@@ -178,6 +178,126 @@ class GlossySpriteSpec {
     frameDurationMs: 155,
     loop: false,
   );
+
+  static const robotIdle = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/idle/sheet.png',
+    frames: 8,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 140,
+    loop: true,
+  );
+
+  static const robotRemind = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/remind/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 110,
+    loop: false,
+  );
+
+  static const robotHappy = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/happy/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 90,
+    loop: true,
+  );
+
+  static const robotOverloaded = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/overloaded/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 115,
+    loop: false,
+  );
+
+  static const robotResting = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/resting/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 190,
+    loop: true,
+  );
+
+  static const robotAlarm = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/alarm/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 90,
+    loop: false,
+  );
+
+  static const robotSleepy = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/sleepy/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 185,
+    loop: true,
+  );
+
+  static const robotRecovering = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/recovering/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 120,
+    loop: false,
+  );
+
+  static const robotFocus = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/focus/sheet.png',
+    frames: 8,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 155,
+    loop: true,
+  );
+
+  static const robotStudy = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/study/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 130,
+    loop: true,
+  );
+
+  static const robotDone = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/done/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 115,
+    loop: false,
+  );
+
+  static const robotThinking = GlossySpriteSpec(
+    assetPath: 'assets/characters-v2/robot/thinking/sheet.png',
+    frames: 12,
+    columns: 4,
+    frameWidth: 256,
+    frameHeight: 256,
+    frameDurationMs: 145,
+    loop: false,
+  );
 }
 
 /// Pure frame indexing: one-shot progress 1.0 holds the final pose.
