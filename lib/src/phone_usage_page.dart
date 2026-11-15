@@ -16,7 +16,9 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
   static const purple = Color(0xFF8054E6);
   bool android = false, started = false, loading = true;
   bool granted = false, available = false;
+  bool savingGoal = false;
   int? minutes;
+  int? goalMinutes;
   String tier = 'unknown';
   String? notice;
 
@@ -65,6 +67,9 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
         minutes = available && data?['minutes'] is int
             ? data!['minutes'] as int
             : null;
+        goalMinutes = data?['goalMinutes'] is int
+            ? data!['goalMinutes'] as int
+            : null;
         tier = available ? (data?['tier'] as String? ?? 'unknown') : 'unknown';
         loading = false;
       });
@@ -105,6 +110,35 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
     }
   }
 
+  Future<void> saveDailyGoal(int? chosen) async {
+    if (!android || savingGoal) return;
+    setState(() => savingGoal = true);
+    try {
+      final saved = await bridge.invokeMethod<bool>(
+        'setUsageDailyGoal',
+        <String, Object?>{'minutes': chosen},
+      );
+      if (!mounted) return;
+      if (saved == true) {
+        setState(() {
+          goalMinutes = chosen;
+          notice = chosen == null
+              ? 'Đã tắt mục tiêu. Brain sẽ hiển thị trạng thái trung tính.'
+              : 'Đã lưu mục tiêu hằng ngày trên thiết bị.';
+        });
+        await refresh();
+      } else {
+        setState(() => notice = 'Android chưa lưu được mục tiêu.');
+      }
+    } on MissingPluginException {
+      if (mounted) setState(() => notice = 'APK chưa có chức năng lưu mục tiêu.');
+    } catch (_) {
+      if (mounted) setState(() => notice = 'Không thể lưu mục tiêu.');
+    } finally {
+      if (mounted) setState(() => savingGoal = false);
+    }
+  }
+
   Widget card(Widget child) => Material(
         color: Colors.white,
         elevation: 2,
@@ -116,14 +150,14 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
   Widget build(BuildContext context) {
     final stateLabel = switch (tier) {
       'balanced' => 'Nhịp sử dụng nhẹ',
-      'break' => 'Có thể nghỉ mắt một chút',
-      'high' => 'Đã dùng nhiều — cân nhắc nghỉ',
+      'strained' => 'Gần đến mục tiêu — có thể nghỉ mắt',
+      'overloaded' => 'Đã đạt mục tiêu bạn chọn — cân nhắc nghỉ',
       _ => 'Chưa đánh giá',
     };
     final color = switch (tier) {
       'balanced' => const Color(0xFF4FB58E),
-      'break' => const Color(0xFFF6A040),
-      'high' => const Color(0xFFE75568),
+      'strained' => const Color(0xFFF6A040),
+      'overloaded' => const Color(0xFFE75568),
       _ => const Color(0xFFA995C6),
     };
     final reading = minutes == null
@@ -172,6 +206,14 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
                     style: const TextStyle(
                         fontSize: 28, fontWeight: FontWeight.w900, color: ink)),
                 const SizedBox(height: 10),
+                if (goalMinutes == null)
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      'Chưa đặt mục tiêu riêng — Brain sẽ giữ trạng thái trung tính.',
+                      style: TextStyle(color: Color(0xFF796D8B)),
+                    ),
+                  ),
                 Row(children: [
                   Icon(Icons.circle, size: 14, color: color),
                   const SizedBox(width: 8),
@@ -194,19 +236,63 @@ class _PhoneUsagePageState extends State<PhoneUsagePage>
             ],
           )),
           const SizedBox(height: 14),
+          card(Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Mục tiêu phản ánh hằng ngày',
+                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
+              const SizedBox(height: 9),
+              const Text('Tùy chọn của bạn, không phải giới hạn y tế. '
+                  'Nếu không chọn, Brain không tự gắn nhãn quá tải.'),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 7,
+                runSpacing: 7,
+                children: <int>[60, 120, 180, 240, 360].map((value) {
+                  return ChoiceChip(
+                    label: Text('${value ~/ 60} giờ'),
+                    selected: goalMinutes == value,
+                    onSelected: android && !savingGoal
+                        ? (_) => saveDailyGoal(value)
+                        : null,
+                  );
+                }).toList(),
+              ),
+              if (goalMinutes != null) ...[
+                const SizedBox(height: 8),
+                Text('Mục tiêu hiện tại: ${goalMinutes! ~/ 60} giờ '
+                    '${goalMinutes! % 60} phút',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700, color: ink)),
+                TextButton.icon(
+                  onPressed: android && !savingGoal
+                      ? () => saveDailyGoal(null)
+                      : null,
+                  icon: const Icon(Icons.close),
+                  label: const Text('Tắt mục tiêu'),
+                ),
+              ],
+              if (savingGoal)
+                const LinearProgressIndicator(color: purple),
+            ],
+          )),
+          const SizedBox(height: 14),
           card(const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Brain phản ứng ra sao?',
+              Text('Hoạt ảnh Brain theo mục tiêu tự chọn',
                   style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
               SizedBox(height: 10),
-              Text('Dưới 90 phút: dấu trạng thái xanh.'),
-              Text('90 đến dưới 180 phút: gợi ý nghỉ, màu hổ phách.'),
-              Text('Từ 180 phút: gợi ý tạm nghỉ, màu hồng.'),
+              Text('Dưới 80% mục tiêu: Balanced (8 khung).'),
+              Text('Từ 80% đến dưới 100%: Strained (10 khung).'),
+              Text('Từ 100% trở lên: Overloaded (12 khung).'),
               SizedBox(height: 10),
-              Text(
-                  'Khi Focus đang chạy, Brain ưu tiên hoạt ảnh Focus có sẵn. '
-                  'Chưa có quyền hoặc chưa đủ dữ liệu: giữ trạng thái trung tính.',
+              Text('Focus luôn ưu tiên hoạt ảnh Focus có sẵn. '
+                  'Không có quyền, dữ liệu hay mục tiêu: Brain ở Idle trung tính.',
+                  style: TextStyle(color: Color(0xFF796D8B))),
+              SizedBox(height: 8),
+              Text('Các atlas biểu cảm hiện là bản ứng viên cần duyệt hình '
+                  'và chạy trên điện thoại thật, không phải artwork final.',
                   style: TextStyle(color: Color(0xFF796D8B))),
             ],
           )),
