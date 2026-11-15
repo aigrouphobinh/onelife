@@ -54,36 +54,70 @@ class BrainOverlayService : Service() {
     private var root: FrameLayout? = null
     private var options: LinearLayout? = null
     private var usageCaption: TextView? = null
+    private var breakAction: TextView? = null
+    private var refreshVersion: Long = 0L
     private var sprite: SpriteView? = null
     private var params: WindowManager.LayoutParams? = null
     private var expanded = false
     private val refreshBehavior = object : Runnable {
         override fun run() {
             if (!isVisible) return
-            // Heavy usage/event history and Focus SQLite are read off main UI.
+            val token = ++refreshVersion
+            // UsageEvents and Focus SQLite stay off the WindowManager main UI.
             Thread {
-                val snapshot = UsageInsights.snapshot(applicationContext)
-                val isFocusRunning = readFocusActive()
+                val breakState = BrainBreaks.snapshot(applicationContext)
+                val usage = UsageInsights.snapshot(applicationContext)
+                val focus = readFocusActive()
                 handler.post {
-                    if (!isVisible) return@post
-                    val tier = snapshot["tier"] as? String ?: "unknown"
-                    sprite?.usageTier = tier
-                    sprite?.focused = isFocusRunning
+                    if (!isVisible || token != refreshVersion) return@post
+                    val phase = breakState["phase"] as? String ?: "idle"
+                    val seq = breakState["sequence"] as? Long ?: 0L
+                    val usageTier = usage["tier"] as? String ?: "unknown"
+                    sprite?.focused = focus
+                    sprite?.usageTier = usageTier
+                    sprite?.setBreakPhase(phase, seq)
                     usageCaption?.text = when {
-                        isFocusRunning -> "Đang tập trung · chế độ Focus"
-                        snapshot["available"] != true -> "Chưa có dữ liệu thời gian dùng"
-                        snapshot["goalMinutes"] !is Int -> "Chưa đặt mục tiêu hằng ngày"
+                        focus -> "Đang tập trung · Focus được ưu tiên"
+                        phase == "resting" -> {
+                            val seconds = breakState["remainingSeconds"] as? Int ?: 0
+                            "Brain đang nghỉ · còn " + ((seconds + 59) / 60) + " phút"
+                        }
+                        phase == "recovering" -> "Nghỉ xong · Brain đang thư giãn"
+                        usage["available"] != true -> "Chưa có dữ liệu thời gian dùng"
+                        usage["goalMinutes"] !is Int -> "Chưa đặt mục tiêu hằng ngày"
                         else -> {
-                            val mins = snapshot["minutes"] as? Int
-                            val goal = snapshot["goalMinutes"] as? Int
-                            if (mins == null || goal == null) "Chưa có dữ liệu"
-                            else "Hôm nay ~" + (mins / 60) + "g" + (mins % 60) +
-                                "p / mục tiêu " + goal + "p"
+                            val minutes = usage["minutes"] as? Int
+                            val goal = usage["goalMinutes"] as? Int
+                            if (minutes == null || goal == null) "Chưa có dữ liệu"
+                            else "Hôm nay ~" + minutes + "p / mục tiêu " + goal + "p"
                         }
                     }
+                    breakAction?.apply {
+                        isEnabled = phase != "recovering"
+                        alpha = if (isEnabled) 1f else 0.6f
+                        text = when (phase) {
+                            "resting" -> "☀  Kết thúc nghỉ"
+                            "recovering" -> "✧  Đang hồi phục"
+                            else -> "☾  Nghỉ 5 phút"
+                        }
+                        contentDescription = text
+                    }
+                    val now = System.currentTimeMillis()
+                    val nextDelay = when (phase) {
+                        "resting" -> {
+                            val deadline = breakState["deadlineMs"] as? Long ?: now
+                            (deadline - now + 100L).coerceIn(250L, 5 * 60 * 1000L)
+                        }
+                        "recovering" -> {
+                            val recoveryStart = breakState["recoveryStartMs"] as? Long ?: now
+                            (recoveryStart + 12 * 125L - now + 100L)
+                                .coerceIn(250L, 1_700L)
+                        }
+                        else -> 5 * 60 * 1000L
+                    }
+                    handler.postDelayed(this, nextDelay)
                 }
             }.start()
-            handler.postDelayed(this, 5 * 60 * 1000L)
         }
     }
 
@@ -224,6 +258,7 @@ class BrainOverlayService : Service() {
         addAction(menu, "✓  Việc hôm nay") { openTaskAction(MainActivity.EXTRA_TODAY_TASKS) }
         addAction(menu, "+  Ghi nhanh") { openTaskAction(MainActivity.EXTRA_QUICK_CAPTURE) }
         addAction(menu, "◷  Tập trung") { openTaskAction(MainActivity.EXTRA_FOCUS) }
+        breakAction = addAction(menu, "☾  Nghỉ 5 phút") { performBreakAction() }
         addAction(menu, "×  Ẩn Brain") { stopSelf() }
         container.addView(menu, LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -294,7 +329,9 @@ class BrainOverlayService : Service() {
         handler.post(refreshBehavior)
     }
 
-    private fun addAction(menu: LinearLayout, label: String, click: () -> Unit) {
+    private fun addAction(
+        menu: LinearLayout, label: String, click: () -> Unit,
+    ): TextView {
         val action = TextView(this).apply {
             text = label
             textSize = 14f
@@ -310,6 +347,19 @@ class BrainOverlayService : Service() {
         menu.addView(action, LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, dp(39),
         ).apply { bottomMargin = dp(5) })
+        return action
+    }
+
+    private fun performBreakAction() {
+        val phase = BrainBreaks.snapshot(this)["phase"] as? String ?: "idle"
+        when (phase) {
+            "resting" -> BrainBreaks.finish(this)
+            "idle" -> BrainBreaks.start(this, 5)
+            else -> return
+        }
+        handler.removeCallbacks(refreshBehavior)
+        handler.post(refreshBehavior)
+        if (expanded) toggleMenu()
     }
 
     private fun toggleMenu() {
@@ -317,7 +367,7 @@ class BrainOverlayService : Service() {
         options?.visibility = if (expanded) View.VISIBLE else View.GONE
         params?.apply {
             width = if (expanded) dp(250) else dp(94)
-            height = if (expanded) dp(384) else dp(94)
+            height = if (expanded) dp(424) else dp(94)
             x = x.coerceIn(
                 0, (resources.displayMetrics.widthPixels - width).coerceAtLeast(0),
             )
@@ -360,6 +410,7 @@ class BrainOverlayService : Service() {
         isVisible = false
         handler.removeCallbacks(animate)
         handler.removeCallbacks(refreshBehavior)
+        ++refreshVersion // discard any in-flight native UsageEvents callbacks
         val view = root
         root = null
         if (view != null) {
@@ -369,6 +420,7 @@ class BrainOverlayService : Service() {
         sprite = null
         options = null
         usageCaption = null
+        breakAction = null
         params = null
         super.onDestroy()
     }
@@ -397,6 +449,8 @@ class BrainOverlayService : Service() {
                 field = value
                 chooseClip()
             }
+        private var breakPhase: String = "idle"
+        private var breakSequence: Long = -1L
         var focused: Boolean = false
             set(value) {
                 if (field == value) return
@@ -406,14 +460,23 @@ class BrainOverlayService : Service() {
 
         val frameDurationMs: Long get() = when (currentState) {
             "focus", "strained" -> 160L
+            "resting" -> 205L
+            "recovering" -> 125L
             "overloaded" -> 115L
             else -> 140L
         }
 
         private fun frameCount(state: String): Int = when (state) {
-            "strained" -> 10
-            "overloaded" -> 12
+            "strained", "resting" -> 10
+            "overloaded", "recovering" -> 12
             else -> 8
+        }
+
+        fun setBreakPhase(phase: String, sequence: Long) {
+            if (breakPhase == phase && breakSequence == sequence) return
+            breakPhase = phase
+            breakSequence = sequence
+            chooseClip()
         }
 
         private fun decode(state: String): Bitmap? = try {
@@ -425,6 +488,7 @@ class BrainOverlayService : Service() {
         private fun chooseClip() {
             val desired = when {
                 focused && focusSheet != null -> "focus"
+                breakPhase == "resting" || breakPhase == "recovering" -> breakPhase
                 usageTier == "balanced" || usageTier == "strained" ||
                     usageTier == "overloaded" -> usageTier
                 else -> "idle"
@@ -450,6 +514,8 @@ class BrainOverlayService : Service() {
                     "strained" -> "Brain gợi ý nghỉ mắt theo mục tiêu đã chọn"
                     "overloaded" -> "Brain báo bạn đã đạt mục tiêu sử dụng tự chọn"
                     "balanced" -> "Brain theo nhịp mục tiêu đã chọn"
+                    "resting" -> "Brain đang nghỉ theo phiên bạn đã bắt đầu"
+                    "recovering" -> "Brain kết thúc nghỉ, hoạt ảnh một lần"
                     else -> "Brain OneLife, chạm để mở thao tác"
                 }
             }
@@ -457,7 +523,13 @@ class BrainOverlayService : Service() {
         }
 
         fun advanceFrame() {
-            frameIndex = (frameIndex + 1) % frameCount(currentState)
+            val count = frameCount(currentState)
+            if (currentState == "recovering") {
+                // 12-frame one-shot, hold last frame. Never loop Recovering.
+                if (frameIndex < count - 1) frameIndex += 1
+            } else {
+                frameIndex = (frameIndex + 1) % count
+            }
             invalidate()
         }
 
@@ -465,7 +537,8 @@ class BrainOverlayService : Service() {
             super.onDraw(canvas)
             val selected = when (currentState) {
                 "focus" -> focusSheet
-                "balanced", "strained", "overloaded" -> wellbeingSheet
+                "balanced", "strained", "overloaded", "resting", "recovering" ->
+                    wellbeingSheet
                 else -> idleSheet
             }
             val atlas = selected ?: idleSheet
@@ -474,7 +547,8 @@ class BrainOverlayService : Service() {
                 bitmap.width >= 1024 && bitmap.height >= 512
             val cols = if (animated) 4 else 1
             val rows = if (animated) {
-                if (currentState == "strained" || currentState == "overloaded") 3
+                if (currentState == "strained" || currentState == "overloaded" ||
+                    currentState == "resting" || currentState == "recovering") 3
                 else 2
             } else 1
             val fw = bitmap.width / cols
@@ -494,6 +568,8 @@ class BrainOverlayService : Service() {
                 currentState == "overloaded" -> Color.rgb(231, 85, 104)
                 currentState == "strained" -> Color.rgb(246, 160, 64)
                 currentState == "balanced" -> Color.rgb(79, 181, 142)
+                currentState == "resting" -> Color.rgb(92, 184, 219)
+                currentState == "recovering" -> Color.rgb(162, 118, 236)
                 else -> Color.TRANSPARENT
             }
             if (color != Color.TRANSPARENT) {
