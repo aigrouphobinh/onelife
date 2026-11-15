@@ -45,7 +45,9 @@ void main() {
       },
     )));
     await tester.tap(find.text('Chọn file khôi phục'));
-    await tester.pumpAndSettle();
+    // Import remains busy while the confirmation dialog awaits a decision.
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
     expect(find.text('Nhập bản sao lưu?'), findsOneWidget);
     await tester.tap(find.text('Hủy'));
     await tester.pumpAndSettle();
@@ -53,7 +55,9 @@ void main() {
     expect(synced, 0);
     files.content = 'invalid';
     await tester.tap(find.text('Chọn file khôi phục'));
-    await tester.pumpAndSettle();
+    // Import remains busy while the confirmation dialog awaits a decision.
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
     expect(repository.imports, 0);
     expect(find.textContaining('File không hợp lệ'), findsOneWidget);
   });
@@ -70,7 +74,9 @@ void main() {
       },
     )));
     await tester.tap(find.text('Chọn file khôi phục'));
-    await tester.pumpAndSettle();
+    // Import remains busy while the confirmation dialog awaits a decision.
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
     await tester.tap(find.text('Nhập dữ liệu'));
     await tester.pumpAndSettle();
     expect(repository.imports, 1);

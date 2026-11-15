@@ -334,7 +334,7 @@ void main() {
       150,
       scrollable: find.byType(Scrollable).last,
     );
-    await tester.drag(find.byType(Scrollable).last, const Offset(0, -180));
+    await tester.ensureVisible(find.text('Nhắc việc & Thông báo'));
     await tester.pump();
     await tester.tap(find.text('Nhắc việc & Thông báo'));
     await tester.pump();

@@ -49,7 +49,8 @@ void main() {
       (m) => ((m['tasks'] as List).first as Map)['id'] = null,
       (m) => ((m['notes'] as List).first as Map)['body'] = 1,
     ]) {
-      final map = backupFixture();
+      final map =
+          jsonDecode(jsonEncode(backupFixture())) as Map<String, dynamic>;
       mutate(map);
       expect(() => BackupData.parse(jsonEncode(map)), throwsFormatException);
     }
