@@ -27,6 +27,8 @@ class TaskReminderReceiver : BroadcastReceiver() {
                     TaskReminders.ACTION_DONE -> TaskReminders.complete(app, id)
                     TaskReminders.ACTION_SNOOZE -> TaskReminders.snooze(app, id)
                 }
+            } catch (_: Exception) {
+                // Permission may be revoked or storage unavailable mid-delivery.
             } finally {
                 pending.finish()
             }
