@@ -1,6 +1,6 @@
 package com.aigrouphobinh.onelife
 
-import android.Manifest
+import android.app.KeyguardManager
 import android.app.AppOpsManager
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
@@ -56,7 +56,9 @@ internal object UsageInsights {
         } else {
             true
         }
-        if (!unlocked) return mapOf(
+        val locked = (context.getSystemService(Context.KEYGUARD_SERVICE) as? KeyguardManager)
+            ?.isDeviceLocked ?: false
+        if (!unlocked || locked) return mapOf(
             "granted" to true, "available" to false,
             "minutes" to null, "tier" to "unknown",
             "reason" to "device_locked",
@@ -115,7 +117,11 @@ internal object UsageInsights {
                 "reason" to "observed_foreground_events",
             )
         } catch (_: SecurityException) {
-            unknown("permission_revoked")
+            mapOf(
+                "granted" to false, "available" to false,
+                "minutes" to null, "tier" to "unknown",
+                "reason" to "permission_revoked",
+            )
         } catch (_: Exception) {
             unknown("no_data")
         }
