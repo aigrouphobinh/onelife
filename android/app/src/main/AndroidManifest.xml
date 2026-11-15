@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Android 13+ requires an explicit permission request from the user. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Restore only opted-in future task reminders after reboot. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
         android:label="OneLife"
         android:name="${applicationName}"
@@ -74,6 +78,21 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/onelife_home_widget_info" />
+        </receiver>
+        <!-- Internal-only scheduled reminder and notification action receiver. -->
+        <receiver
+            android:name=".TaskReminderReceiver"
+            android:exported="false" />
+        <!-- Enabled after user consent; disabled again when reminders are off. -->
+        <receiver
+            android:name=".TaskReminderRestoreReceiver"
+            android:enabled="false"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
         </receiver>
     </application>
     <!-- Required to query activities that can process text, see:
