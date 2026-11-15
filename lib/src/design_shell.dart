@@ -37,7 +37,8 @@ class OneLifeDesignShell extends StatefulWidget {
   State<OneLifeDesignShell> createState() => _OneLifeDesignShellState();
 }
 
-class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
+class _OneLifeDesignShellState extends State<OneLifeDesignShell>
+    with WidgetsBindingObserver {
   late final OneLifeStore store = widget.store ?? SqliteOneLifeStore();
   List<OneLifeTask> tasks = [];
   String character = 'brain';
@@ -49,12 +50,16 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
   static const MethodChannel _captureChannel =
       MethodChannel('onelife/quick_capture');
   bool _quickCaptureQueued = false;
+  bool _remindersEnabled = false;
+  bool _remindersBusy = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _captureChannel.setMethodCallHandler(_handleNativeAction);
     reload();
+    _loadReminderStatus();
     _consumeLaunchAction();
   }
 
@@ -129,7 +134,17 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // Native notification "Hoàn thành" can update SQLite while app is away.
+      reload();
+      _loadReminderStatus();
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _captureChannel.setMethodCallHandler(null);
     super.dispose();
   }
@@ -156,6 +171,55 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
       notify('Tính năng cần bản OneLife Android có tích hợp native.');
     } catch (_) {
       notify('Không mở được lời mời thêm ô. Hãy thêm thủ công.');
+    }
+  }
+
+  Future<void> _loadReminderStatus() async {
+    try {
+      final enabled =
+          await _captureChannel.invokeMethod<bool>('remindersStatus') ?? false;
+      if (mounted) setState(() => _remindersEnabled = enabled);
+    } on MissingPluginException {
+      // iOS does not yet have the native OneLife reminder receiver.
+    } catch (_) {
+      // Permission state can be re-checked on returning to Settings.
+    }
+  }
+
+  Future<void> _syncNativeReminders() async {
+    try {
+      await _captureChannel.invokeMethod<bool>('syncReminders');
+    } catch (_) {
+      // Saving/completing tasks must not depend on OS notification support.
+    }
+  }
+
+  Future<void> _changeReminders(bool enabled) async {
+    if (_remindersBusy) return;
+    if (Theme.of(context).platform != TargetPlatform.android) {
+      notify('Nhắc việc native hiện chỉ có trên Android.');
+      return;
+    }
+    setState(() => _remindersBusy = true);
+    try {
+      final activated = await _captureChannel.invokeMethod<bool>(
+        enabled ? 'enableReminders' : 'disableReminders',
+      ) ?? false;
+      if (!mounted) return;
+      setState(() => _remindersEnabled = activated);
+      if (enabled && !activated) {
+        notify('Chưa được cấp quyền thông báo. Kiểm tra Cài đặt Android.');
+      } else if (!enabled) {
+        notify('Đã tắt lịch nhắc việc, dữ liệu công việc vẫn được giữ.');
+      } else {
+        notify('Đã bật thông báo cho các công việc có hạn sắp tới.');
+      }
+    } on MissingPluginException {
+      notify('Ứng dụng chưa tích hợp thông báo native trên thiết bị này.');
+    } catch (_) {
+      notify('Không thể thay đổi quyền nhắc việc.');
+    } finally {
+      if (mounted) setState(() => _remindersBusy = false);
     }
   }
 
@@ -272,7 +336,8 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Lưu trên thiết bị; chưa tự cài báo thức.',
+                  'Nếu bật Nhắc việc trong Cài đặt Android, hệ thống '
+                  'sẽ lên lịch thông báo (có thể đến muộn).',
                   style: TextStyle(fontSize: 12),
                 ),
               ],
@@ -297,6 +362,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
     try {
       await store.addTask(title: title, dueAt: dueAt);
       await reload();
+      await _syncNativeReminders();
       notify('Đã lưu công việc trên thiết bị');
     } catch (_) {
       notify('Không thể lưu công việc');
@@ -307,6 +373,7 @@ class _OneLifeDesignShellState extends State<OneLifeDesignShell> {
     try {
       await store.setTaskCompleted(task.id, done);
       await reload();
+      await _syncNativeReminders();
     } catch (_) {
       notify('Không thể cập nhật công việc');
     }
